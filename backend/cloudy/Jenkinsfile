@@ -21,7 +21,7 @@ pipeline{
                 withSonarQubeEnv('SonarQube') {
                     dir('./backend/cloudy') {
                      sh 'chmod +x ./gradlew'
-                     sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207-test'
+                     sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
                     }
                 }
             }
