@@ -1,0 +1,33 @@
+pipeline{
+    environment {
+      SONARQUBE_TOKEN = "${env.SONARQUBE_TOKEN}"
+    }
+    agent any
+
+    stages{
+//         stage('build'){
+//             steps{
+//                 script{
+//                     sh 'cd ./backend/cloudy'
+//                     sh 'chmod +x ./gradlew'
+//
+//                     sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207-back-catalog -Dsonar.host.url=https://sonarqube.ssafy.com -Dsonar.login=7d4e908cf60b3bad47363a1394e94a081d39a5a1'
+//                 }
+//             }
+//         }
+        stage('sonarqube') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh 'cd ./backend/cloudy'
+                     sh 'chmod +x ./gradlew'
+                     sh './gradlew sonarqube'
+                }
+            }
+        }
+    }
+
+
+}
+
+
+
