@@ -3,7 +3,12 @@
     "browser": true,
     "node": true
   },
-  "extends": ["next/babel", "next/core-web-vitals", "airbnb-base"],
+  "extends": [
+    "next/babel",
+    "next/core-web-vitals",
+    "airbnb-base",
+    "plugin:storybook/recommended"
+  ],
   "rules": {
     "linebreak-style": 0
   }
