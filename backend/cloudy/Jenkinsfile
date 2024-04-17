@@ -17,9 +17,10 @@ pipeline{
 //         }
         stage('sonarqube') {
             steps {
+                def currentDirectory = pwd()
                 withSonarQubeEnv('SonarQube') {
                     sh 'cd ./backend/cloudy'
-                    def currentDirectory = pwd()
+                    
                     echo "Current Directory: \${currentDirectory}"
                      sh 'chmod +x ./gradlew'
                      sh './gradlew sonarqube'
