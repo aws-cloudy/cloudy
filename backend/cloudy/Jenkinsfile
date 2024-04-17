@@ -19,6 +19,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh 'cd ./backend/cloudy'
+                    echo "Current Directory: \${currentDirectory}"
                      sh 'chmod +x ./gradlew'
                      sh './gradlew sonarqube'
                 }
