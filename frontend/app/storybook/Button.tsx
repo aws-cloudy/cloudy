@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-
+import './button.scss'
 interface ButtonProps extends PropsWithChildren {
   disabled?: boolean
   variant: 'primary' | 'dashed'
@@ -8,7 +8,7 @@ interface ButtonProps extends PropsWithChildren {
 
 export default function Button({ variant, disabled, children, onClick }: ButtonProps) {
   return (
-    <button variant={variant} disabled={disabled} onClick={onClick}>
+    <button variant={variant} disabled={disabled} onClick={onClick} className={'book-button'}>
       {children}
     </button>
   )

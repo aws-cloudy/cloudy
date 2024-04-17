@@ -10,8 +10,14 @@ const meta = {
   component: Button,
   // 컴포넌트에 대한 문서를 자동으로 생성
   tags: ['autodocs'],
-  argTypes: {},
-  args: { onClick: fn() },
+  argTypes: {
+    // storybook 컨트롤 패널에서 색상 변경이 가능
+    // backgroundColor: { control: 'color' },
+  },
+  args: {
+    //fn : 테스트 유틸리티, 이벤트 핸들러 or 콜백 함수 시뮬레이션시 사용
+    onClick: fn(),
+  },
 } satisfies Meta<typeof Button>
 
 export default meta
@@ -25,7 +31,7 @@ export const Primary: Story = {
   // 컴포넌트에 필요한 arguments, 리액트 컴포넌트에게 Props
   args: {
     variant: 'primary',
-    children: 'Primary',
+    children: '프라이머리',
   },
 }
 
@@ -33,7 +39,7 @@ export const Primary: Story = {
 export const Dashed: Story = {
   args: {
     variant: 'dashed',
-    children: 'Dashed',
+    children: '대쉬드',
   },
 }
 
@@ -41,7 +47,7 @@ export const Dashed: Story = {
 export const Disabled: Story = {
   args: {
     ...Primary.args,
-    children: 'Disabled',
+    children: 'disabled',
     disabled: true,
   },
 }
