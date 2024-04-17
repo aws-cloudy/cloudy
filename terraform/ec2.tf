@@ -1,7 +1,7 @@
 resource "aws_instance" "bastion" {
   ami = "ami-0bfd23bc25c60d5a1"
   # 필요시 다른 intel 타입으로 변경 가능
-  instance_type = "t2.medium"
+  instance_type = "t2.small"
 
   subnet_id                   = module.vpc.public_subnets[0]
   iam_instance_profile        = aws_iam_instance_profile.default.name
