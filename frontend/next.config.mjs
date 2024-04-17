@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   sassOptions: {
-    includePaths: ["styles"],
+    includePaths: ['styles'],
   },
-};
+}
 
-export default nextConfig;
+export default nextConfig
