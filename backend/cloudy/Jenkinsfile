@@ -17,7 +17,7 @@ pipeline{
 //         }
         stage('sonarqube') {
             steps {
-                withSonarQubeEnv(credentialsId: 'ssafy-sornarqube', installationName:'SonarQube') {
+                withSonarQubeEnv('SonarQube') {
                      sh "chmod +x ./gradlew"
                      sh './gradlew sonarqube'
                 }
