@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import GoogleAnalytics from '@/components/common/GoogleAnalytics'
 import '../styles/globals.scss'
+import Header from '@/components/common/Header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,8 +18,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-      <GoogleAnalytics />
+      <body className={inter.className}>
+        <GoogleAnalytics />
+        <Header />
+        <div style={{ paddingTop: 80 }}>{children}</div>
+      </body>
     </html>
   )
 }

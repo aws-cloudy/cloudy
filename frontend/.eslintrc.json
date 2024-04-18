@@ -3,13 +3,16 @@
     "browser": true,
     "node": true
   },
-  "extends": [
-    "next/babel",
-    "next/core-web-vitals",
-    "airbnb-base",
-    "plugin:storybook/recommended"
-  ],
+  "extends": ["next/babel", "next/core-web-vitals", "airbnb-base", "plugin:storybook/recommended"],
+  "plugins": ["prettier"],
   "rules": {
-    "linebreak-style": 0
+    "linebreak-style": 0,
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/*.stories.*", "**/.storybook/**/*.*"],
+        "peerDependencies": true
+      }
+    ]
   }
 }
