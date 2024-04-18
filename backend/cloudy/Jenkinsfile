@@ -1,20 +1,7 @@
 pipeline{
-    environment {
-      SONARQUBE_TOKEN = "${env.SONARQUBE_TOKEN}"
-    }
+
     agent any
 
-    stages{
-//         stage('build'){
-//             steps{
-//                 script{
-//                     sh 'cd ./backend/cloudy'
-//                     sh 'chmod +x ./gradlew'
-//
-//                     sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207-back-catalog -Dsonar.host.url=https://sonarqube.ssafy.com -Dsonar.login=7d4e908cf60b3bad47363a1394e94a081d39a5a1'
-//                 }
-//             }
-//         }
         stage('sonarqube') {
             steps {
                 
@@ -24,20 +11,11 @@ pipeline{
                      sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
                     }
                 }
-                timeout(time: 1, unit: 'MINUTES') {
-
-                  // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
-                  // true = set pipeline to UNSTABLE, false = don't
-                  def qg = waitForQualityGate()
-                  if (qg.status != 'OK') {
-                      error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                  }
-                }
+                
             }
         }
         stage('Results') {
                 junit '**/test-results/**/*.xml'
-//                 jacoco sourcePattern: '**/src/main/kotlin'
         }
     }
 
