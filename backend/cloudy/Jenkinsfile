@@ -2,25 +2,23 @@ pipeline{
 
     agent any
 
-        stage('sonarqube') {
-            steps {
-                
-                withSonarQubeEnv('SonarQube') {
-                    dir('./backend/cloudy') {
-                     sh 'chmod +x ./gradlew'
-                     sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
-                    }
+    stage('sonarqube') {
+        steps {
+            withSonarQubeEnv('SonarQube') {
+                dir('./backend/cloudy') {
+                 sh 'chmod +x ./gradlew'
+                 sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
                 }
-                
             }
-        }
-        stage('Results') {
-                junit '**/test-results/**/*.xml'
-        }
+       }
     }
-
-
+    stage('Results') {
+            junit '**/test-results/**/*.xml'
+    }
 }
+
+
+
 
 
 
