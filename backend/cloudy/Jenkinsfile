@@ -6,7 +6,7 @@ pipeline {
             steps{
                 script{
                     dir('./backend/cloudy'){
-                        sh 'chmod +x ./graldew'
+                        sh 'chmod +x ./gradlew'
                         sh './gradlew test'
                     }
 
