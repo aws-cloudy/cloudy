@@ -38,7 +38,7 @@ pipeline {
             steps{
                 script{
                     dir('./frontend'){
-                        /
+                        sh 'pwd'
 
                     }
 
