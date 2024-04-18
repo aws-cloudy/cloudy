@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Header />
-        {children}
+        <div style={{ paddingTop: 80 }}>{children}</div>
       </body>
     </html>
   )
