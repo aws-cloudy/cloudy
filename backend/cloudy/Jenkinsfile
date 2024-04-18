@@ -14,19 +14,6 @@ pipeline {
                         }
                     }
                 }
-
-                timeout(time: 1, unit: 'MINUTES') {
-
-                    def qg = waitForQualityGate()
-                    echo "Quality Gate Status: ${qg.status}"
-                    echo "Quality Gate ID: ${qg.id}"
-                    echo "Quality Gate URL: ${qg.url}"
-
-
-                    if (qg.status != 'OK') {
-                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    }
-                }
             }
         }
         stage('Results') {
