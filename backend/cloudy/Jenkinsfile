@@ -1,24 +1,39 @@
-pipeline{
-
+pipeline {
     agent any
 
-    stage('sonarqube') {
-        steps {
-            withSonarQubeEnv('SonarQube') {
-                dir('./backend/cloudy') {
-                 sh 'chmod +x ./gradlew'
-                 sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
+    stages {
+        stage('sonarqube') {
+            steps {
+                script {
+
+                    withSonarQubeEnv('SonarQube') {
+
+                        dir('./backend/cloudy') {
+                            sh 'chmod +x ./gradlew'
+                            sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
+                        }
+                    }
+                }
+
+                timeout(time: 1, unit: 'MINUTES') {
+
+                    def qg = waitForQualityGate()
+                    echo "Quality Gate Status: ${qg.status}"
+                    echo "Quality Gate ID: ${qg.id}"
+                    echo "Quality Gate URL: ${qg.url}"
+
+
+                    if (qg.status != 'OK') {
+                        error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    }
                 }
             }
-       }
-    }
-    stage('Results') {
-            junit '**/test-results/**/*.xml'
+        }
+        stage('Results') {
+            steps {
+                // 테스트 결과 수집
+                junit '**/test-results/**/*.xml'
+            }
+        }
     }
 }
-
-
-
-
-
-
