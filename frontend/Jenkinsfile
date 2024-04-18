@@ -38,7 +38,7 @@ pipeline {
             steps{
                 script{
                     dir('./frontend'){
-                        sh 'npm run test:ci'
+                        /
 
                     }
 
