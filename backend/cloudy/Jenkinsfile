@@ -2,6 +2,20 @@ pipeline {
     agent any
 
     stages {
+        stage('test'){
+            steps{
+                script{
+                    dir('./backend/cloudy'){
+                        sh 'chmod +x ./graldew'
+                        sh './gradlew test'
+                    }
+
+                }
+
+            }
+        }
+
+
         stage('sonarqube') {
             steps {
                 script {
