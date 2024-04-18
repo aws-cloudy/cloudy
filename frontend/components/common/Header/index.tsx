@@ -25,7 +25,7 @@ const Header = () => {
           <Link href="/learning" className={styles.menuItem}>
             로그인
           </Link>
-          <MdOutlineLanguage width="50px" size={24} />
+          <MdOutlineLanguage width="50px" size={24} className="languageIcon" />
         </div>
       </div>
     </header>
