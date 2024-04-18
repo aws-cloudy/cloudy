@@ -28,7 +28,7 @@ const Header = () => {
             </Link>
           </div>
           <div className={styles.RightWrap}>
-            <Link href="/learning" className={styles.menuItem}>
+            <Link href="/login" className={styles.menuItem}>
               로그인
             </Link>
             <MdOutlineLanguage size={24} className="languageIcon" />
