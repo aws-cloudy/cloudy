@@ -1,4 +1,5 @@
 'use client'
+import Navbar from '@/components/Navbar'
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 
@@ -8,7 +9,7 @@ export default function LoginPage() {
 
   return (
     <div>
-      <button onClick={() => signIn('google', { callbackUrl: '/' })} />
+      <Navbar />
     </div>
   )
 }
