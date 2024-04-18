@@ -1,6 +1,6 @@
 pipeline {
     agent any
-
+    tools {nodejs "20.12.2"}
 
     stages {
         stage('startup notification'){
@@ -21,12 +21,25 @@ pipeline {
             }
         }
 
-        stage('test'){
+        stage('build test'){
+                    steps{
+                        script{
+                            dir('./frontend'){
+                                sh 'npm install'
+                                
+                            }
+
+                        }
+
+                    }
+                }
+
+        stage('jest test'){
             steps{
                 script{
-                    dir('./backend/cloudy'){
-                        sh 'chmod +x ./gradlew'
-                        sh './gradlew test'
+                    dir('./frontend'){
+                        sh 'pwd'
+
                     }
 
                 }
@@ -40,21 +53,14 @@ pipeline {
                 script {
 
                     withSonarQubeEnv('SonarQube') {
-
-                        dir('./backend/cloudy') {
-                            sh 'chmod +x ./gradlew'
-                            sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
+                        dir('./frontend') {
+                            sh 'npm run sonarqube'
                         }
                     }
                 }
             }
         }
-        stage('Results') {
-            steps {
-                // 테스트 결과 수집
-                junit '**/test-results/**/*.xml'
-            }
-        }
+
     }
     post {
             success {
