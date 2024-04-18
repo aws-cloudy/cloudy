@@ -43,3 +43,48 @@
   display: flex;
   margin-left: auto;
 }
+
+.headerMobile {
+  display: none;
+}
+
+.headerMobileWrap {
+  display: flex;
+  position: relative;
+  width: 80%;
+  height: 60px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.MenuIconWrap {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+
+.mobileMenuList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: $white;
+}
+
+.mobileMenuItem {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+@media screen and (max-width: $tablet) {
+  .header {
+    display: none;
+  }
+  .headerMobile {
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    width: 100%;
+    position: fixed;
+  }
+}
