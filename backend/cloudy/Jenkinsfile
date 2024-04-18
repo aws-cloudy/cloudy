@@ -1,24 +1,26 @@
 pipeline {
     agent any
 
-     pre {
-            // 빌드가 시작되기 전에 실행되는 코드
-            script {
-                // Git의 마지막 커밋 작성자 정보 가져오기
-                def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
-                def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
 
-                // Mattermost로 메시지 보내기
-                mattermostSend (
-                    color: 'info',
-                    message: "빌드 시작: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})",
-                    endpoint: "${env.MM_WEBHOOK}",
-                    channel: 'S207-CICD'
-                )
+    stages {
+        stage('startup notification'){
+            steps{
+                script {
+                    // Git의 마지막 커밋 작성자 정보 가져오기
+                    def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
+                    def Author_Name = sh(script: "git show -s --pretty=%ae", returnStdout: true).trim()
+
+                    // Mattermost로 메시지 보내기
+                    mattermostSend (
+                        color: 'info',
+                        message: "빌드 시작: ${env.JOB_NAME} #${env.BUILD_NUMBER} by ${Author_ID}(${Author_Name})",
+                        endpoint: "${env.MM_WEBHOOK}",
+                        channel: 'S207-CICD'
+                    )
+                }
             }
         }
 
-    stages {
         stage('test'){
             steps{
                 script{
