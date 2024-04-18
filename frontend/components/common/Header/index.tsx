@@ -40,7 +40,7 @@ const Header = () => {
         <header className={styles.headerMobile}>
           <div className={styles.headerMobileWrap}>
             <Link href="/" className={styles.logoWrap}>
-              <img className={styles.logo} src="/img/logo.png" alt="logo" />
+              <img className={styles.logo} src="/img/logo.png" alt="logo-mobile" />
             </Link>
             <div className={styles.MenuIconWrap} onClick={() => setIsOpen(!isOpen)}>
               <MdMenu size={24} />
