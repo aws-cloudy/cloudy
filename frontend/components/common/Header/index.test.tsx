@@ -2,12 +2,10 @@ import { render, screen } from '@testing-library/react'
 import Header from '.'
 
 describe('<Header />', () => {
-  it('Header를 렌더링합니다', () => {
-    const { container } = render(<Header />)
+  it('Header의 logo를 렌더링합니다', () => {
+    render(<Header />)
 
-    const header = screen.getByText('Header')
-
-    expect(header).toBeInTheDocument()
-    expect(container).toMatchSnapshot()
+    const logo = screen.getByAltText('logo')
+    expect(logo).toBeInTheDocument()
   })
 })

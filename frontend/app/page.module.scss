@@ -1,5 +1,5 @@
-@import './colors.scss';
+@import '@/styles/theme.scss';
 
 .section {
-  padding-left: 300px;
+  display: flex;
 }
