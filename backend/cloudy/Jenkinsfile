@@ -24,7 +24,20 @@ pipeline{
                      sh './gradlew sonarqube -Dsonar.projectKey=S10P31S207'
                     }
                 }
+                timeout(time: 1, unit: 'MINUTES') {
+
+                  // Parameter indicates whether to set pipeline to UNSTABLE if Quality Gate fails
+                  // true = set pipeline to UNSTABLE, false = don't
+                  def qg = waitForQualityGate()
+                  if (qg.status != 'OK') {
+                      error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                  }
+                }
             }
+        }
+        stage('Results') {
+                junit '**/test-results/**/*.xml'
+//                 jacoco sourcePattern: '**/src/main/kotlin'
         }
     }
 
