@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import GoogleAnalytics from '@/components/common/GoogleAnalytics'
 import '../styles/globals.scss'
 import Header from '@/components/common/Header'
+import Auth from '@/context/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,9 +20,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GoogleAnalytics />
-        <Header />
-        <div style={{ paddingTop: 80 }}>{children}</div>
+        <Auth>
+          <GoogleAnalytics />
+          <Header />
+          <div style={{ paddingTop: 80 }}>{children}</div>
+        </Auth>
       </body>
     </html>
   )
