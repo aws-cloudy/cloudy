@@ -1,7 +1,8 @@
 import React from 'react'
+import styles from './LearningFilterSection.module.scss'
 
 const LearningFilterSection = () => {
-  return <article>filter area</article>
+  return <article className={styles.article}>filter area</article>
 }
 
 export default LearningFilterSection

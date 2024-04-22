@@ -3,6 +3,7 @@
 
 :root {
   --max-width: 1600px;
+  --width-ratio: 80%;
   --font-mono: SCDream, ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
     'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
 }
@@ -42,5 +43,11 @@ img {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: light;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  :root {
+    --width-ratio: 90%;
   }
 }

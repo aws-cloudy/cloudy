@@ -3,7 +3,7 @@ import React from 'react'
 const LearningInput = () => {
   return (
     <div>
-      <input>ss</input>
+      <input />
     </div>
   )
 }

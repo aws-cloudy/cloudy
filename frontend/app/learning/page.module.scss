@@ -2,8 +2,14 @@
 
 .section {
   display: flex;
-  width: 80%;
+  width: var(--width-ratio);
   margin: 0 auto;
   background-color: $white;
   max-width: var(--max-width);
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    display: block;
+  }
 }
