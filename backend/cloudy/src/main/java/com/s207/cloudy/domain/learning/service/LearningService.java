@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface LearningService {
-    List<LearningListRes> getLearnings();
+    List<LearningListRes> getLearnings(int page, int pageSize, String[] jobName, String[] serviceName, String[] type, String[] difficulty, String query);
 }
