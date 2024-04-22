@@ -7,6 +7,8 @@ const createJestConfig = nextJest({ dir: './' })
 const customJestConfig = {
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   testEnvironment: 'jest-environment-jsdom',
+  // testResultsProcessor 추가
+  testResultsProcessor: "jest-junit",
 }
 
 // createJestConfig는 next/jest가 비동기식인 Next.js 구성을 로드할 수 있도록 이러한 방식으로 내보내짐
