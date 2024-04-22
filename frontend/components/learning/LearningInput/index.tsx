@@ -32,7 +32,7 @@ const LearningInput = (props: ILearningInput) => {
           onChange={onChange}
           onKeyDown={handleKeyDown}
         />
-        {value && keyword === '' && <LearningSearchList />}
+        {value && keyword === '' && <LearningSearchList setKeyword={setKeyword} setValue={setValue} />}
       </div>
     </>
   )

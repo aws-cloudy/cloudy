@@ -1,0 +1,18 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  padding: 18px 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray2;
+  }
+}
+
+.text {
+  font-size: 1em;
+  font-weight: 500;
+  margin-left: 20px;
+}
