@@ -63,7 +63,7 @@ pipeline {
     }
     post {
             always {
-                junit checksName: 'Jest Tests', testResults: 'junit.xml'
+                junit checksName: 'Jest Tests', testResults: 'frontend/junit.xml'
             }
             success {
                 script {
