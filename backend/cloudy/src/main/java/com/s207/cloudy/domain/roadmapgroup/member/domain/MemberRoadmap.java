@@ -21,7 +21,7 @@ public class MemberRoadmap {
     @Column(name = "member_id")
     private int memberId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roadmap_id")
     private Roadmap roadmap;
 
