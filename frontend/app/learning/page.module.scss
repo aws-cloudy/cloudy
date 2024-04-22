@@ -1,0 +1,18 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  width: var(--width-ratio);
+  margin: 0 auto;
+  background-color: $white;
+  max-width: var(--max-width);
+  padding-top: 55px;
+  min-height: 100vh;
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    display: block;
+    padding-top: 10px;
+  }
+}
