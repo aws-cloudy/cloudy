@@ -26,6 +26,7 @@ pipeline {
                         script{
                             dir('./frontend'){
                                 sh 'npm install'
+                                sh 'npm run build'
                                 
                             }
 
@@ -38,7 +39,7 @@ pipeline {
             steps{
                 script{
                     dir('./frontend'){
-                        sh 'pwd'
+                        sh 'npm run test:ci'
 
                     }
 
