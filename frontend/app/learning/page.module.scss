@@ -1,0 +1,9 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  background-color: $white;
+  max-width: var(--max-width);
+}
