@@ -26,6 +26,7 @@ pipeline {
                         script{
                             dir('./frontend'){
                                 sh 'npm install'
+                                sh 'npm run build'
                                 
                             }
 
@@ -38,10 +39,8 @@ pipeline {
             steps{
                 script{
                     dir('./frontend'){
-                        sh 'pwd'
-
+                        sh './node_modules/.bin/jest --ci'
                     }
-
                 }
 
             }
@@ -63,6 +62,9 @@ pipeline {
 
     }
     post {
+            always {
+                junit checksName: 'Jest Tests', testResults: 'frontend/junit.xml'
+            }
             success {
                 script {
                     def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
