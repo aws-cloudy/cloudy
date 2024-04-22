@@ -12,7 +12,7 @@ const LearningSection = () => {
   return (
     <section className={styles.section}>
       <LearningInput value={value} setValue={setValue} keyword={keyword} setKeyword={setKeyword} />
-      <LearningSearchResult />
+      <LearningSearchResult keyword={keyword} />
       <div>input area</div>
     </section>
   )

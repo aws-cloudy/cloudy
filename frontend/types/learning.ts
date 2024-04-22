@@ -15,3 +15,7 @@ export interface ILearningSearchList {
 export interface ILearningSearchListItem {
   onClick: (v: string) => void
 }
+
+export interface ILearningSearchResult {
+  keyword: string
+}
