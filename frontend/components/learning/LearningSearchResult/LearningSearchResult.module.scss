@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 32px 0;
+}
+
+.rightWrap {
+  display: flex;
+  align-items: center;
+}
+
+.filterText {
+  margin-right: 10px;
+}
+
+.iconWrap {
+  cursor: pointer;
+  margin-left: 10px;
+}
