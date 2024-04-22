@@ -39,10 +39,8 @@ pipeline {
             steps{
                 script{
                     dir('./frontend'){
-                        sh 'npm run test:ci'
-
+                        sh 'jest --ci'
                     }
-
                 }
 
             }
@@ -64,6 +62,9 @@ pipeline {
 
     }
     post {
+            always {
+                junit checksName: 'Jest Tests', testResults: 'junit.xml'
+            }
             success {
                 script {
                     def Author_ID = sh(script: "git show -s --pretty=%an", returnStdout: true).trim()
