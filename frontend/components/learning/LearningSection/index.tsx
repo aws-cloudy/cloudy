@@ -1,11 +1,17 @@
-import React from 'react'
-import LearningInput from '../LearningInput'
+'use client'
+
+import React, { useState } from 'react'
 import styles from './LearningSection.module.scss'
+import LearningInput from '../LearningInput'
+import LearningSearchList from '../LearningSearchList'
 
 const LearningSection = () => {
+  const [value, setValue] = useState<string>('')
+
   return (
     <section className={styles.section}>
-      <LearningInput />
+      <LearningInput value={value} setValue={setValue} />
+      {value && <LearningSearchList />}
       <div>input area</div>
     </section>
   )
