@@ -39,7 +39,7 @@ pipeline {
             steps{
                 script{
                     dir('./frontend'){
-                        sh 'jest --ci'
+                        sh './node_modules/.bin/jest --ci'
                     }
                 }
 
