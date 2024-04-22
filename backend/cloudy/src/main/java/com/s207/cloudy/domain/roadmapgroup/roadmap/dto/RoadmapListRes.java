@@ -12,5 +12,5 @@ public class RoadmapListRes {
     private String service;
     private String job;
     private String summary;
-    private int commentsCnt;
+    private long commentsCnt;
 }
