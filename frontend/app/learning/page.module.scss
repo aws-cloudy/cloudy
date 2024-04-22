@@ -6,10 +6,12 @@
   margin: 0 auto;
   background-color: $white;
   max-width: var(--max-width);
+  padding-top: 55px;
 }
 
 @media screen and (max-width: $tablet) {
   .section {
     display: block;
+    padding-top: 10px;
   }
 }

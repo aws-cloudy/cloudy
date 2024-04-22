@@ -50,4 +50,10 @@ img {
   :root {
     --width-ratio: 90%;
   }
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-size: 12px;
+  }
 }
