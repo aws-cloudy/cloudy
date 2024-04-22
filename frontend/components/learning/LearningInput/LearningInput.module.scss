@@ -1,5 +1,9 @@
 @import '@/styles/theme.scss';
 
+.inputWrap {
+  position: relative;
+}
+
 .input {
   width: 100%;
   border: none;

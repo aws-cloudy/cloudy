@@ -1,9 +1,10 @@
 import React from 'react'
 import styles from './LearningInput.module.scss'
 import { ILearningInput } from '@/types/learning'
+import LearningSearchList from '../LearningSearchList'
 
 const LearningInput = (props: ILearningInput) => {
-  const { value, setValue, setKeyword } = props
+  const { value, setValue, keyword, setKeyword } = props
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -23,13 +24,16 @@ const LearningInput = (props: ILearningInput) => {
 
   return (
     <>
-      <input
-        className={styles.input}
-        placeholder="무엇이든 검색해보세요 ..."
-        value={value}
-        onChange={onChange}
-        onKeyDown={handleKeyDown}
-      />
+      <div className={styles.inputWrap}>
+        <input
+          className={styles.input}
+          placeholder="무엇이든 검색해보세요 ..."
+          value={value}
+          onChange={onChange}
+          onKeyDown={handleKeyDown}
+        />
+        {value && keyword === '' && <LearningSearchList />}
+      </div>
     </>
   )
 }
