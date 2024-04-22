@@ -22,11 +22,11 @@ public class LearningRoadmap {
     @JoinColumn(name = "roadmap_id")
     private Roadmap roadmap;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_id")
-    private Learning learning;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "learning_id")
+//    private Learning learning;
 
-    @Column(name = "rank")
-    private int rank;
+    @Column(name = "ranking")
+    private int ranking;
 
 }

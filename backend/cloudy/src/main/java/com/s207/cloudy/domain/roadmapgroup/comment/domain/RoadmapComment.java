@@ -5,14 +5,13 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.util.Lazy;
 
 @Entity
 @Table(name = "Roadmap_Comment")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Comment {
+public class RoadmapComment {
 
     @Id
     @Column(name = "id")
@@ -26,6 +25,6 @@ public class Comment {
     @Column(name = "member_id")
     private int memberId;
 
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "content")
+    private String content;
 }
