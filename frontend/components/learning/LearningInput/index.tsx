@@ -19,7 +19,6 @@ const LearningInput = (props: ILearningInput) => {
 
   const handleSubmit = () => {
     setKeyword(value)
-    setValue('')
   }
 
   return (

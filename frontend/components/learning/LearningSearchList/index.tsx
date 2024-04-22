@@ -8,7 +8,7 @@ const LearningSearchList = (props: ILearningSearchList) => {
 
   // 자동 검색어 클릭시
   const onClick = (v: string) => {
-    setValue('')
+    setValue(v)
     setKeyword(v)
   }
 
