@@ -10,7 +10,7 @@ const meta = {
   },
 
   tags: ['autodocs'],
-  args: { item: learningData[0] },
+  args: { item: learningData[0], layout: 'grid' },
 } satisfies Meta<typeof LearningItem>
 
 export default meta
