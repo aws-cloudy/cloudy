@@ -73,7 +73,36 @@
   padding-bottom: 6px;
 }
 
-.learnButton {
+.moreButton {
+  border: none;
+  display: flex;
+  background-color: $white;
+  color: $blue1;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 18px;
+}
+
+.moreWrap {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.duration {
+  font-weight: 400;
+  font-size: 0.85em;
+  color: $gray8;
+  margin-bottom: 6px;
+}
+
+.summary {
+  font-weight: 400;
+  font-size: 0.85em;
+  color: $gray8;
+}
+
+.linkButton {
   border: none;
   display: flex;
   background-color: $white;

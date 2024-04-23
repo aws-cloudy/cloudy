@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import styles from './LearningItem.module.scss'
 import { ILearningItem } from '@/types/learning'
 import { getDifficulty } from '@/utils/getDifficulty'
@@ -6,7 +8,11 @@ import { getDifficulty } from '@/utils/getDifficulty'
 const LearningItem = (props: { item: ILearningItem }) => {
   const { item } = props
 
+  const [more, setMore] = useState<boolean>(true)
+
   const difficulty = getDifficulty(item.difficulty)
+
+  const clickMoreButton = () => setMore(!more)
 
   return (
     <div className={styles.container}>
@@ -23,7 +29,19 @@ const LearningItem = (props: { item: ILearningItem }) => {
           ))}
         </div>
         <div className={styles.title}>{item.title}</div>
-        <button className={styles.learnButton}>더 알아보기</button>
+        {more ? (
+          <button className={styles.moreButton} onClick={clickMoreButton}>
+            더 알아보기
+          </button>
+        ) : (
+          <div className={styles.moreWrap}>
+            <div className={styles.duration}>소요시간 {item.duration}</div>
+            <div onClick={clickMoreButton} className={styles.summary}>
+              {item.summary}
+            </div>
+            <button className={styles.linkButton}>학습하러 가기 {'>'}</button>
+          </div>
+        )}
       </div>
     </div>
   )
