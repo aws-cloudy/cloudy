@@ -9,10 +9,9 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.s207.cloudy.domain.roadmapgroup.comment.domain.QRoadmapComment;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.QRoadmap;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
+import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
@@ -27,10 +26,10 @@ public class    RoadmapQueryRepository {
     private static final QRoadmap qRoadmap = QRoadmap.roadmap;
     private static final QRoadmapComment qComment = QRoadmapComment.roadmapComment;
 
-    public Page<RoadmapListRes> findRoadmapList(String job, String service, String query, Pageable pageable) {
+    public Page<RoadmapRes> findRoadmapList(String job, String service, String query, Pageable pageable) {
 
-        List<RoadmapListRes> content = queryFactory
-                .select(Projections.fields(RoadmapListRes.class,
+        List<RoadmapRes> content = queryFactory
+                .select(Projections.fields(RoadmapRes.class,
                         qRoadmap.id.as("roadmapId"),
                         qRoadmap.title,
                         qRoadmap.thumbnail,

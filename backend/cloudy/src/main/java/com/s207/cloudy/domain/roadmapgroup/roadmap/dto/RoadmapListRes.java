@@ -5,16 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
 public class RoadmapListRes {
-    private int roadmapId;
-    private String title;
-    private String thumbnail;
-    private String service;
-    private String job;
-    private String summary;
-    private long commentsCnt;
+    private List<RoadmapRes> roadmaps;
+    private long totalPageCnt;
 }
