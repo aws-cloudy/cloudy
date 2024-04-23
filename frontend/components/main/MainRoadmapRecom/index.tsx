@@ -1,6 +1,9 @@
 import MainRoadmapRecomItem from '../MainRoadmapRecomItem'
 import styles from './MainRoadmapRecom.module.scss'
 
+import { FaChevronLeft } from 'react-icons/fa6'
+import { FaChevronRight } from 'react-icons/fa6'
+
 const dummy = [
   {
     title: '더미 데이터',
@@ -32,6 +35,10 @@ function MainRoadmapRecom() {
             AWS <span>100%</span> 활용하기
           </p>
           <div className={styles.border} />
+          <div className={styles.buttonBox}>
+            <FaChevronLeft className={styles.button} />
+            <FaChevronRight className={styles.button} />
+          </div>
         </div>
         <div className={styles.roadmapBox}>
           {dummy.map((e, i) => (

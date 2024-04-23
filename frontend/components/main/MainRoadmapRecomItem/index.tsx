@@ -8,7 +8,7 @@ type Props = {
 
 function MainRoadmapRecomItem({ title, content, link }: Props) {
   const shortTitle = title.length > 60 ? title.substring(0, 60) + '...' : title
-  const shortContent = content.length > 300 ? content.substring(0, 300) + '...' : content
+  const shortContent = content.length > 200 ? content.substring(0, 200) + '...' : content
 
   return (
     <div className={styles.container}>

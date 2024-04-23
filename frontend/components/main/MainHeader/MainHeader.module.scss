@@ -35,3 +35,15 @@
   color: $white;
   margin-bottom: 30px;
 }
+
+@media screen and (max-width: $tablet) {
+  .title {
+    font-size: 1.5em;
+    word-break: keep-all;
+  }
+
+  .searchBox {
+    width: 90%;
+    margin-bottom: 50px;
+  }
+}

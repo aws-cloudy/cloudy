@@ -13,20 +13,24 @@ const Header = () => {
   const navRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isMain = pathname === '/'
-  const [isDark, setIsDark] = useState(isMain && window.scrollY < window.innerHeight - 80 ? true : false)
+  const [isDark, setIsDark] = useState(isMain ? true : false)
   const [style, setStyle] = useState(isDark ? mainStyles : styles)
 
   const scrollHandler = () => {
-    if (isMain && window.scrollY < window.innerHeight - 80) {
-      setIsDark(true)
-      setStyle(mainStyles)
-    } else {
-      setIsDark(false)
-      setStyle(styles)
+    if (typeof window !== 'undefined') {
+      if (isMain && window.scrollY < window.innerHeight - 80) {
+        setIsDark(true)
+      } else {
+        setIsDark(false)
+      }
     }
   }
 
   useEffect(() => {
+    const { scrollY, innerHeight, scrollTo } = window
+    setIsDark(isMain && scrollY < innerHeight - 80 ? true : false)
+    scrollTo(0, 0)
+
     if (typeof window !== 'undefined') {
       if (isMain) {
         window.addEventListener('scroll', scrollHandler)
@@ -37,6 +41,14 @@ const Header = () => {
       }
     }
   }, [isMain])
+
+  useEffect(() => {
+    if (isDark) {
+      setStyle(mainStyles)
+    } else {
+      setStyle(styles)
+    }
+  }, [isDark])
 
   return (
     <>

@@ -17,7 +17,7 @@
 
 .titleBox {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -30,10 +30,27 @@
   }
 }
 
+.buttonBox {
+  height: 100%;
+  display: flex;
+}
+
+.button {
+  border-radius: 50%;
+  font-size: 2em;
+  margin: 0 10px;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray7;
+  }
+}
+
 .border {
   background-color: $white;
   height: 1px;
   flex-grow: 1;
+  margin-left: 5px;
 }
 
 .roadmapBox {
@@ -46,7 +63,23 @@
 }
 
 @media screen and (max-width: $tablet) {
+  .container {
+    height: auto;
+    padding: 20px;
+  }
+
   .title {
+    font-size: 1.5em;
+  }
+
+  .roadmapBox {
+    flex-direction: column;
+  }
+
+  .buttonBox {
+  }
+
+  .button {
     font-size: 1.5em;
   }
 }
