@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Roadmap_Comment")
 @Getter
@@ -28,10 +30,14 @@ public class RoadmapComment {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "reg_at")
+    private LocalDateTime regAt;
+
     @Builder
     public RoadmapComment(Roadmap roadmap, int memberId, String content) {
         this.roadmap = roadmap;
         this.memberId = memberId;
         this.content = content;
+        this.regAt = LocalDateTime.now();
     }
 }
