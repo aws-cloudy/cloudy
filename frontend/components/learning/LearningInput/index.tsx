@@ -30,6 +30,7 @@ const LearningInput = (props: ILearningInput) => {
           value={value}
           onChange={onChange}
           onKeyDown={handleKeyDown}
+          name="learning-input"
         />
         {value && keyword === '' && <LearningSearchList setKeyword={setKeyword} setValue={setValue} />}
       </div>

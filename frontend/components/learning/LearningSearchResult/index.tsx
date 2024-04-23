@@ -21,10 +21,10 @@ const LearningSearchResult = (props: ILearningSearchResult) => {
       <div className={styles.rightWrap}>
         <div className={styles.filterText}>필터 초기화</div>
         <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('grid')}>
-          <LuAlignJustify size="1.2em" color={layout === 'grid' ? '#1B1D1F' : '#CCCCCC'} />
+          <MdOutlineGridView size="1.2em" color={layout === 'grid' ? '#1B1D1F' : '#CCCCCC'} />
         </div>
         <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('justify')}>
-          <MdOutlineGridView size="1.2em" color={layout === 'justify' ? '#1B1D1F' : '#CCCCCC'} />
+          <LuAlignJustify size="1.2em" color={layout === 'justify' ? '#1B1D1F' : '#CCCCCC'} />
         </div>
       </div>
     </div>

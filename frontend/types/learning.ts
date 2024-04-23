@@ -1,4 +1,4 @@
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 export interface ILearningInput {
   value: string
@@ -18,4 +18,28 @@ export interface ILearningSearchListItem {
 
 export interface ILearningSearchResult {
   keyword: string
+}
+
+export interface IJob {
+  id: number
+  name: string
+}
+
+export interface IService {
+  id: number
+  name: string
+}
+
+export interface ILearningItem {
+  id: number
+  title: string
+  difficulty: string
+  duration: string
+  desc: string
+  summary: string
+  thumbnail: string
+  link: string
+  type: string
+  job: IJob[]
+  service: IService[]
 }
