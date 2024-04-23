@@ -30,9 +30,6 @@ class RoadmapQueryRepositoryTest {
     RoadmapQueryRepository roadmapQueryRepository;
 
     @Autowired
-    RoadmapCommentRepository roadmapCommentRepository;
-
-    @Autowired
     TestEntityManager entityManager;
 
     Roadmap dummyRoadmap1;
@@ -64,7 +61,7 @@ class RoadmapQueryRepositoryTest {
     @Test
     void findAllSuccess() {
         Page<RoadmapListRes> roadmapList = roadmapQueryRepository.findRoadmapList(null, null, null, PageRequest.of(0, 10));
-        List<RoadmapComment> actualCommentCnt = roadmapCommentRepository.findByRoadmap(dummyRoadmap1);
+        List<RoadmapComment> actualCommentCnt = List.of(dummyRoadmapComment1, dummyRoadmapComment2);
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(2);
