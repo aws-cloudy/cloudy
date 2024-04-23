@@ -5,23 +5,25 @@ import styles from './LearningItem.module.scss'
 import { ILearningItem } from '@/types/learning'
 import { getDifficulty } from '@/utils/getDifficulty'
 
-const LearningItem = (props: { item: ILearningItem }) => {
-  const { item } = props
+const LearningItem = (props: { item: ILearningItem; layout: string }) => {
+  const { item, layout } = props
 
-  const [more, setMore] = useState<boolean>(true)
+  const [more, setMore] = useState<boolean>(false)
 
   const difficulty = getDifficulty(item.difficulty)
 
-  const clickMoreButton = () => setMore(!more)
+  const clickMoreButton = () => layout !== 'justify' && setMore(!more)
 
   return (
-    <div className={styles.container}>
-      <div className={styles.imgWrap}>
+    <div className={layout === 'grid' ? styles.container : styles.justifyContainer}>
+      <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
         <img src={item.thumbnail} alt={item.title} className={styles.img} />
-        <div className={`${styles.badge} ${difficulty.class}`}>{difficulty.text}</div>
+        <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
+          {difficulty.text}
+        </div>
       </div>
-      <div className={styles.wrap}>
-        <div className={styles.categoryWrap}>
+      <div className={`${styles.wrap} ${styles.justifyWrap}`}>
+        <div className={layout === 'grid' ? styles.categoryWrap : styles.justifyCategoryWrap}>
           {item.service.map(service => (
             <div className={styles.category} key={service.id}>
               # {service.name}
@@ -29,11 +31,7 @@ const LearningItem = (props: { item: ILearningItem }) => {
           ))}
         </div>
         <div className={styles.title}>{item.title}</div>
-        {more ? (
-          <button className={styles.moreButton} onClick={clickMoreButton}>
-            더 알아보기
-          </button>
-        ) : (
+        {more || layout === 'justify' ? (
           <div className={styles.moreWrap}>
             <div className={styles.duration}>소요시간 {item.duration}</div>
             <div onClick={clickMoreButton} className={styles.summary}>
@@ -41,6 +39,10 @@ const LearningItem = (props: { item: ILearningItem }) => {
             </div>
             <button className={styles.linkButton}>학습하러 가기 {'>'}</button>
           </div>
+        ) : (
+          <button className={styles.moreButton} onClick={clickMoreButton}>
+            더 알아보기
+          </button>
         )}
       </div>
     </div>

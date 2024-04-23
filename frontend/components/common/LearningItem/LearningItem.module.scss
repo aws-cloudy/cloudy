@@ -6,15 +6,31 @@
   height: 100%;
 }
 
+.justifyContainer {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
 .wrap {
   display: flex;
   flex-direction: column;
   padding: 4px;
+  width: 65%;
+}
+
+.justifyWrap {
+  width: 100%;
 }
 
 .categoryWrap {
   display: flex;
   padding-block: 17px 8px;
+}
+
+.justifyCategoryWrap {
+  display: flex;
+  padding: 0;
 }
 
 .category {
@@ -31,6 +47,13 @@
   position: relative;
   width: 100%;
   height: 170px;
+}
+
+.justifyImgWrap {
+  position: relative;
+  height: 170px;
+  width: 300px;
+  margin-right: 10px;
 }
 
 .img {
@@ -54,6 +77,11 @@
   color: $white;
 }
 
+.justifyBadge {
+  left: 15px;
+  top: 15px;
+}
+
 .fundamental {
   background-color: $red1;
 }
@@ -67,7 +95,7 @@
 }
 
 .title {
-  font-size: 1.1em;
+  font-size: 1.04em;
   font-weight: 500;
   color: $black;
   padding-bottom: 6px;
@@ -98,8 +126,9 @@
 
 .summary {
   font-weight: 400;
-  font-size: 0.85em;
+  font-size: 0.8em;
   color: $gray8;
+  cursor: pointer;
 }
 
 .linkButton {
@@ -110,4 +139,12 @@
   cursor: pointer;
   width: 50%;
   margin-top: 18px;
+}
+
+@media screen and (max-width: $tablet) {
+  .imgWrap {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+  }
 }
