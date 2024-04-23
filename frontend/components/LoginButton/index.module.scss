@@ -1,5 +1,5 @@
 .googleButton {
-  background-color: #ffffff; /* Google blue */
+  background-color: #ffffff;
   color: black;
   border: solid #a1a3b0;
   border-width: thin;
@@ -7,13 +7,15 @@
   border-radius: 5px;
   font-size: 16px;
   font-weight: 500;
+  width: 397px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
+  gap: 60px;
   cursor: pointer;
 }
 
-.googleIcon {
+.icon {
   margin-right: 10px;
   width: 20px;
   height: 20px;
@@ -21,4 +23,25 @@
 
 .googleButton:hover {
   background-color: #357ae8;
+}
+
+.cognitoButton {
+  background-color: #ffffff;
+  color: black;
+  border: solid #a1a3b0;
+  border-width: thin;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  width: 397px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 60px;
+  cursor: pointer;
+}
+
+.cognitoButton:hover {
+  background-color: #C17B9E;
 }
