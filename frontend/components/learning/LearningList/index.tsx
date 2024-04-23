@@ -1,14 +1,13 @@
 import React from 'react'
 import styles from './LearningList.module.scss'
 import { learningData } from './learningData'
+import LearningItem from '@/components/common/LearningItem'
 
 const LearningList = () => {
   return (
     <div className={styles.container}>
       {learningData.map(item => (
-        <div key={item.id}>
-          <div>{item.title}</div>
-        </div>
+        <LearningItem key={item.id} item={item} />
       ))}
     </div>
   )
