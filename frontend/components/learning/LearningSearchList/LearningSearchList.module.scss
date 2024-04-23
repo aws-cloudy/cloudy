@@ -1,0 +1,13 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  margin-top: 10px;
+  border: 1px solid $gray7;
+  background-color: $white;
+  padding: 10px 0;
+  width: 100%;
+  z-index: 5;
+}

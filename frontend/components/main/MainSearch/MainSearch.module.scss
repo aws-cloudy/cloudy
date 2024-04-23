@@ -1,0 +1,64 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  margin-bottom: 80px;
+  position: absolute;
+  left: 0;
+  top: 100px;
+}
+
+.search {
+  &Box {
+    width: 100%;
+    min-height: 60px;
+    height: fit-content;
+    padding: 15px 30px;
+    border-radius: 30px;
+    background-color: $white;
+    position: relative;
+    border: 1px solid $gray1;
+  }
+
+  &Input {
+    font-size: 1em;
+    width: calc(100% - 60px);
+    height: 30px;
+    border: none;
+    outline: none;
+  }
+
+  &Icon {
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    font-size: 2em;
+    cursor: pointer;
+  }
+
+  &ItemBox {
+    margin-top: 10px;
+    padding: 15px 0;
+    border-top: 1px solid $gray6;
+  }
+
+  &Item {
+    padding: 5px;
+    cursor: pointer;
+
+    span {
+      color: $primary;
+      font-weight: 500;
+    }
+
+    &:hover {
+      background-color: $gray1;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .container {
+    top: 50px;
+  }
+}

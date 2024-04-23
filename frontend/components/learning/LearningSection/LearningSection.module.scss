@@ -1,0 +1,13 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 74%;
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    width: 100%;
+  }
+}

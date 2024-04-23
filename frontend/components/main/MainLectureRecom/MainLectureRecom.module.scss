@@ -1,0 +1,42 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: $gray1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner {
+  width: 90%;
+  height: 80%;
+}
+
+.titleBox {
+  width: 100%;
+
+  &Item1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &Item2 {
+    font-size: 1.3em;
+    color: $gray8;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .titleBox {
+    &Item1 {
+      font-size: 1.5em;
+    }
+
+    &Item2 {
+      font-size: 1.1em;
+    }
+  }
+}

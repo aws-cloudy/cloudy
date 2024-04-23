@@ -1,0 +1,44 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.textBox {
+  text-align: center;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+.student {
+  font-size: 3em;
+  font-weight: 900;
+  color: $primary;
+  margin-bottom: 20px;
+}
+
+.icon {
+  font-size: 10em;
+  color: $gray7;
+}
+
+@media screen and (max-width: $tablet) {
+  .container {
+    flex-direction: row-reverse;
+  }
+
+  .textBox {
+    text-align: left;
+  }
+
+  .icon {
+    font-size: 6em;
+    margin-right: 5px;
+    margin-bottom: 30px;
+  }
+}
