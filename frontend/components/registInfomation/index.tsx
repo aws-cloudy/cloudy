@@ -1,22 +1,27 @@
 'use client'
 import Select from 'react-select'
-import styles from './indext.module.scss'
+import styles from './index.module.scss'
 import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
 import { useState } from 'react'
 
-export default function RegistInfo() {
-  const [selectedJob, setSelectedJob] = useState(null)
-  const [selectedService, setSelectedService] = useState(null)
-  const [confirmScreen, setConfirmScreen] = useState(false)
+interface OptionType {
+  value: string
+  label: string
+}
 
-  const options = [
+export default function RegistInfo() {
+  const options: OptionType[] = [
     { value: 'Data Scientist', label: 'Data Scientist' },
     { value: 'Data2', label: 'Data2' },
     { value: 'Data3', label: 'Data3' },
     { value: 'Data4', label: 'Data4' },
     { value: 'Data5', label: 'Data5' },
   ]
+
+  const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
+  const [selectedService, setSelectedService] = useState<OptionType | null>(null)
+  const [confirmScreen, setConfirmScreen] = useState(false)
 
   const customStyles = {
     control: (base: any) => ({
@@ -53,7 +58,7 @@ export default function RegistInfo() {
         <div className={styles.info}>
           <div className={styles.infoContainer}>
             <div className={styles.infoTitle}>직무</div>
-            <div>{selectedJob ? selectedJob.label : '선택되지 않음'}</div>
+            <div id="selectedJob">{selectedJob ? selectedJob.label : '선택되지 않음'}</div>
           </div>
           <div className={styles.infoContainer}>
             <div className={styles.infoTitle}>관심 서비스</div>
@@ -111,7 +116,7 @@ export default function RegistInfo() {
         styles={customStyles}
       />
 
-      <button className={styles.submit} onClick={handleConfirm}>
+      <button className={styles.submit} onClick={handleConfirm} id="selected">
         확인
       </button>
     </div>
