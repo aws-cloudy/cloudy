@@ -2,6 +2,7 @@ package com.s207.cloudy.domain.roadmapgroup.comment.domain;
 
 import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "Roadmap_Comment")
 @Getter
-@Setter
 @NoArgsConstructor
 public class RoadmapComment {
 
@@ -27,4 +27,11 @@ public class RoadmapComment {
 
     @Column(name = "content")
     private String content;
+
+    @Builder
+    public RoadmapComment(Roadmap roadmap, int memberId, String content) {
+        this.roadmap = roadmap;
+        this.memberId = memberId;
+        this.content = content;
+    }
 }

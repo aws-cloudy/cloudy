@@ -1,6 +1,7 @@
 package com.s207.cloudy.domain.roadmapgroup.roadmap.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +9,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "Roadmap")
 @Getter
-@Setter
 @NoArgsConstructor
 public class Roadmap {
 
@@ -31,4 +31,13 @@ public class Roadmap {
 
     @Column(name = "summary")
     private String summary;
+
+    @Builder
+    public Roadmap(String title, String thumbnail, String service, String job, String summary) {
+        this.title = title;
+        this.thumbnail = thumbnail;
+        this.service = service;
+        this.job = job;
+        this.summary = summary;
+    }
 }
