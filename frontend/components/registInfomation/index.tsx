@@ -2,6 +2,9 @@
 import Select from 'react-select'
 import styles from './indext.module.scss'
 import '@/styles/theme.scss'
+import ProgressBar from '../ProgressBar'
+import { useState } from 'react'
+
 export default function RegistInfo() {
   const options = [
     { value: 'Data Scientist', label: 'Data Scientist' },
@@ -19,11 +22,20 @@ export default function RegistInfo() {
     }),
   }
 
+  const [currentStep, setCurrentStep] = useState(0)
+  const totalSteps = 1
+
+  const handleNextStep = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1)
+    }
+  }
+
   return (
     <div className={styles.section}>
       <div className={styles.title}>내 정보 등록</div>
       <div className={styles.grayText}>강의 추천을 위해 추가 정보를 입력해주세요.</div>
-      <div className={styles.line} />
+      <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       <Select
         options={options}
         className={styles.select}
@@ -56,7 +68,9 @@ export default function RegistInfo() {
       />
       <div className={styles.blackText}>등록한 정보는 마이페이지에서 변경할 수 있습니다.</div>
 
-      <button className={styles.submit}>확인</button>
+      <button className={styles.submit} onClick={handleNextStep}>
+        확인
+      </button>
     </div>
   )
 }

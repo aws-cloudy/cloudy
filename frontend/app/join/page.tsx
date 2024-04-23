@@ -1,4 +1,4 @@
-import RegistInfo from '@/components/registInfomation'
+import RegistInfo from '@/components/RegistInfomation'
 import styles from './page.module.scss'
 
 const joinPage = () => {
