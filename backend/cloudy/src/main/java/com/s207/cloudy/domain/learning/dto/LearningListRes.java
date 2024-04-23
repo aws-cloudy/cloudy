@@ -14,7 +14,7 @@ public class LearningListRes {
     private int learningId;
     private String thumbnail;
     private String jobName;
-    private String serviceName;
+    private String serviceType;
     private String title;
     private String summary;
     private String duration;

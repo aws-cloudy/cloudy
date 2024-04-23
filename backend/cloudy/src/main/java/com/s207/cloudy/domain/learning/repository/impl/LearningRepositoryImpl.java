@@ -5,6 +5,7 @@ import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
+import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.repository.LearningRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,16 +22,17 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-//    private static final QLearning qLearning = QLearning.learning;
-//    private static final QJob qJob = QJob.job;
-//    private static final QLearningJob qLearningJob = QLearningJob.learningJob;
-
-//    public LearningRepositoryImpl() {super(Learning.class);}
-
-    // jobName과 serviceName 나중에 추가해야!
+    // serviceName 나중에 추가해야!
     @Override
-    public List<LearningListRes> findLearnings(int page, int pageSize, String[] jobName, String[] serviceName,
-                                               String[] type, String[] difficulty, String query) {
+    public List<LearningListRes> findLearnings(LearningSearchReq learningSearchReq) {
+        int page = learningSearchReq.getPage();
+        int pageSize = learningSearchReq.getPageSize();
+        String[] jobName = learningSearchReq.getJobName();
+        String[] serviceName = learningSearchReq.getServiceName();
+        String[] type = learningSearchReq.getType();
+        String[] difficulty = learningSearchReq.getDifficulty();
+        String query = learningSearchReq.getQuery();
+
         JPAQuery<LearningListRes> jpaQuery = queryFactory.select(Projections.fields(LearningListRes.class,
                         learning.id.as("learningId"), learning.thumbnail, learning.title,
                         learning.summary, learning.duration, learning.difficulty, learning.link))
