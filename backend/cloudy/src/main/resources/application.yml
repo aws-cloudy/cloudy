@@ -25,6 +25,6 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
-        dialect: org.hibernate.dialect.MariaDBDialect
+        dialect: org.hibernate.dialect.MySQLDialect
 
 

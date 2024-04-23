@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 public class LearningListRes {
     private int learningId;
     private String thumbnail;
-    private String jobName;
     private String serviceType;
     private String title;
     private String summary;

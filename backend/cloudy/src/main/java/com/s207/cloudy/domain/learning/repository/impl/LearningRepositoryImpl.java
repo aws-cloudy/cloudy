@@ -15,6 +15,8 @@ import java.util.List;
 import static com.s207.cloudy.domain.learning.entity.QJob.job;
 import static com.s207.cloudy.domain.learning.entity.QLearning.learning;
 import static com.s207.cloudy.domain.learning.entity.QLearningJob.learningJob;
+import static com.s207.cloudy.domain.learning.entity.QLearningService.learningService;
+import static com.s207.cloudy.domain.learning.entity.QService.service;
 
 @RequiredArgsConstructor
 @Repository
@@ -22,21 +24,23 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-    // serviceName 나중에 추가해야!
+    // 서비스명에 대한 필터링 나중에 추가해야!!
     @Override
     public List<LearningListRes> findLearnings(LearningSearchReq learningSearchReq) {
         int page = learningSearchReq.getPage();
         int pageSize = learningSearchReq.getPageSize();
         String[] jobName = learningSearchReq.getJobName();
-        String[] serviceName = learningSearchReq.getServiceName();
+//        String[] serviceName = learningSearchReq.getServiceName();
         String[] type = learningSearchReq.getType();
         String[] difficulty = learningSearchReq.getDifficulty();
         String query = learningSearchReq.getQuery();
 
         JPAQuery<LearningListRes> jpaQuery = queryFactory.select(Projections.fields(LearningListRes.class,
                         learning.id.as("learningId"), learning.thumbnail, learning.title,
-                        learning.summary, learning.duration, learning.difficulty, learning.link))
-                .from(learning);
+                        learning.summary, learning.duration, learning.difficulty, learning.link, service.type.as("serviceType")))
+                .from(learning)
+                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
+                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id));
 
         // 제목에 대한 필터링
         if(query != null && !query.isEmpty()) {

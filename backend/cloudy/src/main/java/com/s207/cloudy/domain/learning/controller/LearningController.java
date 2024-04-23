@@ -25,8 +25,7 @@ public class LearningController {
 
     private final LearningService learningService;
 
-    // 학습 전체 조회 - 검색어 오타 교정 전
-    // 페이지별 + 직무별 필터링 + 난이도별 + 강의타입 + 검색
+    // 학습 전체 조회 - 검색어 오타 교정 전 (페이지별 + 직무별 + 서비스명별 + 난이도별 + 강의분류별 + 검색 필터링)
     @GetMapping
     public ResponseEntity<List<LearningListRes>> getLearningList(@Valid LearningSearchReq learningSearchReq) {
         return ResponseEntity.ok(learningService.getLearnings(learningSearchReq));
