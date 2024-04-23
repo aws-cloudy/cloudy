@@ -14,15 +14,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class HealthControllerTest {
 
-//    @Autowired
-//    private MockMvc mockMvc;
-//
-//
-//    @Test
-//    void 관리자는_헬스체크_api로_서버상태를_확인할_수_있다()throws Exception{
-//        mockMvc.perform(get("/health"))
-//                .andExpect(status().isOk());
-//    }
+    @Autowired
+    private MockMvc mockMvc;
+
+
+    @Test
+    void 관리자는_헬스체크_api로_서버상태를_확인할_수_있다()throws Exception{
+        mockMvc.perform(get("/health"))
+                .andExpect(status().isOk());
+    }
 
 
 }
