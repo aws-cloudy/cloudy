@@ -1,0 +1,35 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 30%;
+  height: 100%;
+}
+
+.title {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.content {
+  text-align: justify;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.link {
+  color: $primary;
+  font-weight: 500;
+}
+
+@media screen and (max-width: $tablet) {
+  .container {
+    width: 100%;
+    height: max-content;
+    margin: 10px 0;
+  }
+
+  .title {
+    font-size: 1.5em;
+  }
+}
