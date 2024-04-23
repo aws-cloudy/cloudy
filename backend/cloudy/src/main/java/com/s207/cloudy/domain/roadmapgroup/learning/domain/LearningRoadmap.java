@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.roadmapgroup.learning.domain;
 
+import com.s207.cloudy.domain.learning.entity.Learning;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -22,9 +23,9 @@ public class LearningRoadmap {
     @JoinColumn(name = "roadmap_id")
     private Roadmap roadmap;
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "learning_id")
-//    private Learning learning;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "learning_id")
+    private Learning learning;
 
     @Column(name = "ranking")
     private int ranking;
