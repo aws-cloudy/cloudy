@@ -1,0 +1,55 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  background-color: $white;
+  align-items: center;
+  justify-content: center;
+  width: 1213px;
+  height: 600px;
+  border-radius: 16px;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 500;
+  margin-bottom: 5%;
+}
+
+.grayText {
+  font-size: 1em;
+  color: $gray8;
+  margin-bottom: 5%;
+}
+
+.blackText {
+  font-size: 1em;
+  color: $black;
+  margin-bottom: 5%;
+}
+
+.line {
+  background-color: $gray6;
+  width: 900px;
+  height: 20px;
+  margin-bottom: 5%;
+}
+
+.select {
+  color: $black;
+  inline-size: 50%;
+  font-size: 1em;
+  margin-bottom: 24px;
+  border-radius: 18px;
+}
+
+.submit {
+  background-color: $black;
+  font-size: 1.2em;
+  border-radius: 5px;
+  width: 800px;
+  height: 50px;
+  color: $white;
+  cursor: pointer;
+}
