@@ -1,0 +1,150 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.justifyContainer {
+  display: flex;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  width: 65%;
+}
+
+.justifyWrap {
+  width: 100%;
+}
+
+.categoryWrap {
+  display: flex;
+  padding-block: 17px 8px;
+}
+
+.justifyCategoryWrap {
+  display: flex;
+  padding: 0;
+}
+
+.category {
+  color: $primary;
+  margin-left: 8px;
+  font-weight: 500;
+  font-size: 0.9em;
+  &:first-child {
+    margin-left: 0px;
+  }
+}
+
+.imgWrap {
+  position: relative;
+  width: 100%;
+  height: 170px;
+}
+
+.justifyImgWrap {
+  position: relative;
+  height: 170px;
+  width: 300px;
+  margin-right: 10px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.badge {
+  right: 16px;
+  bottom: -16px;
+  display: flex;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  font-size: 0.7em;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+}
+
+.justifyBadge {
+  left: 15px;
+  top: 15px;
+}
+
+.fundamental {
+  background-color: $red1;
+}
+
+.intermediate {
+  background-color: $green1;
+}
+
+.advanced {
+  background-color: $blue2;
+}
+
+.title {
+  font-size: 1.04em;
+  font-weight: 500;
+  color: $black;
+  padding-bottom: 6px;
+}
+
+.moreButton {
+  border: none;
+  display: flex;
+  background-color: $white;
+  color: $blue1;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 18px;
+}
+
+.moreWrap {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.duration {
+  font-weight: 400;
+  font-size: 0.85em;
+  color: $gray8;
+  margin-bottom: 6px;
+}
+
+.summary {
+  font-weight: 400;
+  font-size: 0.8em;
+  color: $gray8;
+  cursor: pointer;
+}
+
+.linkButton {
+  border: none;
+  display: flex;
+  background-color: $white;
+  color: $blue1;
+  cursor: pointer;
+  width: 50%;
+  margin-top: 18px;
+}
+
+@media screen and (max-width: $tablet) {
+  .imgWrap {
+    width: 150px;
+    min-width: 150px;
+    height: 150px;
+  }
+}
