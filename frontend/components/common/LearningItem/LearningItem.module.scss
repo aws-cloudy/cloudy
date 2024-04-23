@@ -27,10 +27,43 @@
   }
 }
 
-.img {
+.imgWrap {
+  position: relative;
   width: 100%;
   height: 170px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
+}
+
+.badge {
+  right: 16px;
+  bottom: -16px;
+  display: flex;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  font-size: 0.7em;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+}
+
+.fundamental {
+  background-color: $red1;
+}
+
+.intermediate {
+  background-color: $green1;
+}
+
+.advanced {
+  background-color: $blue2;
 }
 
 .title {
