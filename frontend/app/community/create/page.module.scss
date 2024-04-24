@@ -1,0 +1,11 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  width: var(--width-ratio);
+  margin: 0 auto;
+  background-color: $white;
+  max-width: var(--max-width);
+  padding: 55px 0;
+  min-height: 100vh;
+}

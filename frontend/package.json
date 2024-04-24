@@ -12,12 +12,19 @@
     "build-storybook": "storybook build",
     "test": "jest --watch --coverage",
     "test:ci": "jest --ci",
-    "sonarqube": "sonar-scanner"
+    "sonarqube": "sonar-scanner",
+    "migrate:postgres": "dotenv -e .env.local -- npx prisma migrate dev --name postgres-init",
+    "dbpush:postgres": "dotenv -e .env.local -- npx prisma db push"
   },
   "dependencies": {
+    "@prisma/client": "5.13.0",
+    "@toast-ui/editor": "^3.2.2",
+    "@toast-ui/react-editor": "^3.2.3",
+    "dotenv-cli": "^7.4.1",
     "jest-junit": "^16.0.0",
     "next": "^14.2.2",
     "next-auth": "^4.24.7",
+    "prisma": "^5.13.0",
     "react": "^18",
     "react-dom": "^18",
     "react-ga4": "^2.1.0",
@@ -25,6 +32,7 @@
     "react-icons": "^5.1.0",
     "react-select": "^5.8.0",
     "sass": "^1.75.0",
+    "zod": "^3.23.4",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

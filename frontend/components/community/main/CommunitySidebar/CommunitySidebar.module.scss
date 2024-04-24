@@ -1,0 +1,8 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: calc(30% - 60px);
+  position: fixed;
+  top: 110px;
+  right: 5%;
+}

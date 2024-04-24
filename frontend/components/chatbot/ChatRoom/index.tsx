@@ -25,7 +25,7 @@ function ChatRoom() {
   return (
     <div className={styles.container}>
       <div className={styles.header} onClick={() => setChatbotType('main')}>
-        {'< 목록으로 돌아가기'}
+        {'〈　목록으로 돌아가기'}
       </div>
       <div className={styles.msgBox} ref={msgRef}>
         {messages.map((e, i) => (
