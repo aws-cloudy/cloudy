@@ -1,13 +1,13 @@
 import React from 'react'
 import { ILearningFilterClose } from '@/types/learning'
+import styles from './LearningFilterClose.module.scss'
 
 const LearningFilterClose = (props: ILearningFilterClose) => {
   const { openFilter } = props
 
   return (
-    <div>
-      <div onClick={e => openFilter()}>filter open</div>
-      <div>filter 닫혔을 때</div>
+    <div className={styles.container} onClick={e => openFilter()}>
+      <div className={styles.text}>open filter</div>
     </div>
   )
 }
