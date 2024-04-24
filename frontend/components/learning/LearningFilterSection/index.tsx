@@ -1,8 +1,24 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import styles from './LearningFilterSection.module.scss'
+import LearningFilterOpen from '../LearningFilterOpen'
+import LearningFilterClose from '../LearningFilterClose'
 
 const LearningFilterSection = () => {
-  return <article className={styles.article}>filter area</article>
+  const [open, setOpen] = useState(true)
+
+  const handleOpen = (v: boolean) => setOpen(v)
+
+  return (
+    <aside className={styles.aside}>
+      {open ? (
+        <LearningFilterOpen closeFilter={() => handleOpen(false)} />
+      ) : (
+        <LearningFilterClose openFilter={() => handleOpen(true)} />
+      )}
+    </aside>
+  )
 }
 
 export default LearningFilterSection
