@@ -51,3 +51,8 @@ export interface ILearningFilterOpen {
 export interface ILearningFilterClose {
   openFilter: () => void
 }
+
+export interface IFilter {
+  value: string
+  name: string
+}

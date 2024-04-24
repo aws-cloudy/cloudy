@@ -38,7 +38,7 @@ const LearningItem = (props: { item: ILearningItem; layout: string }) => {
             <div onClick={clickMoreButton} className={styles.summary}>
               {item.summary}
             </div>
-            <button className={styles.linkButton}>학습하러 가기 {'>'}</button>
+            <button className={styles.linkButton}>학습하러 가기 {'〉'}</button>
           </div>
         ) : (
           <button className={styles.moreButton} onClick={clickMoreButton}>

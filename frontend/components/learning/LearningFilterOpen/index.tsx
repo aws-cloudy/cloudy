@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { ILearningFilterOpen } from '@/types/learning'
+import { IFilter, ILearningFilterOpen } from '@/types/learning'
 import styles from './LearningFilterOpen.module.scss'
 import { MdOutlineClose } from 'react-icons/md'
 import { IoIosArrowDown } from 'react-icons/io'
@@ -12,6 +12,12 @@ import LearningTagList from '../LearningTagList'
 
 const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const { closeFilter } = props
+
+  // 필터 목록
+  const [filters, setFilters] = useState<IFilter[]>([])
+
+  // 필터 추가 함수
+  const addFilter = (v: IFilter) => setFilters([...filters, v])
 
   const [filter1, setFilter1] = useState(true)
   const [filter2, setFilter2] = useState(true)
