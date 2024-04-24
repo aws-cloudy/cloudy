@@ -12,15 +12,12 @@
 }
 
 .left {
-  display: flex;
   flex-direction: column;
   flex: 3;
 }
 
 .right {
-  display: flex;
   flex: 7;
-  background-color: $gray1;
 }
 
 .intro {

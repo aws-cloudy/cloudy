@@ -24,14 +24,6 @@ export default function RegistInfomation() {
   const [selectedService, setSelectedService] = useState<OptionType | null>(null)
   const [confirmScreen, setConfirmScreen] = useState(false)
 
-  const customStyles = {
-    control: (base: any) => ({
-      ...base,
-      height: 50,
-      minheight: 50,
-    }),
-  }
-
   const [currentStep, setCurrentStep] = useState(0)
   const totalSteps = 1
 

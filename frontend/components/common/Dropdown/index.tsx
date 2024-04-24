@@ -6,27 +6,31 @@ interface DropdownProps {
   value: { value: string; label: string } | null
   onChange: (option: any) => void
   placeholder: string
+  height: number //드롭다운 버튼의 높이
+  width: number
 }
 
-const customStyles = {
-  control: (base: any) => ({
-    ...base,
-    height: 50,
-    minheight: 50,
-  }),
-}
+const Dropdown = ({ options, value, onChange, placeholder, height = 50, width = 300 }: any) => {
+  const customStyles = {
+    control: (base: any) => ({
+      ...base,
+      height: height,
+      minheight: height,
+      width: width,
+      minwidth: width,
+    }),
+  }
 
-const theme = (theme: any) => ({
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary25: '#ff9900',
-    primary75: 'black',
-    primary: 'black',
-  },
-})
+  const theme = (theme: any) => ({
+    ...theme,
+    colors: {
+      ...theme.colors,
+      primary25: '#ff9900',
+      primary75: 'black',
+      primary: 'black',
+    },
+  })
 
-const Dropdown = ({ options, value, onChange, placeholder }: any) => {
   return (
     <Select
       options={options}
