@@ -1,9 +1,14 @@
 @import '@/styles/theme.scss';
 
-.article {
+.aside {
   display: flex;
-  width: 24%;
   margin-left: auto;
+  position: fixed;
+  max-width: 270px;
+  min-width: 200px;
+  width: 19%;
+  height: 100%;
+  right: 10%;
 }
 
 @media screen and (max-width: $tablet) {

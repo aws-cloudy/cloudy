@@ -11,13 +11,13 @@ const LearningFilterSection = () => {
   const handleOpen = (v: boolean) => setOpen(v)
 
   return (
-    <article className={styles.article}>
+    <aside className={styles.aside}>
       {open ? (
         <LearningFilterOpen closeFilter={() => handleOpen(false)} />
       ) : (
         <LearningFilterClose openFilter={() => handleOpen(true)} />
       )}
-    </article>
+    </aside>
   )
 }
 
