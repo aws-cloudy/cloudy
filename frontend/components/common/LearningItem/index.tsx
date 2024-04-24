@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import styles from './LearningItem.module.scss'
 import { ILearningItem } from '@/types/learning'
 import { getDifficulty } from '@/utils/getDifficulty'
+import Image from 'next/image'
 
 const LearningItem = (props: { item: ILearningItem; layout: string }) => {
   const { item, layout } = props
@@ -17,7 +18,7 @@ const LearningItem = (props: { item: ILearningItem; layout: string }) => {
   return (
     <div className={layout === 'grid' ? styles.container : styles.justifyContainer}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
-        <img src={item.thumbnail} alt={item.title} className={styles.img} />
+        <Image src={item.thumbnail} alt={item.title} className={styles.img} fill priority />
         <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
           {difficulty.text}
         </div>
