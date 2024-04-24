@@ -21,4 +21,5 @@ public class TestQueryDslConfig {
     public RoadmapQueryRepository roadmapQueryRepository() {
         return new RoadmapQueryRepository(jpaQueryFactory());
     }
+
 }

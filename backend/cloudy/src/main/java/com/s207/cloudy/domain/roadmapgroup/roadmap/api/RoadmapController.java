@@ -4,6 +4,7 @@ import com.s207.cloudy.domain.roadmapgroup.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class RoadmapController {
     public ResponseEntity<RoadmapListRes> getRoadmapList(@RequestParam(required = false) String job,
                                                          @RequestParam(required = false) String service,
                                                          @RequestParam(required = false) String query,
-                                                         Pageable pageable) {
+                                                         @PageableDefault Pageable pageable) {
 
         return ResponseEntity
                 .status(OK)

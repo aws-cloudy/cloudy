@@ -3,6 +3,7 @@ package com.s207.cloudy.global.config;
 import com.s207.cloudy.global.error.ErrorCodeEnum;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
 import org.springframework.core.MethodParameter;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.stereotype.Component;
@@ -17,15 +18,34 @@ public class PageableArgumentResolver extends PageableHandlerMethodArgumentResol
     public Pageable resolveArgument(MethodParameter methodParameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
         final Pageable pageable = super.resolveArgument(methodParameter, mavContainer, webRequest, binderFactory);
 
-        final int page = Integer.parseInt(webRequest.getParameter("page"));
-        final int size = Integer.parseInt(webRequest.getParameter("size"));
+        if (webRequest.getParameter("page") == null && webRequest.getParameter("size") == null) {
+            return pageable;
+        }
 
+        int size = 20;
+        int page = 0;
+
+        if (webRequest.getParameter("page") == null) {
+            page = pageable.getPageNumber();
+        } else {
+            page = Integer.parseInt(webRequest.getParameter("page"));
+        }
+
+        if (webRequest.getParameter("size") == null) {
+            size = pageable.getPageSize();
+        } else {
+            size = Integer.parseInt(webRequest.getParameter("size"));
+        }
+
+
+        if (page < 0) {
+            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_PAGE);
+        }
         if (size < 1 || size > 100) {
             throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
         }
-        if (page < 0) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
-        }
-        return pageable;
+
+        return PageRequest.of(page, size);
+
     }
 }

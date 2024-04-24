@@ -1,8 +1,8 @@
 package com.s207.cloudy.domain.roadmapgroup.comment.dao;
 
+import com.s207.cloudy.TestQueryDslConfig;
 import com.s207.cloudy.domain.roadmapgroup.comment.domain.RoadmapComment;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
 import com.s207.cloudy.dummy.DummyRoadmap;
 import com.s207.cloudy.dummy.DummyRoadmapComment;
 import org.assertj.core.api.SoftAssertions;
@@ -12,15 +12,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.context.annotation.Import;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @DataJpaTest
+@Import(TestQueryDslConfig.class)
 class RoadmapCommentRepositoryTest {
 
     @Autowired
@@ -32,6 +29,7 @@ class RoadmapCommentRepositoryTest {
     Roadmap dummyRoadmap1;
     RoadmapComment dummyRoadmapComment1;
     RoadmapComment dummyRoadmapComment2;
+
     @BeforeEach
     void setUp() {
 

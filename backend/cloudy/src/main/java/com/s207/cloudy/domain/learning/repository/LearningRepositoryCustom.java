@@ -6,7 +6,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 import java.util.List;
 
-//@NoRepositoryBean
+@NoRepositoryBean
 public interface LearningRepositoryCustom {
     List<LearningListRes> findLearnings(LearningSearchReq learningSearchReq);
 }
