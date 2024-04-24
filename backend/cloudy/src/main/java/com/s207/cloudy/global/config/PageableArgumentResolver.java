@@ -1,6 +1,6 @@
-package com.s207.cloudy.domain.global.config;
+package com.s207.cloudy.global.config;
 
-import com.s207.cloudy.domain.global.exception.PaginationException;
+import com.s207.cloudy.global.error.exception.PaginationException;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;

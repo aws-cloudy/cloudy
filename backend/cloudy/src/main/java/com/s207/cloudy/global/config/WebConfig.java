@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.global.config;
+package com.s207.cloudy.global.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.global.exception;
+package com.s207.cloudy.global.error.exception;
 
 public class PaginationException extends RuntimeException{
     public PaginationException(String message) {
