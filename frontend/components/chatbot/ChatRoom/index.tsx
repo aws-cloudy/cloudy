@@ -7,7 +7,7 @@ import { LuCat } from 'react-icons/lu'
 import { chatSample } from '../dummy'
 import ChatRoomMessage from '../ChatRoomMessage'
 import React, { useEffect, useRef, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import ChatRoomInput from '../ChatRoomInput'
 
 function ChatRoom() {
   const chatBotType = useChatbotType()
@@ -15,14 +15,6 @@ function ChatRoom() {
   const { setChatbotType } = useChatbotActions()
   const ico = chatBotType === 'oudy' ? LuDog : LuCat
   const [messages, setMessages] = useState(chatSample)
-  const { register, handleSubmit, getValues, reset, watch } = useForm<{ msg: string }>()
-
-  const onSubmit = () => {
-    const content = getValues('msg')
-    if (content === '') return
-    setMessages(prev => [...prev, { sender: 'user', content }])
-    reset()
-  }
 
   useEffect(() => {
     const messageBox = msgRef.current
@@ -40,9 +32,7 @@ function ChatRoom() {
           <ChatRoomMessage key={i} ico={ico} sender={e.sender} content={e.content} />
         ))}
       </div>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} name="messageForm">
-        <input type="text" className={styles.input} placeholder="메세지 입력..." {...register('msg')} required />
-      </form>
+      <ChatRoomInput setMessages={setMessages} />
     </div>
   )
 }
