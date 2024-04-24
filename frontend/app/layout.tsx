@@ -4,6 +4,8 @@ import GoogleAnalytics from '@/components/common/GoogleAnalytics'
 import '../styles/globals.scss'
 import Header from '@/components/common/Header'
 import Auth from '@/context/auth'
+import ChatBotIcon from '@/components/chatbot/ChatBotIcon'
+import ChatBot from '@/components/chatbot/ChatBot'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +25,8 @@ export default function RootLayout({
         <Auth>
           <GoogleAnalytics />
           <Header />
+          <ChatBot />
+          <ChatBotIcon />
           <div style={{ paddingTop: 80 }}>{children}</div>
         </Auth>
       </body>

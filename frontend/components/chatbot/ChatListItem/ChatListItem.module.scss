@@ -1,0 +1,43 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  height: 60px;
+  overflow-y: auto;
+  border-bottom: 1px solid $gray7;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.titleBox {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  *:nth-child(1) {
+    font-weight: 500;
+  }
+  *:nth-child(2) {
+    color: $gray8;
+  }
+}
+
+.content {
+  color: $gray8;
+  font-size: 0.9em;
+}
+
+@media screen and (max-width: $tablet) {
+  .titleBox {
+    font-size: 1.3em;
+  }
+  .content {
+    font-size: 1.2em;
+  }
+}
