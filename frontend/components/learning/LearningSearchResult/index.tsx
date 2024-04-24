@@ -3,6 +3,7 @@ import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
 import { useLearninglayout, useSearchActions } from '@/stores/search'
 import { ILearningSearchResult } from '@/types/learning'
+import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 
 const LearningSearchResult = (props: ILearningSearchResult) => {
   const { keyword } = props
@@ -13,18 +14,23 @@ const LearningSearchResult = (props: ILearningSearchResult) => {
   const onChangeLearningLayout = (v: 'grid' | 'justify') => {
     setLearningLayout(v)
   }
+  const { isTablet } = useResponsiveWidth()
 
   return (
     <div className={styles.container}>
       <div>{keyword && <div>{`'${keyword}' 검색결과 총 1건`}</div>}</div>
       <div className={styles.rightWrap}>
         <div className={styles.filterText}>필터 초기화</div>
-        <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('grid')}>
-          <MdOutlineGridView size="1.2em" color={layout === 'grid' ? '#1B1D1F' : '#CCCCCC'} />
-        </div>
-        <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('justify')}>
-          <LuAlignJustify size="1.2em" color={layout === 'justify' ? '#1B1D1F' : '#CCCCCC'} />
-        </div>
+        {!isTablet && (
+          <>
+            <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('grid')}>
+              <MdOutlineGridView size="1.2em" color={layout === 'grid' ? '#1B1D1F' : '#CCCCCC'} />
+            </div>
+            <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('justify')}>
+              <LuAlignJustify size="1.2em" color={layout === 'justify' ? '#1B1D1F' : '#CCCCCC'} />
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

@@ -4,12 +4,12 @@ import React, { useEffect, useState } from 'react'
 import styles from './LearningList.module.scss'
 import { learningData } from './learningData'
 import LearningItem from '@/components/common/LearningItem'
-import { useLearninglayout, useSearchActions } from '@/stores/search'
-import { useMediaQuery } from 'react-responsive'
+import { useLearninglayout } from '@/stores/search'
+import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 
 const LearningList = () => {
   // 반응형 width 감지
-  const isTablet = useMediaQuery({ query: '(max-width: 992px)' })
+  const { isTablet } = useResponsiveWidth()
   const [layout, setLayout] = useState<'grid' | 'justify'>('grid')
   const learningLayout = useLearninglayout()
 
