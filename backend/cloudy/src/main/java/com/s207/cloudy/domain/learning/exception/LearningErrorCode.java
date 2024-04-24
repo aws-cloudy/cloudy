@@ -19,4 +19,12 @@ public enum LearningErrorCode {
     private final String field;
     private final HttpStatus httpStatus;
 
+    public static String getByField(String field) {
+        for (LearningErrorCode errorCode : values()) {
+            if (errorCode.getField().equals(field)) {
+                return errorCode.getCode();
+            }
+        }
+        return null;
+    }
 }

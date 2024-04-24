@@ -1,6 +1,7 @@
 package com.s207.cloudy.domain.learning.dto;
 
 import com.fasterxml.jackson.databind.annotation.EnumNaming;
+import com.s207.cloudy.global.handler.common.annotation.TypeValidation;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
@@ -23,6 +24,7 @@ public class LearningSearchReq {
 
     String[] serviceName;
 
+    @TypeValidation
     String[] type;
 
     String[] difficulty;

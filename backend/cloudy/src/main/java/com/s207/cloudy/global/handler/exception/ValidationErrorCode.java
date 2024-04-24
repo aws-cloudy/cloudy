@@ -4,10 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 @Getter
 @AllArgsConstructor
 public enum ValidationErrorCode {
