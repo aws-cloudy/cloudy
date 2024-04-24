@@ -5,7 +5,8 @@ server:
 spring:
   application:
     name: catalog-server
-
+  profiles:
+    active: dev
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}
@@ -25,6 +26,5 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
-        dialect: org.hibernate.dialect.MySQLDialect
 
 
