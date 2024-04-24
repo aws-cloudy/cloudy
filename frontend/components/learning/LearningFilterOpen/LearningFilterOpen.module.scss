@@ -23,3 +23,45 @@
     margin-right: 10px;
   }
 }
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.ItemWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.ItemTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px;
+  cursor: pointer;
+  height: 60px;
+}
+
+.itemList {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemListItem {
+  display: flex;
+  align-items: center;
+  height: 37px;
+  padding: 10px 16px;
+
+  span {
+    margin-left: 8px;
+  }
+}
