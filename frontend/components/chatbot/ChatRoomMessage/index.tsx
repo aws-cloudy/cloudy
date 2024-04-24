@@ -1,14 +1,8 @@
 import Avatar from '@/components/common/Avatar'
-import { IconType } from 'react-icons'
 import styles from './ChatRoomMessage.module.scss'
+import { IChatRoomMessage } from '@/types/chatbot'
 
-type Props = {
-  ico: IconType
-  sender: 'cpu' | 'user'
-  content: string
-}
-
-function ChatRoomMessage({ ico, sender, content }: Props) {
+function ChatRoomMessage({ ico, sender, content }: IChatRoomMessage) {
   return (
     <div className={styles.container}>
       <div className={`${styles.inner} ${sender === 'cpu' ? styles.bot : styles.user}`}>
