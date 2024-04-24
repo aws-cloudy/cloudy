@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Getter
 @ToString
 public class LearningSearchReq {
-    @Min(value = 1, message = "page 파라미터 값은 양수입니다.")
+    @Min(value = 1, message = "1이상의 값만 가능합니다")
     private int page = 1;
 
-    @Range(min=1, max=100, message = "pageSize 파라미터 값의 허용 범위는 1이상 100이하 입니다.")
+    @Range(min=1, max=100, message = "1이상 100이하의 값만 가능합니다")
     private int pageSize = 10;
 
     private String[] jobName;
