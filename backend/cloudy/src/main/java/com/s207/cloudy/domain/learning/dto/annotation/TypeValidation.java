@@ -1,4 +1,4 @@
-package com.s207.cloudy.global.handler.common.annotation;
+package com.s207.cloudy.domain.learning.dto.annotation;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

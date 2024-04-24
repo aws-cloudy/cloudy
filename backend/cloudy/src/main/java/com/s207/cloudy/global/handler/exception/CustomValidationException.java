@@ -1,6 +1,7 @@
 package com.s207.cloudy.global.handler.exception;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.Map;
 
@@ -8,6 +9,12 @@ import java.util.Map;
 public class CustomValidationException extends RuntimeException {
 
     private Map<String, Map<String, String>> errorMap;
+
+    public CustomValidationException() {}
+
+    public CustomValidationException(Map<String, Map<String, String>> errorMap) {
+        this.errorMap = errorMap;
+    }
 
     public CustomValidationException(String message, Map<String, Map<String, String>> errorMap) {
         super(message);

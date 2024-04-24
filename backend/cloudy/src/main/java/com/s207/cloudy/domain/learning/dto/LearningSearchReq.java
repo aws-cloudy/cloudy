@@ -1,14 +1,9 @@
 package com.s207.cloudy.domain.learning.dto;
 
-import com.fasterxml.jackson.databind.annotation.EnumNaming;
-import com.s207.cloudy.global.handler.common.annotation.TypeValidation;
-import jakarta.validation.constraints.Max;
+import com.s207.cloudy.domain.learning.dto.annotation.TypeValidation;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.validator.constraints.Range;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Setter
 @Getter
