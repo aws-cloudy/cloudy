@@ -43,3 +43,11 @@ export interface ILearningItem {
   job: IJob[]
   service: IService[]
 }
+
+export interface ILearningFilterOpen {
+  closeFilter: () => void
+}
+
+export interface ILearningFilterClose {
+  openFilter: () => void
+}
