@@ -17,15 +17,19 @@ const handler = NextAuth({
   ],
   callbacks: {
     // 토큰을 세션에 추가하는 콜백
-    async jwt({ token, account }) {
+    async jwt({ token, account }: any) {
       if (account) {
         token.accessToken = account.access_token
+        token.id = account.providerAccountId
       }
       return token
     },
     // 세션 데이터에 accessToken 추가
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       session.accessToken = token.accessToken as string
+      session.user.id = token.id as string
+      session.user.uuid = token.sub as string
+      session.token = token
       return session
     },
   },
