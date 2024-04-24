@@ -6,7 +6,7 @@ import { getDifficulty } from '@/utils/getDifficulty'
 describe('LearningItem', () => {
   const mockItem: ILearningItem = {
     id: 0,
-    thumbnail: 'test image',
+    thumbnail: '/img/learning/1.png',
     title: 'test title',
     service: [{ id: 0, name: 'service 1' }],
     difficulty: 'Intermediate',

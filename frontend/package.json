@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -60,5 +61,6 @@
     "sonarqube-scanner": "^3.4.0",
     "storybook": "^8.0.8",
     "typescript": "^5"
-  }
+  },
+  "sideEffects": false
 }
