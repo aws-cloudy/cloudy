@@ -1,15 +1,7 @@
+import { IChatListItem } from '@/types/chatbot'
 import styles from './ChatListItem.module.scss'
 
-type Props = {
-  chat: {
-    id: number
-    name: string
-    content: string
-    date: string
-  }
-}
-
-function ChatListItem({ chat }: Props) {
+function ChatListItem({ chat }: IChatListItem) {
   const { name, date, content } = chat
 
   return (
