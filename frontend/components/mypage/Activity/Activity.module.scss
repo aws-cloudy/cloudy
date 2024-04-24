@@ -1,0 +1,32 @@
+@import '@/styles/theme.scss';
+
+.section {
+  padding: 20px;
+  width: 100%;
+}
+
+.intro {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  border-bottom: solid 2px $gray2;
+}
+
+.activeTab {
+  font-weight: 550;
+  border-bottom: solid 2px;
+  cursor: pointer;
+  transition: 0.1s linear;
+}
+
+.inActiveTab {
+  cursor: pointer;
+}

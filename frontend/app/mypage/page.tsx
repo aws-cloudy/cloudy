@@ -4,6 +4,7 @@ import styles from './page.module.scss'
 import MyPageTab from '@/components/mypage/MyPageTab'
 import { useEffect, useState } from 'react'
 import Account from '@/components/mypage/Account'
+import Activity from '@/components/mypage/Activity'
 
 const MyPage = () => {
   const { data: session } = useSession()
@@ -26,7 +27,7 @@ const MyPage = () => {
         </div>
         <div className={styles.right}>
           {selectedTab === 'account' && <Account user={session?.user} />}
-          {selectedTab === 'activity' && <div>활동 내역 컴포넌트</div>}
+          {selectedTab === 'activity' && <Activity />}
           {selectedTab === 'favorites' && <div>찜한 로드맵 컴포넌트</div>}
         </div>
       </section>
