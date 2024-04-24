@@ -10,17 +10,51 @@ import { FiPlus } from 'react-icons/fi'
 import { FiMinus } from 'react-icons/fi'
 import LearningTagList from '../LearningTagList'
 
+const filterData1 = [
+  { value: 'Architect', name: 'Architect' },
+  { value: 'Buisiness_User', name: 'Buisiness User' },
+  { value: 'Cloud_Operator', name: 'Cloud Operator' },
+  { value: 'Data_Engineer', name: 'Data Engineer' },
+  { value: 'Developer', name: 'Developer' },
+  { value: 'Infrastructure_Engineer', name: 'Infrastructure Engineer' },
+  { value: 'etc', name: '직무 기타' },
+]
+
+const filterData2 = [
+  { value: 'Database', name: 'Database' },
+  { value: 'Storage', name: 'Storage' },
+  { value: 'Machine_Learning', name: 'Machine Learning' },
+  { value: 'Cloud_Essentials', name: 'Cloud Essentials' },
+  { value: 'Network_&_Content_Delivery', name: 'Network & Content Delivery' },
+  { value: 'Serverless', name: 'Serverless' },
+  { value: 'etc', name: '서비스 기타' },
+]
+
+const filterData3 = [
+  { value: 'Digital_Course', name: 'Digital Course' },
+  { value: 'Digital_Course_with_Lab', name: 'Digital Course With Lab' },
+  { value: 'Exam_Preparation', name: 'Exam Preparation' },
+]
+
+const filterData4 = [
+  { value: '1', name: '기초' },
+  { value: '2', name: '중급' },
+  { value: '3', name: '고급' },
+]
+
 const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const { closeFilter } = props
 
   // 필터 목록
   const [filters, setFilters] = useState<IFilter[]>([])
 
-  // 필터 추가 함수
-  const addFilter = (v: IFilter) => setFilters([...filters, v])
-
   const [filter1, setFilter1] = useState(true)
   const [filter2, setFilter2] = useState(true)
+  const [filter3, setFilter3] = useState(true)
+  const [filter4, setFilter4] = useState(true)
+
+  // 필터에 추가
+  const addFilter = (v: IFilter) => setFilters([...filters, v])
 
   return (
     <div className={styles.container}>
@@ -37,45 +71,65 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
             </div>
             {filter1 && (
               <div className={styles.itemList}>
-                <div className={styles.itemListItem}>
-                  <FiPlus />
-                  <span>data scientist</span>
-                </div>
-                <div className={styles.itemListItem}>
-                  <FiPlus />
-                  <span>Alliance Lead</span>
-                </div>
-                <div className={styles.itemListItem}>
-                  <FiMinus />
-                  <span>Account/Sales Manager</span>
-                </div>
+                {filterData1.map(v => (
+                  <div className={styles.itemListItem} key={v.value}>
+                    <FiPlus onClick={e => addFilter(v)} />
+                    <span>{v.name}</span>
+                  </div>
+                ))}
               </div>
             )}
           </div>
           <div className={styles.ItemWrap}>
             <div className={styles.ItemTitle} onClick={e => setFilter2(!filter2)}>
-              <span>난이도</span>
+              <span>주요 서비스</span>
               {filter2 ? <IoIosArrowUp /> : <IoIosArrowDown />}
             </div>
             {filter2 && (
               <div className={styles.itemList}>
-                <div className={styles.itemListItem}>
-                  <FiPlus />
-                  <span>기초</span>
-                </div>
-                <div className={styles.itemListItem}>
-                  <FiPlus />
-                  <span>중급</span>
-                </div>
-                <div className={styles.itemListItem}>
-                  <FiMinus />
-                  <span>고급</span>
-                </div>
+                {filterData2.map(v => (
+                  <div className={styles.itemListItem} key={v.value}>
+                    <FiPlus onClick={e => addFilter(v)} />
+                    <span>{v.name}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className={styles.ItemWrap}>
+            <div className={styles.ItemTitle} onClick={e => setFilter3(!filter3)}>
+              <span>분류</span>
+              {filter3 ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            {filter3 && (
+              <div className={styles.itemList}>
+                {filterData3.map(v => (
+                  <div className={styles.itemListItem} key={v.value}>
+                    <FiPlus onClick={e => addFilter(v)} />
+                    <span>{v.name}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+          <div className={styles.ItemWrap}>
+            <div className={styles.ItemTitle} onClick={e => setFilter4(!filter4)}>
+              <span>난이도</span>
+              {filter4 ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            {filter4 && (
+              <div className={styles.itemList}>
+                {filterData4.map(v => (
+                  <div className={styles.itemListItem} key={v.value}>
+                    <FiPlus onClick={e => addFilter(v)} />
+                    <span>{v.name}</span>
+                  </div>
+                ))}
               </div>
             )}
           </div>
         </div>
-        <LearningTagList />
+        <LearningTagList filters={filters} />
       </div>
     </div>
   )
