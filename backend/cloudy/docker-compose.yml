@@ -10,7 +10,7 @@ services:                                               # 이 항목 밑에 실�
       MYSQL_DATABASE: catalog   # MySQL 데이터베이스 이름 설정
       MYSQL_ROOT_PASSWORD: local1234   # MySQL 루트 사용자의 비밀번호 설정
     volumes:
-      - ./my.cnf:/etc/mysql/my.cnf  # 호스트의 my.cnf 파일을 컨테이너 내부의 /etc/mysql/my.cnf로 마운트
+      - ./database/config:/etc/mysql/conf.d  # 호스트의 my.cnf 파일을 컨테이너 내부의 /etc/mysql/my.cnf로 마운트
       - ./database/init:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"      # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
