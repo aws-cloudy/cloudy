@@ -14,9 +14,22 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @Component
 public class PageableArgumentResolver extends PageableHandlerMethodArgumentResolver {
 
+    private void validatePage(int page){
+        if (page < 0) {
+            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_PAGE);
+        }
+    }
+
+    private void validateSize(int size){
+        if (size < 1 || size > 100) {
+            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
+        }
+    }
+
+
     @Override
     public Pageable resolveArgument(MethodParameter methodParameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
-        final Pageable pageable = super.resolveArgument(methodParameter, mavContainer, webRequest, binderFactory);
+        final var pageable = super.resolveArgument(methodParameter, mavContainer, webRequest, binderFactory);
 
         if (webRequest.getParameter("page") == null && webRequest.getParameter("size") == null) {
             return pageable;
@@ -31,19 +44,19 @@ public class PageableArgumentResolver extends PageableHandlerMethodArgumentResol
             page = Integer.parseInt(webRequest.getParameter("page"));
         }
 
+        validatePage(page);
+
         if (webRequest.getParameter("size") == null) {
             size = pageable.getPageSize();
         } else {
             size = Integer.parseInt(webRequest.getParameter("size"));
         }
 
+        validateSize(size);
 
-        if (page < 0) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_PAGE);
-        }
-        if (size < 1 || size > 100) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
-        }
+
+
+
 
         return PageRequest.of(page, size);
 
