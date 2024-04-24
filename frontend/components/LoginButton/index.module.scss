@@ -10,7 +10,7 @@
   width: 397px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 60px;
   cursor: pointer;
 }
@@ -37,11 +37,11 @@
   width: 397px;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 60px;
   cursor: pointer;
 }
 
 .cognitoButton:hover {
-  background-color: #C17B9E;
+  background-color: #c17b9e;
 }

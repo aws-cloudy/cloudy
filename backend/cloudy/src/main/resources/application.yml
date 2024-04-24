@@ -1,0 +1,30 @@
+# test ?
+server:
+  port: 8080
+
+spring:
+  application:
+    name: catalog-server
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      max-lifetime: 160000
+
+  jpa:
+    defer-datasource-initialization: false
+    generate-ddl: false
+
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
+
+
