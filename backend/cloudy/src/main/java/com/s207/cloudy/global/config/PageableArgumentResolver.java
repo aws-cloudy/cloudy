@@ -1,6 +1,7 @@
 package com.s207.cloudy.global.config;
 
-import com.s207.cloudy.global.error.exception.PaginationException;
+import com.s207.cloudy.global.error.ErrorCodeEnum;
+import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
@@ -20,10 +21,10 @@ public class PageableArgumentResolver extends PageableHandlerMethodArgumentResol
         final int size = Integer.parseInt(webRequest.getParameter("size"));
 
         if (size < 1 || size > 100) {
-            throw new PaginationException("The page size must be between 1 and 100.");
+            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
         }
         if (page < 0) {
-            throw new PaginationException("The page size must be greater than or equal to 0.");
+            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
         }
         return pageable;
     }

@@ -5,7 +5,8 @@ server:
 spring:
   application:
     name: catalog-server
-
+  profiles:
+    active: dev
   datasource:
     url: ${DB_URL}
     username: ${DB_USER}

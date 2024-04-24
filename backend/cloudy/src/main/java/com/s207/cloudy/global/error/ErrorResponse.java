@@ -1,8 +1,6 @@
 package com.s207.cloudy.global.error;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 @Getter
 public class ErrorResponse {
@@ -15,4 +13,9 @@ public class ErrorResponse {
         this.code = code;
         this.message = message;
     }
+
+    public static ErrorResponse of(ErrorCodeEnum errorCodeEnum) {
+        return new ErrorResponse(errorCodeEnum.getCode(), errorCodeEnum.getMessage());
+    }
+
 }
