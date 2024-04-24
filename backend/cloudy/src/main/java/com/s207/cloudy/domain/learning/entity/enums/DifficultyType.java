@@ -1,7 +1,6 @@
 package com.s207.cloudy.domain.learning.entity.enums;
 
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
-import com.s207.cloudy.domain.learning.exception.LearningException;
+import com.s207.cloudy.global.handler.exception.CustomValidationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,6 +28,6 @@ public enum DifficultyType {
     }
 
     public static DifficultyType getByCode(String code) {
-        return Optional.ofNullable(CODE_MAP.get(code)).orElseThrow(() -> new LearningException(LearningErrorCode.INVALID_DIFFICULTY));
+        return Optional.ofNullable(CODE_MAP.get(code)).orElseThrow(() -> new CustomValidationException());
     }
 }

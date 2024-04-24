@@ -1,7 +1,5 @@
 package com.s207.cloudy.domain.learning.entity.enums;
 
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
-import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.global.handler.exception.CustomValidationException;
 
 import java.util.HashMap;

@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.learning.dto;
 
+import com.s207.cloudy.domain.learning.dto.annotation.DifficultyValidation;
 import com.s207.cloudy.domain.learning.dto.annotation.TypeValidation;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -22,6 +23,7 @@ public class LearningSearchReq {
     @TypeValidation
     String[] type;
 
+    @DifficultyValidation
     String[] difficulty;
 
     String query;
