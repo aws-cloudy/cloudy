@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import RegistInfo from '.'
+import RegistInfomation from '.'
 
 const meta = {
-  title: 'components/RegistInfo',
-  component: RegistInfo,
+  title: 'components/RegistInfomation',
+  component: RegistInfomation,
   parameters: {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof RegistInfo>
+} satisfies Meta<typeof RegistInfomation>
 
 export default meta
 

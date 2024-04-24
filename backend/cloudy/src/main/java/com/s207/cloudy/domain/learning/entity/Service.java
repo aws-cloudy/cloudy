@@ -16,6 +16,9 @@ public class Service {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "name")
     private String name;
 

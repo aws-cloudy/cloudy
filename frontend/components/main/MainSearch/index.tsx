@@ -1,46 +1,43 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import styles from './MainSearch.module.scss'
 import { BiSearch } from 'react-icons/bi'
+import { useForm } from 'react-hook-form'
 
 function MainSearch() {
   const [isOpen, setIsOpen] = useState(false)
-  const [text, setText] = useState('')
-  const replacer = new RegExp(text, 'gi')
+  const { register, watch } = useForm<{ search: string }>()
+  const keyword = watch('search', '')
   const innerHtml = (word: string) => {
     return {
-      __html: word.replace(replacer, matched => {
+      __html: word.replace(keyword, matched => {
         return `<span>${matched}</span>`
       }),
     }
   }
 
   useEffect(() => {
-    if (text.length > 0) {
+    if (!keyword) return
+    if (keyword.length > 0) {
       setIsOpen(true)
     } else {
       setIsOpen(false)
     }
-  }, [text])
+  }, [keyword])
 
   return (
     <div
       className={styles.container}
       onBlur={() => setIsOpen(false)}
       onFocus={() => {
-        if (text.length > 0) setIsOpen(true)
+        if (keyword) setIsOpen(true)
       }}
     >
       <div className={styles.searchBox}>
-        <input
-          type="text"
-          className={styles.searchInput}
-          value={text}
-          onChange={e => {
-            setText(`${e.target.value}`)
-          }}
-        />
+        <form>
+          <input type="text" className={styles.searchInput} {...register('search')} />
+        </form>
         <BiSearch className={styles.searchIcon} />
         {isOpen && (
           <div className={styles.searchItemBox}>
