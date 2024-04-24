@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './LearningSearchResult.module.scss'
 import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
