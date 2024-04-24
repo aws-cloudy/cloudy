@@ -11,3 +11,10 @@ describe('<Header />', () => {
     expect(logo).toBeInTheDocument()
   })
 })
+
+afterEach(() => {
+  jest.resetAllMocks()
+})
+afterAll(() => {
+  jest.clearAllMocks()
+})
