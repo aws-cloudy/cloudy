@@ -1,16 +1,14 @@
 package com.s207.cloudy.domain.learning.service;
 
+import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.entity.enums.CourseType;
 import com.s207.cloudy.domain.learning.entity.enums.DifficultyType;
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
-import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -20,7 +18,7 @@ public class LearningServiceImpl implements LearningService {
     private final LearningRepository learningRepository;
 
     @Override
-    public List<LearningListRes> getLearnings(LearningSearchReq learningSearchReq) {
+    public LearningListRes getLearnings(LearningSearchReq learningSearchReq) {
         // 난이도 파라미터 변환
         if(learningSearchReq.getDifficulty() != null) {
             String[] covertDifficulty = covertDifficulty(learningSearchReq.getDifficulty());
@@ -37,7 +35,11 @@ public class LearningServiceImpl implements LearningService {
 
         // 서비스명 파라미터 변환
 
-        return learningRepository.findLearnings(learningSearchReq);
+        List<LearningItem> items = learningRepository.findLearnings(learningSearchReq);
+        return LearningListRes.builder()
+                .learningList(items)
+                .isModified(false)
+                .build();
     }
 
     // 유효성 검사

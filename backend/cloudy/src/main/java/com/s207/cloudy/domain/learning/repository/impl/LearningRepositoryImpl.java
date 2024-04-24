@@ -5,7 +5,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.s207.cloudy.domain.learning.dto.LearningListRes;
+import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.repository.LearningRepositoryCustom;
 import lombok.RequiredArgsConstructor;
@@ -73,13 +73,13 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
     }
 
     @Override
-    public List<LearningListRes> findLearnings(LearningSearchReq learningSearchReq) {
+    public List<LearningItem> findLearnings(LearningSearchReq learningSearchReq) {
         int page = learningSearchReq.getPage();
         int pageSize = learningSearchReq.getPageSize();
 
         BooleanBuilder searchOptions = getSearchOption(learningSearchReq);
 
-        JPAQuery<LearningListRes> jpaQuery = queryFactory.select(Projections.fields(LearningListRes.class,
+        JPAQuery<LearningItem> jpaQuery = queryFactory.select(Projections.fields(LearningItem.class,
                         learning.id.as("learningId"), learning.thumbnail, learning.title,
                         learning.summary, learning.duration, learning.difficulty, learning.link, service.type.as("serviceType")))
                 .from(learning)
