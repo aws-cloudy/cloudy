@@ -32,44 +32,6 @@
   &::-webkit-scrollbar {
     display: none;
   }
+  padding-top: 20px;
   padding-bottom: 40px;
-}
-
-.wrap {
-  display: flex;
-  flex-direction: column;
-}
-
-.ItemWrap {
-  display: flex;
-  flex-direction: column;
-}
-
-.ItemTitle {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 16px;
-  cursor: pointer;
-  height: 60px;
-}
-
-.itemList {
-  display: flex;
-  flex-direction: column;
-}
-
-.itemListItem {
-  display: flex;
-  align-items: center;
-  height: 37px;
-  padding: 10px 16px;
-
-  span {
-    margin-left: 8px;
-  }
-}
-
-.tagWrap {
-  display: flex;
 }
