@@ -25,8 +25,8 @@ pipeline {
                     steps{
                         script{
                             dir('./frontend'){
-                                sh 'npm install'
-                                sh 'npm run build'
+                                sh 'pnpm install'
+                                sh 'pnpm run build'
                                 
                             }
 
@@ -53,7 +53,7 @@ pipeline {
 
                     withSonarQubeEnv('SonarQube') {
                         dir('./frontend') {
-                            sh 'npm run sonarqube'
+                            sh 'pnpm run sonarqube'
                         }
                     }
                 }
