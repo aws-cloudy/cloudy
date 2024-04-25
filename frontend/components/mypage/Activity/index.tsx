@@ -2,6 +2,7 @@ import { useState } from 'react'
 import styles from './Activity.module.scss'
 import ActivityWrite from './ActivityWrite'
 import ActivityComment from './ActivityComment/indext'
+import Dropdown from '@/components/common/Dropdown'
 
 const Activity = () => {
   const [selectedTab, setSelectedTab] = useState('write')
@@ -26,6 +27,10 @@ const Activity = () => {
         >
           작성한 댓글
         </div>
+      </div>
+      <div className={styles.row}>
+        <Dropdown placeholder="작성일순" width={130} height={30} />
+        <input type="text" />
       </div>
       {selectedTab === 'write' && <ActivityWrite />}
       {selectedTab === 'comment' && <ActivityComment />}

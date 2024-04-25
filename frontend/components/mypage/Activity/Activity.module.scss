@@ -18,6 +18,7 @@
   flex-direction: row;
   gap: 16px;
   border-bottom: solid 2px $gray2;
+  margin-bottom: 20px;
 }
 
 .activeTab {
@@ -29,4 +30,10 @@
 
 .inActiveTab {
   cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
 }

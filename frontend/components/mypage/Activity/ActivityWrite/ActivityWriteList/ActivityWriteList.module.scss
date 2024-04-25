@@ -1,0 +1,31 @@
+@import '@/styles/theme.scss';
+
+.section {
+  width: 100%;
+  margin-top: 20px;
+  border-bottom: solid 2px $gray2;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.status {
+  width: 10%;
+  text-align: center;
+  border-radius: 12px;
+  border: solid 1px $gray8;
+  color: $gray8;
+}
+
+.context {
+  color: $gray8;
+  margin-bottom: 10px;
+}
+
+.tag {
+  color: $primary;
+}
