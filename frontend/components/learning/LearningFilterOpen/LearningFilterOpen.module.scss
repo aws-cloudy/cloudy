@@ -35,3 +35,9 @@
   padding-top: 20px;
   padding-bottom: 40px;
 }
+
+@media screen and (max-width: $tablet) {
+  .container {
+    padding: 20px;
+  }
+}

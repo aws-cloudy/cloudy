@@ -1,13 +1,19 @@
+@import '@/styles/theme.scss';
+
 .container {
   display: flex;
   height: 37px;
   padding: 10px 16px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $gray2;
+  }
 }
 
 .wrap {
   display: flex;
   align-items: center;
-  cursor: pointer;
 
   span {
     font-size: 0.9em;
