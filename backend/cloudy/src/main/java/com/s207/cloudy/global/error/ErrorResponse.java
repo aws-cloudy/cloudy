@@ -1,5 +1,6 @@
 package com.s207.cloudy.global.error;
 
+import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
 import lombok.Getter;
 
 @Getter

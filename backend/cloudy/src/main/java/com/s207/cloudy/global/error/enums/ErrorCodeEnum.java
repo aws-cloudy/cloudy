@@ -1,4 +1,4 @@
-package com.s207.cloudy.global.error;
+package com.s207.cloudy.global.error.enums;
 
 import lombok.Getter;
 

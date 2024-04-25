@@ -1,22 +1,29 @@
 package com.s207.cloudy.global.error;
 
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
 import com.s207.cloudy.domain.learning.exception.LearningException;
+import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
-import jakarta.servlet.http.HttpServletRequest;
+import com.s207.cloudy.global.error.exception.CustomValidationException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(CustomValidationException.class)
+    public ResponseEntity<?> validationExceptionHandler(CustomValidationException e) {
+        log.error(e.getMessage());
+        return new ResponseEntity<>(e.getErrorMap(), HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(LearningException.class)
-    public ResponseEntity<ErrorResponse> learningExceptionHandler(LearningException e) {
-        return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getErrorCode().getCode(), e.getErrorCode().getMessage()), e.getErrorCode().getHttpStatus());
+    public ResponseEntity<?> learningExceptionHandler(LearningException e){
+        log.error(e.getError().get("message"));
+        return new ResponseEntity<>(e.getError(), e.getStatus());
     }
 
 //    @ExceptionHandler(Exception.class)
@@ -25,33 +32,10 @@ public class GlobalExceptionHandler {
 //        return new ResponseEntity<ErrorResponse>(new ErrorResponse("SE001", "Internal Server Error입니다."), HttpStatus.INTERNAL_SERVER_ERROR);
 //    }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> methodValidException(MethodArgumentNotValidException e, HttpServletRequest request) {
-        ErrorResponse errorResponse = makeErrorResponse(e.getBindingResult());
-        return new ResponseEntity<ErrorResponse>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler({InvalidPaginationArgumentException.class})
     public ResponseEntity<ErrorResponse> badRequestException400(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(ErrorResponse.of(ErrorCodeEnum.getEnum(e.getMessage())));
     }
 
-    private ErrorResponse makeErrorResponse(BindingResult bindingResult) {
-        // 에러가 있다면
-        if (bindingResult.hasErrors()) {
-            // DTO에 유효성체크를 걸어놓은 필드명을 가져온다
-            String bindResultCode = bindingResult.getFieldError().getField();
-
-            switch (bindResultCode) {
-                case "pageSize":
-                    LearningErrorCode ec = LearningErrorCode.INVALID_PAGE_SIZE;
-                    return new ErrorResponse(ec.getCode(), ec.getMessage());
-                case "page":
-                    ec = LearningErrorCode.INVALID_PAGE;
-                    return new ErrorResponse(ec.getCode(), ec.getMessage());
-            }
-        }
-        return null;
-    }
 }

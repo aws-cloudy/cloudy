@@ -6,7 +6,7 @@ import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.dummy.DummyRoadmap;
-import com.s207.cloudy.global.error.ErrorCodeEnum;
+import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

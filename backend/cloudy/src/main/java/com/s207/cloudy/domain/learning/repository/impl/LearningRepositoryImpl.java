@@ -1,10 +1,15 @@
 package com.s207.cloudy.domain.learning.repository.impl;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.s207.cloudy.domain.learning.dto.LearningListRes;
+import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.repository.LearningRepositoryCustom;
 import lombok.RequiredArgsConstructor;
@@ -24,42 +29,31 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
-    // 서비스명에 대한 필터링 나중에 추가해야!!
-    @Override
-    public List<LearningListRes> findLearnings(LearningSearchReq learningSearchReq) {
-        int page = learningSearchReq.getPage();
-        int pageSize = learningSearchReq.getPageSize();
-        String[] jobName = learningSearchReq.getJobName();
-//        String[] serviceName = learningSearchReq.getServiceName();
-        String[] type = learningSearchReq.getType();
-        String[] difficulty = learningSearchReq.getDifficulty();
-        String query = learningSearchReq.getQuery();
-
-        JPAQuery<LearningListRes> jpaQuery = queryFactory.select(Projections.fields(LearningListRes.class,
-                        learning.id.as("learningId"), learning.thumbnail, learning.title,
-                        learning.summary, learning.duration, learning.difficulty, learning.link, service.type.as("serviceType")))
-                .from(learning)
-                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
-                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id));
+    private BooleanBuilder getSearchOption(LearningSearchReq learningSearchReq) {
+        BooleanBuilder searchOptions = new BooleanBuilder();
 
         // 제목에 대한 필터링
-        if(query != null && !query.isEmpty()) {
-            jpaQuery.where(learning.title.like("%" + query + "%"));
+        String query = learningSearchReq.getQuery();
+        if(query != null && !query.trim().isEmpty()) {
+            searchOptions.and(learning.title.like("%" + query + "%"));
         }
 
         // 유형에 대한 필터링
+        String[] type = learningSearchReq.getType();
         if (type != null && type.length > 0) {
-            jpaQuery.where(learning.type.in(type));
+            searchOptions.and(learning.type.in(type));
         }
 
         // 난이도에 대한 필터링
+        String[] difficulty = learningSearchReq.getDifficulty();
         if (difficulty != null && difficulty.length > 0) {
-            jpaQuery.where(learning.difficulty.in(difficulty));
+            searchOptions.and(learning.difficulty.in(difficulty));
         }
 
         // 직무명에 대한 필터링
+        String[] jobName = learningSearchReq.getJobName();
         if (jobName != null && jobName.length > 0) {
-            jpaQuery.where(
+            searchOptions.and(
                     learning.id.in(
                             JPAExpressions.selectDistinct(learningJob.learningJobPK.learning.id)
                                     .from(learningJob)
@@ -76,12 +70,69 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
             );
         }
 
+        // 서비스명에 대한 필터링 나중에 추가해야!! @@@@@@
+//        String[] serviceName = learningSearchReq.getServiceName();
+
+        return searchOptions;
+    }
+
+    Expression<?>[] learningFields = {
+            learning.id.as("learningId"), learning.thumbnail, learning.title, learning.summary,
+            learning.duration, learning.difficulty, learning.link, service.type.as("serviceType")
+    };
+
+    @Override
+    public List<LearningItem> findLearnings(LearningSearchReq learningSearchReq) {
+        int page = learningSearchReq.getPage();
+        int pageSize = learningSearchReq.getPageSize();
+
+        BooleanBuilder searchOptions = getSearchOption(learningSearchReq);
+
+        JPAQuery<LearningItem> jpaQuery = queryFactory
+                .select(Projections.fields(LearningItem.class,learningFields))
+                .from(learning)
+                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
+                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id))
+                .where(searchOptions);
+
         // 페이지네이션 설정
         jpaQuery.orderBy(learning.id.asc())
-                .offset((page - 1) * pageSize)
+                .offset(Long.valueOf((page - 1) * pageSize))
                 .limit(pageSize);
 
         return jpaQuery.fetch();
     }
 
+    @Override
+    public List<LearningItem> findLearningsByJob(int jobId, int count) {
+        return queryFactory
+                .select(Projections.fields(LearningItem.class, learningFields))
+                .from(learning)
+                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
+                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id))
+                .where(
+                        learning.id.in(
+                                JPAExpressions.select(learningJob.learningJobPK.learning.id)
+                                        .from(learningJob)
+                                        .where(
+                                                learningJob.learningJobPK.job.id.eq(jobId)
+                                        )
+                                )
+                )
+                .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
+                .limit(count)
+                .fetch();
+    }
+
+    @Override
+    public List<LearningItem> findLearningsByJob(int count) {
+        return queryFactory
+                .select(Projections.fields(LearningItem.class, learningFields))
+                .from(learning)
+                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
+                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id))
+                .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
+                .limit(count)
+                .fetch();
+    }
 }
