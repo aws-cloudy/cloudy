@@ -12,6 +12,7 @@ interface ILearningState {
     setServiceFilter: (v: IFilter) => void
     setTypeFilter: (v: IFilter) => void
     setDifficultyFilter: (v: IFilter) => void
+    resetFilter: () => void
   }
 }
 
@@ -50,6 +51,7 @@ const learningStore = create<ILearningState>(set => ({
           ? { ...state, difficulties: [...state.difficulties, v] }
           : { ...state, difficulties: state.difficulties.filter((_, i) => i !== index) }
       }),
+    resetFilter: () => set({ jobs: [], services: [], types: [], difficulties: [], filterCount: 0 }),
   },
 }))
 
