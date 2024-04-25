@@ -34,22 +34,26 @@ const learningStore = create<ILearningState>(set => ({
       set(state => {
         const index = state.services.indexOf(v)
         return index === -1
-          ? { ...state, services: [...state.services, v] }
-          : { ...state, services: state.services.filter((_, i) => i !== index) }
+          ? { ...state, services: [...state.services, v], filterCount: (state.filterCount += 1) }
+          : { ...state, services: state.services.filter((_, i) => i !== index), filterCount: (state.filterCount -= 1) }
       }),
     setTypeFilter: v =>
       set(state => {
         const index = state.types.indexOf(v)
         return index === -1
-          ? { ...state, types: [...state.types, v] }
-          : { ...state, types: state.types.filter((_, i) => i !== index) }
+          ? { ...state, types: [...state.types, v], filterCount: (state.filterCount += 1) }
+          : { ...state, types: state.types.filter((_, i) => i !== index), filterCount: (state.filterCount -= 1) }
       }),
     setDifficultyFilter: v =>
       set(state => {
         const index = state.difficulties.indexOf(v)
         return index === -1
-          ? { ...state, difficulties: [...state.difficulties, v] }
-          : { ...state, difficulties: state.difficulties.filter((_, i) => i !== index) }
+          ? { ...state, difficulties: [...state.difficulties, v], filterCount: (state.filterCount += 1) }
+          : {
+              ...state,
+              difficulties: state.difficulties.filter((_, i) => i !== index),
+              filterCount: (state.filterCount -= 1),
+            }
       }),
     resetFilter: () => set({ jobs: [], services: [], types: [], difficulties: [], filterCount: 0 }),
   },
