@@ -6,6 +6,7 @@ interface ILearningState {
   services: IFilter[]
   types: IFilter[]
   difficulties: IFilter[]
+  filterCount: number
   actions: {
     setJobFilter: (v: IFilter) => void
     setServiceFilter: (v: IFilter) => void
@@ -19,13 +20,14 @@ const learningStore = create<ILearningState>(set => ({
   services: [],
   types: [],
   difficulties: [],
+  filterCount: 0,
   actions: {
     setJobFilter: v =>
       set(state => {
         const index = state.jobs.indexOf(v)
         return index === -1
-          ? { ...state, jobs: [...state.jobs, v] }
-          : { ...state, jobs: state.jobs.filter((_, i) => i !== index) }
+          ? { ...state, jobs: [...state.jobs, v], filterCount: (state.filterCount += 1) }
+          : { ...state, jobs: state.jobs.filter((_, i) => i !== index), filterCount: (state.filterCount -= 1) }
       }),
     setServiceFilter: v =>
       set(state => {
@@ -55,5 +57,6 @@ export const usejobFilter = () => learningStore(state => state.jobs)
 export const useServiceFilter = () => learningStore(state => state.services)
 export const useTypeFilter = () => learningStore(state => state.types)
 export const useDifficultyFilter = () => learningStore(state => state.difficulties)
+export const useFilterCount = () => learningStore(state => state.filterCount)
 
 export const useLearningActions = () => learningStore(state => state.actions)
