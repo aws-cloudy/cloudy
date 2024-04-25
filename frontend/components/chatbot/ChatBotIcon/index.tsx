@@ -1,17 +1,23 @@
 'use client'
 
-import React from 'react'
+import React, { useMemo } from 'react'
 import styles from './ChatBotIcon.module.scss'
 
 import { RiRobot2Fill } from 'react-icons/ri'
 import { useChatbotActions, useIsChatbotOpen } from '@/stores/chatbotStore'
+import { usePathname } from 'next/navigation'
 
 function ChatBotIcon() {
+  const pathname = usePathname()
   const isChatbotOpen = useIsChatbotOpen()
   const { setIsChatbotOpen } = useChatbotActions()
+  const isActive = useMemo(() => {
+    return pathname !== '/community/create'
+  }, [pathname])
 
   return (
-    !isChatbotOpen && (
+    !isChatbotOpen &&
+    isActive && (
       <div className={styles.container} onClick={() => setIsChatbotOpen(true)}>
         <div className={styles.inner}>
           <RiRobot2Fill className={styles.icon} />

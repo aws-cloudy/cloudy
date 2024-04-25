@@ -1,7 +1,11 @@
+import PageTitle from '@/components/common/PageTitle'
+
 const RoadmapPage = () => {
   return (
     <>
-      <div>로드맵 페이지</div>
+      <div>
+        <PageTitle />
+      </div>
     </>
   )
 }

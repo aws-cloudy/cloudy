@@ -1,0 +1,16 @@
+@import '@/styles/theme.scss';
+
+.container {
+}
+
+.nodata {
+  color: $gray8;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray7;
+  }
+}

@@ -1,0 +1,21 @@
+@import '@/styles/theme.scss';
+
+.container {
+  min-height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  background-color: $black;
+  color: $white;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background-color: $black3;
+  }
+  &:active {
+    background-color: $black1;
+  }
+}
