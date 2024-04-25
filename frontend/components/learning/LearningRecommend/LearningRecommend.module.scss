@@ -1,0 +1,21 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $gray2;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: $black;
+}
+
+.desc {
+  color: $black1;
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-block: 8px 20px;
+}

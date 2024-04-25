@@ -19,7 +19,11 @@ const LearningFilterToggoleItem = (props: { item: IFilter }) => {
   return (
     <div className={styles.container} onClick={e => setFilter()}>
       <div className={styles.wrap}>
-        {[...jobs, ...services, ...types, ...dificulties].every(v => v.name !== item.name) ? <FiPlus /> : <FiMinus />}
+        {[...jobs, ...services, ...types, ...dificulties].every(v => v.name !== item.name) ? (
+          <FiPlus data-testid="plus-icon" />
+        ) : (
+          <FiMinus data-testid="minus-icon" />
+        )}
         <span>{item.name}</span>
       </div>
     </div>
