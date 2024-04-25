@@ -1,7 +1,11 @@
 package com.s207.cloudy.domain.learning.repository.impl;
 
 import com.querydsl.core.BooleanBuilder;
+import com.querydsl.core.types.Expression;
+import com.querydsl.core.types.Order;
+import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -72,6 +76,11 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
         return searchOptions;
     }
 
+    Expression<?>[] learningFields = {
+            learning.id.as("learningId"), learning.thumbnail, learning.title, learning.summary,
+            learning.duration, learning.difficulty, learning.link, service.type.as("serviceType")
+    };
+
     @Override
     public List<LearningItem> findLearnings(LearningSearchReq learningSearchReq) {
         int page = learningSearchReq.getPage();
@@ -79,9 +88,8 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
 
         BooleanBuilder searchOptions = getSearchOption(learningSearchReq);
 
-        JPAQuery<LearningItem> jpaQuery = queryFactory.select(Projections.fields(LearningItem.class,
-                        learning.id.as("learningId"), learning.thumbnail, learning.title,
-                        learning.summary, learning.duration, learning.difficulty, learning.link, service.type.as("serviceType")))
+        JPAQuery<LearningItem> jpaQuery = queryFactory
+                .select(Projections.fields(LearningItem.class,learningFields))
                 .from(learning)
                 .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
                 .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id))
@@ -95,4 +103,36 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
         return jpaQuery.fetch();
     }
 
+    @Override
+    public List<LearningItem> findLearningsByJob(int jobId, int count) {
+        return queryFactory
+                .select(Projections.fields(LearningItem.class, learningFields))
+                .from(learning)
+                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
+                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id))
+                .where(
+                        learning.id.in(
+                                JPAExpressions.select(learningJob.learningJobPK.learning.id)
+                                        .from(learningJob)
+                                        .where(
+                                                learningJob.learningJobPK.job.id.eq(jobId)
+                                        )
+                                )
+                )
+                .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
+                .limit(count)
+                .fetch();
+    }
+
+    @Override
+    public List<LearningItem> findLearningsByJob(int count) {
+        return queryFactory
+                .select(Projections.fields(LearningItem.class, learningFields))
+                .from(learning)
+                .leftJoin(learningService).on(learning.id.eq(learningService.learningServicePK.learning.id))
+                .leftJoin(service).on(learningService.learningServicePK.service.id.eq(service.id))
+                .orderBy(Expressions.numberTemplate(Double.class, "function('rand')").asc())
+                .limit(count)
+                .fetch();
+    }
 }

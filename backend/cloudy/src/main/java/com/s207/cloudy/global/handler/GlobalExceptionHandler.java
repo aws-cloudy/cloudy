@@ -21,14 +21,16 @@ import java.util.*;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomValidationException.class)
-    public ResponseEntity<?> validationApiException(CustomValidationException e) {
+    public ResponseEntity<?> validationExceptionHandler(CustomValidationException e) {
         log.error(e.getMessage());
         return new ResponseEntity<>(e.getErrorMap(), HttpStatus.BAD_REQUEST);
     }
-//    @ExceptionHandler(LearningException.class)
-//    public ResponseEntity<ErrorResponse> learningExceptionHandler(LearningException e){
-//        return new ResponseEntity<ErrorResponse>(new ErrorResponse(e.getErrorCode().getCode(), e.getErrorCode().getMessage()), e.getErrorCode().getHttpStatus());
-//    }
+
+    @ExceptionHandler(LearningException.class)
+    public ResponseEntity<?> learningExceptionHandler(LearningException e){
+        log.error(e.getError().get("message"));
+        return new ResponseEntity<>(e.getError(), e.getStatus());
+    }
 //
 //    @ExceptionHandler(Exception.class)
 //    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

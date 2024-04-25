@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface LearningService {
     LearningListRes getLearnings(LearningSearchReq learningSearchReq);
+
+    LearningListRes getLearningsByJob(int jobId, int count);
+    LearningListRes getLearningsByJob(int count);
 }

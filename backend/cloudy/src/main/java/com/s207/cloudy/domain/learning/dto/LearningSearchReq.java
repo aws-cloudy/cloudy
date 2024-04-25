@@ -9,6 +9,7 @@ import org.hibernate.validator.constraints.Range;
 @Setter
 @Getter
 @ToString
+@NoArgsConstructor
 public class LearningSearchReq {
     @Min(value = 1, message = "1이상의 값만 가능합니다")
     private int page = 1;

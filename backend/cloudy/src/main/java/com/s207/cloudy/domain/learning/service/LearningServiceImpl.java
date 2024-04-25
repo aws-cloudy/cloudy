@@ -5,6 +5,9 @@ import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.entity.enums.CourseType;
 import com.s207.cloudy.domain.learning.entity.enums.DifficultyType;
+import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
+import com.s207.cloudy.domain.learning.exception.LearningException;
+import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +19,7 @@ import java.util.List;
 public class LearningServiceImpl implements LearningService {
 
     private final LearningRepository learningRepository;
+    private final JobRepository jobRepository;
 
     @Override
     public LearningListRes getLearnings(LearningSearchReq learningSearchReq) {
@@ -42,11 +46,27 @@ public class LearningServiceImpl implements LearningService {
                 .build();
     }
 
-    // 유효성 검사
-    public boolean isValidParameter(LearningSearchReq learningSearchReq) {
-
-        return true;
+    @Override
+    public LearningListRes getLearningsByJob(int jobId, int count) {
+        // 존재하지 않는 직무라면
+        if(!jobRepository.existsJobId(jobId)) {
+            throw new LearningException(LearningErrorCode.INVALID_JOB_ID);
+        }
+        
+        List<LearningItem> items = learningRepository.findLearningsByJob(jobId, count);
+        return LearningListRes.builder()
+                .learningList(items)
+                .build();
     }
+
+    @Override
+    public LearningListRes getLearningsByJob(int count) {
+        List<LearningItem> items = learningRepository.findLearningsByJob(count);
+        return LearningListRes.builder()
+                .learningList(items)
+                .build();
+    }
+
 
     public String[] covertDifficulty(String[] difficulty) {
         String[] convertDifficulty = new String[difficulty.length];

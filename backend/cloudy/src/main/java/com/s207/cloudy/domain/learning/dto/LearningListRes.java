@@ -16,10 +16,10 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 public class LearningListRes {
     private List<LearningItem> learningList;
-    private boolean isModified;
+    private Boolean isModified;
     private String modifiedKeyword;
 
-    public boolean getIsModified() {
+    public Boolean getIsModified() {
         return isModified;
     }
 }

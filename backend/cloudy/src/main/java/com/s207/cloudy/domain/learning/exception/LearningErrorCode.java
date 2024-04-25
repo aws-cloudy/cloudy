@@ -7,24 +7,11 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public enum LearningErrorCode {
-    /* 400 BAD_REQUEST : 잘못된 요청 */
-    INVALID_DIFFICULTY("CE001", "difficulty", HttpStatus.BAD_REQUEST),
-    INVALID_TYPE("CE001", "type", HttpStatus.BAD_REQUEST),
-    INVALID_JOB_NAME("CE001", "jobName", HttpStatus.BAD_REQUEST),
-    INVALID_SERVICE_NAME("CE001", "serviceName", HttpStatus.BAD_REQUEST),
-    INVALID_PAGE_SIZE("CE002", "pageSize", HttpStatus.BAD_REQUEST),
-    INVALID_PAGE("CE003", "page", HttpStatus.BAD_REQUEST);
+    /* 500 SERVER_ERROR : 서버에러 */
+    INVALID_JOB_ID("SE001", "존재하지 않는 직무 아이디입니다", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final String code;
-    private final String field;
+    private final String message;
     private final HttpStatus httpStatus;
 
-    public static String getByField(String field) {
-        for (LearningErrorCode errorCode : values()) {
-            if (errorCode.getField().equals(field)) {
-                return errorCode.getCode();
-            }
-        }
-        return null;
-    }
 }
