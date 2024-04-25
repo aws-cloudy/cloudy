@@ -6,7 +6,6 @@ import Header from '@/components/common/Header'
 import Auth from '@/context/auth'
 import ChatBotIcon from '@/components/chatbot/ChatBotIcon'
 import ChatBot from '@/components/chatbot/ChatBot'
-import { useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
 

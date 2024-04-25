@@ -1,11 +1,10 @@
 @import '@/styles/theme.scss';
 
 .card {
-  width: 50%;
+  width: calc(50% - 16px);
   height: 10%;
   border-radius: 12px;
   border: 1px solid $gray5;
-  //   background-color: $gray2;
 }
 
 .imageBox {

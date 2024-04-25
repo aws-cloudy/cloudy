@@ -11,10 +11,6 @@ const MyPage = () => {
   const { data: session } = useSession()
   const [selectedTab, setSelectedTab] = useState('account')
 
-  useEffect(() => {
-    console.log('유저', session?.user)
-  })
-
   return (
     <>
       <section className={styles.section}>

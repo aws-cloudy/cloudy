@@ -11,3 +11,9 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}

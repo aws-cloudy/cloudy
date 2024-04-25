@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import styles from './RoadmapCard.module.scss'
 import Image from 'next/image'
-import img from '../../../public/img/learning/1.png'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 
-const RoadmapCard = () => {
-  const [clickMark, setClickMark] = useState('scrap')
+const RoadmapCard = ({ road }: any) => {
+  const [clickMark, setClickMark] = useState(road.status)
 
   const handleMarkClear = () => {
     //북마크 스크랩 해제
+
     setClickMark('unscrap')
   }
 
@@ -18,27 +18,25 @@ const RoadmapCard = () => {
   }
 
   return (
-    <div className={styles.card}>
+    <div className={styles.card} key={road.id}>
       <div className={styles.imageBox}>
-        <Image src={img} alt="" className={styles.image} />
+        <Image src={road.image} alt="" className={styles.image} />
         {clickMark === 'scrap' ? (
-          <BsBookmarkFill className={styles.bookmark} onClick={handleMarkClear} size={20} />
+          <BsBookmarkFill className={styles.bookmark} onClick={handleMarkClear} size={20} role="button" />
         ) : (
-          <BsBookmark className={styles.bookmark} onClick={handleMarkSelect} size={20} />
+          <BsBookmark className={styles.bookmark} onClick={handleMarkSelect} size={20} role="button" />
         )}
       </div>
       <div className={styles.info}>
-        <div className={styles.title}>
-          AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide Guide{' '}
-        </div>
+        <div className={styles.title}>{road.title}</div>
         <div className={styles.context}>
-          효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 알 수 있음 효과적인 프롬포트를 설계하기 위한 원칙,
-          기법 및 모범 사례를...
+          {road.context.length > 50 ? `${road.context.substring(0, 50)}...` : road.context}
         </div>
         <div className={styles.row}>
           <div className={styles.tags}>
-            <div className={styles.tag}>#DataWrangler</div>
-            <div className={styles.tag}>#GeneratedAI</div>
+            {road.tags.map((tag: any) => (
+              <div>#{tag}</div>
+            ))}
           </div>
           <div className={styles.comment}>
             <BsChat className={styles.comment} /> 2
