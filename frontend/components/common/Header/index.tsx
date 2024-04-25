@@ -7,14 +7,16 @@ import Link from 'next/link'
 import { MdOutlineLanguage } from 'react-icons/md'
 import { MdMenu } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
-const Header = ({ session }: any) => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
   const navRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isMain = pathname === '/'
   const [isDark, setIsDark] = useState(isMain ? true : false)
   const [style, setStyle] = useState(isDark ? mainStyles : styles)
+  const { data: session } = useSession()
 
   const scrollHandler = () => {
     if (typeof window !== 'undefined') {

@@ -20,13 +20,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const { data: session } = useSession()
   return (
     <html lang="en">
       <body className={inter.className}>
         <Auth>
           <GoogleAnalytics />
-          <Header session={session} />
+          <Header />
           <ChatBot />
           <ChatBotIcon />
           <div style={{ paddingTop: 80 }}>{children}</div>

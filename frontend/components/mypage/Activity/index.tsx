@@ -27,6 +27,32 @@ const Activity = () => {
     },
   ]
 
+  const cData = [
+    {
+      id: 1,
+      category: '커뮤니티',
+      context:
+        '넵!! 해결되었습니다. 잘 짚어주셔서 감사합니다. 해당 부분 고려해서 수정해보도록 하겠습니다. 혹시 다른 부분도 여쭤봐도 될까요?',
+      writer: '김싸피',
+      date: '2024.04.15 11:53',
+    },
+    {
+      id: 2,
+      category: '로드맵',
+      context: '정말 마음에 드는 로드맵이네요 ~!',
+      writer: '클라우디',
+      date: '2024.04.12 14:20',
+    },
+    {
+      id: 3,
+      category: '커뮤니티',
+      context:
+        '넵!! 해결되었습니다. 잘 짚어주셔서 감사합니다. 해당 부분 고려해서 수정해보도록 하겠습니다. 혹시 다른 부분도 여쭤봐도 될까요?',
+      writer: '김싸피',
+      date: '2024.04.08 16:03',
+    },
+  ]
+
   return (
     <section className={styles.section}>
       <div className={styles.intro}>활동내역</div>
@@ -50,10 +76,10 @@ const Activity = () => {
       </div>
       <div className={styles.row}>
         <Dropdown placeholder="작성일순" width={130} height={30} />
-        <input type="text" className={styles.input} />
+        <input type="text" placeholder="검색어를 입력해주세요." className={styles.input} />
       </div>
       {selectedTab === 'write' && <ActivityWrite posts={wData} />}
-      {selectedTab === 'comment' && <ActivityComment />}
+      {selectedTab === 'comment' && <ActivityComment comments={cData} />}
     </section>
   )
 }
