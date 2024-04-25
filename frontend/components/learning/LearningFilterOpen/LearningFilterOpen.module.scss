@@ -1,0 +1,25 @@
+@import '@/styles/theme.scss';
+
+.container {
+  padding-top: 55px;
+  position: sticky;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.closeWrap {
+  display: flex;
+  border-bottom: 1px solid $black;
+  cursor: pointer;
+  height: 60px;
+  font-weight: 500;
+  font-size: 1.3em;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 11px;
+
+  span {
+    margin-right: 10px;
+  }
+}

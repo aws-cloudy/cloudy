@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -20,7 +21,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-ga4": "^2.1.0",
+    "react-hook-form": "^7.51.3",
     "react-icons": "^5.1.0",
+    "react-responsive": "^10.0.0",
     "react-select": "^5.8.0",
     "sass": "^1.75.0",
     "zustand": "^4.5.2"
@@ -59,5 +62,6 @@
     "sonarqube-scanner": "^3.4.0",
     "storybook": "^8.0.8",
     "typescript": "^5"
-  }
+  },
+  "sideEffects": false
 }

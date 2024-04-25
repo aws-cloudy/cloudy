@@ -1,0 +1,14 @@
+@import '@/styles/theme.scss';
+
+.container {
+  aspect-ratio: 1;
+  background-color: $primary;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  color: $white;
+}

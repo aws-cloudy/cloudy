@@ -1,6 +1,6 @@
 'use client'
 import Select from 'react-select'
-import styles from './index.module.scss'
+import styles from './RegistInfomation.module.scss'
 import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
 import { useState } from 'react'
@@ -10,7 +10,7 @@ interface OptionType {
   label: string
 }
 
-export default function RegistInfo() {
+export default function RegistInfomation() {
   const options: OptionType[] = [
     { value: 'Data Scientist', label: 'Data Scientist' },
     { value: 'Data2', label: 'Data2' },
