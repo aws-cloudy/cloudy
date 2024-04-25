@@ -25,6 +25,8 @@ pipeline {
                     steps{
                         script{
                             dir('./frontend'){
+                                sh 'corepack enable'
+                                sh 'corepack prepare pnpm@latest-9 --activate'
                                 sh 'pnpm install'
                                 sh 'pnpm run build'
                                 
