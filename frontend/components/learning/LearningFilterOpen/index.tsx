@@ -1,28 +1,13 @@
-'use client'
-
-import React, { useEffect } from 'react'
+import React from 'react'
 import { ILearningFilterOpen } from '@/types/learning'
 import styles from './LearningFilterOpen.module.scss'
 import { MdOutlineClose } from 'react-icons/md'
 import LearningTagList from '../LearningTagList'
-import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
 import LearningFilterToggle from '../LearningFilterToggle'
 import { difficultyData, jobData, serviceData, typeData } from '@/constants/learning'
 
 const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const { closeFilter } = props
-
-  const jobs = usejobFilter()
-  const services = useServiceFilter()
-  const types = useTypeFilter()
-  const difficulties = useDifficultyFilter()
-
-  useEffect(() => {
-    console.log('jobs', jobs)
-    console.log('services', services)
-    console.log('types', types)
-    console.log('dificulties', difficulties)
-  }, [jobs, services, types, difficulties])
 
   return (
     <div className={styles.container}>
