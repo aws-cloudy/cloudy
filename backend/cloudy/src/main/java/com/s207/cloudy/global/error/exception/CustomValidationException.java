@@ -1,4 +1,4 @@
-package com.s207.cloudy.global.handler.exception;
+package com.s207.cloudy.global.error.exception;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

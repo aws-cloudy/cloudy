@@ -1,8 +1,7 @@
 package com.s207.cloudy.domain.learning.dto.annotation;
 
 import com.s207.cloudy.domain.learning.entity.enums.CourseType;
-import com.s207.cloudy.domain.learning.exception.LearningException;
-import com.s207.cloudy.global.handler.exception.CustomValidationException;
+import com.s207.cloudy.global.error.exception.CustomValidationException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 

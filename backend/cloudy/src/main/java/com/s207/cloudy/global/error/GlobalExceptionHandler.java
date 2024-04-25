@@ -1,15 +1,12 @@
 package com.s207.cloudy.global.error;
 
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
 import com.s207.cloudy.domain.learning.exception.LearningException;
+import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
-import com.s207.cloudy.global.handler.exception.CustomValidationException;
-import jakarta.servlet.http.HttpServletRequest;
+import com.s207.cloudy.global.error.exception.CustomValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 

@@ -1,6 +1,6 @@
 package com.s207.cloudy.global.config;
 
-import com.s207.cloudy.global.error.ErrorCodeEnum;
+import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.PageRequest;

@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.learning.entity.enums;
 
-import com.s207.cloudy.global.handler.exception.CustomValidationException;
+import com.s207.cloudy.global.error.exception.CustomValidationException;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
-package com.s207.cloudy.global.handler.aop;
+package com.s207.cloudy.global.config.aop;
 
-import com.s207.cloudy.global.handler.exception.CustomValidationException;
-import com.s207.cloudy.global.handler.exception.ValidationErrorCode;
+import com.s207.cloudy.global.error.exception.CustomValidationException;
+import com.s207.cloudy.global.error.enums.ValidationErrorCode;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
