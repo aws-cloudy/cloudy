@@ -6,6 +6,7 @@ import Header from '@/components/common/Header'
 import Auth from '@/context/auth'
 import ChatBotIcon from '@/components/chatbot/ChatBotIcon'
 import ChatBot from '@/components/chatbot/ChatBot'
+import { useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,12 +20,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const { data: session } = useSession()
   return (
     <html lang="en">
       <body className={inter.className}>
         <Auth>
           <GoogleAnalytics />
-          <Header />
+          <Header session={session} />
           <ChatBot />
           <ChatBotIcon />
           <div style={{ paddingTop: 80 }}>{children}</div>
