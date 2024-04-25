@@ -1,15 +1,18 @@
 import React from 'react'
 import styles from './LearningTagList.module.scss'
 import LearningTagListItem from '../LearningTagListItem'
-import { IFilter } from '@/types/learning'
+import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
 
-const LearningTagList = (props: { filters: IFilter[] }) => {
-  const { filters } = props
+const LearningTagList = () => {
+  const jobs = usejobFilter()
+  const services = useServiceFilter()
+  const types = useTypeFilter()
+  const dificulties = useDifficultyFilter()
 
   return (
     <div className={styles.container}>
-      {filters.map(v => (
-        <LearningTagListItem key={v.name} text={v.name} />
+      {[...jobs, ...services, ...types, ...dificulties].map(v => (
+        <LearningTagListItem key={v.name} item={v} />
       ))}
     </div>
   )

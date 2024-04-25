@@ -20,8 +20,20 @@ const learningStore = create<ILearningState>(set => ({
   types: [],
   difficulties: [],
   actions: {
-    setJobFilter: v => set(state => ({ ...state, jobs: [...state.jobs, v] })),
-    setServiceFilter: v => set(state => ({ ...state, services: [...state.services, v] })),
+    setJobFilter: v =>
+      set(state => {
+        const index = state.jobs.indexOf(v)
+        return index === -1
+          ? { ...state, jobs: [...state.jobs, v] }
+          : { ...state, jobs: state.jobs.filter((_, i) => i !== index) }
+      }),
+    setServiceFilter: v =>
+      set(state => {
+        const index = state.services.indexOf(v)
+        return index === -1
+          ? { ...state, services: [...state.services, v] }
+          : { ...state, services: state.services.filter((_, i) => i !== index) }
+      }),
     setTypeFilter: v => set(state => ({ ...state, types: [...state.types, v] })),
     setDifficultyFilter: v => set(state => ({ ...state, difficulties: [...state.difficulties, v] })),
   },

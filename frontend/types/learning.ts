@@ -55,4 +55,5 @@ export interface ILearningFilterClose {
 export interface IFilter {
   value: string
   name: string
+  category: string
 }
