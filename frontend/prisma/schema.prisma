@@ -1,0 +1,58 @@
+generator client {
+  provider="prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("PRISMA_DB_URL")
+}
+
+
+model Question {
+  id              Int       @id @default(autoincrement())
+  memberId        Int
+  memberName      String
+  title           String
+  desc            String    
+  hit             Int       @default(0)
+  createdAt       DateTime  @default(now())
+  checkedId       Int?
+  hashtags        Questionhash[]
+  answers         Answer[]
+
+  @@unique([memberId, memberName], name: "user")
+}
+
+
+model Answer {
+  id              Int       @id @default(autoincrement())
+  memberId        Int       
+  memberName      String    
+  createdAt       DateTime  @default(now()) 
+  desc            String    
+  questionId      Int?
+
+  question Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+  @@unique([memberId, memberName], name: "user")
+}
+
+
+model Hashtag {
+  id              Int       @id @default(autoincrement())
+  title           String    @unique @db.VarChar(20)
+  questions       Questionhash[]
+}
+
+
+model Questionhash {
+  question        Question  @relation(fields: [questionId], references: [id])
+  questionId      Int
+  hashtag         Hashtag   @relation(fields: [hashtagId], references: [id])
+  hashtagId       Int
+
+  @@id([questionId, hashtagId])
+  @@index([questionId])
+  @@index([hashtagId])
+}

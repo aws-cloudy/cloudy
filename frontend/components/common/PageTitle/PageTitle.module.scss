@@ -1,0 +1,27 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  padding: 30px;
+}
+
+.route {
+  margin: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  &Item {
+    margin-right: 10px;
+
+    &:last-child {
+      color: $primary;
+      font-weight: 500;
+    }
+  }
+}
+
+.title {
+  font-weight: 400;
+  font-size: 3em;
+}

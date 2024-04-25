@@ -1,0 +1,25 @@
+@import '@/styles/theme.scss';
+
+.container {
+  height: fit-content;
+  padding: 2px 5px;
+  border: 2px solid black;
+  border-radius: 25px;
+  font-size: 0.8em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+  margin: 0 5px;
+  cursor: default;
+}
+
+.check {
+  color: $green1;
+  border-color: $green1;
+}
+
+.none {
+  color: $gray8;
+  border-color: $gray8;
+}

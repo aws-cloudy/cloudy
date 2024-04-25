@@ -15,7 +15,7 @@ function MainRoadmapRecomItem({ title, content, link }: Props) {
       <p className={styles.title}>{shortTitle}</p>
       <p className={styles.content}>{shortContent}</p>
       <a href={link} className={styles.link}>
-        {'자세히 보기 >'}
+        {'자세히 보기 〉'}
       </a>
     </div>
   )

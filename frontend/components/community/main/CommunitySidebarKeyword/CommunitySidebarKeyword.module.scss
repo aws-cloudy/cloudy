@@ -1,0 +1,53 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+}
+
+.keywordSection {
+  padding: 10px 0;
+  margin: 10px 0;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.keyword {
+  margin: 5px 0;
+
+  &None {
+    color: $gray8;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+
+  &Item {
+    color: $primary;
+    margin-right: 3px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration-line: underline;
+    }
+  }
+
+  &ItemC {
+    color: $primary;
+    margin-right: 3px;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration-line: line-through;
+    }
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .keyword {
+    font-size: 1.2em;
+  }
+}
