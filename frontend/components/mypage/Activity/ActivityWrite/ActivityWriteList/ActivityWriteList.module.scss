@@ -13,12 +13,22 @@
   margin-bottom: 10px;
 }
 
-.status {
+.unResolve,
+.resolve {
   width: 10%;
   text-align: center;
   border-radius: 12px;
   border: solid 1px $gray8;
   color: $gray8;
+}
+
+.resolve {
+  border: solid 1px $green1;
+  color: $green1;
+}
+
+.title {
+  font-size: 1.2em;
 }
 
 .context {

@@ -1,22 +1,28 @@
+import { Key } from 'react'
 import styles from './ActivityWriteList.module.scss'
 
-const ActivityWriteList = () => {
+const ActivityWriteList = ({ posts }: any) => {
   return (
-    <section className={styles.section}>
-      <div className={styles.row}>
-        <div>이거 왜 오류난건가요?</div>
-        <div className={styles.status}>미해결</div>
-      </div>
-      <div className={styles.context}>
-        강의 내용대로 하고 있었는데 아래와 같은 오류가 발생했습니다. 설정이 잘못된 걸까요? 질문 내용 질문 내용 질문 내용
-        질문 내용 질문 내용 질문 내용 질문 내용 질문 내용 질문 내용 질문 내용 질문 내용 질문 내용 질문 내용 질문 내용
-        질문 내용 질문 내용 질문 ...
-      </div>
-      <div className={styles.row}>
-        <div className={styles.tag}>#S3</div>
-        <div className={styles.tag}>#Bedrock</div>
-      </div>
-    </section>
+    <>
+      {posts.map((post: any) => (
+        <section className={styles.section} key={post.id}>
+          <div className={styles.row}>
+            <div className={styles.title}>{post.title}</div>
+            <div className={post.status === '미해결' ? styles.unResolve : styles.resolve}>{post.status}</div>
+          </div>
+          <div className={styles.context}>
+            {post.context.length > 100 ? `${post.context.substring(0, 100)}...` : post.context}
+          </div>
+          <div className={styles.row}>
+            {post.tags.map((tag: any) => (
+              <div className={styles.tag} key={tag}>
+                #{tag}
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </>
   )
 }
 
