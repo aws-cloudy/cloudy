@@ -19,8 +19,6 @@ model Question {
   checkedId       Int?
   hashtags        Questionhash[]
   answers         Answer[]
-
-  @@unique([memberId, memberName], name: "user")
 }
 
 

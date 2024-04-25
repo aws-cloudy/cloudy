@@ -22,13 +22,13 @@ function CommunityListItem({ question }: { question: ICommunityListItem }) {
       <p className={styles.desc}>{desc}</p>
       <div className={styles.footer}>
         <div className={styles.hash}>
-          {question.hashtags.map((h, i) => (
-            <span key={i} className={styles.hashtag}>
-              #{h}
+          {question.hashtags.map(h => (
+            <span key={h.hashtag.id} className={styles.hashtag}>
+              #{h.hashtag.title}
             </span>
           ))}
         </div>
-        <p className={styles.answers}>{question.createdAt}</p>
+        <p className={styles.answers}>{new Date(question.createdAt).toDateString()}</p>
       </div>
     </div>
   )

@@ -17,7 +17,7 @@
 .sidebar {
   width: calc(30% - 55px);
   position: fixed;
-  right: 10%;
+  right: calc(10% - 55px);
   padding: 30px;
   padding-top: 80px;
   background-color: $white;

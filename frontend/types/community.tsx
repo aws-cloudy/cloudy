@@ -1,5 +1,5 @@
 export interface IHashtag {
-  id: number
+  id: number | null
   title: string
 }
 
@@ -32,6 +32,6 @@ export interface ICommunityListItem {
   createdAt: string
   memberName: string
   checkedId: number | null
-  hashtags: string[]
+  hashtags: { hashtag: IHashtag }[]
   answers: number
 }
