@@ -92,3 +92,5 @@ export const dummyQuestion: ICommunityListItem[] = [
     answers: 2,
   },
 ]
+
+export const dummyKeywrod = Array.from({ length: 10 }, (_, x) => `키워드${x + 1}`)

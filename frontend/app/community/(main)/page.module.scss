@@ -15,6 +15,69 @@
 }
 
 .sidebar {
-  width: 30%;
+  width: calc(30% - 55px);
+  position: fixed;
+  right: 10%;
   padding: 30px;
+  padding-top: 80px;
+  background-color: $white;
+  box-sizing: border-box;
+}
+
+.titleSection {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.openButton {
+  width: 100%;
+  padding: 0 5%;
+  display: none;
+}
+
+.icon {
+  font-size: 3em;
+}
+
+.close {
+  display: none;
+}
+
+@media screen and (max-width: $tablet) {
+  .content {
+    width: 100%;
+  }
+
+  .openButton {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .sidebar {
+    width: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+    overflow: hidden;
+    max-height: 0;
+    display: none;
+    transition: max-height 0.3s ease;
+  }
+
+  .close {
+    display: block;
+    font-size: 4em;
+    position: fixed;
+    right: 30px;
+    top: 30px;
+  }
+
+  .open {
+    display: block;
+    max-height: 100vh;
+  }
 }

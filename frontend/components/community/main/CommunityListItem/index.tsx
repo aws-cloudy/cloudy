@@ -1,10 +1,10 @@
-import { ICommunityListItem } from '@/types/community'
+import React from 'react'
 import styles from './CommunityListItem.module.scss'
 import CommunityListItemBadge from '../CommunityListItemBadge'
+import { ICommunityListItem } from '@/types/community'
 import { FiMessageCircle } from 'react-icons/fi'
 
 function CommunityListItem({ question }: { question: ICommunityListItem }) {
-  // const
   const desc = question.desc.length > 120 ? question.desc.substring(0, 120) + '...' : question.desc
 
   return (
@@ -34,4 +34,4 @@ function CommunityListItem({ question }: { question: ICommunityListItem }) {
   )
 }
 
-export default CommunityListItem
+export default React.memo(CommunityListItem)

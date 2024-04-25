@@ -1,5 +1,5 @@
-import { BiSearch } from 'react-icons/bi'
 import styles from './CommunitySidebarSearch.module.scss'
+import { BiSearch } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 
 function CommunitySidebarSearch() {

@@ -5,6 +5,7 @@ import CommunitySidebarKeyword from '../CommunitySidebarKeyword'
 import Button from '@/components/common/Button'
 import { useRouter } from 'next/navigation'
 import styles from './CommunitySidebar.module.scss'
+import { IoCloseOutline } from 'react-icons/io5'
 
 function CommunitySidebar() {
   const route = useRouter()

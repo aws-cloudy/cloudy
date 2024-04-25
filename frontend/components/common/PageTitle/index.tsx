@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import { usePathname } from 'next/navigation'
 import { routeKr } from './routeData'
 
@@ -23,4 +24,4 @@ function PageTitle() {
   )
 }
 
-export default PageTitle
+export default React.memo(PageTitle)

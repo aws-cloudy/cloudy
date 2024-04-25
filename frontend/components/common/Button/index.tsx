@@ -1,3 +1,4 @@
+import React from 'react'
 import { IButton } from '@/types/common'
 import styles from './Button.module.scss'
 
@@ -9,4 +10,4 @@ function Button({ children, width, ...props }: IButton) {
   )
 }
 
-export default Button
+export default React.memo(Button)
