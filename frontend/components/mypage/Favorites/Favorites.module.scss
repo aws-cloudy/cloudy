@@ -1,0 +1,19 @@
+@import '@/styles/theme.scss';
+
+.section {
+  padding: 20px;
+  width: 100%;
+}
+
+.intro {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}

@@ -1,14 +1,14 @@
 import LearningFilterSection from '@/components/learning/LearningFilterSection'
 import LearningSection from '@/components/learning/LearningSection'
-import styles from './page.module.scss'
+import Layout from '@/components/common/Layout'
 
 const LearningPage = () => {
   return (
     <>
-      <section className={styles.section}>
+      <Layout>
         <LearningSection />
         <LearningFilterSection />
-      </section>
+      </Layout>
     </>
   )
 }
