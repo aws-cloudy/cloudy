@@ -1,22 +1,25 @@
 package com.s207.cloudy.domain.learning.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
+@Builder
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
-@NoArgsConstructor
-@AllArgsConstructor
 public class LearningListRes {
-    private int learningId;
-    private String thumbnail;
-    private String serviceType;
-    private String title;
-    private String summary;
-    private String duration;
-    private String difficulty;
-    private String link;
+    private List<LearningItem> learningList;
+    private Boolean isModified;
+    private String modifiedKeyword;
+
+    public Boolean getIsModified() {
+        return isModified;
+    }
 }

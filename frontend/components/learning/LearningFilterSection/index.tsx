@@ -11,7 +11,7 @@ const LearningFilterSection = () => {
   const handleOpen = (v: boolean) => setOpen(v)
 
   return (
-    <aside className={styles.aside}>
+    <aside className={`${styles.aside} ${open && styles.mobileAside}`}>
       {open ? (
         <LearningFilterOpen closeFilter={() => handleOpen(false)} />
       ) : (

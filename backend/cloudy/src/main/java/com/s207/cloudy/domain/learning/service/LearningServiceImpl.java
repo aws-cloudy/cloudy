@@ -1,14 +1,17 @@
 package com.s207.cloudy.domain.learning.service;
 
+import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
+import com.s207.cloudy.domain.learning.entity.enums.CourseType;
+import com.s207.cloudy.domain.learning.entity.enums.DifficultyType;
 import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
 import com.s207.cloudy.domain.learning.exception.LearningException;
+import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -16,9 +19,10 @@ import java.util.List;
 public class LearningServiceImpl implements LearningService {
 
     private final LearningRepository learningRepository;
+    private final JobRepository jobRepository;
 
     @Override
-    public List<LearningListRes> getLearnings(LearningSearchReq learningSearchReq) {
+    public LearningListRes getLearnings(LearningSearchReq learningSearchReq) {
         // 난이도 파라미터 변환
         if(learningSearchReq.getDifficulty() != null) {
             String[] covertDifficulty = covertDifficulty(learningSearchReq.getDifficulty());
@@ -35,27 +39,40 @@ public class LearningServiceImpl implements LearningService {
 
         // 서비스명 파라미터 변환
 
-        return learningRepository.findLearnings(learningSearchReq);
+        List<LearningItem> items = learningRepository.findLearnings(learningSearchReq);
+        return LearningListRes.builder()
+                .learningList(items)
+                .isModified(false)
+                .build();
     }
+
+    @Override
+    public LearningListRes getLearningsByJob(int jobId, int count) {
+        // 존재하지 않는 직무라면
+        if(!jobRepository.existsJobId(jobId)) {
+            throw new LearningException(LearningErrorCode.INVALID_JOB_ID);
+        }
+        
+        List<LearningItem> items = learningRepository.findLearningsByJob(jobId, count);
+        return LearningListRes.builder()
+                .learningList(items)
+                .build();
+    }
+
+    @Override
+    public LearningListRes getLearningsByJob(int count) {
+        List<LearningItem> items = learningRepository.findLearningsByJob(count);
+        return LearningListRes.builder()
+                .learningList(items)
+                .build();
+    }
+
 
     public String[] covertDifficulty(String[] difficulty) {
         String[] convertDifficulty = new String[difficulty.length];
 
         for(int i=0; i<difficulty.length; i++) {
-            switch (difficulty[i]) {
-                case "1":
-                    convertDifficulty[i] = "Fundamental";
-                    break;
-                case "2":
-                    convertDifficulty[i] = "Intermediate";
-                    break;
-                case "3":
-                    convertDifficulty[i] = "Advanced";
-                    break;
-                default:
-                    // 난이도가 유효한 값이 아니라면
-                    throw new LearningException(LearningErrorCode.INVALID_DIFFICULTY);
-            }
+            convertDifficulty[i] = String.valueOf(DifficultyType.getByCode(difficulty[i]));
         }
 
         return convertDifficulty;
@@ -65,14 +82,7 @@ public class LearningServiceImpl implements LearningService {
         String[] convertType = new String[type.length];
 
         for(int i=0; i<type.length; i++) {
-            switch (type[i]) {
-                case "Digital_Course", "Digital_Course_With_Lab", "Exam_Preparation":
-                    convertType[i] = type[i].replace("_", " ");
-                    break;
-                default:
-                    // 강의분류가 유효한 값이 아니라면
-                    throw new LearningException(LearningErrorCode.INVALID_TYPE);
-            }
+            convertType[i] = CourseType.getByCourse(type[i]);
         }
 
         return convertType;
