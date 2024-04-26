@@ -29,7 +29,7 @@ const CustomSelect = (props: ICustomSelect) => {
           <IoIosArrowDown color={isDefault ? '#000' : '#fff'} />
         )}
       </div>
-      <div className={`${styles.optionWrap} ${open ? styles.visible : styles.none} `}>
+      <div className={`${styles.optionWrap} ${open ? styles.visible : styles.none} `} role="listbox">
         {options.map(v => (
           <div className={styles.option} onClick={e => onChange(v)} key={v.name}>
             {v.name}
