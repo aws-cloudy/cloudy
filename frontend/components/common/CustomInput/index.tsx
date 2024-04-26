@@ -10,7 +10,13 @@ const CustomInput = (props: ICustomInput) => {
 
   return (
     <div className={styles.container} style={{ width }}>
-      <input value={value} onChange={onChange} placeholder="검색어를 입력해주세요" className={styles.input} />
+      <input
+        value={value}
+        onChange={onChange}
+        placeholder="검색어를 입력해주세요"
+        className={styles.input}
+        name="custom-input"
+      />
       <div className={styles.iconWrap}>
         <IoMdSearch color="#ccc" />
       </div>

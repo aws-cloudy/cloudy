@@ -22,7 +22,7 @@ const RoadmapCard = ({ road }: any) => {
   return (
     <div className={styles.card} key={road.id}>
       <div className={styles.imageBox}>
-        <Image src={road.image} alt="" className={styles.image} />
+        <Image src={road.image} alt="roadmap-image" className={styles.image} priority />
         {clickMark === 'scrap' ? (
           <BsBookmarkFill className={styles.bookmark} onClick={handleMarkClear} size={20} role="button" />
         ) : (
