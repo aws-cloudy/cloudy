@@ -17,3 +17,9 @@ export interface ICustomSelect {
   setItem: Dispatch<SetStateAction<IFilter>>
   options: IFilter[]
 }
+
+export interface ICustomInput {
+  value: string
+  setValue: Dispatch<SetStateAction<string>>
+  width?: string
+}

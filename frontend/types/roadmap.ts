@@ -7,3 +7,8 @@ export interface IRoadmapFilterDropdown {
   service: IFilter
   setService: Dispatch<SetStateAction<IFilter>>
 }
+
+export interface IRoadmapFilterInput {
+  value: string
+  setValue: Dispatch<SetStateAction<string>>
+}
