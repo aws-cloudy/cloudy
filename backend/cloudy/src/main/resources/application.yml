@@ -6,6 +6,7 @@ spring:
   application:
     name: catalog-server
   datasource:
+    driver-class-name: com.mysql.jdbc.Driver
     url: ${DB_URL}
     username: ${DB_USER}
     password: ${DB_PASSWORD}
@@ -24,5 +25,8 @@ spring:
       hibernate:
         format_sql: true
         show_sql: true
+        dialect: org.hibernate.dialect.MySQLDialect
 
-
+cognito:
+  jwk:
+    url: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_J5ofonWXb/.well-known"

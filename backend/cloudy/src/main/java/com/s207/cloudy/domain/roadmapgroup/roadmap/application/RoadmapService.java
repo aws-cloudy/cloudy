@@ -1,6 +1,6 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.application;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.application;
 
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapListRes;
 import org.springframework.data.domain.Pageable;
 
 public interface RoadmapService {

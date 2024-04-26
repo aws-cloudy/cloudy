@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.domain;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.domain;
 
 import lombok.Getter;
 
