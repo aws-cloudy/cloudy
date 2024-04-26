@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
+import { IFilter } from './learning'
 
 export interface IPageTitle {
   [name: string]: {
@@ -9,4 +10,10 @@ export interface IPageTitle {
 
 export interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   width?: string
+}
+
+export interface ICustomSelect {
+  item: IFilter
+  setItem: Dispatch<SetStateAction<IFilter>>
+  options: IFilter[]
 }

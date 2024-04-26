@@ -4,35 +4,37 @@ import { useState } from 'react'
 import styles from './CustomSelect.module.scss'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoIosArrowUp } from 'react-icons/io'
+import { ICustomSelect } from '@/types/common'
+import { IFilter } from '@/types/learning'
 
-const CustomSelect = () => {
+const CustomSelect = (props: ICustomSelect) => {
+  const { item, setItem, options } = props
+
   const [open, setOpen] = useState(false)
-  const [value, setValue] = useState<string>('Developer')
 
-  const onChange = (v: string) => {
-    setValue(v)
+  const onChange = (v: IFilter) => {
+    setItem(v)
     setOpen(false)
   }
 
+  const isDefault = item.value === ''
+
   return (
     <div className={styles.select}>
-      <div className={styles.selected} onClick={e => setOpen(!open)}>
-        <div>{value}</div>
-        {open ? <IoIosArrowUp /> : <IoIosArrowDown />}
+      <div className={`${styles.selected} ${!isDefault && styles.isNotDefault}`} onClick={e => setOpen(!open)}>
+        <span>{item.name}</span>
+        {open ? (
+          <IoIosArrowUp color={isDefault ? '#000' : '#fff'} />
+        ) : (
+          <IoIosArrowDown color={isDefault ? '#000' : '#fff'} />
+        )}
       </div>
-      <div className={`${styles.optionWrap} ${open ? styles.visible : styles.none}`}>
-        <div className={styles.option} onClick={e => onChange('직무1')}>
-          직무1
-        </div>
-        <div className={styles.option} onClick={e => onChange('직무2')}>
-          직무2
-        </div>
-        <div className={styles.option} onClick={e => onChange('직무3')}>
-          직무3
-        </div>
-        <div className={styles.option} onClick={e => onChange('직무4')}>
-          직무4
-        </div>
+      <div className={`${styles.optionWrap} ${open ? styles.visible : styles.none} `}>
+        {options.map(v => (
+          <div className={styles.option} onClick={e => onChange(v)} key={v.name}>
+            {v.name}
+          </div>
+        ))}
       </div>
     </div>
   )
