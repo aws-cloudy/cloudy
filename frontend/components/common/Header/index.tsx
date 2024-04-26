@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { MdOutlineLanguage } from 'react-icons/md'
 import { MdMenu } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -15,6 +16,7 @@ const Header = () => {
   const isMain = pathname === '/'
   const [isDark, setIsDark] = useState(isMain ? true : false)
   const [style, setStyle] = useState(isDark ? mainStyles : styles)
+  const { data: session } = useSession()
 
   const scrollHandler = () => {
     if (typeof window !== 'undefined') {
@@ -69,9 +71,15 @@ const Header = () => {
             </Link>
           </div>
           <div className={style.RightWrap}>
-            <Link href="/login" className={style.menuItem}>
-              로그인
-            </Link>
+            {session ? (
+              <Link href="/mypage" className={style.menuItem}>
+                {session.user?.name}님
+              </Link> // 세션에 사용자 이름이 있다면 표시
+            ) : (
+              <Link href="/login" className={style.menuItem}>
+                로그인
+              </Link>
+            )}
             <MdOutlineLanguage size={24} className="languageIcon" color={isDark ? '#fff' : ' #000'} />
           </div>
         </div>

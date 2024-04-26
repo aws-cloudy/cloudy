@@ -4,6 +4,7 @@ import styles from './RegistInfomation.module.scss'
 import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
 import { useState } from 'react'
+import Dropdown from '../common/Dropdown'
 
 interface OptionType {
   value: string
@@ -22,14 +23,6 @@ export default function RegistInfomation() {
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
   const [selectedService, setSelectedService] = useState<OptionType | null>(null)
   const [confirmScreen, setConfirmScreen] = useState(false)
-
-  const customStyles = {
-    control: (base: any) => ({
-      ...base,
-      height: 50,
-      minheight: 50,
-    }),
-  }
 
   const [currentStep, setCurrentStep] = useState(0)
   const totalSteps = 1
@@ -81,40 +74,8 @@ export default function RegistInfomation() {
       <div className={styles.grayText}>강의 추천을 위해 추가 정보를 입력해주세요.</div>
       <ProgressBar currentStep={currentStep} totalSteps={totalSteps} />
       <div className={styles.blackText}>등록한 정보는 마이페이지에서 변경할 수 있습니다.</div>
-      <Select
-        options={options}
-        value={selectedJob}
-        onChange={handleJobChange}
-        className={styles.select}
-        placeholder="직무"
-        theme={theme => ({
-          ...theme,
-          colors: {
-            ...theme.colors,
-            primary25: '#ff9900',
-            primary75: 'black',
-            primary: 'black',
-          },
-        })}
-        styles={customStyles}
-      />
-      <Select
-        options={options}
-        value={selectedService}
-        onChange={handleServiceChange}
-        className={styles.select}
-        placeholder="관심 서비스"
-        theme={theme => ({
-          ...theme,
-          colors: {
-            ...theme.colors,
-            primary25: '#ff9900',
-            primary75: 'black',
-            primary: 'black',
-          },
-        })}
-        styles={customStyles}
-      />
+      <Dropdown options={options} value={selectedJob} onChange={handleJobChange} placeholder="직무" />
+      <Dropdown options={options} value={selectedService} onChange={handleServiceChange} placeholder="관심 서비스" />
 
       <button className={styles.submit} onClick={handleConfirm} id="selected">
         확인

@@ -1,0 +1,33 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  width: var(--width-ratio);
+  margin: 0 auto;
+  background-color: $white;
+  max-width: var(--max-width);
+  padding: 35px 0;
+  min-height: 100vh;
+  gap: 40px;
+}
+
+.left {
+  flex-direction: column;
+  flex: 3;
+}
+
+.right {
+  flex: 7;
+}
+
+.intro {
+  font-size: 2rem;
+  margin-bottom: 50px;
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    display: block;
+    padding-top: 10px;
+  }
+}
