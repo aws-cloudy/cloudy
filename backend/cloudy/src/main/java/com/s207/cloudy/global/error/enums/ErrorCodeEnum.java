@@ -9,6 +9,7 @@ public enum ErrorCodeEnum {
     PARAMETER_ERROR("CE001", "API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. "),
     INVALID_PAGINATION_SIZE("CE002", "size 파라미터 값의 허용 범위가 1~100입니다."),
     INVALID_PAGINATION_PAGE("CE003", "page 파라미터 값의 허용 범위가 양수입니다."),
+    UNAUTHORIZED("CE004", "로그인이 필요합니다."),
     SERVER_ERROR("SE001", "Internal Server Error / 데이터베이스 오류입니다.");
 
     @Getter
