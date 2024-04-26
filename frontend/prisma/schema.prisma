@@ -33,7 +33,6 @@ model Answer {
   question Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@index([questionId])
-  @@unique([memberId, memberName], name: "user")
 }
 
 

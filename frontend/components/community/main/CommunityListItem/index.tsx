@@ -3,12 +3,17 @@ import styles from './CommunityListItem.module.scss'
 import CommunityListItemBadge from '../CommunityListItemBadge'
 import { ICommunityListItem } from '@/types/community'
 import { FiMessageCircle } from 'react-icons/fi'
+import { useRouter } from 'next/navigation'
 
 function CommunityListItem({ question }: { question: ICommunityListItem }) {
   const desc = question.desc.length > 120 ? question.desc.substring(0, 120) + '...' : question.desc
+  const router = useRouter()
+  const handleClick = () => {
+    router.push(`/community/detail/${question.id}`)
+  }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => handleClick()}>
       <div className={styles.titleBox}>
         <div className={styles.titleBoxInner}>
           <h2 className={styles.title}>{question.title}</h2>
@@ -16,7 +21,7 @@ function CommunityListItem({ question }: { question: ICommunityListItem }) {
         </div>
         <div className={styles.answers}>
           <FiMessageCircle />
-          <p>{question.answers}</p>
+          <p>{question._count.answers}</p>
         </div>
       </div>
       <p className={styles.desc}>{desc}</p>

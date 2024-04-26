@@ -34,3 +34,17 @@ export const QHSchema = z.object({
 })
 
 export const CreateQH = QHSchema
+
+export const AnswerSchema = z.object({
+  id: z.number(),
+  memberId: z.number(),
+  memberName: z.string(),
+  createdAt: z.date(),
+  postId: z.number(),
+  desc: z
+    .string()
+    .min(1, { message: '1글자 이상 입력해주세요.' })
+    .max(1000, { message: '본문은 1000자를 초과할 수 없습니다.' }),
+})
+
+export const CreateAnswer = AnswerSchema.omit({ id: true, createdAt: true })

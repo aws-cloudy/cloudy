@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const QH: z.infer<typeof CreateQH>[] = hashtags.reduce(
       (arr: { questionId: number; hashtagId: number }[], hashtag: IHashtag) => {
         if (hashtag.id) {
-          return [...arr, { questionId: question.id, hashtagId: hashtag.id }]
+          return [...arr, { questionId: Number(question.id), hashtagId: hashtag.id }]
         } else {
           return arr
         }

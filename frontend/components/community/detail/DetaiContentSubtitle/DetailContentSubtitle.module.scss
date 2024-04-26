@@ -1,0 +1,33 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  & > * {
+    margin-right: 10px;
+  }
+}
+
+.time {
+  color: $gray8;
+}
+
+.buttonBox {
+  & > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: $gray8;
+    margin-left: 10px;
+
+    &:hover {
+      color: $gray9;
+    }
+  }
+}

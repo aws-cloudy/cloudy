@@ -2,10 +2,10 @@
 
 import prisma from './client'
 import { z } from 'zod'
-import { CreateHashtag, CreateQH, CreateQuestion } from './schemas'
+import { CreateAnswer, CreateHashtag, CreateQH, CreateQuestion } from './schemas'
 import { Prisma } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
-import { IHashtag, IQuestion } from '@/types/community'
+import { IAnswer, IHashtag, IQuestion } from '@/types/community'
 
 export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
   const rawHash: Prisma.Prisma__HashtagClient<
@@ -119,4 +119,39 @@ export async function createQH(values: z.infer<typeof CreateQH>[]) {
   }
 
   return response
+}
+
+export async function createAnswer(values: z.infer<typeof CreateAnswer>) {
+  const response: { error?: string; answer?: IAnswer } = {}
+  const validated = CreateAnswer.safeParse(values)
+
+  if (!validated.success) {
+    response.error = 'answer: invalid fields'
+    return response
+  }
+  const { postId, memberId, desc, memberName } = validated.data
+
+  const question = await prisma.question.findUnique({ where: { id: postId } })
+  if (!question) {
+    response.error = 'answer: question not found '
+    return response
+  }
+
+  try {
+    const answer = await prisma.answer.create({
+      data: {
+        memberId,
+        memberName,
+        desc,
+        questionId: question.id,
+      },
+    })
+
+    response.answer = answer
+    return response
+  } catch (e) {
+    console.log(e)
+    response.error = 'answer: an error occured while creating....'
+    return response
+  }
 }

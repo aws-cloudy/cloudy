@@ -28,6 +28,9 @@ export async function GET(req: NextRequest) {
       ],
     },
     include: {
+      _count: {
+        select: { answers: true },
+      },
       hashtags: {
         select: {
           hashtag: true,

@@ -7,23 +7,29 @@ export interface IAnswer {
   id: number
   memberId: number
   memberName: string
-  createdAt: string
+  createdAt: string | Date
   desc: string
-  questionId: number
+  questionId: number | null
 }
 
-export interface IQuestion {
-  id: number
-  memberId: number
+export interface IQuestionDetail {
+  id: string | number
   memberName: string
+  memberId: number
   title: string
   desc: string
   hit: number
   createdAt: Date | string
-  checkedId?: number | null
-  hashtags?: IHashtag[]
-  answers?: IAnswer[]
+  hashtags?: { hashtag: IHashtag }[]
 }
+
+export interface IQuestionAnswer {
+  id: string | number
+  answers?: IAnswer[]
+  checkedId?: number | null
+}
+
+export interface IQuestion extends IQuestionDetail, IQuestionAnswer {}
 
 export interface ICommunityListItem {
   id: number
@@ -33,7 +39,9 @@ export interface ICommunityListItem {
   memberName: string
   checkedId: number | null
   hashtags: { hashtag: IHashtag }[]
-  answers: number
+  _count: {
+    answers: number
+  }
 }
 
 export interface ICreateQuestion {
