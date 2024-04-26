@@ -1,8 +1,7 @@
 @import '@/styles/theme.scss';
 
-.container {
-}
-
-.editor {
+.inner {
   width: 100%;
+  height: 100%;
+  display: flex;
 }

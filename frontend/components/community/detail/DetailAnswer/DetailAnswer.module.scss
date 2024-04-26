@@ -1,0 +1,17 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 30%;
+}
+
+.inner {
+  margin-left: 55px;
+  padding-top: 80px;
+}
+
+.count {
+  font-weight: 500;
+  padding: 10px 0;
+  margin: 10px 0;
+  border-bottom: 1px solid $gray6;
+}
