@@ -1,7 +1,8 @@
+'use client'
 import RoadmapCard from '@/components/common/RoadmapCard'
 import styles from './Favorites.module.scss'
-import roadmapgreen from '../../../public/img/roadmap/roadmapgreen.jpg'
-import roadmapblue from '../../../public/img/roadmap/roadmapblue.jpg'
+import roadmapgreen from '@/public/img/roadmap/roadmapgreen.jpg'
+import roadmapblue from '@/public/img/roadmap/roadmapblue.jpg'
 
 const Favorites = () => {
   //로드맵 더미데이터

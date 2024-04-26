@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 
 const RoadmapCard = ({ road }: any) => {
-  const [clickMark, setClickMark] = useState(road.status)
+  const [clickMark, setClickMark] = useState('scrap')
 
   const handleMarkClear = () => {
     //북마크 스크랩 해제
@@ -35,7 +35,7 @@ const RoadmapCard = ({ road }: any) => {
         <div className={styles.row}>
           <div className={styles.tags}>
             {road.tags.map((tag: any) => (
-              <div>#{tag}</div>
+              <div key={tag}>#{tag}</div>
             ))}
           </div>
           <div className={styles.comment}>

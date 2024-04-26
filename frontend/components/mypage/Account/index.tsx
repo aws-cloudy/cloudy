@@ -1,3 +1,4 @@
+'use client'
 import Dropdown from '@/components/common/Dropdown'
 import styles from './Account.module.scss'
 import { useState } from 'react'

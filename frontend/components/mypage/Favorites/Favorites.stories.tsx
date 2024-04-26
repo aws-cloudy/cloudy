@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import RoadmapCard from '.'
+import Favorites from '.'
 
 const meta = {
-  title: 'components/common/RoadmapCard',
-  component: RoadmapCard,
+  title: 'components/Mypage/Favorites',
+  component: Favorites,
   parameters: {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
-} satisfies Meta<typeof RoadmapCard>
+} satisfies Meta<typeof Favorites>
 
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Roadmap: Story = {}
+export const FavoritePage: Story = {}
