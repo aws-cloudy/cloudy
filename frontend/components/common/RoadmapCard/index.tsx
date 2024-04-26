@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import styles from './RoadmapCard.module.scss'
 import Image from 'next/image'
