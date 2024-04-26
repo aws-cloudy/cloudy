@@ -1,12 +1,13 @@
 package com.s207.cloudy.global.config;
 
+import com.s207.cloudy.global.auth.filter.JwtAuthenticationFilter;
+import com.s207.cloudy.global.auth.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -19,11 +20,13 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final JwtService jwtService;
+
 
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
-        CorsConfiguration config = new CorsConfiguration();
+        var config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
         config.addExposedHeader("accessToken");
@@ -32,7 +35,7 @@ public class SecurityConfig {
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        var source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
 
         return source;
@@ -44,17 +47,20 @@ public class SecurityConfig {
        http.csrf(AbstractHttpConfigurer::disable);
        http.authorizeHttpRequests((request)->{
            request.requestMatchers(antMatcher("/api/v1/roadmaps/my/**")).authenticated();
-//           request.requestMatchers(antMatcher("/api/v1/roadmaps/**")).permitAll(); // "/api/v1/roadmaps/**" 요청에 대해 permitAll 설정
            request.requestMatchers(antMatcher("/**")).permitAll();
            request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
        });
     http.headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()));
-    //http.addFilter(getAuthenticationFilter());
-
+    http.addFilter(jwtAuthenticationFilter());
 
         return http.build();
     }
 
+
+    @Bean
+    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        return new JwtAuthenticationFilter(jwtService);
+    }
 
 
 }
