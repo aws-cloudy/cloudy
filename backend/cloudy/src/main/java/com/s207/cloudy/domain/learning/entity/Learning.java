@@ -28,7 +28,7 @@ public class Learning {
     @Column(name = "duration")
     private String duration;
 
-    @Column(name = "desc")
+    @Column(name = "`desc`", columnDefinition = "TEXT")
     private String desc;
 
     @Column(name = "summary")

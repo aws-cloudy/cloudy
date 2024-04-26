@@ -1,6 +1,8 @@
 package com.s207.cloudy;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.s207.cloudy.domain.learning.repository.JobRepository;
+import com.s207.cloudy.domain.learning.repository.impl.LearningRepositoryImpl;
 import com.s207.cloudy.domain.roadmapgroup.roadmap.dao.RoadmapQueryRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -21,5 +23,8 @@ public class TestQueryDslConfig {
     public RoadmapQueryRepository roadmapQueryRepository() {
         return new RoadmapQueryRepository(jpaQueryFactory());
     }
+
+    @Bean
+    public LearningRepositoryImpl learningRepositoryImpl() { return new LearningRepositoryImpl(jpaQueryFactory());}
 
 }
