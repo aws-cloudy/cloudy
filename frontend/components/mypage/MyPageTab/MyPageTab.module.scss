@@ -1,0 +1,31 @@
+@import '@/styles/theme.scss';
+
+.button,
+.activeButton {
+  display: flex;
+  background-color: $gray1;
+  color: $black;
+  padding: 20px;
+  align-content: center;
+  justify-content: space-between;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 344px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.button:hover {
+  background-color: $black;
+  color: $white;
+}
+
+.activeButton {
+  background-color: $black;
+  color: $white;
+}
+
+.logout {
+  padding-left: 22px;
+  cursor: pointer;
+}

@@ -1,11 +1,12 @@
+import Layout from '@/components/common/Layout'
 import PageTitle from '@/components/common/PageTitle'
 
 const RoadmapPage = () => {
   return (
     <>
-      <div>
+      <Layout>
         <PageTitle />
-      </div>
+      </Layout>
     </>
   )
 }
