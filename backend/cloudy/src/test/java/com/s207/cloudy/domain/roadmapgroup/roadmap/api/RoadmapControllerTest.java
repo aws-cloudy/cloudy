@@ -1,10 +1,10 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.api;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.application.RoadmapService;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.application.RoadmapService;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.Roadmap;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapListRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.dummy.DummyRoadmap;
 import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -26,7 +28,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RoadmapController.class)
+@WebMvcTest(value = RoadmapController.class,
+        includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class))
 class RoadmapControllerTest {
 
     @Autowired
@@ -51,6 +54,8 @@ class RoadmapControllerTest {
         dummyRoadmapRes1 = DummyRoadmap.getDummyRoadmapRes(dummyRoadmap);
         dummyRoadmapRes2 = DummyRoadmap.getDummyRoadmapRes(dummyRoadmap);
     }
+
+
 
     @Test
     @DisplayName("페이지에 관한 정보를 파라미터로 입력 시 전체 로드맵 리스트를 정상적으로 조회해 반환하고, 200 OK를 반환한다.")

@@ -1,7 +1,7 @@
 package com.s207.cloudy.dummy;
 
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.Roadmap;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapRes;
 
 public class DummyRoadmap {
 

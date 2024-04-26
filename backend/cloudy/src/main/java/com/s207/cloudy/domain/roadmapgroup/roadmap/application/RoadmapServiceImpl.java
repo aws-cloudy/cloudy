@@ -1,8 +1,8 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.application;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.application;
 
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dao.RoadmapQueryRepository;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dao.RoadmapQueryRepository;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapListRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

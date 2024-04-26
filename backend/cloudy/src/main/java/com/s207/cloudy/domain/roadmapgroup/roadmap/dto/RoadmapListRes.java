@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.dto;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

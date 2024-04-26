@@ -1,8 +1,8 @@
-package com.s207.cloudy.domain.roadmapgroup.comment.application;
+package com.s207.cloudy.domain.roadmapGroup.comment.application;
 
-import com.s207.cloudy.domain.roadmapgroup.comment.dao.RoadmapCommentRepository;
-import com.s207.cloudy.domain.roadmapgroup.comment.domain.RoadmapComment;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
+import com.s207.cloudy.domain.roadmapGroup.comment.dao.RoadmapCommentRepository;
+import com.s207.cloudy.domain.roadmapGroup.comment.domain.RoadmapComment;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.Roadmap;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

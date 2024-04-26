@@ -1,9 +1,9 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.application;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.application;
 
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dao.RoadmapQueryRepository;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dao.RoadmapQueryRepository;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.Roadmap;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapListRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.dummy.DummyRoadmap;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

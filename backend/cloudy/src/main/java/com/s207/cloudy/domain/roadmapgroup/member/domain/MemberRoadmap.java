@@ -1,6 +1,6 @@
-package com.s207.cloudy.domain.roadmapgroup.member.domain;
+package com.s207.cloudy.domain.roadmapGroup.member.domain;
 
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.Roadmap;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

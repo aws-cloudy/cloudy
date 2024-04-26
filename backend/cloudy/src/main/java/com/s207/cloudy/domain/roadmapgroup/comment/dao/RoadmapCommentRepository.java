@@ -1,7 +1,7 @@
-package com.s207.cloudy.domain.roadmapgroup.comment.dao;
+package com.s207.cloudy.domain.roadmapGroup.comment.dao;
 
-import com.s207.cloudy.domain.roadmapgroup.comment.domain.RoadmapComment;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.Roadmap;
+import com.s207.cloudy.domain.roadmapGroup.comment.domain.RoadmapComment;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.Roadmap;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

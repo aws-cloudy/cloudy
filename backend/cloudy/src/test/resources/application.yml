@@ -9,3 +9,6 @@ spring:
     hibernate:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.H2Dialect
+
+cognito:
+  iss: https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_J5ofonWXb

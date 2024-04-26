@@ -1,7 +1,7 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.api;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.api;
 
-import com.s207.cloudy.domain.roadmapgroup.roadmap.application.RoadmapService;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapListRes;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.application.RoadmapService;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapListRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;

@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.roadmapgroup.roadmap.dao;
+package com.s207.cloudy.domain.roadmapGroup.roadmap.dao;
 
 import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
@@ -7,9 +7,9 @@ import com.querydsl.core.util.StringUtils;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.s207.cloudy.domain.roadmapgroup.comment.domain.QRoadmapComment;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.domain.QRoadmap;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dto.RoadmapRes;
+import com.s207.cloudy.domain.roadmapGroup.comment.domain.QRoadmapComment;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.domain.QRoadmap;
+import com.s207.cloudy.domain.roadmapGroup.roadmap.dto.RoadmapRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
