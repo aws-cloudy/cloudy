@@ -4,6 +4,7 @@ import { LuAlignJustify } from 'react-icons/lu'
 import { useLearninglayout, useSearchActions } from '@/stores/search'
 import { ILearningSearchResult } from '@/types/learning'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
+import { useFilterCount, useLearningActions } from '@/stores/learning'
 
 const LearningSearchResult = (props: ILearningSearchResult) => {
   const { keyword } = props
@@ -16,11 +17,19 @@ const LearningSearchResult = (props: ILearningSearchResult) => {
   }
   const { isTablet } = useResponsiveWidth()
 
+  const filterCount = useFilterCount()
+  const { resetFilter } = useLearningActions()
+
   return (
     <div className={styles.container}>
       <div>{keyword && <div>{`'${keyword}' 검색결과 총 1건`}</div>}</div>
       <div className={styles.rightWrap}>
-        <div className={styles.filterText}>필터 초기화</div>
+        <div
+          className={`${styles.filterText} ${filterCount ? styles.black : styles.gray}`}
+          onClick={e => resetFilter()}
+        >
+          필터 초기화
+        </div>
         {!isTablet && (
           <>
             <div className={styles.iconWrap} onClick={e => onChangeLearningLayout('grid')}>

@@ -1,0 +1,23 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 16px;
+  cursor: pointer;
+  height: 60px;
+  font-weight: 500;
+  font-size: 1.1em;
+  color: $black1;
+}
