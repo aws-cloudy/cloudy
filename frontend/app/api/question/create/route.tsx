@@ -44,15 +44,15 @@ export async function POST(req: NextRequest) {
           return NextResponse.json({ message: newQuestion }, { status: 201 })
         } catch (err) {
           console.log(`태그 연결 에러: ${err}`)
-          return new AxiosError()
+          throw new Error('태그 연결 에러')
         }
       }
     } catch (err) {
       console.log(`글작성 에러: :${err}`)
-      return new AxiosError()
+      throw new Error('작성 에러')
     }
   } catch (err) {
     console.log(`해시태그 에러: ${err}`)
-    return new AxiosError()
+    throw new Error('해시태그 에러')
   }
 }

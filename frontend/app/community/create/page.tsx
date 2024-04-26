@@ -11,22 +11,23 @@ import EditorFooter from '@/components/community/create/EditorFooter'
 
 import { IHashtag } from '@/types/community'
 import { commuURL } from '@/apis/urls'
-import { Editor } from '@toast-ui/react-editor'
+import dynamic from 'next/dynamic'
+import { Editor as EditorType } from '@toast-ui/react-editor'
+
+const EditorBody = dynamic(() => import('@/components/community/create/EditorBody'), { ssr: false })
 
 const CommunityCreatepage = () => {
   const [tags, setTags] = useState<IHashtag[]>([])
-  const editorRef = useRef<Editor>(null)
   const { register, getValues } = useForm<{ title: string }>()
+  const editorRef = useRef<EditorType>()
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const editor = editorRef.current
     if (!editor) return
-
     const title = getValues('title')
     const desc = editor.getInstance().getMarkdown()
     const res = await axios.post(`${commuURL}/question/create`, { tags, title, desc })
-    console.log(res)
   }
 
   return (
@@ -34,7 +35,7 @@ const CommunityCreatepage = () => {
       <form className={styles.form} onSubmit={onSubmit}>
         <EditorHashtag tags={tags} setTags={setTags} />
         <input type="text" className={styles.title} placeholder="제목을 입력하세요" {...register('title')} />
-        <Editor ref={editorRef} initialEditType="wysiwyg" hideModeSwitch={true} className={styles.editor} />
+        <EditorBody editorRef={editorRef} />
         <EditorFooter />
       </form>
     </div>
