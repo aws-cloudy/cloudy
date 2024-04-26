@@ -1,0 +1,36 @@
+@import '@/styles/theme.scss';
+
+.container {
+  position: relative;
+  height: 38px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  height: 100%;
+  width: 100%;
+  padding-block: 12px;
+  padding-inline: calc(11px + 1.4em) 11px;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: 1px solid $gray7;
+  font-size: 0.9em;
+
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    color: $gray7;
+  }
+}
+
+.iconWrap {
+  position: absolute;
+  left: 11px;
+  border: 0;
+  background-color: transparent;
+  padding-top: 2px;
+  cursor: pointer;
+}

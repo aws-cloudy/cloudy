@@ -1,0 +1,19 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
+
+@media screen and (max-width: $tablet) {
+  .container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: $mobile) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,4 +1,3 @@
-'use client'
 import RoadmapCard from '@/components/common/RoadmapCard'
 import styles from './Favorites.module.scss'
 import roadmapgreen from '@/public/img/roadmap/roadmapgreen.jpg'
