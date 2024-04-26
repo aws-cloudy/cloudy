@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import Avatar from '@/components/common/Avatar'
 import Description from './Description/indext'
+import CommentBox from './CommentBox'
 const Detail = () => {
   const [selectedTab, setSelectedTab] = useState('introduce')
 
@@ -46,7 +47,9 @@ const Detail = () => {
           </div>
           {selectedTab === 'introduce' && <Description />}
         </div>
-        <div className={styles.right}>댓글</div>
+        <div className={styles.right}>
+          <CommentBox />
+        </div>
       </div>
     </section>
   )
