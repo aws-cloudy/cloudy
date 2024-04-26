@@ -2,7 +2,9 @@ package com.s207.cloudy.domain.learning.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.s207.cloudy.domain.learning.entity.Learning;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,4 +21,29 @@ public class LearningItem {
     private String duration;
     private String difficulty;
     private String link;
+
+    @Builder
+    public LearningItem(int learningId, String title, String difficulty, String duration, String desc, String summary, String thumbnail, String link, String serviceType) {
+        this.learningId = learningId;
+        this.title = title;
+        this.difficulty = difficulty;
+        this.duration = duration;
+        this.summary = summary;
+        this.thumbnail = thumbnail;
+        this.link = link;
+        this.serviceType = serviceType;
+    }
+
+    public static LearningItem of(Learning learning) {
+        return LearningItem.builder()
+                .learningId(learning.getId())
+                .title(learning.getTitle())
+                .difficulty(learning.getDifficulty())
+                .duration(learning.getDuration())
+                .summary(learning.getSummary())
+                .thumbnail(learning.getThumbnail())
+                .link(learning.getLink())
+                .serviceType(learning.getType())
+                .build();
+    }
 }

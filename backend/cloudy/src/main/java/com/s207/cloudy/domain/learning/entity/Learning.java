@@ -2,6 +2,7 @@ package com.s207.cloudy.domain.learning.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -42,4 +43,15 @@ public class Learning {
     @Column(name = "type")
     private String type;
 
+    @Builder
+    public Learning(String title, String difficulty, String duration, String desc, String summary, String thumbnail, String link, String type) {
+        this.title = title;
+        this.difficulty = difficulty;
+        this.duration = duration;
+        this.desc = desc;
+        this.summary = summary;
+        this.thumbnail = thumbnail;
+        this.link = link;
+        this.type = type;
+    }
 }
