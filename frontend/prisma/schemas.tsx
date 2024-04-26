@@ -1,14 +1,14 @@
 import { z } from 'zod'
 
 export const HashSchema = z.object({
-  id: z.number(),
+  id: z.number().nullable(),
   title: z
     .string()
     .min(1, { message: '1글자 이상 입력해주세요.' })
     .max(20, { message: '해시태그는 20자를 초과할 수 없습니다.' }),
 })
 
-export const CreateHashtag = HashSchema.omit({ id: true })
+export const CreateHashtag = HashSchema
 
 export const QuestionSchema = z.object({
   id: z.number(),
@@ -23,6 +23,14 @@ export const QuestionSchema = z.object({
     .min(1, { message: '1글자 이상 입력해주세요.' })
     .max(3000, { message: '본문은 3000자를 초과할 수 없습니다.' }),
   createdAt: z.date(),
+  checkedId: z.number(),
 })
 
-export const CreateQuestion = QuestionSchema.omit({ id: true, createdAt: true })
+export const CreateQuestion = QuestionSchema.omit({ id: true, createdAt: true, checkedId: true })
+
+export const QHSchema = z.object({
+  questionId: z.number(),
+  hashtagId: z.number(),
+})
+
+export const CreateQH = QHSchema

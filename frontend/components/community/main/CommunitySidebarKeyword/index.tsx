@@ -1,21 +1,23 @@
 'use client'
 
 import { useSelectedTags, useCommuSearchActions } from '@/stores/communityStore'
-import { dummyKeywrod } from '../dummy'
 import styles from './CommunitySidebarKeyword.module.scss'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import axios from 'axios'
 import { IHashtag } from '@/types/community'
+import Loading from '@/components/common/Loading'
 
 function CommunitySidebarKeyword() {
   const [keywords, setKeywords] = useState<IHashtag[]>([])
+  const [isFetching, setIsFetching] = useState(true)
   const selected = useSelectedTags()
   const { setSelected } = useCommuSearchActions()
 
   useEffect(() => {
     const hashes = async () => {
       const res = await axios.get('http://localhost:3000/api/hashtag')
-      setKeywords(res.data.hashList)
+      setKeywords(res.data.hashtags)
+      setIsFetching(false)
     }
     hashes()
   }, [])
@@ -54,10 +56,12 @@ function CommunitySidebarKeyword() {
       <div className={styles.keywordSection}>
         <p className={styles.title}>관련 키워드</p>
         <div className={styles.keyword}>
-          {keywords.length === 0 && <div className={styles.keywordNone}>키워드가 없습니다.</div>}
-          {keywords.map(e => (
-            <span key={e.id} className={styles.keywordItem} onClick={() => addKeyword(e)}>{`#${e.title}`}</span>
-          ))}
+          {isFetching && <Loading />}
+          {keywords.length === 0 && !isFetching && <div className={styles.keywordNone}>키워드가 없습니다.</div>}
+          {!isFetching &&
+            keywords.map(e => (
+              <span key={e.id} className={styles.keywordItem} onClick={() => addKeyword(e)}>{`#${e.title}`}</span>
+            ))}
         </div>
       </div>
     </div>

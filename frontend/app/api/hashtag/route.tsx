@@ -1,10 +1,8 @@
-import prisma from '@/prisma/client'
+import { fetchHashtags } from '@/prisma/data'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const hashList = await prisma.hashtag.findMany({
-    orderBy: [{ title: 'asc' }],
-  })
+  const hashtags = await fetchHashtags()
 
-  return NextResponse.json({ hashList })
+  return NextResponse.json({ hashtags }, { status: 200 })
 }

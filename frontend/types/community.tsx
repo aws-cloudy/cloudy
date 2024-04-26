@@ -19,10 +19,10 @@ export interface IQuestion {
   title: string
   desc: string
   hit: number
-  createdAt: string
-  checkedId?: number
-  hashtags: IHashtag[]
-  answers: IAnswer[]
+  createdAt: Date | string
+  checkedId?: number | null
+  hashtags?: IHashtag[]
+  answers?: IAnswer[]
 }
 
 export interface ICommunityListItem {
@@ -34,4 +34,10 @@ export interface ICommunityListItem {
   checkedId: number | null
   hashtags: { hashtag: IHashtag }[]
   answers: number
+}
+
+export interface ICreateQuestion {
+  tags: IHashtag[]
+  title: string
+  desc: string
 }
