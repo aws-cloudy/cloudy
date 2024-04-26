@@ -10,11 +10,13 @@ public class TypeValidator implements ConstraintValidator<TypeValidation, String
     @Override
     public boolean isValid(String[] strings, ConstraintValidatorContext constraintValidatorContext) {
 
-        for(int i=0; i<strings.length; i++) {
-            try {
-                CourseType.getByCourse(strings[i]);
-            } catch (CustomValidationException e) {
-                return false;
+        if(strings != null) {
+            for(int i=0; i<strings.length; i++) {
+                try {
+                    CourseType.getByCourse(strings[i]);
+                } catch (CustomValidationException e) {
+                    return false;
+                }
             }
         }
 

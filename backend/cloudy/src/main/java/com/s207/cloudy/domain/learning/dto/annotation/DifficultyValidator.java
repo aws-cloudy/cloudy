@@ -10,11 +10,13 @@ public class DifficultyValidator implements ConstraintValidator<DifficultyValida
     @Override
     public boolean isValid(String[] strings, ConstraintValidatorContext constraintValidatorContext) {
 
-        for(int i=0; i<strings.length; i++) {
-            try {
-                DifficultyType.getByCode(strings[i]);
-            } catch (CustomValidationException e) {
-                return false;
+        if(strings != null) {
+            for(int i=0; i<strings.length; i++) {
+                try {
+                    DifficultyType.getByCode(strings[i]);
+                } catch (CustomValidationException e) {
+                    return false;
+                }
             }
         }
 
