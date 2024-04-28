@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useEffect, useState } from 'react'
 import styles from './LearningList.module.scss'
 import { learningData } from './learningData'
