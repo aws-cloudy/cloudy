@@ -2,6 +2,7 @@ package com.s207.cloudy.global.error.exception;
 
 import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.Getter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 public class InvalidPaginationArgumentException extends RuntimeException{
@@ -12,4 +13,13 @@ public class InvalidPaginationArgumentException extends RuntimeException{
     }
 
 
+    @Override
+    public String getMessage() {
+        return this.errorCode.getMessage();
+    }
+
+
+    public HttpStatus getHttpStatus(){
+        return this.errorCode.getHttpStatus();
+    }
 }

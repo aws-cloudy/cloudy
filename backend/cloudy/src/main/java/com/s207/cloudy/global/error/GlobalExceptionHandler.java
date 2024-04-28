@@ -5,6 +5,7 @@ import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException
 import com.s207.cloudy.global.error.exception.CustomValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.ErrorResponse;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,26 +16,53 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(CustomValidationException.class)
-    public ErrorResponse validationExceptionHandler(CustomValidationException e) {
+    public ResponseEntity<CommonErrorResponse> validationExceptionHandler(CustomValidationException e) {
         log.error(e.getMessage());
-        return ErrorResponse.builder(e,HttpStatus.BAD_REQUEST, e.getErrorMap().toString() ).build();
+        return ResponseEntity
+                .status(e.getHttpStatus())
+                .body(
+                    CommonErrorResponse
+                        .builder()
+                        .errorMap(e.getErrorMap())
+                        .build()
+                    );
+
+
+        // return ErrorResponse.builder(e,HttpStatus.BAD_REQUEST, e.getErrorMap().toString() ).build();
     }
 
     @ExceptionHandler(LearningException.class)
-    public ErrorResponse learningExceptionHandler(LearningException e){
-        log.error(e.getMessage());
-        return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
+    public ResponseEntity<CommonErrorResponse> learningExceptionHandler(LearningException e){
+        log.error("Exception type : {}, message :{}",e.getClass(),e.getMessage());
+
+
+
+        return ResponseEntity
+                .status(e.getHttpStatus())
+                .body(CommonErrorResponse
+                        .builder()
+                        .code(e.getErrorCode().getCode())
+                        .message(e.getErrorCode().getMessage())
+                        .build()
+                );
+
+        //return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
     }
 
-//    @ExceptionHandler(Exception.class)
-//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-//    public ResponseEntity<ErrorResponse> serverErrorExceptionHandler(Exception e) {
-//        return new ResponseEntity<ErrorResponse>(new ErrorResponse("SE001", "Internal Server Error입니다."), HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
 
     @ExceptionHandler({InvalidPaginationArgumentException.class})
-    public ErrorResponse badRequestException400(InvalidPaginationArgumentException e) {
-        return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
+    public ResponseEntity<CommonErrorResponse> badRequestException400(InvalidPaginationArgumentException e) {
+        log.error("Exception type : {}, message :{}",e.getClass(),e.getMessage());
+        return ResponseEntity
+                .status(e.getHttpStatus())
+                .body(CommonErrorResponse
+                        .builder()
+                        .code(e.getErrorCode().getCode())
+                        .message(e.getErrorCode().getMessage())
+                        .build()
+                );
+
+//        return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
     }
 
 }
