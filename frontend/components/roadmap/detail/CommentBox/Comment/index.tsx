@@ -1,13 +1,19 @@
 import styles from './Comment.module.scss'
 import React from 'react'
 
-const Comment = () => {
+const Comment = ({comments}:any) => {
   return (
-    <div>
-      <div className={styles.name}>김싸피</div>
-      <div className={styles.date}>2024.04.15 11:53</div>
-      <div className={styles.comment}>이거대로 공부하고 자격증 합격했어요. 강추합니다 !!</div>
-    </div>
+    <>
+      {comments.map((comment:any) => (
+        <div key={comment.id}>
+          <div className={styles.row}>
+          <div className={styles.name}>{comment.name}</div>
+          <div className={styles.date}>{comment.date}</div>
+          </div>
+          <div className={styles.comment}>{comment.context}</div>
+        </div>  
+      ))}
+    </>
   )
 }
 

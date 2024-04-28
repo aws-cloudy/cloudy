@@ -3,3 +3,14 @@
 .date {
   color: $gray8;
 }
+
+.row{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.comment{
+  margin-bottom: 20px;
+}
