@@ -137,7 +137,7 @@ class RoadmapControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.code",
                         equalTo(ErrorCode.INVALID_PAGINATION_PAGE.getCode()), String.class))
                 .andExpect(jsonPath("$.message",
@@ -160,7 +160,7 @@ class RoadmapControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.code",
                         equalTo(ErrorCode.INVALID_PAGINATION_SIZE.getCode()), String.class))
                 .andExpect(jsonPath("$.message",
