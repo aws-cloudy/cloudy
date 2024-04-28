@@ -1,18 +1,24 @@
 package com.s207.cloudy.global.config;
 
+
 import com.s207.cloudy.global.auth.filter.JwtAuthenticationFilter;
 import com.s207.cloudy.global.auth.service.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -51,19 +57,38 @@ public class SecurityConfig {
            request.requestMatchers(antMatcher("/**")).permitAll();
            request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
        });
-    http.headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()));
+        http.headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()));
+
+
         http.addFilterAfter(jwtAuthenticationFilter(), LogoutFilter.class);
+
+
 
         return http.build();
     }
 
 
+
+
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter(jwtService);
+
+        return new JwtAuthenticationFilter(jwtService, this.authenticationManager());
     }
 
 
+    @Bean
+    public AuthenticationManager authenticationManager() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder());
+        provider.setUserDetailsService(null);
+        return new ProviderManager(provider);
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }
 
 

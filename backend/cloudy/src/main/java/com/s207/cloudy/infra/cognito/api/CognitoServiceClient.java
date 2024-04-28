@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @FeignClient(name="cognito-service", url = "${cognito.iss}")
 public interface CognitoServiceClient {
 
-    @GetMapping("/.well-known/jwks.json")
+    @GetMapping("/jwks.json")
     ResponseEntity<JwksDto> getJwks();
 
 
