@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.learning.exception;
 
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
@@ -10,15 +11,14 @@ import java.util.Map;
 @Getter
 public class LearningException extends RuntimeException {
 
-    private Map<String, String> error;
-    private HttpStatus status;
 
-    public LearningException(LearningErrorCode errorCode) {
-        error = new HashMap<>();
-        error.put("code", errorCode.getCode());
-        error.put("message", errorCode.getMessage());
+    private final ErrorCode errorCode;
 
-        this.status = errorCode.getHttpStatus();
+    public LearningException(ErrorCode errorCode) {
+
+            this.errorCode = errorCode;
+
+
     }
 
 }
