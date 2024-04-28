@@ -5,10 +5,11 @@ import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.entity.enums.CourseType;
 import com.s207.cloudy.domain.learning.entity.enums.DifficultyType;
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
+
 import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +51,7 @@ public class LearningServiceImpl implements LearningService {
     public LearningListRes getLearningsByJob(int jobId, int count) {
         // 존재하지 않는 직무라면
         if(!jobRepository.existsJobId(jobId)) {
-            throw new LearningException(LearningErrorCode.INVALID_JOB_ID);
+            throw new LearningException(ErrorCode.INVALID_JOB_ID);
         }
         
         List<LearningItem> items = learningRepository.findLearningsByJob(jobId, count);

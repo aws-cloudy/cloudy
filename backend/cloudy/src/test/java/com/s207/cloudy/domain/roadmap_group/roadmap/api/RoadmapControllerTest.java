@@ -6,8 +6,7 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.dummy.DummyRoadmap;
-import com.s207.cloudy.global.config.SecurityConfig;
-import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.FilterType;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
@@ -140,11 +137,11 @@ class RoadmapControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
                 .andExpect(jsonPath("$.code",
-                        equalTo(ErrorCodeEnum.INVALID_PAGINATION_PAGE.getCode()), String.class))
+                        equalTo(ErrorCode.INVALID_PAGINATION_PAGE.getCode()), String.class))
                 .andExpect(jsonPath("$.message",
-                        equalTo(ErrorCodeEnum.INVALID_PAGINATION_PAGE.getMessage()), String.class))
+                        equalTo(ErrorCode.INVALID_PAGINATION_PAGE.getMessage()), String.class))
                 .andDo(print());
     }
 
@@ -163,11 +160,11 @@ class RoadmapControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
                 .andExpect(jsonPath("$.code",
-                        equalTo(ErrorCodeEnum.INVALID_PAGINATION_SIZE.getCode()), String.class))
+                        equalTo(ErrorCode.INVALID_PAGINATION_SIZE.getCode()), String.class))
                 .andExpect(jsonPath("$.message",
-                        equalTo(ErrorCodeEnum.INVALID_PAGINATION_SIZE.getMessage()), String.class))
+                        equalTo(ErrorCode.INVALID_PAGINATION_SIZE.getMessage()), String.class))
                 .andDo(print());
     }
 

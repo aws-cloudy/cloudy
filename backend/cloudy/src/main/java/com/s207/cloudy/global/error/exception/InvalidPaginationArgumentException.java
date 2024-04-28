@@ -1,10 +1,14 @@
 package com.s207.cloudy.global.error.exception;
 
-import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
+import com.s207.cloudy.global.error.enums.ErrorCode;
+import lombok.Getter;
 
+@Getter
 public class InvalidPaginationArgumentException extends RuntimeException{
-    public InvalidPaginationArgumentException(ErrorCodeEnum errorCode) {
-        super(errorCode.getMessage());
+    private final ErrorCode errorCode;
+
+    public InvalidPaginationArgumentException(ErrorCode errorCode) {
+        this.errorCode = errorCode;
     }
 
 

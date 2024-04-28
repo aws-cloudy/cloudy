@@ -1,6 +1,6 @@
 package com.s207.cloudy.global.config;
 
-import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.PageRequest;
@@ -16,13 +16,13 @@ public class PageableArgumentResolver extends PageableHandlerMethodArgumentResol
 
     private void validatePage(int page){
         if (page < 0) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_PAGE);
+            throw new InvalidPaginationArgumentException(ErrorCode.INVALID_PAGINATION_PAGE);
         }
     }
 
     private void validateSize(int size){
         if (size < 1 || size > 100) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
+            throw new InvalidPaginationArgumentException(ErrorCode.INVALID_PAGINATION_SIZE);
         }
     }
 
