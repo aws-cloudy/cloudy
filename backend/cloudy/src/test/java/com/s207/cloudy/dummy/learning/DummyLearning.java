@@ -32,6 +32,30 @@ public class DummyLearning {
                 .build();
     }
 
+    public static LearningItem getDummyLearningItem3() {
+        return LearningItem.builder()
+                .learningId(4)
+                .thumbnail("//explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/assets/courselogo/original/course-type-digital-2021-09-02-21-37-20.jpeg?enhanced_signature=WAWBQ6-SZZMRoD29b39-toUWB29a2MsqCb_i9L05qKs")
+                .serviceType("Data Analytics")
+                .title("Getting Started with Amazon EMR (Korean)")
+                .duration("1h")
+                .difficulty("Fundamental")
+                .link("https://explore.skillbuilder.aws/learn/course/external/view/elearning/12839/getting-started-with-amazon-emr-korean")
+                .build();
+    }
+
+    public static LearningItem getDummyLearningItem4() {
+        return LearningItem.builder()
+                .learningId(6)
+                .thumbnail("//explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/assets/courselogo/original/course-type-digital-2021-09-02-21-37-20.jpeg?enhanced_signature=WAWBQ6-SZZMRoD29b39-toUWB29a2MsqCb_i9L05qKs")
+                .serviceType("Data Analytics")
+                .title("Getting Started with Amazon Redshift (Korean)")
+                .duration("1h")
+                .difficulty("Fundamental")
+                .link("https://explore.skillbuilder.aws/learn/course/external/view/elearning/16153/getting-started-with-amazon-redshift-korean")
+                .build();
+    }
+
     public static Learning getDummyLearning1() {
         return Learning.builder()
                 .title("Introduction to Amazon Athena (Korean)")
@@ -73,6 +97,12 @@ public class DummyLearning {
         return LearningListRes.builder()
                 .learningList(list)
                 .isModified(isModified)
+                .build();
+    }
+
+    public static LearningListRes getDummyLearningListRes(List<LearningItem> list) {
+        return LearningListRes.builder()
+                .learningList(list)
                 .build();
     }
 }
