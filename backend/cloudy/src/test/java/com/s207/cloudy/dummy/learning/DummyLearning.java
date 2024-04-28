@@ -2,7 +2,10 @@ package com.s207.cloudy.dummy.learning;
 
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
+import com.s207.cloudy.domain.learning.entity.Job;
 import com.s207.cloudy.domain.learning.entity.Learning;
+import com.s207.cloudy.domain.learning.entity.LearningJob;
+import com.s207.cloudy.domain.learning.entity.embedded.LearningJobPK;
 
 import java.util.List;
 
@@ -80,10 +83,40 @@ public class DummyLearning {
                 .build();
     }
 
+    public static Learning getDummyLearning3() {
+        return Learning.builder()
+                .title("Getting Started with Amazon EMR (Korean)")
+                .difficulty("Fundamental")
+                .duration("1h")
+                .desc("<p>Amazon EMR은 Apache Spark , Apache Hive , Apache HBase , Apache Flink , Apache Hudi 및 Presto와 같은 오픈 소스 도구를 사용하여 방대한 양의 데이터를 처리하기 위한 서비스입니다. Amazon EMR을 사용하면 빅 데이터 환경을 설정 및 운영하고 크기를 조정할 수 있으며, 용량 프로비저닝 및 클러스터 튜닝과 같이 시간이 소요되는 태스크를 자동화할 수 있습니다. 이 과정에서는 Amazon EMR의 이점, 일반적인 용례 및 기술적 개념을 학습합니다. AWS Management Console을 사용하여 데모를 통해 서비스를 체험해 볼 수도 있습니다.</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>과정 수준: 기초</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>소요 시간: 1시간</p><p><br></p><p>참고: 이 과정의 동영상에는 한국어 트랜스크립트 또는 자막이 지원되며 음성은 영어로 출력됩니다. 자막을 표시하려면 동영상 화면 우측 하단의 CC 버튼을 클릭하세요.&nbsp;</p><p><br></p><h2>활동</h2><p>이 과정에는 프레젠테이션, 그래픽 및 따라 해볼 수 있는 데모가 포함되어 있습니다.</p><p><br></p><h2>과정 목표</h2><p>이 과정에서 학습할 내용은 다음과 같습니다.</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR의 작동 방식 이해</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR의 기술적 개념 이해</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR의 일반적인 용례 나열</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>실제 적용 사례에서 Amazon EMR을 구현하는 데 필요한 사항 파악</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR의 이점 이해</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR의 비용 구조 설명</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>AWS Management Console에서 Amazon EMR 사용 방법 보기</p><p><br></p><h2>수강 대상</h2><p>본 과정의 수강 대상은 다음과 같습니다.</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>개발자</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>솔루션스 아키텍트</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>데이터 엔지니어</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>비즈니스 애널리스트</p><p><br></p><h2>수강 전 권장 사항</h2><p>AWS Technical Essentials 이수</p><p><br></p><h2>과정 개요</h2><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR 기본 사항&nbsp;</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR 용례</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR 설계 및 비용 고려 사항</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>Amazon EMR 사용</p><p>•<span style=\"white-space:pre;\">&nbsp; &nbsp;&nbsp;</span>자세히 알아보기</p>")
+                .thumbnail("//explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/assets/courselogo/original/course-type-digital-2021-09-02-21-37-20.jpeg?enhanced_signature=WAWBQ6-SZZMRoD29b39-toUWB29a2MsqCb_i9L05qKs")
+                .link("https://explore.skillbuilder.aws/learn/course/external/view/elearning/12839/getting-started-with-amazon-emr-korean")
+                .type("Digital Course")
+                .build();
+    }
 
-//    public static LearningItem changeLearningToLearningItem(Learning learning) {
-//        return LearningItem.of(learning);
-//    }
+    public static Learning getDummyLearning4() {
+        return Learning.builder()
+                .title("Getting Started with Amazon Redshift (Korean)")
+                .difficulty("Fundamental")
+                .duration("1h")
+                .desc("<p>이 과정에서는 Amazon Redshift의 이점, 일반적인 용례 및 기술적 개념을 학습합니다. AWS 관리 콘솔을 사용하여 데모를 통해 서비스를 체험해 볼 수도 있습니다. 클라우드 데이터 웨어하우스 서비스는 Amazon Simple Storage Service(Amazon S3)를 기반으로 데이터 레이크와 통합됩니다. 또한 Amazon Relational Database Service (Amazon RDS) for PostgreSQL, Amazon Aurora PostgreSQL 호환 버전, Amazon RDS for MySQL 및 Amazon Aurora MySQL 호환 버전과 같은 관계형 데이터베이스 서비스와도 통합됩니다. Amazon Redshift는 익숙한 SQL 명령을 사용한 기계 학습(ML) 모델 사용과 구축을 지원하므로 ML 활용에 필요한 스킬을 줄여줍니다.</p><ul><li>과정 수준: 기초</li><li>소요 시간: 1시간</li></ul><p><br></p><p>참고: 이 과정의 동영상에는 한국어 트랜스크립트 또는 자막이 지원되며 음성은 영어로 출력됩니다. 자막을 표시하려면 동영상 화면 우측 하단의 CC 버튼을 클릭하세요.</p><p><br></p><p>참고: <strong>이 과정은 Google Chrome(최신 주요 버전 2개), Microsoft Edge(최신 주요 버전 2개), Safari(최신 주요 버전 2개)에 최적화되어 있습니다.</strong></p><p><br></p><h2>활동</h2><p>이 과정에는 프레젠테이션, 그래픽 및 따라 해볼 수 있는 데모가 포함되어 있습니다.</p><p><br></p><h2>과정 목표</h2><p>이 과정에서 배울 내용은 다음과 같습니다.</p><ul><li>Amazon Redshift 작동 방식 이해</li><li>AWS Redshift의 기술적 개념 숙지</li><li>Amazon Redshift의 일반적인 사용 사례 나열</li><li>실제 적용 사례에서 Amazon Redshift를 구현하는 데 필요한 사항 파악</li><li>Amazon Redshift의 이점 이해</li><li>Amazon Redshift의 비용 구조 설명</li><li>AWS 관리 콘솔에서 Amazon Redshift 사용</li></ul><p><br></p><h2>수강 대상</h2><p>이 과정의 수강 대상은 다음과 같습니다.</p><ul><li>데이터 웨어하우스 엔지니어</li><li>Solutions Architect</li></ul><p><br></p><h2>수강 전 권장 사항</h2><ul><li>1년 이상의 데이터 웨어하우스 관리 경험</li><li><a href=\"https://explore.skillbuilder.aws/learn/course/internal/view/elearning/1851/aws-technical-essentials\" target=\"_blank\" rel=\"noreferrer noopener\">AWS Technical Essentials(Korean)</a></li></ul><p><br></p><h2>과정 개요</h2><ul><li>Amazon Redshift 기본</li><li>Amazon Redshift 사용</li><li>자세히 알아보기</li></ul><p><br></p>")
+                .thumbnail("//explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/assets/courselogo/original/course-type-digital-2021-09-02-21-37-20.jpeg?enhanced_signature=WAWBQ6-SZZMRoD29b39-toUWB29a2MsqCb_i9L05qKs")
+                .link("https://explore.skillbuilder.aws/learn/course/external/view/elearning/16153/getting-started-with-amazon-redshift-korean")
+                .type("Digital Course")
+                .build();
+    }
+
+    public static Job getDummyJob() {
+        return Job.builder()
+                .name("Architect")
+                .build();
+    }
+
+    public static LearningJob getDummyLearningJob(Learning learning, Job job) {
+        LearningJobPK learningJobPK = new LearningJobPK(learning, job);
+        return new LearningJob(learningJobPK);
+    }
 
     public static LearningListRes getDummyLearningListRes(List<LearningItem> list, Boolean isModified, String modifiedKeyword) {
         return LearningListRes.builder()
