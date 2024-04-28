@@ -21,4 +21,15 @@ public class LearningException extends RuntimeException {
 
     }
 
+
+    @Override
+    public String getMessage(){
+        return this.errorCode.getMessage();
+    }
+
+
+    public HttpStatus getHttpStatus(){
+        return this.errorCode.getHttpStatus();
+    }
+
 }

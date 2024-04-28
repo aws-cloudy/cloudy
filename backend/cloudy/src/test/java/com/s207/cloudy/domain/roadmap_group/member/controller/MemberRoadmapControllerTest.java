@@ -30,17 +30,17 @@ class MemberRoadmapControllerTest {
     @MockBean
     private JwtService jwtService;
 
-//    @Test
-//    @DisplayName("로그인이 되어있지 않다면 403에러를 반환한다.")
-//    void should_403_when_not_login() throws Exception{
-//
-//        given(
-//                jwtService.isTokenValid(any())
-//        ).willThrow();
-//
-//        mockMvc.perform(get("/api/v1/roadmaps/my"))
-//                .andExpect(status().isForbidden());
-//    }
+    @Test
+    @DisplayName("로그인이 되어있지 않다면 403에러를 반환한다.")
+    void should_403_when_not_login() throws Exception{
+
+        given(
+                jwtService.isTokenValid(any())
+        ).willThrow();
+
+        mockMvc.perform(get("/api/v1/roadmaps/my"))
+                .andExpect(status().isForbidden());
+    }
 
 
 
