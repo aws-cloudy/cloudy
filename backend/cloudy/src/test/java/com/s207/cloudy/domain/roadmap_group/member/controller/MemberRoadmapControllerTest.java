@@ -1,7 +1,9 @@
 package com.s207.cloudy.domain.roadmap_group.member.controller;
 
+import com.s207.cloudy.global.auth.api.AuthController;
 import com.s207.cloudy.global.auth.service.JwtService;
 import com.s207.cloudy.global.config.SecurityConfig;
+import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +20,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@WebMvcTest(value = MemberRoadmapController.class,
+@WebMvcTest(value = {MemberRoadmapController.class, AuthController.class},
         includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class))
 class MemberRoadmapControllerTest {
 
@@ -31,18 +33,18 @@ class MemberRoadmapControllerTest {
     private JwtService jwtService;
 
 
-    //todo 해당 테스트는 이슈 번호 34번에서 마저 처리합니다.
-//    @Test
-//    @DisplayName("로그인이 되어있지 않다면 403에러를 반환한다.")
-//    void should_403_when_not_login() throws Exception{
-//
-//        given(
-//                jwtService.isTokenValid(any())
-//        ).willThrow();
-//
-//        mockMvc.perform(get("/api/v1/roadmaps/my"))
-//                .andExpect(status().isForbidden());
-//    }
+
+    @Test
+    @DisplayName("로그인이 되어있지 않다면 403 에러를 반환한다.")
+    void should_401_when_not_login() throws Exception{
+
+        given(
+                jwtService.isTokenValid(any())
+        ).willThrow(AuthorizationException.class);
+
+        mockMvc.perform(get("/api/v1/roadmaps/my"))
+                .andExpect(status().isForbidden());
+    }
 
 
 

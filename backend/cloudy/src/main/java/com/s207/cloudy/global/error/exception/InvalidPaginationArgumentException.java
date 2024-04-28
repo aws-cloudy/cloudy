@@ -22,4 +22,8 @@ public class InvalidPaginationArgumentException extends RuntimeException{
     public HttpStatus getHttpStatus(){
         return this.errorCode.getHttpStatus();
     }
+
+    public String getCode(){
+        return this.errorCode.getCode();
+    }
 }

@@ -3,7 +3,11 @@ package com.s207.cloudy.global.auth.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.RSAKeyProvider;
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.global.auth.util.RsaKeyProvider;
+import com.s207.cloudy.global.error.enums.ErrorCode;
+import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import com.s207.cloudy.infra.cognito.api.CognitoServiceClient;
 import com.s207.cloudy.infra.cognito.dto.JwkDto;
 import com.s207.cloudy.infra.cognito.dto.JwksDto;
@@ -11,13 +15,24 @@ import com.s207.cloudy.global.auth.util.RsaUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.ProviderManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.core.authority.mapping.NullAuthoritiesMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
-import java.util.Base64;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
+import static com.s207.cloudy.global.error.enums.ErrorCode.UNAUTHORIZED;
 
 @Service
 @RequiredArgsConstructor
@@ -26,61 +41,52 @@ public class JwtServiceImpl implements JwtService {
 
 
     private final CognitoServiceClient cognitoServiceClient;
-    private final RsaUtil RsaUtils;
+    private final RsaUtil rsaUtils;
+    private GrantedAuthoritiesMapper authoritiesMapper = new NullAuthoritiesMapper();
+
 
 
     private final static String ACCESS_HEADER = "Authorization";
-    private final static String BEARER= "Bearer";
+    private final static String BEARER= "Bearer ";
+    private final static String KID = "kid";
+    private final static String SUB = "sub";
 
     @Override
-    public boolean isTokenValid(String token){
+    public boolean isTokenValid(String token) throws TokenExpiredException {
+
         var decodedJWT = JWT.decode(token);
 
         //jwks를 사용하여 jwt 검증
-        var jwk = getJwk(decodedJWT.getHeaderClaim("kid").asString());
+        var jwk = getJwk(decodedJWT.getHeaderClaim(KID).asString());
 
         var algorithm = buildAlgorithm((jwk));
 
-        //검증을 진행한다.
-        JWT.require(algorithm)
+
+        String userId = JWT.require(algorithm)
                 .build()
-                .verify(token);
+                .verify(token)
+                .getClaim(SUB)
+                .asString();
+
+        generateAuthentication(userId);
+
+
+
+
 
         return true;
     }
 
     private Algorithm buildAlgorithm(JwkDto jwk){
-        return Algorithm.RSA256(new RSAKeyProvider() {
-            @Override
-            public RSAPublicKey getPublicKeyById(String keyId) {
-                // JWKS를 가져오고 kid와 일치하는 키를 반환
-                try {
-                    byte[] modulus = Base64.getUrlDecoder().decode(jwk.n());
-                    byte[] exponent = Base64.getUrlDecoder().decode(jwk.e());
-                    return RsaUtils.getRSAPublicKey(modulus, exponent);
-                } catch (Exception e) {
-                    //todo 에러코드 정의
-                    throw new RuntimeException("jwk에서 퍼블릭 키 생성 중 오류");
-                }
-            }
-
-            @Override
-            public RSAPrivateKey getPrivateKey() {
-                return null;
-            }
-
-            @Override
-            public String getPrivateKeyId() {
-                return null;
-            }
-        });
+        return Algorithm.RSA256(new RsaKeyProvider(rsaUtils, jwk));
     }
 
     @Override
     public Optional<String> extractAccessToken(HttpServletRequest request) {
         return Optional.ofNullable(request.getHeader(ACCESS_HEADER))
-                .filter(refreshToken -> refreshToken.startsWith(BEARER))
-                .map(refreshToken -> refreshToken.replace(BEARER, ""));
+                .filter(accessToken -> accessToken.startsWith(BEARER))
+                .map(accessToken -> accessToken.replace(BEARER, ""));
+
     }
 
 
@@ -90,7 +96,7 @@ public class JwtServiceImpl implements JwtService {
         JwksDto jwks = cognitoServiceClient.getJwks().getBody();
 
         if(jwks==null){
-            throw new RuntimeException("cognito 통신실패");
+            throw new AuthorizationException(ErrorCode.COGNITO_SERVICE_ERROR);
         }
 
         return jwks
@@ -98,14 +104,30 @@ public class JwtServiceImpl implements JwtService {
             .stream()
             .filter(jwk -> jwk.equalsKid(kid))
             .findFirst()
-            .orElseThrow(()-> new RuntimeException("kid가 일치하는 jwk가 존재하지 않습니다."));
+            .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
+
+    }
+
+
+    private void generateAuthentication(String userId){
+
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        Member member = new Member(userId,userId, authorities);
+        Authentication authentication = new UsernamePasswordAuthenticationToken(member, null,
+                authoritiesMapper.mapAuthorities(member.getAuthorities()));
+        // Authentication 객체를 SecurityContext에 설정
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+
+        log.info("authentication :: {}", SecurityContextHolder.getContext().getAuthentication().getName());
 
     }
 
 
 
 
-
-
-
 }
+
+
+
+

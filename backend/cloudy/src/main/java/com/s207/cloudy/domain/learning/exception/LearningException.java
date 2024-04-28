@@ -32,4 +32,9 @@ public class LearningException extends RuntimeException {
         return this.errorCode.getHttpStatus();
     }
 
+
+    public String getCode(){
+        return this.errorCode.getCode();
+    }
+
 }
