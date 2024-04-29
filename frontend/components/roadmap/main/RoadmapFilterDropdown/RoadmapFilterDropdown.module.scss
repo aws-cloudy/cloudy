@@ -1,0 +1,17 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  & > div {
+    margin-right: 10px;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .container {
+    flex-wrap: wrap;
+    & > div {
+      margin-bottom: 10px;
+    }
+  }
+}

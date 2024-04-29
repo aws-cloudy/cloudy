@@ -2,6 +2,7 @@
 
 .section {
   display: flex;
+  flex-direction: column;
   width: var(--width-ratio);
   margin: 0 auto;
   background-color: $white;

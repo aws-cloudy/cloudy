@@ -1,9 +1,6 @@
 @import '@/styles/theme.scss';
 
-.container {
-}
-
-.nodata {
+.addbutton {
   color: $gray8;
   background: none;
   border: none;
@@ -12,5 +9,15 @@
 
   &:hover {
     color: $gray7;
+  }
+}
+
+.tag {
+  color: $primary;
+  cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    text-decoration-line: line-through;
   }
 }

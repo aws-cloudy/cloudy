@@ -1,0 +1,59 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nameBox {
+  width: 100%;
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+
+  & > * {
+    margin-right: 10px;
+  }
+}
+
+.buttonBox {
+  display: flex;
+  width: max-content;
+
+  & > button {
+    width: max-content;
+    border: none;
+    outline: none;
+    background: none;
+    color: $gray8;
+    cursor: pointer;
+
+    &:hover {
+      color: $gray9;
+    }
+  }
+}
+
+.name {
+  font-weight: 500;
+}
+
+.date {
+  color: $gray8;
+  font-size: 0.9em;
+}
+
+.badge {
+  padding: 1px 10px;
+  border: 2px solid $green1;
+  font-size: 0.7em;
+  color: $green1;
+  font-weight: 500;
+  border-radius: 25px;
+}

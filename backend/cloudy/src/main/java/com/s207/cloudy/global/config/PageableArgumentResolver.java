@@ -1,7 +1,8 @@
 package com.s207.cloudy.global.config;
 
-import com.s207.cloudy.global.error.enums.ErrorCodeEnum;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,18 +15,40 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @Component
 public class PageableArgumentResolver extends PageableHandlerMethodArgumentResolver {
 
+    static final int MIN_PAGE_NUM  = 0;
+    static final int MAX_PAGE_PER_SIZE_NUM = 100;
+    static final int MIN_PAGE_PER_SIZE_NUM = 0;
+
+
     private void validatePage(int page){
-        if (page < 0) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_PAGE);
+        if (page < MIN_PAGE_NUM) {
+            throw new InvalidPaginationArgumentException(ErrorCode.INVALID_PAGINATION_PAGE);
         }
     }
 
     private void validateSize(int size){
-        if (size < 1 || size > 100) {
-            throw new InvalidPaginationArgumentException(ErrorCodeEnum.INVALID_PAGINATION_SIZE);
+        if (size < MIN_PAGE_PER_SIZE_NUM || size > MAX_PAGE_PER_SIZE_NUM) {
+            throw new InvalidPaginationArgumentException(ErrorCode.INVALID_PAGINATION_SIZE);
         }
     }
 
+
+    private int getPage(NativeWebRequest webRequest, Pageable pageable){
+
+        if (webRequest.getParameter("page") == null) {
+            return pageable.getPageNumber();
+        } else {
+            return Integer.parseInt(webRequest.getParameter("page"));
+        }
+    }
+
+    private int getSize(NativeWebRequest webRequest, Pageable pageable){
+        if (webRequest.getParameter("size") == null) {
+            return pageable.getPageSize();
+        } else {
+            return Integer.parseInt(webRequest.getParameter("size"));
+        }
+    }
 
     @Override
     public Pageable resolveArgument(MethodParameter methodParameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
@@ -35,28 +58,14 @@ public class PageableArgumentResolver extends PageableHandlerMethodArgumentResol
             return pageable;
         }
 
-        int size = 20;
-        int page = 0;
-
-        if (webRequest.getParameter("page") == null) {
-            page = pageable.getPageNumber();
-        } else {
-            page = Integer.parseInt(webRequest.getParameter("page"));
-        }
+        var page = getPage(webRequest, pageable);
+        var size = getSize(webRequest, pageable);
 
         validatePage(page);
-
-        if (webRequest.getParameter("size") == null) {
-            size = pageable.getPageSize();
-        } else {
-            size = Integer.parseInt(webRequest.getParameter("size"));
-        }
-
         validateSize(size);
 
-
-
-
+//        int size = 20;
+//        int page = 0;
 
         return PageRequest.of(page, size);
 

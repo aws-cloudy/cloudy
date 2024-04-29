@@ -19,8 +19,6 @@ model Question {
   checkedId       Int?
   hashtags        Questionhash[]
   answers         Answer[]
-
-  @@unique([memberId, memberName], name: "user")
 }
 
 
@@ -35,7 +33,6 @@ model Answer {
   question Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
 
   @@index([questionId])
-  @@unique([memberId, memberName], name: "user")
 }
 
 
