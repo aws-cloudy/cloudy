@@ -35,8 +35,8 @@ public class RoadmapServiceImpl implements RoadmapService {
     }
 
     @Override
-    public RoadmapListRes findMemberRoadmapList(List<Integer> memberRoadmapList) {
-        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getMemberRoadmapList(memberRoadmapList);
+    public RoadmapListRes findMemberRoadmapList(List<Integer> memberRoadmapIdList) {
+        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getMemberRoadmapList(memberRoadmapIdList);
         return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
     }
 }
