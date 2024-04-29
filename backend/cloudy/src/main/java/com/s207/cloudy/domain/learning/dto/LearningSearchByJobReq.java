@@ -1,6 +1,5 @@
 package com.s207.cloudy.domain.learning.dto;
 
-import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

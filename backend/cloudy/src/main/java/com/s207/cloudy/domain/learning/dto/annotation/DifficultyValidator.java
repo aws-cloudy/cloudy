@@ -11,19 +11,10 @@ public class DifficultyValidator implements ConstraintValidator<DifficultyValida
 
     @Override
     public boolean isValid(String[] strings, ConstraintValidatorContext constraintValidatorContext) {
-        if(strings==null){
+        if(strings == null){
             return true;
         }
-        //변경 전 코드
-//        for(int i=0; i<strings.length; i++) {
-//            try {
-//                DifficultyType.getByCode(strings[i]);
-//            } catch (CustomValidationException e) {
-//                return false;
-//            }
-//        }
 
-        //의문 굳이 예외를 false로 반환해야하는가??
         return validateDifficultTypeArray(strings);
     }
 

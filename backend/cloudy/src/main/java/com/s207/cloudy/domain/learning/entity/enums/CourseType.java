@@ -35,6 +35,6 @@ public enum CourseType {
     }
 
     public static String getByCourse(String course) {
-        return Optional.ofNullable(COURSE_MAP.get(course)).orElseThrow(() -> new CustomValidationException());
+        return Optional.ofNullable(COURSE_MAP.get(course)).orElseThrow(CustomValidationException::new);
     }
 }
