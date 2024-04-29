@@ -25,7 +25,7 @@ const MyPageTab = ({ selectedTab, setSelectedTab }: any) => {
         <div>찜한 로드맵</div>
         <div>{'>'}</div>
       </div>
-      <div className={styles.logout} onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}>
+      <div className={styles.logout} onClick={() => signOut()}>
         로그아웃
       </div>
     </>
