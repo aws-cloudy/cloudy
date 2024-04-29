@@ -12,6 +12,7 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.domain.QRoadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.support.PageableExecutionUtils;
 import org.springframework.stereotype.Repository;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class    RoadmapQueryRepository {
+public class RoadmapQueryRepository {
 
     private final JPAQueryFactory queryFactory;
     private static final QRoadmap qRoadmap = QRoadmap.roadmap;
@@ -28,22 +29,7 @@ public class    RoadmapQueryRepository {
 
     public Page<RoadmapRes> findRoadmapList(String job, String service, String query, Pageable pageable) {
 
-        List<RoadmapRes> content = queryFactory
-                .select(Projections.fields(RoadmapRes.class,
-                        qRoadmap.id.as("roadmapId"),
-                        qRoadmap.title,
-                        qRoadmap.thumbnail,
-                        qRoadmap.service,
-                        qRoadmap.job,
-                        qRoadmap.summary,
-                        ExpressionUtils.as(
-                                JPAExpressions.select(qComment.count())
-                                        .from(qComment)
-                                        .where(qComment.roadmap.eq(qRoadmap)),
-                                "commentsCnt"
-                        ))
-                )
-                .from(qRoadmap)
+        List<RoadmapRes> content = getRoadmapQuery()
                 .where(isSearched(query), isFilteredWithJob(job), isFilteredWithService(service))
                 .offset(pageable.getOffset()).limit(pageable.getPageSize())
                 .fetch();
@@ -52,8 +38,8 @@ public class    RoadmapQueryRepository {
                 .select(qRoadmap.count())
                 .from(qRoadmap)
                 .where(isSearched(query), isFilteredWithJob(job), isFilteredWithService(service));
-        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
 
+        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
     }
 
     private static BooleanExpression isSearched(String query) {
@@ -80,4 +66,38 @@ public class    RoadmapQueryRepository {
         return qRoadmap.service.eq((service));
     }
 
+    public Page<RoadmapRes> findMemberRoadmapList(List<Integer> memberRoadmaps) {
+        Pageable pageable = PageRequest.of(0, 1000);
+        JPAQuery<RoadmapRes> getRoadmapQuery = getRoadmapQuery();
+        List<RoadmapRes> content = getRoadmapQuery
+                .where(qRoadmap.id.in(memberRoadmaps))
+                .offset(pageable.getOffset()).limit(pageable.getPageSize())
+                .fetch();
+
+        JPAQuery<Long> count = queryFactory.from(qRoadmap)
+                .select(qRoadmap.count())
+                .from(qRoadmap)
+                .where(qRoadmap.id.in(memberRoadmaps));
+
+        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
+    }
+
+    private JPAQuery<RoadmapRes> getRoadmapQuery() {
+        return queryFactory
+                .select(Projections.fields(RoadmapRes.class,
+                        qRoadmap.id.as("roadmapId"),
+                        qRoadmap.title,
+                        qRoadmap.thumbnail,
+                        qRoadmap.service,
+                        qRoadmap.job,
+                        qRoadmap.summary,
+                        ExpressionUtils.as(
+                                JPAExpressions.select(qComment.count())
+                                        .from(qComment)
+                                        .where(qComment.roadmap.eq(qRoadmap)),
+                                "commentsCnt"
+                        ))
+                )
+                .from(qRoadmap);
+    }
 }

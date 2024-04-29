@@ -1,12 +1,11 @@
-package com.s207.cloudy.domain.roadmap_group.member.controller;
+package com.s207.cloudy.domain.roadmap_group.member.api;
 
 import com.s207.cloudy.global.auth.api.AuthController;
+import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import com.s207.cloudy.global.auth.service.JwtService;
 import com.s207.cloudy.global.config.SecurityConfig;
-import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -14,8 +13,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.BDDMockito.given;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 

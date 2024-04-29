@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "Member_Roadmap")
+@Table(name = "member_roadmap")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class MemberRoadmap {
     private int id;
 
     @Column(name = "member_id")
-    private int memberId;
+    private String memberId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "roadmap_id")
