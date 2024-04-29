@@ -23,8 +23,8 @@ public class RoadmapServiceImpl implements RoadmapService {
     private final RoadmapQueryRepository roadmapQueryRepository;
 
     @Override
-    public RoadmapListRes getRoadmapList(String job, String service, String query, Pageable pageable) {
-        Page<RoadmapRes> roadmaps = roadmapQueryRepository.findRoadmapList(job, service, query, pageable);
+    public RoadmapListRes findRoadmapList(String job, String service, String query, Pageable pageable) {
+        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getRoadmaplist(job, service, query, pageable);
         return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
     }
 
@@ -36,7 +36,7 @@ public class RoadmapServiceImpl implements RoadmapService {
 
     @Override
     public RoadmapListRes findMemberRoadmapList(List<Integer> memberRoadmapList) {
-        Page<RoadmapRes> roadmaps = roadmapQueryRepository.findMemberRoadmapList(memberRoadmapList);
+        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getMemberRoadmapList(memberRoadmapList);
         return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
     }
 }

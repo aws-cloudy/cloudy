@@ -28,7 +28,7 @@ public class MemberRoadmapController {
 
         return ResponseEntity
                 .status(OK)
-                .body(memberRoadmapService.getRoadmapList(member));
+                .body(memberRoadmapService.findRoadmapListByMember(member));
     }
 
     @PostMapping

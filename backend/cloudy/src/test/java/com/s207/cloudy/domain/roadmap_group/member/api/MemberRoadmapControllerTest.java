@@ -63,7 +63,7 @@ class MemberRoadmapControllerTest {
 
         List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);
 
-        given(mockMemberRoadmapService.getRoadmapList(any(Member.class)))
+        given(mockMemberRoadmapService.findRoadmapListByMember(any(Member.class)))
                 .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
 
         mockMvc.perform(get("/api/v1/my/roadmaps")

@@ -44,16 +44,16 @@ class RoadmapServiceImplTest {
 
     @Test
     @DisplayName("전체 로드맵 리스트를 정상적으로 조회한다.")
-    void findAllSuccess() {
+    void return_roadmap_list_success() {
 
         List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);
 
         // given
-        given(mockRoadmapRepository.findRoadmapList(anyString(), anyString(), anyString(), any()))
+        given(mockRoadmapRepository.getRoadmaplist(anyString(), anyString(), anyString(), any()))
                 .willReturn(new PageImpl<>(dummyList, PageRequest.of(0, 10), dummyList.size()));
 
         // when
-        RoadmapListRes actualRoadmaps = roadmapService.getRoadmapList(
+        RoadmapListRes actualRoadmaps = roadmapService.findRoadmapList(
                 "backend developer", "AWS EC2", "Learning guide",
                 PageRequest.of(0, 10));
 

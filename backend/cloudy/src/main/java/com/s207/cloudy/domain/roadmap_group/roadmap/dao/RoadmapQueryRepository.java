@@ -27,7 +27,7 @@ public class RoadmapQueryRepository {
     private static final QRoadmap qRoadmap = QRoadmap.roadmap;
     private static final QRoadmapComment qComment = QRoadmapComment.roadmapComment;
 
-    public Page<RoadmapRes> findRoadmapList(String job, String service, String query, Pageable pageable) {
+    public Page<RoadmapRes> getRoadmaplist(String job, String service, String query, Pageable pageable) {
 
         List<RoadmapRes> content = getRoadmapQuery()
                 .where(isSearched(query), isFilteredWithJob(job), isFilteredWithService(service))
@@ -66,7 +66,7 @@ public class RoadmapQueryRepository {
         return qRoadmap.service.eq((service));
     }
 
-    public Page<RoadmapRes> findMemberRoadmapList(List<Integer> memberRoadmaps) {
+    public Page<RoadmapRes> getMemberRoadmapList(List<Integer> memberRoadmaps) {
         Pageable pageable = PageRequest.of(0, 1000);
         JPAQuery<RoadmapRes> getRoadmapQuery = getRoadmapQuery();
         List<RoadmapRes> content = getRoadmapQuery

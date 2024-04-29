@@ -2,11 +2,9 @@ package com.s207.cloudy.domain.roadmap_group.member.application;
 
 import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
-import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapQueryRepository;
+import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,14 +13,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     private final MemberRoadmapQueryRepository memberRoadmapQueryRepository;
-    private final RoadmapQueryRepository roadmapQueryRepository;
+    private final RoadmapService roadmapService;
 
     @Override
-    public RoadmapListRes getRoadmapList(Member member) {
+    public RoadmapListRes findRoadmapListByMember(Member member) {
         String memberId = member.getUsername();
-        List<Integer> memberRoadmapList = memberRoadmapQueryRepository.getByMemberId(memberId);
-        Page<RoadmapRes> roadmaps = roadmapQueryRepository.findMemberRoadmapList(memberRoadmapList);
-        return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
-
+        List<Integer> memberRoadmapList = findRoadmapIdList(memberId);
+        return roadmapService.findMemberRoadmapList(memberRoadmapList);
     }
+
+    @Override
+    public List<Integer> findRoadmapIdList(String memberId) {
+        return memberRoadmapQueryRepository.getRoadmapIdListByMemberId(memberId);
+    }
+
 }

@@ -14,7 +14,7 @@ public class MemberRoadmapQueryRepository {
     private final JPAQueryFactory queryFactory;
     private static final QMemberRoadmap qMemberRoadmap = QMemberRoadmap.memberRoadmap;
 
-    public List<Integer> getByMemberId(String memberId) {
+    public List<Integer> getRoadmapIdListByMemberId(String memberId) {
 
         return queryFactory
                 .select(qMemberRoadmap.roadmap.id)
