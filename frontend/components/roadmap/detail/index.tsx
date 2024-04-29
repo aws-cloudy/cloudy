@@ -7,8 +7,6 @@ import Avatar from '@/components/common/Avatar'
 import Description from './Description/indext'
 import CommentBox from './CommentBox'
 
-
-
 const Detail = () => {
   const [selectedTab, setSelectedTab] = useState('introduce')
 
@@ -17,9 +15,7 @@ const Detail = () => {
       id: 1,
       name: '김싸피',
       date: '2024.04.15. 11:53',
-      context:
-        '이거대로 공부하고 자격증 합격했어요. 강추합니다 !!',
-      
+      context: '이거대로 공부하고 자격증 합격했어요. 강추합니다 !!',
     },
     {
       id: 2,
@@ -29,7 +25,6 @@ const Detail = () => {
         '정말 좋은 로드맵인 것 같아요 ㅎㅎ 어떻게 시작해야할지 고민되었었는데 ㅎㅎㅎ 다른 분들도 꼭 합격하시길!!',
     },
   ]
-
 
   return (
     <section className={styles.section}>
@@ -70,7 +65,7 @@ const Detail = () => {
           {selectedTab === 'introduce' && <Description />}
         </div>
         <div className={styles.right}>
-          <CommentBox comments={comments}/>
+          <CommentBox comments={comments} />
         </div>
       </div>
     </section>

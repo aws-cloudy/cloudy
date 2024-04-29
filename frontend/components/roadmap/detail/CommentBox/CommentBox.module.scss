@@ -1,5 +1,12 @@
 @import '@/styles/theme.scss';
 
+.section {
+  position: sticky;
+  top: 70px;
+  padding-top: 30px;
+  background-color: $white;
+}
+
 .counts {
   margin-bottom: 16px;
 }
@@ -18,23 +25,21 @@
   padding: 10px;
   margin-bottom: 26px;
   box-sizing: border-box;
-  
 }
 
 .iconBox {
   display: flex;
   position: absolute;
   transform: translateY(-50%);
-  right: 10px; 
+  right: 10px;
   border: none;
   background: transparent;
   cursor: pointer;
   color: $primary;
   padding: 0;
-  
 }
 
-.icon{
+.icon {
   font-size: 2em;
 }
 
