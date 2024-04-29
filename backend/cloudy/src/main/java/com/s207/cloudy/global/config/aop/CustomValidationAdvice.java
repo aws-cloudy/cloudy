@@ -19,6 +19,7 @@ public class CustomValidationAdvice {
 
     @Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)")
     public void getMapping() {
+        // This method serves as a pointcut declaration without any additional logic.
     }
 
 
