@@ -3,13 +3,13 @@ package com.s207.cloudy.domain.learning.application;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
-import com.s207.cloudy.domain.learning.exception.LearningErrorCode;
 import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
 import com.s207.cloudy.domain.learning.service.LearningService;
 import com.s207.cloudy.domain.learning.service.LearningServiceImpl;
 import com.s207.cloudy.dummy.learning.DummyLearning;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -99,7 +99,7 @@ public class LearningServiceImplTest {
     void getListByJobWhenLoginFail() throws Exception{
 
         given(jobRepository.existsJobId(anyInt()))
-                .willThrow(new LearningException(LearningErrorCode.INVALID_JOB_ID));
+                .willThrow(new LearningException(ErrorCode.INVALID_JOB_ID));
 
         // given
         int jobId = 1000;
@@ -109,9 +109,9 @@ public class LearningServiceImplTest {
         LearningException e = assertThrows(LearningException.class, () -> {
             learningService.getLearningsByJob(jobId, count);
         });
-        Assertions.assertThat(e.getError().get("code").equals("SE001"));
-        Assertions.assertThat(e.getError().get("message").equals("존재하지 않는 직무 아이디입니다"));
-        Assertions.assertThat(e.getStatus().equals(HttpStatus.INTERNAL_SERVER_ERROR));
+        Assertions.assertThat(e.getCode().equals("SE001"));
+        Assertions.assertThat(e.getMessage().equals("존재하지 않는 직무 아이디입니다"));
+        Assertions.assertThat(e.getHttpStatus().equals(HttpStatus.INTERNAL_SERVER_ERROR));
     }
 
     @Test

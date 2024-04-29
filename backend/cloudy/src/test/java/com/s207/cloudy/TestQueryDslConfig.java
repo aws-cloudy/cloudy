@@ -1,9 +1,8 @@
 package com.s207.cloudy;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.impl.LearningRepositoryImpl;
-import com.s207.cloudy.domain.roadmapgroup.roadmap.dao.RoadmapQueryRepository;
+import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapQueryRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.boot.test.context.TestConfiguration;
