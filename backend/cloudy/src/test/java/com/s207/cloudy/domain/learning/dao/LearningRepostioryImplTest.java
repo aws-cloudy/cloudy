@@ -22,7 +22,7 @@ import java.util.List;
 
 @DataJpaTest(showSql = true)
 @Import(TestQueryDslConfig.class)
-public class LearningRepostioryImplTest {
+class LearningRepostioryImplTest {
 
     @Autowired
     LearningRepositoryImpl learningRepository;

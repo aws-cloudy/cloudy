@@ -27,7 +27,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
 
 @SpringJUnitConfig(LearningServiceImpl.class)
-public class LearningServiceImplTest {
+class LearningServiceImplTest {
 
     @Autowired
     LearningService learningService;
@@ -67,7 +67,7 @@ public class LearningServiceImplTest {
 
         // then
         Assertions.assertThat(list.getLearningList()).isNotNull();
-        Assertions.assertThat(list.getIsModified()).isEqualTo(false);
+        Assertions.assertThat(list.getIsModified()).isFalse();
         Assertions.assertThat(list.getLearningList()).hasSize(dummyList.size());
     }
 
@@ -109,9 +109,10 @@ public class LearningServiceImplTest {
         LearningException e = assertThrows(LearningException.class, () -> {
             learningService.getLearningsByJob(jobId, count);
         });
-        Assertions.assertThat(e.getCode().equals("SE001"));
-        Assertions.assertThat(e.getMessage().equals("존재하지 않는 직무 아이디입니다"));
-        Assertions.assertThat(e.getHttpStatus().equals(HttpStatus.INTERNAL_SERVER_ERROR));
+
+        Assertions.assertThat(e.getCode()).isEqualTo("SE002");
+        Assertions.assertThat(e.getMessage()).isEqualTo("존재하지 않는 직무 아이디입니다");
+        Assertions.assertThat(e.getHttpStatus()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Test
