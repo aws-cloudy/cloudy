@@ -1,11 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react'
 import Favorites from '.'
 import RoadmapCard from '@/components/common/RoadmapCard'
-import roadmapgreen from '../../../public/img/roadmap/roadmapgreen.jpg'
 
 const testData = {
   id: 1,
-  image: roadmapgreen,
+  image: '/img/roadmap/roadmapgreen.jpg',
   status: 'scrap',
   title: 'AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide Guide ',
   context:
@@ -21,7 +20,7 @@ describe('<Favorites />', () => {
   })
 
   it('북마크 아이콘 클릭 이벤트가 정상 작동됩니다.', () => {
-    render(<RoadmapCard road={testData} />)
+    render(<RoadmapCard item={testData} />)
     const bookMark = screen.getByRole('button')
     //북마크 아이콘 클릭 이벤트 시뮬레이션
     fireEvent.click(bookMark)
