@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import LearningItem from './'
+import LearningCard from './'
 import { learningData } from '@/components/learning/LearningList/learningData'
-import { ILearningItem } from '@/types/learning'
+import { ILearningCard } from '@/types/learning'
 
-const LearningItemComponent = ({ item, layout }: { item: ILearningItem; layout: string }) => (
+const LearningCardComponent = ({ item, layout }: { item: ILearningCard; layout: string }) => (
   <div style={{ width: layout === 'justify' ? '100%' : 250 }}>
-    <LearningItem item={item} layout={layout} />
+    <LearningCard item={item} layout={layout} />
   </div>
 )
 
 const meta = {
-  title: 'common/LearningItem',
-  component: LearningItemComponent,
+  title: 'common/LearningCard',
+  component: LearningCardComponent,
   parameters: {
     layout: 'fullscreen',
   },
 
   tags: ['autodocs'],
   args: { item: learningData[0], layout: 'grid' },
-} satisfies Meta<typeof LearningItem>
+} satisfies Meta<typeof LearningCard>
 
 export default meta
 

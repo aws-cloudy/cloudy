@@ -1,12 +1,12 @@
 'use client'
 
 import React, { useState } from 'react'
-import styles from './LearningItem.module.scss'
-import { ILearningItem } from '@/types/learning'
+import styles from './LearningCard.module.scss'
+import { ILearningCard } from '@/types/learning'
 import { getDifficulty } from '@/utils/getDifficulty'
 import Image from 'next/image'
 
-const LearningItem = (props: { item: ILearningItem; layout: string }) => {
+const LearningCard = (props: { item: ILearningCard; layout: string }) => {
   const { item, layout } = props
 
   const [more, setMore] = useState<boolean>(false)
@@ -50,4 +50,4 @@ const LearningItem = (props: { item: ILearningItem; layout: string }) => {
   )
 }
 
-export default LearningItem
+export default LearningCard

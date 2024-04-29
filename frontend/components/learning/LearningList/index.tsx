@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './LearningList.module.scss'
 import { learningData } from './learningData'
-import LearningItem from '@/components/common/LearningItem'
+import LearningCard from '@/components/common/LearningCard'
 import { useLearninglayout } from '@/stores/search'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 
@@ -18,7 +18,7 @@ const LearningList = () => {
   return (
     <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
       {learningData.map(item => (
-        <LearningItem key={item.id} item={item} layout={layout} />
+        <LearningCard key={item.id} item={item} layout={layout} />
       ))}
     </div>
   )
