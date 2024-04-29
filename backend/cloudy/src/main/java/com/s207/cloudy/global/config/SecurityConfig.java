@@ -22,6 +22,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -40,6 +42,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.addExposedHeader("accessToken");
         config.addExposedHeader("refreshToken");
+        config.setAllowedOrigins(List.of("*"));
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
