@@ -35,7 +35,7 @@ class AuthControllerTest {
                 jwtService.isTokenValid(any())
         ).willThrow(AuthorizationException.class);
 
-        mockMvc.perform(get("/api/v1/roadmaps/my"))
+        mockMvc.perform(get("/api/v1/my/roadmaps"))
                 .andExpect(status().isForbidden());
     }
 
