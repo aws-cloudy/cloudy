@@ -1,4 +1,5 @@
 import type { StorybookConfig } from '@storybook/nextjs'
+import path from 'path'
 
 // Storybook에 대한 전반적인 설정 적용
 const config: StorybookConfig = {
@@ -18,6 +19,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  staticDirs: ['..\\public'],
+  staticDirs: [path.join(__dirname, '..', 'public')],
 }
 export default config
