@@ -20,11 +20,11 @@ export default function LoginButton({ session }: any) {
   const handleSignInGoogle = () => {
     // 구글 로그인 제공자를 명시적으로 지정
     // 로그인 요청 후 리디렉션 페이지는 메인 페이지
-    signIn('google', { callbackUrl: '/' })
+    signIn()
   }
 
   const handleSignInCognito = () => {
-    signIn('cognito', { callbackUrl: '/' })
+    signIn()
   }
 
   return (

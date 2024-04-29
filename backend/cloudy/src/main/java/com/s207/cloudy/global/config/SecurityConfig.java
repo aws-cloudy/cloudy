@@ -3,6 +3,7 @@ package com.s207.cloudy.global.config;
 
 import com.s207.cloudy.global.auth.filter.JwtAuthenticationFilter;
 import com.s207.cloudy.global.auth.service.JwtService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -53,14 +55,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
        http.csrf(AbstractHttpConfigurer::disable);
        http.authorizeHttpRequests((request)->{
-           request.requestMatchers(antMatcher("/api/v1/roadmaps/my/**")).authenticated();
+           request.requestMatchers(antMatcher("/api/v1/my/**")).authenticated();
            request.requestMatchers(antMatcher("/**")).permitAll();
            request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
-       });
-        http.headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()));
+       }
+       )
+        .headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()))
 
-
-        http.addFilterAfter(jwtAuthenticationFilter(), LogoutFilter.class);
+        .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
 

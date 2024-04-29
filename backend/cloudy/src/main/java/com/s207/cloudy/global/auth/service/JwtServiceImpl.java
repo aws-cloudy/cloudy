@@ -117,8 +117,6 @@ public class JwtServiceImpl implements JwtService {
                 authoritiesMapper.mapAuthorities(member.getAuthorities()));
         // Authentication 객체를 SecurityContext에 설정
         SecurityContextHolder.getContext().setAuthentication(authentication);
-
-
         log.info("authentication :: {}", SecurityContextHolder.getContext().getAuthentication().getName());
 
     }

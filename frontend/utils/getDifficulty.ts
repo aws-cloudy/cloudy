@@ -1,4 +1,4 @@
-import styles from '@/components/common/LearningItem/LearningItem.module.scss'
+import styles from '@/components/common/LearningCard/LearningCard.module.scss'
 
 // 영어로된 난이도를 {텍스트, 클래스}로 바꿔서 반환
 export const getDifficulty = (difficulty: string) => {
