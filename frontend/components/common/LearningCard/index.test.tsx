@@ -5,17 +5,14 @@ import { getDifficulty } from '@/utils/getDifficulty'
 
 describe('LearningCard', () => {
   const mockItem: ILearningCard = {
-    id: 0,
+    learningId: 0,
     thumbnail: '/img/learning/1.png',
     title: 'test title',
-    service: [{ id: 0, name: 'service 1' }],
     difficulty: 'Intermediate',
     duration: '2h 10m',
     summary: 'test summary',
     link: 'test link',
-    job: [{ id: 0, name: 'job 1' }],
-    desc: 'test desc',
-    type: 'Digital Course',
+    serviceType: 'Digital Course',
   }
 
   it('더 알아보기 toggle이 잘 작동하는지 확인합니다', () => {

@@ -18,18 +18,14 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
   return (
     <div className={layout === 'grid' ? styles.container : styles.justifyContainer}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
-        <Image src={item.thumbnail} alt={item.title} className={styles.img} fill priority sizes="auto" />
+        <Image src={'/img/learning/1.png'} alt={item.title} className={styles.img} fill priority sizes="auto" />
         <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
           {difficulty.text}
         </div>
       </div>
       <div className={`${styles.wrap} ${styles.justifyWrap}`}>
         <div className={layout === 'grid' ? styles.categoryWrap : styles.justifyCategoryWrap}>
-          {item.service.map(service => (
-            <div className={styles.category} key={service.id}>
-              # {service.name}
-            </div>
-          ))}
+          <div className={styles.category}># {item.serviceType}</div>
         </div>
         <div className={styles.title}>{item.title}</div>
         {more || layout === 'justify' ? (

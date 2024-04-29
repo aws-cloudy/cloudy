@@ -31,17 +31,14 @@ export interface IService {
 }
 
 export interface ILearningCard {
-  id: number
+  learningId: number
   title: string
   difficulty: string
   duration: string
-  desc: string
-  summary: string
+  summary: string | null
   thumbnail: string
   link: string
-  type: string
-  job: IJob[]
-  service: IService[]
+  serviceType: string
 }
 
 export interface ILearningFilterOpen {
