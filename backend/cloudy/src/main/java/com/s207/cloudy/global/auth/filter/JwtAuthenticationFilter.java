@@ -47,25 +47,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if(!request.getServletPath().equals("/api/v1/my/**")){
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try{
             jwtService.extractAccessToken(request)
                     .filter(jwtService::isTokenValid)
                     .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
-        }catch(AuthorizationException e){
+        }catch(Exception e) {
             e.printStackTrace();
             log.error("{}", e.getMessage());
-            response.setStatus(401);
-            response.getWriter().write(e.getMessage());
-        }catch(AccessDeniedException e){
-            e.printStackTrace();
-            log.error("{}", e.getMessage());
-            response.setStatus(401);
-            response.getWriter().write(e.getMessage());
-        }catch(TokenExpiredException e){
-            e.printStackTrace();
-            log.error("{}", e.getMessage());
-            response.setStatus(401);
-            response.getWriter().write("토큰의 유효기간이 만료되었습니다.");
         }
 
         filterChain.doFilter(request, response);
