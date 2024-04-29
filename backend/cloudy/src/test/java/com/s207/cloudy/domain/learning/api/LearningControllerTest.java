@@ -156,7 +156,7 @@ class LearningControllerTest {
         given(mockLearningService.getLearningsByJob(anyInt(), anyInt()))
                 .willReturn(DummyLearning.getDummyLearningListRes(dummyList));
 
-        mockMvc.perform(get("/api/v1/learnings/search/job/3?count=2"))
+        mockMvc.perform(get("/api/v1/my/learnings/search/job/3?count=2"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.learningList",hasSize(2)))
@@ -166,7 +166,7 @@ class LearningControllerTest {
     @Test
     @DisplayName("로그인 시, 지정한 개수가 1부터 100 사이가 아니라면 400 Bad Request를 반환한다.")
     void getListByJobWhenLoginFail() throws Exception {
-        mockMvc.perform(get("/api/v1/learnings/search/job/1?count=-1"))
+        mockMvc.perform(get("/api/v1/my/learnings/search/job/1?count=-1"))
                 .andExpect(status().isBadRequest())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.errorMap.count.code",equalTo("CE001"), String.class))
