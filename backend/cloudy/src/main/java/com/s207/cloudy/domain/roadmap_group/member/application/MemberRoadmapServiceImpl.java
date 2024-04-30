@@ -4,12 +4,14 @@ import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkListRes;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
 import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapNotFoundException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,17 +26,13 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     private final MemberRoadmapRepository memberRoadmapRepository;
 
     @Override
-    public RoadmapListRes findRoadmapListByMember(Member member) {
+    public BookmarkListRes findRoadmapListByMember(Member member) {
         String memberId = member.getUsername();
-        List<Integer> memberRoadmapList = findRoadmapIdList(memberId);
-        return roadmapService.findMemberRoadmapList(memberRoadmapList);
+        Page<BookmarkRes> memberRoadmapList = memberRoadmapQueryRepository.getRoadmapListByMemberId(memberId);
+        List<BookmarkRes> bookmarkList = memberRoadmapList.getContent();
+        return new BookmarkListRes(bookmarkList, bookmarkList.size());
     }
 
-    @Override
-    public List<Integer> findRoadmapIdList(String memberId) {
-        return memberRoadmapQueryRepository.getRoadmapIdListByMemberId(memberId);
-
-    }
 
     @Override
     @Transactional

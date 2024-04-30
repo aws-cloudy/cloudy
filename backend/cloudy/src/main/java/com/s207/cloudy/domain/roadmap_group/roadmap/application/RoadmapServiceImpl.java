@@ -12,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -34,9 +32,4 @@ public class RoadmapServiceImpl implements RoadmapService {
                 .orElseThrow(RoadmapNotFoundException::new);
     }
 
-    @Override
-    public RoadmapListRes findMemberRoadmapList(List<Integer> memberRoadmapIdList) {
-        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getMemberRoadmapList(memberRoadmapIdList);
-        return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
-    }
 }

@@ -3,8 +3,8 @@ package com.s207.cloudy.domain.roadmap_group.member.api;
 
 import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.application.MemberRoadmapService;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkListRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ public class MemberRoadmapController {
     private final MemberRoadmapService memberRoadmapService;
 
     @GetMapping
-    public ResponseEntity<RoadmapListRes> getMyRoadmapList(@AuthenticationPrincipal Member member) {
+    public ResponseEntity<BookmarkListRes> getMyRoadmapList(@AuthenticationPrincipal Member member) {
 
         log.debug("memberId: {}", member.getUsername());
 
