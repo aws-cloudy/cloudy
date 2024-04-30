@@ -26,8 +26,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -134,6 +133,21 @@ class MemberRoadmapControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createRoadmapReq)))
                 .andExpect(status().isBadRequest())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("로드맵 북마크 번호가 정상적으로 들어왔을 경우 북마크 삭제에 성공하고, 204 NO CONTENT를 반환한다.")
+    void should_204_and_delete_bookmark_success_when_valid_path_variable() throws Exception {
+
+        CreateRoadmapReq createRoadmapReq = new CreateRoadmapReq(dummyRoadmap.getId());
+
+//        mockMemberRoadmapService.deleteById(anyInt())
+
+        mockMvc.perform(delete(BOOKMARK_URI+"/{bookmarkId}", 1)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRoadmapReq)))
+                .andExpect(status().isNoContent())
                 .andDo(print());
     }
 
