@@ -65,6 +65,7 @@ dependencies {
     //security
     // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
     implementation 'org.springframework.boot:spring-boot-starter-security:3.2.4'
+    testImplementation 'org.springframework.security:spring-security-test'
 
     //jwt
     // https://mvnrepository.com/artifact/com.auth0/java-jwt

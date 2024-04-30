@@ -5,11 +5,11 @@ import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.application.MemberRoadmapService;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -17,7 +17,6 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
-@Validated
 @Slf4j
 @RequestMapping("/api/v1/my/roadmaps")
 public class MemberRoadmapController {
@@ -34,12 +33,14 @@ public class MemberRoadmapController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> createMyRoadmap(@AuthenticationPrincipal Member member,
-                                                  @RequestBody CreateRoadmapReq req) {
+    public ResponseEntity<Void> createMyRoadmap(@AuthenticationPrincipal Member member,
+                                                @Valid @RequestBody CreateRoadmapReq req) {
+
+        memberRoadmapService.createRoadmapBookmark(member, req);
 
         return ResponseEntity
                 .status(CREATED)
-                .body(memberRoadmapService.createRoadmapBookmark(member, req));
+                .build();
     }
 
     @DeleteMapping

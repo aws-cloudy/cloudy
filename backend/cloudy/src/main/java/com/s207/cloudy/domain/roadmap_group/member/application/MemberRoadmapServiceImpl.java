@@ -37,15 +37,13 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
 
     @Override
     @Transactional
-    public Integer createRoadmapBookmark(Member member, CreateRoadmapReq req) {
+    public MemberRoadmap createRoadmapBookmark(Member member, CreateRoadmapReq req) {
         Roadmap roadmap = roadmapService.findRoadmapEntity(req.getRoadmapId());
 
         String memberId = member.getUsername();
         MemberRoadmap memberRoadmap = new MemberRoadmap(memberId, roadmap);
 
-        MemberRoadmap saved = memberRoadmapRepository.save(memberRoadmap);
-
-        return saved.getId();
+        return memberRoadmapRepository.save(memberRoadmap);
     }
 
 }
