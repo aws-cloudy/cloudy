@@ -3,6 +3,7 @@ package com.s207.cloudy.domain.roadmap_group.member.dao;
 import com.s207.cloudy.TestQueryDslConfig;
 import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.dummy.DummyMember;
 import com.s207.cloudy.dummy.DummyRoadmap;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -53,17 +55,15 @@ class MemberRoadmapQueryRepositoryTest {
         entityManager.clear();
     }
 
-    @DisplayName("회원별 전체 로드맵 ID 리스트를 정상적으로 조회한다.")
+    @DisplayName("회원별 전체 로드맵 리스트를 정상적으로 조회한다.")
     @Test
     void return_roadmap_list_by_member_id_success() {
-        List<Integer> roadmapIdList = memberRoadmapQueryRepository.getRoadmapIdListByMemberId(dummyMember.getUsername());
-        List<Integer> actualIdList = List.of(dummyRoadmap1.getId(), dummyRoadmap2.getId());
-        System.out.println(roadmapIdList.toString());
+        Page<BookmarkRes> roadmapPageList = memberRoadmapQueryRepository.getRoadmapListByMemberId(dummyMember.getUsername());
+        List<BookmarkRes> roadmapList = roadmapPageList.getContent();
         SoftAssertions.assertSoftly(assertions -> {
-            assertions.assertThat(roadmapIdList).isNotEmpty();
-            assertions.assertThat(roadmapIdList).hasSize(actualIdList.size());
-            assertions.assertThat(roadmapIdList.get(0)).isEqualTo(dummyRoadmap1.getId());
-            assertions.assertThat(roadmapIdList.get(1)).isEqualTo(dummyRoadmap2.getId());
+            assertions.assertThat(roadmapList).isNotNull();
+            assertions.assertThat(roadmapList.get(0).getRoadmapId()).isEqualTo(dummyRoadmap1.getId());
+            assertions.assertThat(roadmapList.get(1).getRoadmapId()).isEqualTo(dummyRoadmap2.getId());
         });
     }
 }

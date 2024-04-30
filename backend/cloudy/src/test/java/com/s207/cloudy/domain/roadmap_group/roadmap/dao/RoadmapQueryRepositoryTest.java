@@ -139,17 +139,5 @@ class RoadmapQueryRepositoryTest {
         });
     }
 
-    @DisplayName("로드맵 아이디 리스트로 로드맵 전체 정보 리스트 조회가 정상적으로 동작한다.")
-    @Test
-    void get_roadmap_list_by_roadmap_id_list() {
-        Page<RoadmapRes> roadmapList =
-                roadmapQueryRepository.getMemberRoadmapList(List.of(dummyRoadmap1.getId(), dummyRoadmap2.getId()));
-        SoftAssertions.assertSoftly(assertions -> {
-            assertions.assertThat(roadmapList).isNotEmpty();
-            assertions.assertThat(roadmapList).hasSize(2);
-            assertions.assertThat(roadmapList.getContent().get(0).getRoadmapId()).isEqualTo(dummyRoadmap1.getId());
-            assertions.assertThat(roadmapList.getContent().get(0).getService()).isEqualTo(dummyRoadmap1.getService());
-        });
-    }
 
 }

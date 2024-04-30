@@ -4,11 +4,11 @@ import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkListRes;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.dummy.DummyMember;
 import com.s207.cloudy.dummy.DummyRoadmap;
 import org.assertj.core.api.Assertions;
@@ -17,6 +17,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
@@ -40,57 +42,35 @@ class MemberRoadmapServiceImplTest {
 
 
     Roadmap dummyRoadmap;
-    RoadmapRes dummyRoadmapRes1;
-    RoadmapRes dummyRoadmapRes2;
-    Member dummyMember;
     MemberRoadmap dummyMemberRoadmap;
+    BookmarkRes dummyBookmarkRes1;
+    BookmarkRes dummyBookmarkRes2;
+    Member dummyMember;
 
     @BeforeEach
     void setUp() {
         dummyRoadmap = DummyRoadmap.getDummyRoadmap();
-        dummyRoadmapRes1 = DummyRoadmap.getDummyRoadmapRes(dummyRoadmap);
-        dummyRoadmapRes2 = DummyRoadmap.getDummyRoadmapRes(dummyRoadmap);
         dummyMember = DummyMember.getDummyMember();
         dummyMemberRoadmap = DummyRoadmap.getDummyMemberRoadmap(dummyMember, dummyRoadmap);
-    }
-
-    @Test
-    @DisplayName("회원이 북마크한 로드맵의 아이디 리스트를 정상적으로 조회한다.")
-    void return_roadmap_list_id_by_member_success() {
-
-        List<Integer> roadmapIdList = List.of(dummyRoadmapRes1.getRoadmapId(), dummyRoadmapRes2.getRoadmapId());
-
-        // given
-        given(mockMemberRoadmapQueryRepository.getRoadmapIdListByMemberId(anyString()))
-                .willReturn(roadmapIdList);
-
-        // when
-        List<Integer> actualRoadmaps = memberRoadmapService.findRoadmapIdList(dummyMember.getUsername());
-
-        // then
-        Assertions.assertThat(actualRoadmaps).isNotNull();
-        Assertions.assertThat(actualRoadmaps).hasSize(roadmapIdList.size());
+        dummyBookmarkRes1 = DummyRoadmap.getBookmarkRes(dummyMemberRoadmap);
+        dummyBookmarkRes2 = DummyRoadmap.getBookmarkRes(dummyMemberRoadmap);
     }
 
     @Test
     @DisplayName("회원이 북마크한 로드맵 리스트를 정상적으로 조회한다.")
     void return_roadmap_list_by_member_success() {
 
-        List<Integer> roadmapIdList = List.of(dummyRoadmapRes1.getRoadmapId(), dummyRoadmapRes2.getRoadmapId());
-        List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);
-
+        List<BookmarkRes> dummyList = List.of(dummyBookmarkRes1, dummyBookmarkRes2);
         // given
-        given(mockMemberRoadmapQueryRepository.getRoadmapIdListByMemberId(anyString()))
-                .willReturn(roadmapIdList);
-        given(mockRoadmapService.findMemberRoadmapList(anyList()))
-                .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
+        given(mockMemberRoadmapQueryRepository.getRoadmapListByMemberId(anyString()))
+                .willReturn(new PageImpl<>(dummyList, PageRequest.of(0, 10), dummyList.size()));
 
         // when
-        RoadmapListRes actualRoadmaps = memberRoadmapService.findRoadmapListByMember(dummyMember);
+        BookmarkListRes actualRoadmaps = memberRoadmapService.findRoadmapListByMember(dummyMember);
 
         // then
         Assertions.assertThat(actualRoadmaps).isNotNull();
-        Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(roadmapIdList.size());
+        Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(dummyList.size());
     }
 
     @Test

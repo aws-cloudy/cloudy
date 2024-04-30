@@ -98,24 +98,5 @@ class RoadmapServiceImplTest {
                 .hasMessage(RoadmapNotFoundException.MESSAGE);
     }
 
-    @Test
-    @DisplayName("로드맵 id 리스트로 전체 로드맵 리스트를 정상적으로 조회한다.")
-    void return_roadmap_list_by_roadmap_id_list_success() {
-        List<Integer> roadmapIdList = List.of(dummyRoadmapRes1.getRoadmapId(), dummyRoadmapRes2.getRoadmapId());
-        List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);
-
-        // given
-        given(mockRoadmapQueryRepository.getMemberRoadmapList(anyList()))
-                .willReturn(new PageImpl<>(dummyList, PageRequest.of(0, 10), dummyList.size()));
-
-        // when
-        RoadmapListRes actualRoadmaps = roadmapService.findMemberRoadmapList(roadmapIdList);
-
-        // then
-        Assertions.assertThat(actualRoadmaps).isNotNull();
-        Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(dummyList.size());
-    }
-
-
 
 }
