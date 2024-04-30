@@ -2,6 +2,7 @@ package com.s207.cloudy.domain.roadmap_group.member.application;
 
 import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
+import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
@@ -32,6 +33,9 @@ class MemberRoadmapServiceImplTest {
 
     @MockBean
     MemberRoadmapQueryRepository mockMemberRoadmapQueryRepository;
+
+    @MockBean
+    MemberRoadmapRepository memberRoadmapRepository;
 
 
     Roadmap dummyRoadmap;
@@ -85,5 +89,7 @@ class MemberRoadmapServiceImplTest {
         Assertions.assertThat(actualRoadmaps).isNotNull();
         Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(roadmapIdList.size());
     }
+
+
 
 }
