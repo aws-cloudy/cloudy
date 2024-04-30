@@ -11,4 +11,6 @@ public interface MemberRoadmapService {
     MemberRoadmap createRoadmapBookmark(Member member, CreateRoadmapReq req);
 
     void deleteById(int memberRoadmapId);
+
+    MemberRoadmap findMemberRoadmapEntity(int memberRoadmapId);
 }

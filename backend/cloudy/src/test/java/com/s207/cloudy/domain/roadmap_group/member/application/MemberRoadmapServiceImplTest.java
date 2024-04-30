@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
@@ -94,5 +95,34 @@ class MemberRoadmapServiceImplTest {
         Assertions.assertThat(actualRoadmapBookmark.getRoadmap()).isEqualTo(dummyRoadmap);
     }
 
+    @Test
+    @DisplayName("북마크를 정상적으로 삭제한다.")
+    void delete_roadmap_bookmark_success() {
 
+        // given
+        given(mockMemberRoadmapRepository.findById(anyInt()))
+                .willReturn(Optional.of(dummyMemberRoadmap));
+
+        // when
+        memberRoadmapService.deleteById(1);
+
+        // then
+        Assertions.assertThatNoException();
+    }
+
+    @Test
+    @DisplayName("회원-로드맵 엔터티를 정상적으로 조회한다.")
+    void return_member_roadmap_entity_success() {
+
+        // given
+        given(mockMemberRoadmapRepository.findById(anyInt()))
+                .willReturn(Optional.of(dummyMemberRoadmap));
+
+        // when
+        MemberRoadmap actualMemberRoadmap = memberRoadmapService.findMemberRoadmapEntity(1);
+
+        // then
+        Assertions.assertThat(actualMemberRoadmap).isNotNull();
+        Assertions.assertThat(actualMemberRoadmap.getId()).isEqualTo(dummyMemberRoadmap.getId());
+    }
 }

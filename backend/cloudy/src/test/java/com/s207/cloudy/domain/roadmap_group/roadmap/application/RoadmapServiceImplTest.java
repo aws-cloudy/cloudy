@@ -98,5 +98,4 @@ class RoadmapServiceImplTest {
                 .hasMessage(RoadmapNotFoundException.MESSAGE);
     }
 
-
 }

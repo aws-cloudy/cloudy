@@ -142,9 +142,7 @@ class MemberRoadmapControllerTest {
 
         CreateRoadmapReq createRoadmapReq = new CreateRoadmapReq(dummyRoadmap.getId());
 
-//        mockMemberRoadmapService.deleteById(anyInt())
-
-        mockMvc.perform(delete(BOOKMARK_URI+"/{bookmarkId}", 1)
+        mockMvc.perform(delete(BOOKMARK_URI + "/{bookmarkId}", 1)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createRoadmapReq)))
                 .andExpect(status().isNoContent())

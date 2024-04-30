@@ -51,6 +51,7 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
         memberRoadmapRepository.delete(memberRoadmap);
     }
 
+    @Override
     public MemberRoadmap findMemberRoadmapEntity(int memberRoadmapId) {
         return memberRoadmapRepository.findById(memberRoadmapId)
                 .orElseThrow(MemberRoadmapNotFoundException::new);
