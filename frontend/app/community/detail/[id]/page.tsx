@@ -6,6 +6,7 @@ import { IQuestion, IQuestionAnswer, IQuestionDetail } from '@/types/community'
 import { ICommunityDetailPage } from '@/types/communityProps'
 import axios from 'axios'
 import styles from './page.module.scss'
+import { getUser } from '@/utils/getUser'
 
 const getQuestion = async (id: string) => {
   const res = await axios.get(`${commuURL}/question/detail`, { params: { id } })
@@ -16,8 +17,19 @@ async function CommunityDetailPage({ params: { id } }: ICommunityDetailPage) {
   const question = await getQuestion(id)
   if (!question.id) return <div>삭제되었거나 존재하지 않는 게시글입니다.</div>
   const { id: questionId, memberId, title, hashtags, desc, createdAt, memberName, answers, checkedId, hit } = question
-  const Q: IQuestionDetail = { id: questionId, memberId, title, hashtags, desc, createdAt, memberName, hit }
-  const A: IQuestionAnswer = { id: questionId, answers, checkedId }
+  const user = await getUser()
+  const Q: IQuestionDetail = {
+    id: questionId,
+    memberId,
+    title,
+    hashtags,
+    desc,
+    createdAt,
+    memberName,
+    hit,
+    authId: user?.id,
+  }
+  const A: IQuestionAnswer = { id: questionId, answers, checkedId, authId: user?.id, isWriter: user?.id === memberId }
 
   return (
     <Layout>

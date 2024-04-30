@@ -1,17 +1,4 @@
-import { NextResponse } from 'next/server'
-import prisma from './client'
-
-export async function fetchHashtags() {
-  try {
-    const data = await prisma.hashtag.findMany({
-      orderBy: [{ title: 'asc' }],
-    })
-
-    return data
-  } catch (e) {
-    console.log('An error occured during fetching hashtags...')
-  }
-}
+import prisma from '../client'
 
 export async function fetchQuestionDetail(id: number) {
   try {

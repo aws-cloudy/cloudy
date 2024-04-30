@@ -6,7 +6,8 @@ import { FiMessageCircle } from 'react-icons/fi'
 import { useRouter } from 'next/navigation'
 
 function CommunityListItem({ question }: { question: ICommunityListItem }) {
-  const desc = question.desc.length > 120 ? question.desc.substring(0, 120) + '...' : question.desc
+  const descWithoutImage = question.desc.replace(/!\[alt text]\(.+\)/g, '')
+  let desc = descWithoutImage.length > 120 ? descWithoutImage.substring(0, 120) + '...' : descWithoutImage
   const router = useRouter()
   const handleClick = () => {
     router.push(`/community/detail/${question.id}`)

@@ -1,11 +1,11 @@
 'use server'
 
-import prisma from './client'
+import prisma from '../client'
 import { z } from 'zod'
-import { CreateAnswer, CreateHashtag, CreateQH, CreateQuestion } from './schemas'
+import { CreateHashtag, CreateQH } from '../schemas'
 import { Prisma } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
-import { IAnswer, IHashtag, IQuestion } from '@/types/community'
+import { IHashtag } from '@/types/community'
 
 export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
   const rawHash: Prisma.Prisma__HashtagClient<
@@ -63,39 +63,6 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
   return response
 }
 
-export async function createQuestion(values: z.infer<typeof CreateQuestion>) {
-  const response: { error?: string; question?: IQuestion } = {}
-
-  const validated = CreateQuestion.safeParse(values)
-  if (!validated.success) {
-    console.log(validated.error.flatten().fieldErrors)
-    response.error = 'question: invalid fields'
-    return response
-  }
-
-  const { memberId, memberName, title, desc } = validated.data
-
-  try {
-    const question = await prisma.question.create({
-      data: {
-        memberId,
-        memberName,
-        title,
-        desc,
-      },
-    })
-
-    if (question) {
-      response.question = question
-    }
-  } catch (e) {
-    response.error = 'question:an error occured while creating....'
-    return response
-  }
-
-  return response
-}
-
 export async function createQH(values: z.infer<typeof CreateQH>[]) {
   let response: { error?: string } = {}
   let data: z.infer<typeof CreateQH>[] = []
@@ -121,37 +88,12 @@ export async function createQH(values: z.infer<typeof CreateQH>[]) {
   return response
 }
 
-export async function createAnswer(values: z.infer<typeof CreateAnswer>) {
-  const response: { error?: string; answer?: IAnswer } = {}
-  const validated = CreateAnswer.safeParse(values)
-
-  if (!validated.success) {
-    response.error = 'answer: invalid fields'
-    return response
-  }
-  const { postId, memberId, desc, memberName } = validated.data
-
-  const question = await prisma.question.findUnique({ where: { id: postId } })
-  if (!question) {
-    response.error = 'answer: question not found '
-    return response
-  }
-
-  try {
-    const answer = await prisma.answer.create({
-      data: {
-        memberId,
-        memberName,
-        desc,
-        questionId: question.id,
+export async function deleteHashtag() {
+  return await prisma.hashtag.deleteMany({
+    where: {
+      questions: {
+        none: {},
       },
-    })
-
-    response.answer = answer
-    return response
-  } catch (e) {
-    console.log(e)
-    response.error = 'answer: an error occured while creating....'
-    return response
-  }
+    },
+  })
 }

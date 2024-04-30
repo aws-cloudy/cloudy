@@ -5,3 +5,9 @@
   height: 100%;
   display: flex;
 }
+
+@media screen and (max-width: $tablet) {
+  .inner {
+    flex-direction: column;
+  }
+}

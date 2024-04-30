@@ -13,7 +13,13 @@ function DetailContent({ question }: { question: IQuestionDetail }) {
           {question.hashtags?.map(each => <span key={each.hashtag.id}>#{each.hashtag.title}</span>)}
         </div>
         <div className={styles.title}>{question.title}</div>
-        <DetailContentSubtitle id={question.id} user={question.memberName} createdAt={question.createdAt} />
+        <DetailContentSubtitle
+          id={question.id}
+          author={question.memberName}
+          authorId={question.memberId}
+          createdAt={question.createdAt}
+          authId={question.authId}
+        />
       </div>
       <DetailContentDesc desc={question.desc} />
     </div>
