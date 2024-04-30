@@ -38,8 +38,8 @@ class RoadmapCommentRepositoryTest {
         entityManager.persist(dummyRoadmap1);
 
 
-        Member member1 = Member.builder().userId("test").userName("testName").build();
-        Member member2 = Member.builder().userId("test1").userName("testName1").build();
+        Member member1 = Member.builder().id("test").name("testName").build();
+        Member member2 = Member.builder().id("test1").name("testName1").build();
 
         entityManager.persist(member1);
         entityManager.persist(member2);
