@@ -19,7 +19,13 @@ const handler = NextAuth({
     // 토큰을 세션에 추가하는 콜백
     async jwt({ token, account }: any) {
       if (account) {
-        token.accessToken = account.access_token
+        token.account = account
+        // account의 provider가 Google일 경우 id_token값을 사용
+        if (account.provider === 'google') {
+          token.accessToken = account.id_token
+        } else {
+          token.accessToken = account.access_token
+        }
         token.id = account.providerAccountId
       }
       return token
