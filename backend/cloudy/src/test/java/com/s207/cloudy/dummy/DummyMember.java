@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class DummyMember {
 
     public static Member getDummyMember() {
-        return new Member("id", "password", new ArrayList<>());
+        return new Member("id", "password", "name");
     }
 
 }
