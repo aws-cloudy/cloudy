@@ -5,6 +5,7 @@ import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryReposit
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
+import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapNotFoundException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
@@ -46,4 +47,14 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
         return memberRoadmapRepository.save(memberRoadmap);
     }
 
+    @Override
+    public void deleteById(int memberRoadmapId) {
+        MemberRoadmap memberRoadmap = findMemberRoadmapEntity(memberRoadmapId);
+        memberRoadmapRepository.delete(memberRoadmap);
+    }
+
+    public MemberRoadmap findMemberRoadmapEntity(int memberRoadmapId) {
+        return memberRoadmapRepository.findById(memberRoadmapId)
+                .orElseThrow(MemberRoadmapNotFoundException::new);
+    }
 }

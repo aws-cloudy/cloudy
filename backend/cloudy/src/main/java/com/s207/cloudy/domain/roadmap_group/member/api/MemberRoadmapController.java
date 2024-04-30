@@ -12,13 +12,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.*;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1/my/roadmaps")
+@RequestMapping("/api/v1/bookmarks")
 public class MemberRoadmapController {
     private final MemberRoadmapService memberRoadmapService;
 
@@ -43,11 +42,14 @@ public class MemberRoadmapController {
                 .build();
     }
 
-    @DeleteMapping
-    public ResponseEntity<String> deleteMyRoadMap() {
+    @DeleteMapping("/{bookmarkId}")
+    public ResponseEntity<Void> deleteMyRoadMap(@PathVariable int bookmarkId) {
 
+        memberRoadmapService.deleteById(bookmarkId);
 
-        return ResponseEntity.ok("ok");
+        return ResponseEntity
+                .status(NO_CONTENT)
+                .build();
     }
 
 

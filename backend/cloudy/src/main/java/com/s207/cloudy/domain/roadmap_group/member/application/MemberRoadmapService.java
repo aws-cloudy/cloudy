@@ -13,4 +13,6 @@ public interface MemberRoadmapService {
     List<Integer> findRoadmapIdList(String memberId);
 
     MemberRoadmap createRoadmapBookmark(Member member, CreateRoadmapReq req);
+
+    void deleteById(int memberRoadmapId);
 }

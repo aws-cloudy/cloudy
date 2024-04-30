@@ -33,8 +33,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(controllers = MemberRoadmapController.class,
-        excludeAutoConfiguration = SecurityAutoConfiguration .class)
+        excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class MemberRoadmapControllerTest {
+    static String BOOKMARK_URI = "/api/v1/my/roadmaps";
 
 
     @Autowired
@@ -78,7 +79,7 @@ class MemberRoadmapControllerTest {
         given(mockMemberRoadmapService.findRoadmapListByMember(any(Member.class)))
                 .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
 
-        mockMvc.perform(get("/api/v1/my/roadmaps")
+        mockMvc.perform(get(BOOKMARK_URI)
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -111,7 +112,7 @@ class MemberRoadmapControllerTest {
         given(mockMemberRoadmapService.createRoadmapBookmark(any(Member.class), any(CreateRoadmapReq.class)))
                 .willReturn(dummyMemberRoadmap);
 
-        mockMvc.perform(post("/api/v1/my/roadmaps")
+        mockMvc.perform(post(BOOKMARK_URI)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(createRoadmapReq)))
                 .andExpect(status().isCreated())
