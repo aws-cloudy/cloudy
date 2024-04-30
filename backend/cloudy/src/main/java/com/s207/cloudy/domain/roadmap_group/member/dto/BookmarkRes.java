@@ -9,6 +9,13 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
-public class RoadmapRes {
+public class BookmarkRes {
+    private int bookmarkId;
     private int roadmapId;
+    private String title;
+    private String thumbnail;
+    private String service;
+    private String job;
+    private String summary;
+    private long commentsCnt;
 }
