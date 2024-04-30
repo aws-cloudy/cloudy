@@ -3,3 +3,8 @@
 .section {
   display: flex;
 }
+
+.inner {
+  width: 100%;
+  overflow-x: hidden;
+}
