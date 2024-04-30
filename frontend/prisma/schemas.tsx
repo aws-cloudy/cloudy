@@ -12,7 +12,7 @@ export const CreateHashtag = HashSchema
 
 export const QuestionSchema = z.object({
   id: z.number(),
-  memberId: z.number(),
+  memberId: z.string(),
   memberName: z.string(),
   title: z
     .string()
@@ -27,6 +27,8 @@ export const QuestionSchema = z.object({
 })
 
 export const CreateQuestion = QuestionSchema.omit({ id: true, createdAt: true, checkedId: true })
+export const UpdateQuestion = QuestionSchema.pick({ id: true })
+export const DeleteQuestion = QuestionSchema.pick({ id: true })
 
 export const QHSchema = z.object({
   questionId: z.number(),
@@ -37,7 +39,7 @@ export const CreateQH = QHSchema
 
 export const AnswerSchema = z.object({
   id: z.number(),
-  memberId: z.number(),
+  memberId: z.string(),
   memberName: z.string(),
   createdAt: z.date(),
   postId: z.number(),
@@ -48,3 +50,4 @@ export const AnswerSchema = z.object({
 })
 
 export const CreateAnswer = AnswerSchema.omit({ id: true, createdAt: true })
+export const DeleteAnswer = AnswerSchema.pick({ id: true })

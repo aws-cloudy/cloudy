@@ -15,3 +15,14 @@
   margin: 10px 0;
   border-bottom: 1px solid $gray6;
 }
+
+@media screen and (max-width: $tablet) {
+  .container {
+    width: 100%;
+  }
+
+  .inner {
+    margin: 0;
+    padding: 10px;
+  }
+}

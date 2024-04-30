@@ -4,14 +4,22 @@ import styles from './DetailAnswer.module.scss'
 import DetailAnswerITem from '../DetailAnswerITem'
 
 function DetailAnswer({ answer }: { answer: IQuestionAnswer }) {
-  const { id, answers, checkedId } = answer
+  const { id, answers, checkedId, authId, isWriter } = answer
 
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
+        <DetailAnswerInput id={id} authId={authId} />
         <p className={styles.count}>댓글 {answers?.length}개</p>
-        <DetailAnswerInput id={id} />
-        {answers?.map(answer => <DetailAnswerITem key={answer.id} ans={answer} isChecked={answer.id === checkedId} />)}
+        {answers?.map(answer => (
+          <DetailAnswerITem
+            key={answer.id}
+            ans={answer}
+            isChecked={answer.id === checkedId}
+            authId={authId}
+            isWriter={isWriter}
+          />
+        ))}
       </div>
     </div>
   )
