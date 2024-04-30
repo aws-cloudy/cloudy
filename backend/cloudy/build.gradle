@@ -86,20 +86,25 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.required = true
-    }
-}
 test {
     // finalizedBy : 이(test) 작업에 대해 주어진 종료자 작업을 추가
     finalizedBy jacocoTestReport // test 작업이 끝나고 jacocoTestReport를 실행
     useJUnitPlatform()
 }
+
+
 jacocoTestReport {
-    // dependsOn : 이 작업에 지정된 종속성을 추가
-    dependsOn test // jacocoTestReport 에 test라는 종속성을 추가
-    finalizedBy 'jacocoTestCoverageVerification'
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = false
+    }
+}
+
+
+sonarqube {
+    properties {
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacocoTestReport.xml"
+    }
 }

@@ -2,8 +2,6 @@ package com.s207.cloudy.dummy;
 
 import com.s207.cloudy.domain.members.entity.Member;
 
-import java.util.ArrayList;
-
 public class DummyMember {
 
     public static Member getDummyMember() {
