@@ -17,7 +17,9 @@ function CommunityListItem({ question }: { question: ICommunityListItem }) {
     <div className={styles.container} onClick={() => handleClick()}>
       <div className={styles.titleBox}>
         <div className={styles.titleBoxInner}>
-          <h2 className={styles.title}>{question.title}</h2>
+          <h2 className={styles.title}>
+            {question.title} {question.id}
+          </h2>
           <CommunityListItemBadge checked={Boolean(question.checkedId)} />
         </div>
         <div className={styles.answers}>

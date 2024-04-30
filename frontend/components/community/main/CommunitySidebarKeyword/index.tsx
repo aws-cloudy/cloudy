@@ -16,7 +16,12 @@ function CommunitySidebarKeyword() {
   useEffect(() => {
     const hashes = async () => {
       const res = await axios.get('http://localhost:3000/api/hashtag')
-      setKeywords(res.data.hashtags)
+      const selectedTitle = selected.map(ea => ea.title)
+      setKeywords(
+        res.data.hashtags.filter((e: IHashtag) => {
+          return selectedTitle.indexOf(e.title) === -1
+        }),
+      )
       setIsFetching(false)
     }
     hashes()
