@@ -39,7 +39,7 @@ const CommunityCreatepage = () => {
     })
 
     const res = await axios.post(`${commuURL}/question/create`, { tags, title, desc })
-    // router.push(`/community/detail/${res.data.question.id}`)
+    router.push(`/community/detail/${res.data.question.id}`)
   }
 
   useEffect(() => {

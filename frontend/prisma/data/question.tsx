@@ -2,9 +2,26 @@ import { IQuestion } from '@/types/community'
 import prisma from '../client'
 
 export async function fetchQuestions(tags: string[], searchword: string | null, lastId: number) {
-  const response: { error?: string; questions: IQuestion[] } = { questions: [] }
+  const response: { error?: string; questions: IQuestion[]; count: number } = { questions: [], count: 0 }
 
   const isFirstPage = !Boolean(lastId)
+
+  const where = {
+    AND: [
+      tags.length > 0
+        ? {
+            hashtags: {
+              some: {
+                hashtag: {
+                  title: { in: tags },
+                },
+              },
+            },
+          }
+        : {},
+      searchword ? { title: { contains: searchword } } : {},
+    ],
+  }
 
   const pageCondition = {
     skip: 1,
@@ -13,25 +30,16 @@ export async function fetchQuestions(tags: string[], searchword: string | null, 
     },
   }
 
+  const count = await prisma.question.count({ where })
+
+  if (count) {
+    response.count = count
+  }
+
   try {
     const questionList = await prisma.question.findMany({
       orderBy: [{ id: 'desc' }],
-      where: {
-        AND: [
-          tags.length > 0
-            ? {
-                hashtags: {
-                  some: {
-                    hashtag: {
-                      title: { in: tags },
-                    },
-                  },
-                },
-              }
-            : {},
-          searchword ? { title: { contains: searchword } } : {},
-        ],
-      },
+      where,
       include: {
         _count: {
           select: { answers: true },
@@ -46,7 +54,6 @@ export async function fetchQuestions(tags: string[], searchword: string | null, 
       ...(!isFirstPage && pageCondition),
     })
 
-    console.log(questionList)
     if (questionList) {
       response.questions = questionList
     }

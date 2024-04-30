@@ -27,6 +27,7 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
       return
     }
     const { id, title } = validated.data
+    const lowerTitle = title.toLowerCase()
 
     if (id) {
       try {
@@ -44,9 +45,9 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
     } else {
       try {
         const hash = prisma.hashtag.upsert({
-          where: { title },
+          where: { title: lowerTitle },
           update: {},
-          create: { title },
+          create: { title: lowerTitle },
         })
         rawHash.push(hash)
       } catch (e) {

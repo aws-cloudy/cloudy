@@ -16,6 +16,19 @@
   border-bottom: 1px solid $gray6;
 }
 
+.answers {
+  min-height: 200px;
+}
+
+.nodata {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $gray8;
+}
+
 @media screen and (max-width: $tablet) {
   .container {
     width: 100%;
