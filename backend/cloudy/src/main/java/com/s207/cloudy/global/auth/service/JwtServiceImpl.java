@@ -15,11 +15,7 @@ import com.s207.cloudy.global.auth.util.RsaUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
@@ -67,12 +63,7 @@ public class JwtServiceImpl implements JwtService {
                 .verify(token)
                 .getClaim(SUB)
                 .asString();
-
         generateAuthentication(userId);
-
-
-
-
 
         return true;
     }
@@ -112,7 +103,7 @@ public class JwtServiceImpl implements JwtService {
     private void generateAuthentication(String userId){
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        Member member = new Member(userId,userId, authorities);
+        Member member = new Member(userId,userId);
         Authentication authentication = new UsernamePasswordAuthenticationToken(member, null,
                 authoritiesMapper.mapAuthorities(member.getAuthorities()));
         // Authentication 객체를 SecurityContext에 설정

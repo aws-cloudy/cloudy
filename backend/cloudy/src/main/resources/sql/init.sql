@@ -33,6 +33,11 @@ CREATE TABLE `learning_roadmap` (
 );
 
 
+create TABLE `member` (
+                          `id` VARCHAR(255) NOT  NULL,
+                          `name` VARCHAR(50) NOT NULL
+    );
+
 
 
 ALTER TABLE `roadmap_comment` ADD CONSTRAINT `PK_ROADMAP_COMMENT` PRIMARY KEY (
