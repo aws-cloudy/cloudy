@@ -1,5 +1,12 @@
 @import '@/styles/theme.scss';
 
+.section {
+  position: sticky;
+  top: 70px;
+  padding-top: 30px;
+  background-color: $white;
+}
+
 .counts {
   margin-bottom: 16px;
 }

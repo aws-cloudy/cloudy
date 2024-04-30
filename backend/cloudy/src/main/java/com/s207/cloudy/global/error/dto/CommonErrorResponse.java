@@ -2,11 +2,8 @@ package com.s207.cloudy.global.error.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.Builder;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.ErrorResponse;
 
 import java.util.Map;
 

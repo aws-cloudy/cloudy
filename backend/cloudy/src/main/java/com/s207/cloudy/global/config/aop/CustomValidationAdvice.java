@@ -17,12 +17,9 @@ import java.util.Map;
 @Aspect
 public class CustomValidationAdvice {
 
-//    @Pointcut("execution(* com.s207.cloudy.domain.learning.controller.LearningController.getLearningList(..))")
-//    public void learningMapping() {
-//    }
-
     @Pointcut("@annotation(org.springframework.web.bind.annotation.GetMapping)")
     public void getMapping() {
+        // This method serves as a pointcut declaration without any additional logic.
     }
 
 
@@ -47,6 +44,6 @@ public class CustomValidationAdvice {
                 }
             }
         }
-        return proceedingJoinPoint.proceed(); // 정상적으로 해당 메서드를 실행해
+        return proceedingJoinPoint.proceed(); // 정상적으로 해당 메서드를 실행
     }
 }

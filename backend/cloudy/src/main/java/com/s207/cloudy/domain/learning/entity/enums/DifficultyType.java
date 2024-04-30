@@ -28,6 +28,6 @@ public enum DifficultyType {
     }
 
     public static DifficultyType getByCode(String code) {
-        return Optional.ofNullable(CODE_MAP.get(code)).orElseThrow(() -> new CustomValidationException());
+        return Optional.ofNullable(CODE_MAP.get(code)).orElseThrow(CustomValidationException::new);
     }
 }

@@ -40,6 +40,17 @@
   font-size: 1em;
 }
 
+.loginButton {
+  background-color: transparent;
+  border: 0;
+  color: $black1;
+  margin-right: 27px;
+  font-weight: 500;
+  height: 24px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
 .RightWrap {
   display: flex;
   margin-left: auto;
@@ -53,7 +64,7 @@
   display: flex;
   position: relative;
   width: 100%;
-  padding: 0 10%;
+  padding: 0 5%;
   height: 60px;
   margin: 0 auto;
   align-items: center;
@@ -81,6 +92,15 @@
   padding: 10px;
 }
 
+.mobileLoginButton {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
+
 @media screen and (max-width: $tablet) {
   .header {
     display: none;
@@ -92,5 +112,8 @@
     width: 100%;
     position: fixed;
     z-index: 9999;
+  }
+  .MenuIconWrap {
+    right: 5%;
   }
 }

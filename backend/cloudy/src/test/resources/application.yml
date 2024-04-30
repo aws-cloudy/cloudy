@@ -1,14 +1,14 @@
-spring:
-  datasource :
-    url: jdbc:h2:mem:test
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    database-platform: org.hibernate.dialect.H2Dialect
+#spring:
+#  datasource :
+#    url: jdbc:h2:mem:test
+#    driverClassName: org.h2.Driver
+#    username: sa
+#    password:
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#    database-platform: org.hibernate.dialect.H2Dialect
 
 cognito:
   iss: https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_J5ofonWXb

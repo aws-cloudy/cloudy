@@ -29,6 +29,6 @@ public class RoadmapController {
 
         return ResponseEntity
                 .status(OK)
-                .body(roadmapService.getRoadmapList(job, service, query, pageable));
+                .body(roadmapService.findRoadmapList(job, service, query, pageable));
     }
 }

@@ -38,6 +38,17 @@
   font-size: 1em;
 }
 
+.loginButton {
+  background-color: transparent;
+  border: 0;
+  color: $white;
+  margin-right: 27px;
+  font-weight: 500;
+  height: 24px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
 .RightWrap {
   display: flex;
   margin-left: auto;
@@ -50,9 +61,10 @@
 .headerMobileWrap {
   display: flex;
   position: relative;
-  width: 80%;
+  width: 100%;
   height: 60px;
   margin: 0 auto;
+  padding: 0 5%;
   align-items: center;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -81,6 +93,16 @@
   color: $white;
 }
 
+.mobileLoginButton {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  color: $white;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
+
 @media screen and (max-width: $tablet) {
   .header {
     display: none;
@@ -92,5 +114,8 @@
     width: 100%;
     position: fixed;
     z-index: 9999;
+  }
+  .MenuIconWrap {
+    right: 5%;
   }
 }

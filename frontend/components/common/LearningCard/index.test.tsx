@@ -1,10 +1,10 @@
-import { ILearningItem } from '@/types/learning'
+import { ILearningCard } from '@/types/learning'
 import { fireEvent, render, screen } from '@testing-library/react'
-import LearningItem from '.'
+import LearningCard from '.'
 import { getDifficulty } from '@/utils/getDifficulty'
 
-describe('LearningItem', () => {
-  const mockItem: ILearningItem = {
+describe('LearningCard', () => {
+  const mockItem: ILearningCard = {
     id: 0,
     thumbnail: '/img/learning/1.png',
     title: 'test title',
@@ -19,7 +19,7 @@ describe('LearningItem', () => {
   }
 
   it('더 알아보기 toggle이 잘 작동하는지 확인합니다', () => {
-    render(<LearningItem item={mockItem} layout="grid" />)
+    render(<LearningCard item={mockItem} layout="grid" />)
 
     // 처음에 요약이 잘 숨겨져 있는지 확인
     expect(screen.queryByText('test summary')).not.toBeInTheDocument()

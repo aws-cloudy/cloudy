@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { MdOutlineLanguage } from 'react-icons/md'
 import { MdMenu } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -76,9 +76,9 @@ const Header = () => {
                 {session.user?.name}님
               </Link> // 세션에 사용자 이름이 있다면 표시
             ) : (
-              <Link href="/login" className={style.menuItem}>
+              <button onClick={() => signIn('cognito', { callbackUrl: '/' })} className={style.loginButton}>
                 로그인
-              </Link>
+              </button>
             )}
             <MdOutlineLanguage size={24} className="languageIcon" color={isDark ? '#fff' : ' #000'} />
           </div>
@@ -106,9 +106,15 @@ const Header = () => {
               <Link href="/community" className={style.mobileMenuItem}>
                 커뮤니티
               </Link>
-              <Link href="/community" className={style.mobileMenuItem}>
-                로그인
-              </Link>
+              {session ? (
+                <Link href="/mypage" className={style.mobileMenuItem}>
+                  마이페이지
+                </Link> // 세션에 사용자 이름이 있다면 표시
+              ) : (
+                <button onClick={() => signIn('cognito', { callbackUrl: '/' })} className={style.mobileLoginButton}>
+                  로그인
+                </button>
+              )}
             </div>
           )}
         </header>

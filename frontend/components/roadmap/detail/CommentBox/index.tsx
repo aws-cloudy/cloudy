@@ -23,7 +23,7 @@ const CommentBox = ({ comments }: any) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.section}>
       <div className={styles.counts}>댓글 {comments.length}개</div>
       <div className={styles.inputContainer}>
         <input

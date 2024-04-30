@@ -30,7 +30,7 @@ export interface IService {
   name: string
 }
 
-export interface ILearningItem {
+export interface ILearningCard {
   id: number
   title: string
   difficulty: string

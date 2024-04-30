@@ -2,8 +2,6 @@ package com.s207.cloudy.domain.learning.repository.impl;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Expression;
-import com.querydsl.core.types.Order;
-import com.querydsl.core.types.OrderSpecifier;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
@@ -97,7 +95,7 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
 
         // 페이지네이션 설정
         jpaQuery.orderBy(learning.id.asc())
-                .offset(Long.valueOf((page - 1) * pageSize))
+                .offset((long)((page - 1) * pageSize))
                 .limit(pageSize);
 
         return jpaQuery.fetch();

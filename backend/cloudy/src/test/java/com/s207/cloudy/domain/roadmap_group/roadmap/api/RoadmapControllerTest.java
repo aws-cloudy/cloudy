@@ -62,7 +62,7 @@ class RoadmapControllerTest {
 
         List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);
 
-        given(mockRoadmapService.getRoadmapList(any(), any(), any(), any(Pageable.class)))
+        given(mockRoadmapService.findRoadmapList(any(), any(), any(), any(Pageable.class)))
                 .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
 
         mockMvc.perform(get("/api/v1/roadmaps?page=1&size=1")
@@ -95,7 +95,7 @@ class RoadmapControllerTest {
 
         List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);
 
-        given(mockRoadmapService.getRoadmapList(any(), any(), any(), any()))
+        given(mockRoadmapService.findRoadmapList(any(), any(), any(), any()))
                 .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
 
         mockMvc.perform(get("/api/v1/roadmaps")
@@ -130,7 +130,7 @@ class RoadmapControllerTest {
 
         int page = -1;
 
-        given(mockRoadmapService.getRoadmapList(any(), any(), any(), any(Pageable.class)))
+        given(mockRoadmapService.findRoadmapList(any(), any(), any(), any(Pageable.class)))
                 .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
 
         mockMvc.perform(get("/api/v1/roadmaps?page={pageSize}", page)
@@ -153,7 +153,7 @@ class RoadmapControllerTest {
 
         int pageSize = -1;
 
-        given(mockRoadmapService.getRoadmapList(any(), any(), any(), any(Pageable.class)))
+        given(mockRoadmapService.findRoadmapList(any(), any(), any(), any(Pageable.class)))
                 .willReturn(new RoadmapListRes(dummyList, dummyList.size()));
 
         mockMvc.perform(get("/api/v1/roadmaps?size={pageSize}", pageSize)
