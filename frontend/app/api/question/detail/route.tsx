@@ -1,4 +1,4 @@
-import { fetchQuestionDetail } from '@/prisma/data'
+import { fetchQuestionDetail } from '@/prisma/data/question'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
