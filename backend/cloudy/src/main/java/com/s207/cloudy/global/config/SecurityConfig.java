@@ -1,7 +1,10 @@
 package com.s207.cloudy.global.config;
 
 
+import com.s207.cloudy.domain.members.application.MemberService;
+import com.s207.cloudy.domain.members.dao.MemberRepository;
 import com.s207.cloudy.global.auth.filter.JwtAuthenticationFilter;
+import com.s207.cloudy.global.auth.filter.MemberRegistryFilter;
 import com.s207.cloudy.global.auth.service.JwtService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +25,8 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.List;
+
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 @Configuration
@@ -30,6 +35,8 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 public class SecurityConfig {
 
     private final JwtService jwtService;
+    private final MemberService memberService;
+
 
 
 
@@ -40,6 +47,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.addExposedHeader("accessToken");
         config.addExposedHeader("refreshToken");
+        config.setAllowedOrigins(List.of("*"));
         config.addAllowedOriginPattern("*");
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
@@ -53,17 +61,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-       http.csrf(AbstractHttpConfigurer::disable);
-       http.authorizeHttpRequests((request)->{
-           request.requestMatchers(antMatcher("/api/v1/my/**")).authenticated();
-           request.requestMatchers(antMatcher("/**")).permitAll();
-           request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
-       }
-       )
+       http.csrf(AbstractHttpConfigurer::disable)
+           .cors(cors-> cors.configurationSource(corsConfigurationSource()))
+               .authorizeHttpRequests((request)->{
+                   request.requestMatchers(antMatcher("/api/v1/my/**")).authenticated();
+                   request.requestMatchers(antMatcher("/**")).permitAll();
+                   request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
+                })
         .headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()))
-
-        .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-
+        .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+        .addFilterAfter(memberRegistryFilter(),JwtAuthenticationFilter.class);
 
 
         return http.build();
@@ -76,9 +83,14 @@ public class SecurityConfig {
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
 
-        return new JwtAuthenticationFilter(jwtService, this.authenticationManager());
+        return new JwtAuthenticationFilter(jwtService);
     }
 
+
+    @Bean
+    public MemberRegistryFilter memberRegistryFilter(){
+        return new MemberRegistryFilter(memberService);
+    }
 
     @Bean
     public AuthenticationManager authenticationManager() {

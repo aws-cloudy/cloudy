@@ -1,5 +1,7 @@
 package com.s207.cloudy.dummy;
 
+import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 
@@ -13,6 +15,10 @@ public class DummyRoadmap {
                 .job("DataWrangler")
                 .summary("효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 알 수 있음 효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 어찌고")
                 .build();
+    }
+
+    public static MemberRoadmap getDummyMemberRoadmap(Member member, Roadmap roadmap) {
+        return new MemberRoadmap(member.getId(), roadmap);
     }
 
     public static RoadmapRes getDummyRoadmapRes(Roadmap roadmap) {

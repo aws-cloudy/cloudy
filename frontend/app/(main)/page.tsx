@@ -8,7 +8,7 @@ import MainFooter from '@/components/main/MainFooter'
 export default function Home() {
   return (
     <section className={styles.section}>
-      <div>
+      <div className={styles.inner}>
         <MainHeader />
         <MainIntroduce />
         <MainLectureRecom />

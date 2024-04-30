@@ -1,6 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.dao;
 
 import com.s207.cloudy.TestQueryDslConfig;
+import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.comment.domain.RoadmapComment;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
@@ -46,8 +47,16 @@ class RoadmapQueryRepositoryTest {
         entityManager.persist(dummyRoadmap1);
         entityManager.persist(dummyRoadmap2);
 
-        dummyRoadmapComment1 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, 1);
-        dummyRoadmapComment2 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, 1);
+        Member member1 = Member.builder().id("test").name("testName").build();
+        Member member2 = Member.builder().id("test1").name("testName1").build();
+
+        entityManager.persist(member1);
+        entityManager.persist(member2);
+
+
+        dummyRoadmapComment1 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, member1);
+        dummyRoadmapComment2 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, member2);
+
         entityManager.persist(dummyRoadmapComment1);
         entityManager.persist(dummyRoadmapComment2);
 
@@ -58,7 +67,7 @@ class RoadmapQueryRepositoryTest {
     @DisplayName("전체 로드맵 리스트를 정상적으로 조회한다.")
     @Test
     void findAllSuccess() {
-        Page<RoadmapRes> roadmapList = roadmapQueryRepository.findRoadmapList(null, null, null, PageRequest.of(0, 10));
+        Page<RoadmapRes> roadmapList = roadmapQueryRepository.getRoadmaplist(null, null, null, PageRequest.of(0, 10));
         List<RoadmapComment> actualCommentCnt = List.of(dummyRoadmapComment1, dummyRoadmapComment2);
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
@@ -74,7 +83,7 @@ class RoadmapQueryRepositoryTest {
     @DisplayName("전체 로드맵 리스트 사이즈가 2개이고, 페이지 사이즈가 1일 때 페이지네이션이 정상적으로 적용된다.")
     @Test
     void paginationSuccess() {
-        Page<RoadmapRes> roadmapList = roadmapQueryRepository.findRoadmapList(null, null, null, PageRequest.of(0, 1));
+        Page<RoadmapRes> roadmapList = roadmapQueryRepository.getRoadmaplist(null, null, null, PageRequest.of(0, 1));
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(1);
@@ -86,7 +95,7 @@ class RoadmapQueryRepositoryTest {
     @DisplayName("직무명으로 필터링이 정상적으로 동작한다.")
     @Test
     void filteringJobSuccess() {
-        Page<RoadmapRes> roadmapList = roadmapQueryRepository.findRoadmapList("Backend Developer", null, null, PageRequest.of(0, 10));
+        Page<RoadmapRes> roadmapList = roadmapQueryRepository.getRoadmaplist("Backend Developer", null, null, PageRequest.of(0, 10));
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(1);
@@ -98,7 +107,7 @@ class RoadmapQueryRepositoryTest {
     @DisplayName("서비스명으로 필터링이 정상적으로 동작한다.")
     @Test
     void filteringServiceSuccess() {
-        Page<RoadmapRes> roadmapList = roadmapQueryRepository.findRoadmapList(null, "AWS EC2", null, PageRequest.of(0, 10));
+        Page<RoadmapRes> roadmapList = roadmapQueryRepository.getRoadmaplist(null, "AWS EC2", null, PageRequest.of(0, 10));
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(1);
@@ -110,7 +119,7 @@ class RoadmapQueryRepositoryTest {
     @DisplayName("로드맵명으로 검색이 정상적으로 동작한다.")
     @Test
     void searchingRoadmapNameSuccess() {
-        Page<RoadmapRes> roadmapList = roadmapQueryRepository.findRoadmapList(null, null, "Learner Guide", PageRequest.of(0, 10));
+        Page<RoadmapRes> roadmapList = roadmapQueryRepository.getRoadmaplist(null, null, "Learner Guide", PageRequest.of(0, 10));
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(2);
@@ -120,7 +129,7 @@ class RoadmapQueryRepositoryTest {
     @DisplayName("다중 조건 검색이 정상적으로 동작한다. (직무 필터링, 서비스 필터링, 검색)")
     @Test
     void searchingMultipleSuccess() {
-        Page<RoadmapRes> roadmapList = roadmapQueryRepository.findRoadmapList("Backend Developer", "AWS EC2", "Learner Guide", PageRequest.of(0, 10));
+        Page<RoadmapRes> roadmapList = roadmapQueryRepository.getRoadmaplist("Backend Developer", "AWS EC2", "Learner Guide", PageRequest.of(0, 10));
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(1);

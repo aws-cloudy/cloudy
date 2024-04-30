@@ -2,7 +2,7 @@
 import { useSession } from 'next-auth/react'
 import styles from './page.module.scss'
 import MyPageTab from '@/components/mypage/MyPageTab'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Account from '@/components/mypage/Account'
 import Activity from '@/components/mypage/Activity'
 import Favorites from '@/components/mypage/Favorites'
@@ -10,6 +10,10 @@ import Favorites from '@/components/mypage/Favorites'
 const MyPage = () => {
   const { data: session, status } = useSession()
   const [selectedTab, setSelectedTab] = useState('account')
+
+  useEffect(() => {
+    console.log('유저 정보', session)
+  })
 
   if (status === 'authenticated') {
     return (
