@@ -2,6 +2,9 @@ package com.s207.cloudy.domain.roadmap_group.member.application;
 
 import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
+import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
+import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
+import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
@@ -18,8 +21,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.anyList;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 
 @SpringJUnitConfig(MemberRoadmapServiceImpl.class)
@@ -33,11 +35,15 @@ class MemberRoadmapServiceImplTest {
     @MockBean
     MemberRoadmapQueryRepository mockMemberRoadmapQueryRepository;
 
+    @MockBean
+    MemberRoadmapRepository mockMemberRoadmapRepository;
+
 
     Roadmap dummyRoadmap;
     RoadmapRes dummyRoadmapRes1;
     RoadmapRes dummyRoadmapRes2;
     Member dummyMember;
+    MemberRoadmap dummyMemberRoadmap;
 
     @BeforeEach
     void setUp() {
@@ -45,6 +51,7 @@ class MemberRoadmapServiceImplTest {
         dummyRoadmapRes1 = DummyRoadmap.getDummyRoadmapRes(dummyRoadmap);
         dummyRoadmapRes2 = DummyRoadmap.getDummyRoadmapRes(dummyRoadmap);
         dummyMember = DummyMember.getDummyMember();
+        dummyMemberRoadmap = DummyRoadmap.getDummyMemberRoadmap(dummyMember, dummyRoadmap);
     }
 
     @Test
@@ -85,5 +92,27 @@ class MemberRoadmapServiceImplTest {
         Assertions.assertThat(actualRoadmaps).isNotNull();
         Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(roadmapIdList.size());
     }
+
+    @Test
+    @DisplayName("회원이 북마크한 로드맵을 정상적으로 저장한다.")
+    void create_bookmark_success() {
+
+        CreateRoadmapReq createRoadmapReq = new CreateRoadmapReq(dummyRoadmap.getId());
+
+        // given
+        given(mockRoadmapService.findRoadmapEntity(anyInt()))
+                .willReturn(dummyRoadmap);
+        given(mockMemberRoadmapRepository.save(any(MemberRoadmap.class)))
+                .willReturn(dummyMemberRoadmap);
+
+        // when
+        MemberRoadmap actualRoadmapBookmark = memberRoadmapService.createRoadmapBookmark(dummyMember, createRoadmapReq);
+
+        // then
+        Assertions.assertThat(actualRoadmapBookmark).isNotNull();
+        Assertions.assertThat(actualRoadmapBookmark.getMemberId()).isEqualTo(dummyMember.getId());
+        Assertions.assertThat(actualRoadmapBookmark.getRoadmap()).isEqualTo(dummyRoadmap);
+    }
+
 
 }

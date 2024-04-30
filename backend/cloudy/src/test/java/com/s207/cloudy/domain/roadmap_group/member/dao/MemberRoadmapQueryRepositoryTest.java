@@ -42,13 +42,9 @@ class MemberRoadmapQueryRepositoryTest {
         entityManager.persist(dummyRoadmap1);
         entityManager.persist(dummyRoadmap2);
 
-        MemberRoadmap memberRoadmap1 = new MemberRoadmap();
-        memberRoadmap1.setRoadmap(dummyRoadmap1);
-        memberRoadmap1.setMemberId(dummyMember.getUsername());
-
-        MemberRoadmap memberRoadmap2 = new MemberRoadmap();
-        memberRoadmap2.setRoadmap(dummyRoadmap2);
-        memberRoadmap2.setMemberId(dummyMember.getUsername());
+        String userId = dummyMember.getUsername();
+        MemberRoadmap memberRoadmap1 = new MemberRoadmap(userId, dummyRoadmap1);
+        MemberRoadmap memberRoadmap2 = new MemberRoadmap(userId, dummyRoadmap2);
 
         entityManager.persist(memberRoadmap1);
         entityManager.persist(memberRoadmap2);

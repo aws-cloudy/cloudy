@@ -9,6 +9,7 @@ import com.s207.cloudy.global.error.exception.CustomValidationException;
 import com.s207.cloudy.global.error.exception.InvalidPaginationArgumentException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -51,7 +52,7 @@ public class GlobalExceptionHandler {
     }
 
 
-    @ExceptionHandler({InvalidPaginationArgumentException.class})
+    @ExceptionHandler({InvalidPaginationArgumentException.class, MethodArgumentNotValidException.class})
     public ResponseEntity<CommonErrorResponse> badRequestException400(InvalidPaginationArgumentException e) {
         log.error("Exception type : {}, message :{}", e.getClass(), e.getMessage());
         return ResponseEntity
