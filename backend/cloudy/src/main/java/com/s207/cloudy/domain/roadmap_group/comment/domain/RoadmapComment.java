@@ -1,10 +1,12 @@
 package com.s207.cloudy.domain.roadmap_group.comment.domain;
 
+import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
@@ -12,6 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "Roadmap_Comment")
 @Getter
 @NoArgsConstructor
+@ToString
 public class RoadmapComment {
 
     @Id
@@ -23,8 +26,9 @@ public class RoadmapComment {
     @JoinColumn(name = "roadmap_id")
     private Roadmap roadmap;
 
-    @Column(name = "member_id")
-    private int memberId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
 
     @Column(name = "content")
     private String content;
@@ -33,9 +37,9 @@ public class RoadmapComment {
     private LocalDateTime regAt;
 
     @Builder
-    public RoadmapComment(Roadmap roadmap, int memberId, String content) {
+    public RoadmapComment(Roadmap roadmap, Member member, String content) {
         this.roadmap = roadmap;
-        this.memberId = memberId;
+        this.member= member;
         this.content = content;
         this.regAt = LocalDateTime.now();
     }

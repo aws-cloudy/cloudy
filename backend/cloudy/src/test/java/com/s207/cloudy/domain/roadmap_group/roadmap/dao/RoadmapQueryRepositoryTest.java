@@ -1,6 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.dao;
 
 import com.s207.cloudy.TestQueryDslConfig;
+import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.domain.roadmap_group.comment.domain.RoadmapComment;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
@@ -46,8 +47,16 @@ class RoadmapQueryRepositoryTest {
         entityManager.persist(dummyRoadmap1);
         entityManager.persist(dummyRoadmap2);
 
-        dummyRoadmapComment1 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, 1);
-        dummyRoadmapComment2 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, 1);
+        Member member1 = Member.builder().userId("test").userName("testName").build();
+        Member member2 = Member.builder().userId("test1").userName("testName1").build();
+
+        entityManager.persist(member1);
+        entityManager.persist(member2);
+
+
+        dummyRoadmapComment1 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, member1);
+        dummyRoadmapComment2 = DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap1, member2);
+
         entityManager.persist(dummyRoadmapComment1);
         entityManager.persist(dummyRoadmapComment2);
 
