@@ -21,17 +21,15 @@ public class MemberRegistryFilter  extends OncePerRequestFilter {
 
     private final MemberService memberService;
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
-        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
-
-        if(!memberService.isExist(userId)){
-            Member member = new Member(userId, null, userId);
-            memberService.save(member);
+        if(SecurityContextHolder.getContext().getAuthentication()!=null){
+            String userId = SecurityContextHolder.getContext().getAuthentication().getName();
+            if(!memberService.isExist(userId)){
+                Member member = new Member(userId, null, userId);
+                memberService.save(member);
+            }
         }
-
 
         filterChain.doFilter(request, response);
     }

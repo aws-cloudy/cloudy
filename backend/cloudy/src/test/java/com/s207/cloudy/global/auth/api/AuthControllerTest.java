@@ -1,5 +1,6 @@
 package com.s207.cloudy.global.auth.api;
 
+import com.s207.cloudy.domain.members.application.MemberService;
 import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import com.s207.cloudy.global.auth.service.JwtService;
 import com.s207.cloudy.global.config.SecurityConfig;
@@ -27,6 +28,9 @@ class AuthControllerTest {
     @MockBean
     private JwtService jwtService;
 
+    @MockBean
+    private MemberService memberService;
+
     @Test
     @DisplayName("로그인이 되어있지 않은 회원이 마이페이지를 접근하면 403 에러를 반환한다.")
     void should_401_when_not_login_user_access_mypage() throws Exception {
@@ -34,6 +38,10 @@ class AuthControllerTest {
         given(
                 jwtService.isTokenValid(any())
         ).willThrow(AuthorizationException.class);
+
+        given(
+                memberService.isExist(any())
+        ).willReturn(true);
 
         mockMvc.perform(get("/api/v1/my/roadmaps"))
                 .andExpect(status().isForbidden());
