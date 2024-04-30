@@ -12,6 +12,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Cloudy',
   description: 'AWS 클라우드 서비스를 친구처럼 편안하게 Cloudy',
+  icons: {
+    icon: '/icon/favicon.png',
+  },
 }
 
 export default function RootLayout({
