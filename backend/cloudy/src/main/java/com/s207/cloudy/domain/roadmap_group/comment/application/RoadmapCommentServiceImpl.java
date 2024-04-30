@@ -15,6 +15,6 @@ public class RoadmapCommentServiceImpl implements RoadmapCommentService{
 
     @Override
     public List<RoadmapComment> getRoadmapEntityList(Roadmap roadmap) {
-        return roadmapCommentRepository.findByRoadmap(roadmap);
+        return roadmapCommentRepository.findByRoadmapId(roadmap.getId());
     }
 }
