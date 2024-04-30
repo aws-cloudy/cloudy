@@ -38,6 +38,17 @@
   font-size: 1em;
 }
 
+.loginButton {
+  background-color: transparent;
+  border: 0;
+  color: $white;
+  margin-right: 27px;
+  font-weight: 500;
+  height: 24px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
 .RightWrap {
   display: flex;
   margin-left: auto;
@@ -79,6 +90,16 @@
   justify-content: center;
   padding: 10px;
   color: $white;
+}
+
+.mobileLoginButton {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  color: $white;
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
 }
 
 @media screen and (max-width: $tablet) {

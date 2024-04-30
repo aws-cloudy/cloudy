@@ -20,11 +20,11 @@ export default function LoginButton({ session }: any) {
   const handleSignInGoogle = () => {
     // 구글 로그인 제공자를 명시적으로 지정
     // 로그인 요청 후 리디렉션 페이지는 메인 페이지
-    signIn()
+    signIn('google', { callbackUrl: '/' })
   }
 
   const handleSignInCognito = () => {
-    signIn()
+    signIn('cognito', { callbackUrl: '/' })
   }
 
   return (
@@ -37,7 +37,7 @@ export default function LoginButton({ session }: any) {
         // 세션 정보가 있다면 signOut() 호출
         <>
           <p>{session.user?.name}님 안녕하세요!</p>
-          <button onClick={() => signOut()}>로그아웃</button>
+          <button onClick={() => signOut({ callbackUrl: '/' })}>로그아웃</button>
           {/* <button onClick={() => signOut({ callbackUrl: '/api/auth/logout' })}>코그니토로그아웃</button> */}
         </>
       ) : (
