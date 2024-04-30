@@ -20,12 +20,7 @@ const handler = NextAuth({
     async jwt({ token, account }: any) {
       if (account) {
         token.account = account
-        // account의 provider가 Google일 경우 id_token값을 사용
-        if (account.provider === 'google') {
-          token.accessToken = account.id_token
-        } else {
-          token.accessToken = account.access_token
-        }
+        token.accessToken = account.access_token
         token.id = account.providerAccountId
       }
       return token
