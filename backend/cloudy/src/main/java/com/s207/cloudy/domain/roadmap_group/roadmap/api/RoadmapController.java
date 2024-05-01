@@ -1,5 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.api;
 
+import com.s207.cloudy.domain.roadmap_group.comment.application.RoadmapCommentService;
+import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentListRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
@@ -19,6 +21,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequestMapping("/api/v1/roadmaps")
 public class RoadmapController {
     private final RoadmapService roadmapService;
+    private final RoadmapCommentService roadmapCommentService;
 
     @GetMapping
     public ResponseEntity<RoadmapListRes> getRoadmapList(@RequestParam(required = false) String job,
@@ -39,4 +42,12 @@ public class RoadmapController {
         );
 
     }
+
+    @GetMapping("/{roadmapId}/comments")
+    public ResponseEntity<RoadmapCommentListRes> getRoadmapCommentList(@PathVariable("roadmapId")Integer roadmapId){
+        return ResponseEntity.ok(
+                new RoadmapCommentListRes(roadmapCommentService.getRoadmapList(roadmapId))
+        );
+    }
+
 }

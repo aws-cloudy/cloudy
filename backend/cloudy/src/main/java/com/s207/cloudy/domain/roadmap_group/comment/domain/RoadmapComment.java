@@ -1,6 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.comment.domain;
 
 import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentDto;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -26,7 +27,7 @@ public class RoadmapComment {
     @JoinColumn(name = "roadmap_id")
     private Roadmap roadmap;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "member_id")
     private Member member;
 
@@ -43,4 +44,16 @@ public class RoadmapComment {
         this.content = content;
         this.regAt = LocalDateTime.now();
     }
+
+
+    public RoadmapCommentDto toDto(){
+        return RoadmapCommentDto
+                .builder()
+                .commentId(id)
+                .member(member.toDto())
+                .content(content)
+                .regAt(regAt)
+                .build();
+    }
+
 }
