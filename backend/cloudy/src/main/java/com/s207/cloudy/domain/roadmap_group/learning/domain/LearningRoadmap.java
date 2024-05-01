@@ -27,7 +27,7 @@ public class LearningRoadmap {
     @JoinColumn(name = "learning_id")
     private Learning learning;
 
-    @Column(name = "ranking")
-    private int ranking;
+    @Column(name = "rank")
+    private int rank;
 
 }
