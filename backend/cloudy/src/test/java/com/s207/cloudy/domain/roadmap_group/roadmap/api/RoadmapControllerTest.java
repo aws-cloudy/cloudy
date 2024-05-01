@@ -1,6 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.s207.cloudy.domain.roadmap_group.comment.application.RoadmapCommentService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
@@ -39,6 +40,8 @@ class RoadmapControllerTest {
 
     @MockBean
     RoadmapService mockRoadmapService;
+    @MockBean
+    RoadmapCommentService roadmapCommentService;
 
     @Autowired
     ObjectMapper objectMapper;

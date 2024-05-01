@@ -5,6 +5,8 @@ ALTER TABLE roadmap_comment MODIFY COLUMN `member_id` VARCHAR(255);
 ALTER TABLE roadmap_comment
     CHANGE COLUMN `desc` content VARCHAR(255);
 
+ALTER TABLE roadmap_comment MODIFY COLUMN id INT AUTO_INCREMENT;
+
 ALTER TABLE roadmap_comment
     ADD COLUMN reg_at TIMESTAMP;
 

@@ -16,7 +16,7 @@ public record RoadmapCommentDto(
 
 
         int commentId,
-        Roadmap roadmap,
+        Integer roadmapId,
         MemberDto member,
         String content,
         LocalDateTime regAt
