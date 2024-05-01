@@ -41,7 +41,7 @@ locals {
 
   # 본인IP를 넣으세요. IP확인(https://www.myip.com/)
   myips = [
-    "121.178.98.10/32"
+    "0.0.0.0/0"
   ]
 
   # API Gateway의 API ID값을 넣으세요.(리소스ID X)
