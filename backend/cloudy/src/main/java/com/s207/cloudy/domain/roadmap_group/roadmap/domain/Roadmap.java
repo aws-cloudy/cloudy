@@ -1,5 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.domain;
 
+import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
+import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,5 +40,18 @@ public class Roadmap {
         this.service = service;
         this.job = job;
         this.summary = summary;
+    }
+
+    public RoadmapRes toDto(){
+        return RoadmapRes
+                .builder()
+                .roadmapId(id)
+                .title(title)
+                .thumbnail(thumbnail)
+                .job(job)
+                .service(service)
+                .summary(summary)
+                .commentsCnt(0)
+                .build();
     }
 }
