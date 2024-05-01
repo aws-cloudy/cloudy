@@ -1,6 +1,7 @@
 package com.s207.cloudy.global.error.handler;
 
 import com.s207.cloudy.domain.learning.exception.LearningException;
+import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapNotFoundException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
 import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import com.s207.cloudy.global.error.dto.CommonErrorResponse;
@@ -32,8 +33,6 @@ public class GlobalExceptionHandler {
                                 .build()
                 );
 
-
-        // return ErrorResponse.builder(e,HttpStatus.BAD_REQUEST, e.getErrorMap().toString() ).build();
     }
 
     @ExceptionHandler(LearningException.class)
@@ -47,8 +46,6 @@ public class GlobalExceptionHandler {
                         .message(e.getMessage())
                         .build()
                 );
-
-        //return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
     }
 
 
@@ -63,11 +60,9 @@ public class GlobalExceptionHandler {
                         .message(e.getMessage())
                         .build()
                 );
-
-//        return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
     }
 
-    @ExceptionHandler({RoadmapNotFoundException.class})
+    @ExceptionHandler({RoadmapNotFoundException.class, MemberRoadmapNotFoundException.class})
     public ResponseEntity<CommonErrorResponse> notFoundException404(RuntimeException e) {
         return ResponseEntity
                 .status(NOT_FOUND)
@@ -77,8 +72,6 @@ public class GlobalExceptionHandler {
                         .message(e.getMessage())
                         .build()
                 );
-
-//        return ErrorResponse.builder(e, e.getErrorCode().getHttpStatus(), e.getMessage()).build();
     }
 
 
