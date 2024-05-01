@@ -20,16 +20,16 @@ export interface IQuestionDetail {
   desc: string
   hit: number
   createdAt: Date | string
-  hashtags?: { hashtag: IHashtag }[]
+  hashtags: { hashtag: IHashtag }[]
   authId?: string | undefined
 }
 
 export interface IQuestionAnswer {
   id: string | number
-  isWriter?: boolean
-  answers?: IAnswer[]
-  checkedId?: number | null
+  answers: IAnswer[]
+  checkedId: number | null
   authId?: string | undefined
+  isWriter?: boolean
 }
 
 export interface IQuestion extends IQuestionDetail, IQuestionAnswer {}
@@ -51,9 +51,13 @@ export interface ICreateQuestion {
   tags: IHashtag[]
   title: string
   desc: string
+  imageData: {
+    path: string
+    url: string
+  }[]
 }
 
 export interface IImage {
   localUrl: string
-  dbUrl: string
+  file: File | Blob
 }

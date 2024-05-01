@@ -12,7 +12,7 @@ function DetailAnswer({ answer }: { answer: IQuestionAnswer }) {
         <p className={styles.count}>댓글 {answers?.length}개</p>
         <div className={styles.answers}>
           {answers.length === 0 && <div className={styles.nodata}>등록된 댓글이 없습니다.</div>}
-          {answers?.map(answer => (
+          {answers.map(answer => (
             <DetailAnswerITem
               key={answer.id}
               ans={answer}

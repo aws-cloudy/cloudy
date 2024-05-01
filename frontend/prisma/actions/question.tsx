@@ -1,12 +1,12 @@
 'use server'
 
-import { IQuestion } from '@/types/community'
 import prisma from '../client'
 import { CreateQuestion, DeleteQuestion } from '../schemas'
 import { z } from 'zod'
+import { IPrismaError, IcreateQuestion } from '../types'
 
 export async function createQuestion(values: z.infer<typeof CreateQuestion>) {
-  const response: { error?: string; question?: IQuestion } = {}
+  const response: IcreateQuestion = {}
 
   const validated = CreateQuestion.safeParse(values)
   if (!validated.success) {
@@ -40,7 +40,7 @@ export async function createQuestion(values: z.infer<typeof CreateQuestion>) {
 
 export async function deleteQuestion(value: z.infer<typeof DeleteQuestion>) {
   const validated = DeleteQuestion.safeParse(value)
-  const response: { error?: string } = {}
+  const response: IPrismaError = {}
 
   if (!validated.success) {
     response.error = 'delete question: invalid fields'

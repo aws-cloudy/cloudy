@@ -1,8 +1,8 @@
-import { IQuestion } from '@/types/community'
 import prisma from '../client'
+import { IfetchQuestions } from '../types'
 
 export async function fetchQuestions(tags: string[], searchword: string | null, lastId: number) {
-  const response: { error?: string; questions: IQuestion[]; count: number } = { questions: [], count: 0 }
+  const response: IfetchQuestions = { questions: [], count: 0 }
 
   const isFirstPage = !Boolean(lastId)
 

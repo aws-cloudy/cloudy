@@ -51,3 +51,12 @@ export const AnswerSchema = z.object({
 
 export const CreateAnswer = AnswerSchema.omit({ id: true, createdAt: true })
 export const DeleteAnswer = AnswerSchema.pick({ id: true })
+
+export const QuestionImageSchema = z.object({
+  path: z.string(),
+  url: z.string(),
+  questionId: z.number(),
+})
+
+export const CreateQuestionImage = QuestionImageSchema.omit({ questionId: true })
+export const DeleteQuestionImage = QuestionImageSchema.pick({ questionId: true })

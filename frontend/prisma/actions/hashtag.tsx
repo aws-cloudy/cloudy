@@ -3,21 +3,14 @@
 import prisma from '../client'
 import { z } from 'zod'
 import { CreateHashtag, CreateQH } from '../schemas'
-import { Prisma } from '@prisma/client'
+import { Hashtag, Prisma } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
-import { IHashtag } from '@/types/community'
+import { IPrismaError, IcreateHashtag } from '../types'
 
 export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
-  const rawHash: Prisma.Prisma__HashtagClient<
-    {
-      id: number
-      title: string
-    },
-    never,
-    DefaultArgs
-  >[] = []
-  const hashtags: IHashtag[] = []
-  let response: { error?: string; hashtags?: IHashtag[] } = {}
+  const rawHash: Prisma.Prisma__HashtagClient<Hashtag, never, DefaultArgs>[] = []
+  const hashtags: Hashtag[] = []
+  let response: IcreateHashtag = {}
 
   values.forEach(async value => {
     const validated = CreateHashtag.safeParse(value)
@@ -27,7 +20,6 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
       return
     }
     const { id, title } = validated.data
-    const lowerTitle = title.toLowerCase()
 
     if (id) {
       try {
@@ -45,9 +37,9 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
     } else {
       try {
         const hash = prisma.hashtag.upsert({
-          where: { title: lowerTitle },
+          where: { title },
           update: {},
-          create: { title: lowerTitle },
+          create: { title },
         })
         rawHash.push(hash)
       } catch (e) {
@@ -65,7 +57,7 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
 }
 
 export async function createQH(values: z.infer<typeof CreateQH>[]) {
-  let response: { error?: string } = {}
+  let response: IPrismaError = {}
   let data: z.infer<typeof CreateQH>[] = []
 
   values.forEach(async value => {
