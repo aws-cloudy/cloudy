@@ -6,11 +6,8 @@ import LearningInput from '../LearningInput'
 import LearningSearchResult from '../LearningSearchResult'
 import LearningList from '../LearningList'
 import LearningRecommend from '../LearningRecommend'
-import { ILearningCard } from '@/types/learning'
 
-const LearningSection = (props: { data: ILearningCard[] }) => {
-  const { data } = props
-
+const LearningSection = () => {
   const [value, setValue] = useState<string>('') // input value
   const [keyword, setKeyword] = useState<string>('') // 검색어
 
@@ -19,7 +16,7 @@ const LearningSection = (props: { data: ILearningCard[] }) => {
       <LearningInput value={value} setValue={setValue} keyword={keyword} setKeyword={setKeyword} />
       <LearningSearchResult keyword={keyword} />
       <LearningRecommend />
-      <LearningList data={data} />
+      <LearningList keyword={keyword} />
     </section>
   )
 }

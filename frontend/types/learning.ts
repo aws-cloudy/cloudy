@@ -54,3 +54,7 @@ export interface IFilter {
   name: string
   category: string
 }
+
+export interface ILearningList {
+  keyword: string
+}
