@@ -1,6 +1,13 @@
 
 ALTER TABLE roadmap MODIFY COLUMN `desc` TEXT;
 
+ALTER TABLE roadmap_comment MODIFY COLUMN `member_id` VARCHAR(255);
+ALTER TABLE roadmap_comment
+    CHANGE COLUMN `desc` content VARCHAR(255);
+
+ALTER TABLE roadmap_comment
+    ADD COLUMN reg_at TIMESTAMP;
+
 INSERT INTO catalog.learning_roadmap (id, roadmap_id, learning_id, `rank`) VALUES (1, 1, 39, 1);
 INSERT INTO catalog.learning_roadmap (id, roadmap_id, learning_id, `rank`) VALUES (2, 1, 249, 2);
 INSERT INTO catalog.learning_roadmap (id, roadmap_id, learning_id, `rank`) VALUES (3, 1, 147, 3);
