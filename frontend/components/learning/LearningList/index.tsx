@@ -30,6 +30,7 @@ const LearningList = (props: ILearningList) => {
 
   // fetch
   const fetchLearning = async () => {
+    setIsFetching(true)
     if (!hasMore.current) return
 
     const apiLearnings = await getLearnings(
@@ -42,12 +43,12 @@ const LearningList = (props: ILearningList) => {
       getTextFilter(difficulties),
     )
 
-    if (apiLearnings.length < LEARNING_ROWS_PER_PAGE) {
-      hasMore.current = false // 더 이상 로드할 데이터가 없을 때
+    if (apiLearnings) {
+      apiLearnings.length < LEARNING_ROWS_PER_PAGE && (hasMore.current = false) // 더 이상 로드할 데이터가 없을 때
+      setList(prev => [...prev, ...apiLearnings])
+      offset.current += 1
     }
 
-    setList(prev => [...prev, ...apiLearnings])
-    offset.current += 1
     setIsFetching(false)
   }
 
