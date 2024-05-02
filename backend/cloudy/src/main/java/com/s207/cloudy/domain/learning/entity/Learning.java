@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.learning.entity;
 
+import com.s207.cloudy.domain.learning.dto.LearningItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -53,5 +54,19 @@ public class Learning implements Serializable {
         this.thumbnail = thumbnail;
         this.link = link;
         this.type = type;
+    }
+
+    public LearningItem toDto(){
+        return LearningItem
+                .builder()
+                .learningId(id)
+                .title(title)
+                .difficulty(difficulty)
+                .duration(duration)
+                .desc(desc)
+                .summary(summary)
+                .thumbnail(thumbnail)
+                .link(link)
+                .build();
     }
 }

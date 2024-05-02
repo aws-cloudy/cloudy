@@ -6,7 +6,7 @@ Transform: AWS::Serverless-2016-10-31
 
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 600
 
 Resources:
   CloudyBackendApi:
@@ -53,3 +53,5 @@ Resources:
         SubnetIds:
           - subnet-0253ac03a3ec70057
           - subnet-08fc48b8da6f4f371
+      SnapStart:
+        ApplyOn: PublishedVersions

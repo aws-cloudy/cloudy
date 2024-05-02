@@ -38,31 +38,9 @@ public class SecurityConfig {
     private final MemberService memberService;
 
 
-
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource(){
-        var config = new CorsConfiguration();
-
-        config.setAllowCredentials(true);
-        config.addExposedHeader("accessToken");
-        config.addExposedHeader("refreshToken");
-        config.setAllowedOrigins(List.of("*"));
-        config.addAllowedOriginPattern("*");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-
-        var source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", config);
-
-        return source;
-    }
-
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
        http.csrf(AbstractHttpConfigurer::disable)
-           .cors(cors-> cors.configurationSource(corsConfigurationSource()))
                .authorizeHttpRequests((request)->{
                    request.requestMatchers(antMatcher("/api/v1/my/**")).authenticated();
                    request.requestMatchers(antMatcher("/**")).permitAll();

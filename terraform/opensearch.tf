@@ -1,64 +1,66 @@
-resource "aws_opensearch_domain" "this" {
-  domain_name    = "cloudy"
-  engine_version = "OpenSearch_2.11"
+
+
+resource "aws_opensearch_domain" "cloudy" {
+  domain_name           = "cloudy"
+  engine_version        = "OpenSearch_2.11"
 
   cluster_config {
-    instance_type          = "t3.small.search"
-    zone_awareness_enabled = false
-    instance_count         = 1
+    instance_type     = "t3.small.search" # 프리티어 가능 인스턴스
+    instance_count    = 1
   }
+
   ebs_options {
-    ebs_enabled = true
-    volume_size = 10
-    volume_type = "gp2"
+    ebs_enabled       = true
+    volume_size       = 10
+    volume_type       = "gp2"
   }
 
-  vpc_options {
-    subnet_ids = [module.vpc.elasticache_subnets[0]]
-    security_group_ids = [module.vpc.default_security_group_id]
+  domain_endpoint_options {
+    enforce_https = true
+    tls_security_policy = "Policy-Min-TLS-1-2-2019-07"
   }
 
-  advanced_security_options {
-    enabled                        = true
-    anonymous_auth_enabled         = false
-    internal_user_database_enabled = true
-    master_user_options {
-      master_user_name     = "admin"
-      master_user_password = "WkdS207Wkd!@#"
-    }
-  }
   node_to_node_encryption {
     enabled = true
   }
+
   encrypt_at_rest {
     enabled = true
   }
-  domain_endpoint_options {
-    enforce_https       = true
-    tls_security_policy = "Policy-Min-TLS-1-2-2019-07"
-  }
-}
 
-resource "aws_opensearch_domain_policy" "this" {
-  domain_name     = aws_opensearch_domain.this.domain_name
-  access_policies = data.aws_iam_policy_document.opensearch.json
-}
-
-data "aws_iam_policy_document" "opensearch" {
-  statement {
-    effect = "Allow"
-
-    principals {
-      type        = "*"
-      identifiers = ["*"]
+  advanced_security_options {
+    enabled = true
+    internal_user_database_enabled = true
+    master_user_options {
+      master_user_name = "${user_name}"
+      master_user_password = "${password}"
     }
-
-    actions   = ["es:*"]
-    resources = ["${aws_opensearch_domain.this.arn}/*"]
   }
+
+  access_policies = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "es:*",
+      "Resource": "arn:aws:es:ap-northeast-2:767397922066:domain/cloudy/*"
+    }
+  ]
+}
+POLICY
+
+  snapshot_options {
+    automated_snapshot_start_hour = 23
+  }
+
 }
 
-resource "aws_iam_role_policy_attachment" "opensearch_vpc_access" {
-  role       = aws_iam_role.ec2.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonOpenSearchServiceRolePolicy"
+output "opensearch_domain_endpoint" {
+  value = aws_opensearch_domain.cloudy.endpoint
+}
+
+output "opensearch_domain_arn" {
+  value = aws_opensearch_domain.cloudy.arn
 }

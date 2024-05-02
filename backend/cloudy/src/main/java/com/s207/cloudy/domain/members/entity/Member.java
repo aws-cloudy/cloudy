@@ -1,10 +1,7 @@
 package com.s207.cloudy.domain.members.entity;
 
 import com.s207.cloudy.domain.members.MemberDto;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,7 +22,7 @@ public class Member implements UserDetails {
     @Column(name="id")
     private String id;
 
-
+    @Transient
     private String password;
 
 

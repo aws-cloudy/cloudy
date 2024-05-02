@@ -1,5 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.application;
 
+import com.s207.cloudy.domain.learning.repository.LearningRepository;
+import com.s207.cloudy.domain.members.application.MemberService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
@@ -36,6 +38,12 @@ class RoadmapServiceImplTest {
 
     @MockBean
     RoadmapRepository mockRoadmapRepository;
+
+    @MockBean
+    MemberService memberService;
+
+    @MockBean
+    LearningRepository learningRepository;
 
     Roadmap dummyRoadmap;
     RoadmapRes dummyRoadmapRes1;
