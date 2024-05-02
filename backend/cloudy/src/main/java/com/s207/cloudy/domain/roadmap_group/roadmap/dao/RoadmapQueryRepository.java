@@ -20,13 +20,13 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class    RoadmapQueryRepository {
+public class RoadmapQueryRepository {
 
     private final JPAQueryFactory queryFactory;
     private static final QRoadmap qRoadmap = QRoadmap.roadmap;
     private static final QRoadmapComment qComment = QRoadmapComment.roadmapComment;
 
-    public Page<RoadmapRes> findRoadmapList(String job, String service, String query, Pageable pageable) {
+    public Page<RoadmapRes> getRoadmaplist(String job, String service, String query, Pageable pageable) {
 
         List<RoadmapRes> content = queryFactory
                 .select(Projections.fields(RoadmapRes.class,
@@ -43,8 +43,8 @@ public class    RoadmapQueryRepository {
                                 "commentsCnt"
                         ))
                 )
-                .from(qRoadmap)
                 .where(isSearched(query), isFilteredWithJob(job), isFilteredWithService(service))
+                .from(qRoadmap)
                 .offset(pageable.getOffset()).limit(pageable.getPageSize())
                 .fetch();
 
@@ -52,8 +52,8 @@ public class    RoadmapQueryRepository {
                 .select(qRoadmap.count())
                 .from(qRoadmap)
                 .where(isSearched(query), isFilteredWithJob(job), isFilteredWithService(service));
-        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
 
+        return PageableExecutionUtils.getPage(content, pageable, count::fetchOne);
     }
 
     private static BooleanExpression isSearched(String query) {
@@ -79,5 +79,6 @@ public class    RoadmapQueryRepository {
 
         return qRoadmap.service.eq((service));
     }
+
 
 }

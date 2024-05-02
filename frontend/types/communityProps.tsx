@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
-import { IAnswer, IHashtag } from './community'
+import { IAnswer, IHashtag, IImage } from './community'
+import { Editor } from '@toast-ui/react-editor'
 
 export interface IEditorHashtag {
   tags: IHashtag[]
@@ -23,11 +24,20 @@ export interface IDetailContentDesc {
 
 export interface IDetailContentSubtitle {
   id: string | number
-  user: string
+  author: string
   createdAt: string | Date
+  authorId: string
+  authId: string | undefined
 }
 
 export interface IDetailAnswerItem {
   ans: IAnswer
   isChecked: boolean
+  authId: string | undefined
+  isWriter?: boolean
+}
+
+export interface IEditorBody {
+  editorRef: React.RefObject<Editor>
+  setImages: React.Dispatch<React.SetStateAction<IImage[]>>
 }

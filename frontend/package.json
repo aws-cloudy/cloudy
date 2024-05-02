@@ -14,10 +14,13 @@
     "test:ci": "jest --ci",
     "sonarqube": "sonar-scanner",
     "migrate:postgres": "dotenv -e .env.local -- npx prisma migrate dev --name postgres-init",
-    "dbpush:postgres": "dotenv -e .env.local -- npx prisma db push"
+    "dbpush:postgres": "dotenv -e .env.local -- npx prisma db push",
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "5.13.0",
+    "@supabase/ssr": "^0.3.0",
+    "@supabase/supabase-js": "^2.42.7",
     "@tanstack/react-query": "^5.32.0",
     "@toast-ui/editor": "^3.2.2",
     "@toast-ui/react-editor": "^3.2.3",
@@ -32,6 +35,7 @@
     "react-ga4": "^2.1.0",
     "react-hook-form": "^7.51.3",
     "react-icons": "^5.1.0",
+    "react-intersection-observer": "^9.10.1",
     "react-responsive": "^10.0.0",
     "react-select": "^5.8.0",
     "sass": "^1.75.0",

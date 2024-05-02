@@ -1,4 +1,4 @@
-import { fetchHashtags } from '@/prisma/data'
+import { fetchHashtags } from '@/prisma/data/hashtag'
 import { NextResponse } from 'next/server'
 
 export async function GET() {

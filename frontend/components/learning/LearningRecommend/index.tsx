@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './LearningRecommend.module.scss'
-import LearningItem from '@/components/common/LearningItem'
+import LearningCard from '@/components/common/LearningCard'
 import { learningData } from '../LearningList/learningData'
 
 const LearningRecommend = () => {
@@ -8,7 +8,7 @@ const LearningRecommend = () => {
     <div className={styles.container}>
       <div className={styles.title}>Oudy Pick!</div>
       <div className={styles.desc}>우디가 회원님께 추천드리는 강의 입니다.</div>
-      <LearningItem item={learningData[0]} layout="justify" />
+      <LearningCard item={learningData[0]} layout="justify" />
     </div>
   )
 }

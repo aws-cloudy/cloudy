@@ -13,6 +13,7 @@ public enum ErrorCode {
     INVALID_PAGINATION_SIZE("CE002", "size 파라미터 값의 허용 범위가 1~100입니다.", HttpStatus.BAD_REQUEST),
     INVALID_PAGINATION_PAGE("CE003", "page 파라미터 값의 허용 범위가 양수입니다.", HttpStatus.BAD_REQUEST),
     UNAUTHORIZED("CE004", "로그인이 필요합니다.", HttpStatus.UNAUTHORIZED),
+    NOT_FOUND("CE005", "조건에 일치하는 값이 없습니다.", HttpStatus.NOT_FOUND),
 
 
     //서버에러

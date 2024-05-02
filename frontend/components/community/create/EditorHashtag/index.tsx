@@ -5,22 +5,23 @@ import { IEditorHashtag } from '@/types/communityProps'
 
 function EditorHashtag({ tags, setTags }: IEditorHashtag) {
   const [isAdding, setIsAdding] = useState(false)
-  const { register, handleSubmit, getValues, reset } = useForm<{ hash: string }>()
+  const { register, getValues, setValue } = useForm<{ hash: string }>()
 
   const onSpacebar = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const tag = getValues('hash')
+
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault()
       if (tag.length !== 0 && tags.length < 5) {
         if (tags.filter(e => e.title === tag).length === 0) {
           setTags(prev => [...prev, { id: null, title: tag }])
         }
-        reset()
+        setValue('hash', '')
       }
       setIsAdding(false)
     } else if (e.key === 'Escape') {
       e.preventDefault()
-      reset()
+      setValue('hash', '')
       setIsAdding(false)
     }
   }

@@ -64,7 +64,7 @@
   display: flex;
   position: relative;
   width: 100%;
-  padding: 0 10%;
+  padding: 0 5%;
   height: 60px;
   margin: 0 auto;
   align-items: center;
@@ -112,5 +112,8 @@
     width: 100%;
     position: fixed;
     z-index: 9999;
+  }
+  .MenuIconWrap {
+    right: 5%;
   }
 }

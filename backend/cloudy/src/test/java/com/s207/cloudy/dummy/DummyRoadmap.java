@@ -1,5 +1,8 @@
 package com.s207.cloudy.dummy;
 
+import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
+import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 
@@ -15,8 +18,25 @@ public class DummyRoadmap {
                 .build();
     }
 
+    public static MemberRoadmap getDummyMemberRoadmap(Member member, Roadmap roadmap) {
+        return new MemberRoadmap(member.getId(), roadmap);
+    }
+
     public static RoadmapRes getDummyRoadmapRes(Roadmap roadmap) {
         return new RoadmapRes(roadmap.getId(),
+                roadmap.getTitle(),
+                roadmap.getThumbnail(),
+                roadmap.getService(),
+                roadmap.getJob(),
+                roadmap.getSummary(),
+                2);
+    }
+
+    public static BookmarkRes getBookmarkRes(MemberRoadmap memberRoadmap) {
+        Roadmap roadmap = memberRoadmap.getRoadmap();
+        return new BookmarkRes(
+                memberRoadmap.getId(),
+                roadmap.getId(),
                 roadmap.getTitle(),
                 roadmap.getThumbnail(),
                 roadmap.getService(),

@@ -10,7 +10,7 @@ import java.util.List;
 public interface LearningRepositoryCustom {
     List<LearningItem> findLearnings(LearningSearchReq learningSearchReq);
 
-    List<LearningItem> findLearningsByJob(int JobId, int count);
+    List<LearningItem> findLearningsByJob(int jobId, int count);
     List<LearningItem> findLearningsByJob(int count);
 
 }

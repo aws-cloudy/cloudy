@@ -30,18 +30,15 @@ export interface IService {
   name: string
 }
 
-export interface ILearningItem {
-  id: number
+export interface ILearningCard {
+  learningId: number
   title: string
   difficulty: string
   duration: string
-  desc: string
-  summary: string
+  summary: string | null
   thumbnail: string
   link: string
-  type: string
-  job: IJob[]
-  service: IService[]
+  serviceType: string
 }
 
 export interface ILearningFilterOpen {
@@ -56,4 +53,8 @@ export interface IFilter {
   value: string
   name: string
   category: string
+}
+
+export interface ILearningList {
+  keyword: string
 }

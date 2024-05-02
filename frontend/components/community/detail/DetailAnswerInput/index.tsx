@@ -1,13 +1,14 @@
 'use client'
 
 import { commuURL } from '@/apis/urls'
-import { IQuestionAnswer } from '@/types/community'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import React, { BaseSyntheticEvent } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import styles from './DetailAnswerInput.module.scss'
+import Button from '@/components/common/Button'
 
-function DetailAnswerInput({ id }: { id: string | number }) {
+function DetailAnswerInput({ id, authId }: { id: string | number; authId: string | undefined }) {
   const { register, getValues, handleSubmit, reset } = useForm<{ desc: string }>()
   const router = useRouter()
 
@@ -17,16 +18,20 @@ function DetailAnswerInput({ id }: { id: string | number }) {
   ) => {
     if (e) e.preventDefault()
     const desc = getValues('desc')
-    const res = await axios.post(`${commuURL}/question/answer`, { postId: id, desc })
+    await axios.post(`${commuURL}/question/answer`, { postId: id, desc })
     router.refresh()
     reset()
   }
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <textarea {...register('desc')} placeholder="덧글을 입력하세요" required></textarea>
-      <button type="submit">작성</button>
+  return Boolean(authId) ? (
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+      <textarea {...register('desc')} placeholder="댓글을 입력하세요" required className={styles.textBox}></textarea>
+      <Button type="submit" width="25%">
+        작성
+      </Button>
     </form>
+  ) : (
+    <div className={styles.needLogin}>로그인 후 이용해주세요.</div>
   )
 }
 

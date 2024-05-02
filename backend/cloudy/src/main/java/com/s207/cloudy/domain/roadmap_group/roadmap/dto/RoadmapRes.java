@@ -1,14 +1,14 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
 @Getter
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@Builder
 public class RoadmapRes {
     private int roadmapId;
     private String title;

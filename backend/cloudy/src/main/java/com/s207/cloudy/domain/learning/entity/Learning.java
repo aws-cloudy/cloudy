@@ -1,18 +1,20 @@
 package com.s207.cloudy.domain.learning.entity;
 
+import com.s207.cloudy.domain.learning.dto.LearningItem;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Learning")
-public class Learning {
+public class Learning implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,7 +29,7 @@ public class Learning {
     @Column(name = "duration")
     private String duration;
 
-    @Column(name = "desc")
+    @Column(name = "`desc`", columnDefinition = "TEXT")
     private String desc;
 
     @Column(name = "summary")
@@ -42,4 +44,29 @@ public class Learning {
     @Column(name = "type")
     private String type;
 
+    @Builder
+    public Learning(String title, String difficulty, String duration, String desc, String summary, String thumbnail, String link, String type) {
+        this.title = title;
+        this.difficulty = difficulty;
+        this.duration = duration;
+        this.desc = desc;
+        this.summary = summary;
+        this.thumbnail = thumbnail;
+        this.link = link;
+        this.type = type;
+    }
+
+    public LearningItem toDto(){
+        return LearningItem
+                .builder()
+                .learningId(id)
+                .title(title)
+                .difficulty(difficulty)
+                .duration(duration)
+                .desc(desc)
+                .summary(summary)
+                .thumbnail(thumbnail)
+                .link(link)
+                .build();
+    }
 }
