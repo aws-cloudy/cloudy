@@ -29,11 +29,11 @@ const LearningList = (props: ILearningList) => {
   const [isFetching, setIsFetching] = useState<boolean>(true)
 
   // fetch
-  const fetchLearning = async () => {
+  const fetchLearnings = async () => {
     setIsFetching(true)
     if (!hasMore.current) return
 
-    const apiLearnings = await getLearnings(
+    const learnings = await getLearnings(
       offset.current,
       LEARNING_ROWS_PER_PAGE,
       keyword,
@@ -43,9 +43,9 @@ const LearningList = (props: ILearningList) => {
       getTextFilter(difficulties),
     )
 
-    if (apiLearnings) {
-      apiLearnings.length < LEARNING_ROWS_PER_PAGE && (hasMore.current = false) // 더 이상 로드할 데이터가 없을 때
-      setList(prev => [...prev, ...apiLearnings])
+    if (learnings) {
+      learnings.length < LEARNING_ROWS_PER_PAGE && (hasMore.current = false) // 더 이상 로드할 데이터가 없을 때
+      setList(prev => [...prev, ...learnings])
       offset.current += 1
     }
 
@@ -53,8 +53,8 @@ const LearningList = (props: ILearningList) => {
   }
 
   const observerCallback: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    if (isIntersecting && list.length > 0) {
-      fetchLearning()
+    if (isIntersecting && hasMore.current) {
+      fetchLearnings()
     }
   }
 
@@ -63,7 +63,7 @@ const LearningList = (props: ILearningList) => {
     setList([])
     hasMore.current = true
     offset.current = 1
-    fetchLearning()
+    fetchLearnings()
   }, [keyword, jobs, services, types, difficulties])
 
   // 반응형 width 감지

@@ -14,11 +14,11 @@ export interface IRoadmapFilterInput {
 }
 
 export interface IRoadmapCard {
-  id: number
-  image: string
-  status: string
+  roadmapId: number
+  commentsCnt: number
+  job: string
+  service: string
+  summary: string
+  thumbnail: string
   title: string
-  context: string
-  tags: string[]
-  comments: number
 }
