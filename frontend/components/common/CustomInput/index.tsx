@@ -8,6 +8,10 @@ const CustomInput = (props: ICustomInput) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
 
+  const onClick = () => {
+    console.log(value)
+  }
+
   return (
     <div className={styles.container} style={{ width }}>
       <input
@@ -17,7 +21,7 @@ const CustomInput = (props: ICustomInput) => {
         className={styles.input}
         name="custom-input"
       />
-      <div className={styles.iconWrap}>
+      <div className={styles.iconWrap} onClick={onClick}>
         <IoMdSearch color="#ccc" />
       </div>
     </div>
