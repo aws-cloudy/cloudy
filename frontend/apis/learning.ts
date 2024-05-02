@@ -1,3 +1,4 @@
+import { learningData } from '@/components/learning/LearningList/learningData'
 import axiosInstance from '@/utils/axiosInstance'
 
 // 학습 전체 조회 - 검색어 오타 교정 전
@@ -16,6 +17,6 @@ export const getLearnings = async (
     )
     .then(res => res.data.learningList)
     .catch(err => err)
-
+  // const res = learningData
   return res
 }
