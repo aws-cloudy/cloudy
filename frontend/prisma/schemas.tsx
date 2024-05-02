@@ -27,7 +27,12 @@ export const QuestionSchema = z.object({
 })
 
 export const CreateQuestion = QuestionSchema.omit({ id: true, createdAt: true, checkedId: true })
-export const UpdateQuestion = QuestionSchema.pick({ id: true })
+export const UpdateQuestion = QuestionSchema.omit({
+  createdAt: true,
+  checkedId: true,
+  memberId: true,
+  memberName: true,
+})
 export const DeleteQuestion = QuestionSchema.pick({ id: true })
 
 export const QHSchema = z.object({

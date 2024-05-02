@@ -12,13 +12,14 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
   const hashtags: Hashtag[] = []
   let response: IcreateHashtag = {}
 
-  values.forEach(async value => {
+  const maketag = values.map(async value => {
     const validated = CreateHashtag.safeParse(value)
     if (!validated.success) {
       console.log(validated.error.flatten().fieldErrors)
       response.error = 'hashtag: invalid fields'
       return
     }
+
     const { id, title } = validated.data
 
     if (id) {
@@ -26,6 +27,7 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
         const hash = await prisma.hashtag.findUnique({
           where: { id },
         })
+
         if (hash) {
           hashtags.push(hash)
         }
@@ -49,6 +51,8 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
       }
     }
   })
+
+  await Promise.all(maketag)
 
   const newhash = await prisma.$transaction([...rawHash])
   response.hashtags = hashtags.concat(newhash)
@@ -89,4 +93,36 @@ export async function deleteHashtag() {
       },
     },
   })
+}
+
+export async function updateQH(values: z.infer<typeof CreateQH>[], questionId: number) {
+  let response: IPrismaError = {}
+  let data: z.infer<typeof CreateQH>[] = []
+
+  values.forEach(async value => {
+    const validated = CreateQH.safeParse(value)
+    if (!validated.success) {
+      response.error = 'QH: field error'
+      return
+    }
+    data.push(validated.data)
+  })
+
+  try {
+    await prisma.questionhash.deleteMany({
+      where: {
+        questionId,
+      },
+    })
+
+    await prisma.questionhash.createMany({
+      data,
+    })
+  } catch (e) {
+    console.log(e)
+    response.error = 'QH: server error'
+    return response
+  }
+
+  return response
 }

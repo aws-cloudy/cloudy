@@ -40,4 +40,5 @@ export interface IDetailAnswerItem {
 export interface IEditorBody {
   editorRef: React.RefObject<Editor>
   setImages: React.Dispatch<React.SetStateAction<IImage[]>>
+  orig?: string
 }

@@ -1,7 +1,8 @@
 import { z } from 'zod'
-import { CreateQuestionImage } from '../schemas'
+import { CreateQuestionImage, DeleteQuestionImage } from '../schemas'
 import { IPrismaError } from '../types'
 import prisma from '../client'
+import { supabase } from '@/apis/supabase'
 
 export async function createQuestionImage(values: {
   items: z.infer<typeof CreateQuestionImage>[]
@@ -34,5 +35,33 @@ export async function createQuestionImage(values: {
     }
   })
 
+  return response
+}
+
+export async function deleteQuestionImage(questionId: number, desc: string) {
+  const response: IPrismaError = {}
+
+  const questions = await prisma.questionimage.findMany({
+    where: {
+      questionId,
+    },
+  })
+
+  if (!questions) return
+  const notExist = questions.filter(each => !desc.match(each.url)).map(each => each.path)
+
+  try {
+    await prisma.questionimage.deleteMany({
+      where: {
+        path: {
+          in: notExist,
+        },
+      },
+    })
+
+    await supabase.storage.from('cloudy_image').remove(notExist)
+  } catch (e) {
+    response.error = '이미지 삭제 중 에러 발생'
+  }
   return response
 }

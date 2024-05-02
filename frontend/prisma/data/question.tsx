@@ -1,5 +1,6 @@
 import prisma from '../client'
 import { IfetchQuestions } from '../types'
+import { unstable_noStore as noStore } from 'next/cache'
 
 export async function fetchQuestions(tags: string[], searchword: string | null, lastId: number) {
   const response: IfetchQuestions = { questions: [], count: 0 }
@@ -66,6 +67,8 @@ export async function fetchQuestions(tags: string[], searchword: string | null, 
 }
 
 export async function fetchQuestionDetail(id: number) {
+  noStore()
+
   try {
     const data = await prisma.question.findUnique({
       where: { id },

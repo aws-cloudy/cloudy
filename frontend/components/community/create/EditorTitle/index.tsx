@@ -1,12 +1,25 @@
 'user client'
 
-import styles from '@/app/community/create/page.module.scss'
-import { UseFormGetValues, UseFormRegister } from 'react-hook-form'
+import styles from '@/components/community/CreateForm/CreateForm.module.scss'
+import { UseFormRegister } from 'react-hook-form'
 import React from 'react'
 
-type Props = { register: UseFormRegister<{ title: string }>; getValues: UseFormGetValues<{ title: string }> }
+type Props = {
+  register: UseFormRegister<{ title: string }>
+  orig?: string
+}
 
-function EditorTitle({ register, getValues }: Props) {
-  return <input type="text" className={styles.title} placeholder="제목을 입력하세요" {...register('title')} />
+function EditorTitle({ register, orig }: Props) {
+  const defaultValue = orig ? orig : ''
+
+  return (
+    <input
+      type="text"
+      className={styles.title}
+      defaultValue={defaultValue}
+      placeholder="제목을 입력하세요"
+      {...register('title')}
+    />
+  )
 }
 export default React.memo(EditorTitle)

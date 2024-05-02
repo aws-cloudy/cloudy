@@ -1,3 +1,5 @@
+import { Hashtag } from '@prisma/client'
+
 export interface IHashtag {
   id: number | null
   title: string
@@ -20,7 +22,7 @@ export interface IQuestionDetail {
   desc: string
   hit: number
   createdAt: Date | string
-  hashtags: { hashtag: IHashtag }[]
+  hashtags: { hashtag: Hashtag }[]
   authId?: string | undefined
 }
 
@@ -57,7 +59,20 @@ export interface ICreateQuestion {
   }[]
 }
 
+export interface IUpdateQuestionAPI extends ICreateQuestion {
+  questionId: string | number
+  authorId: string
+}
+
 export interface IImage {
   localUrl: string
   file: File | Blob
+}
+
+export interface IUpdateQuestion {
+  id?: number | string
+  authorId?: string
+  title?: string
+  desc?: string
+  hashtags?: Hashtag[]
 }

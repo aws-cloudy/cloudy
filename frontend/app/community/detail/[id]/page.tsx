@@ -1,6 +1,8 @@
 import Layout from '@/components/common/Layout'
 import DetailAnswer from '@/components/community/detail/DetailAnswer'
 import DetailContent from '@/components/community/detail/DetailContent'
+import '@toast-ui/editor/dist/toastui-editor.css'
+
 import { commuURL } from '@/apis/urls'
 import { IQuestion, IQuestionAnswer, IQuestionDetail } from '@/types/community'
 import { ICommunityDetailPage } from '@/types/communityProps'

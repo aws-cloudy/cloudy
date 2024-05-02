@@ -7,7 +7,9 @@ import React from 'react'
 
 type HookCallback = (url: string, text?: string) => void
 
-const EditorBody = ({ editorRef, setImages }: IEditorBody) => {
+const EditorBody = ({ editorRef, setImages, orig }: IEditorBody) => {
+  const defaultValue = orig ? orig : ''
+
   const handleImage = async (blob: Blob | File, callback: HookCallback) => {
     const localUrl = await URL.createObjectURL(blob)
     callback(localUrl, 'alt text')
@@ -19,6 +21,7 @@ const EditorBody = ({ editorRef, setImages }: IEditorBody) => {
   return (
     <Editor
       ref={editorRef}
+      initialValue={orig}
       initialEditType="wysiwyg"
       hideModeSwitch={true}
       height="500px"

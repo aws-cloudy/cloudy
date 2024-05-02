@@ -12,7 +12,9 @@ function ChatBotIcon() {
   const isChatbotOpen = useIsChatbotOpen()
   const { setIsChatbotOpen } = useChatbotActions()
   const isActive = useMemo(() => {
-    return pathname !== '/community/create'
+    if (pathname === '/community/create') return false
+    if (pathname.startsWith('/community/update')) return false
+    return true
   }, [pathname])
 
   return (
