@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './LearningList.module.scss'
 import LearningCard from '@/components/common/LearningCard'
 import { useLearninglayout } from '@/stores/search'
@@ -23,17 +23,17 @@ const LearningList = (props: ILearningList) => {
   const difficulties = useDifficultyFilter()
 
   // 무한 스크롤
-  const [offset, setOffset] = useState<number>(1)
+  const offset = useRef<number>(1)
+  const hasMore = useRef<boolean>(true)
   const [list, setList] = useState<ILearningCard[]>([])
-  const [hasMore, setHasMore] = useState<boolean>(true)
   const [isFetching, setIsFetching] = useState<boolean>(true)
 
   // fetch
-  const fetchLearning = async (type: string) => {
-    if (!hasMore) return
+  const fetchLearning = async () => {
+    if (!hasMore.current) return
 
     const apiLearnings = await getLearnings(
-      offset,
+      offset.current,
       LEARNING_ROWS_PER_PAGE,
       keyword,
       getTextFilter(jobs),
@@ -42,28 +42,27 @@ const LearningList = (props: ILearningList) => {
       getTextFilter(difficulties),
     )
 
-    if (type === 'scroll' && apiLearnings.length < LEARNING_ROWS_PER_PAGE) {
-      setHasMore(false) // 더 이상 로드할 데이터가 없을 때
-      console.log('hasMore 변경됨~~')
+    if (apiLearnings.length < LEARNING_ROWS_PER_PAGE) {
+      hasMore.current = false // 더 이상 로드할 데이터가 없을 때
     }
 
     setList(prev => [...prev, ...apiLearnings])
-    setOffset(offset + 1)
+    offset.current += 1
     setIsFetching(false)
   }
 
   const observerCallback: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     if (isIntersecting && list.length > 0) {
-      fetchLearning('scroll')
+      fetchLearning()
     }
   }
 
   useEffect(() => {
     window.scrollTo(0, 0) // 맨 위로 이동
     setList([])
-    setHasMore(true)
-    setOffset(1)
-    fetchLearning('')
+    hasMore.current = true
+    offset.current = 1
+    fetchLearning()
   }, [keyword, jobs, services, types, difficulties])
 
   // 반응형 width 감지
@@ -81,7 +80,6 @@ const LearningList = (props: ILearningList) => {
   return (
     <>
       <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
-        <div>{list && list.length}</div>
         {list && list.map(item => <LearningCard key={item.learningId} item={item} layout={layout} />)}
       </div>
       <Observer callback={observerCallback} />

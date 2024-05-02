@@ -13,11 +13,8 @@ export const getLearnings = async (
   const res = await fetch(
     `${API_URL}/learnings/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
   )
-  console.log('fetch 실행', offset)
 
-  //const data = await res.json()
-  const data = { learningList: [] }
-  //console.log(query, job, service, type, difficulty)
-  // console.log('data', data.learningList)
+  const data = await res.json()
+  console.log(data)
   return data.learningList
 }
