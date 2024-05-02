@@ -28,4 +28,4 @@ spring:
         dialect: org.hibernate.dialect.MySQLDialect
 
 cognito:
-  iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_J5ofonWXb/.well-known"
+  iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"

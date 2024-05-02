@@ -57,7 +57,7 @@ public class JwtServiceImpl implements JwtService {
 
         var algorithm = buildAlgorithm((jwk));
 
-
+        log.error("decodedJwt::{}", decodedJWT);
         String userId = JWT.require(algorithm)
                 .build()
                 .verify(token)
