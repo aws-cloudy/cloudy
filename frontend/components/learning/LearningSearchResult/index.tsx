@@ -22,7 +22,7 @@ const LearningSearchResult = (props: ILearningSearchResult) => {
 
   return (
     <div className={styles.container}>
-      <div>{keyword && <div>{`'${keyword}' 검색결과 총 1건`}</div>}</div>
+      <div>{keyword && <div>{`'${keyword}' 검색결과`}</div>}</div>
       <div className={styles.rightWrap}>
         <div
           className={`${styles.filterText} ${filterCount ? styles.black : styles.gray}`}

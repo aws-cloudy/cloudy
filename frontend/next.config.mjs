@@ -4,6 +4,7 @@ const nextConfig = {
     includePaths: ['styles'],
   },
   images: {
+    domains: ['cdn.inflearn.com', 'localhost'],
     formats: ['image/avif', 'image/webp'],
   },
   reactStrictMode: false,

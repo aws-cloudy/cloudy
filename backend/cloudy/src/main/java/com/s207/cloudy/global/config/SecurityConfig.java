@@ -42,7 +42,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
        http.csrf(AbstractHttpConfigurer::disable)
                .authorizeHttpRequests((request)->{
-                   request.requestMatchers(antMatcher("/api/v1/my/**")).authenticated();
+                   request.requestMatchers(antMatcher("/api/v1/bookmarks/**")).authenticated();
                    request.requestMatchers(antMatcher("/**")).permitAll();
                    request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
                 })

@@ -1,42 +1,45 @@
-export const roadmapData = [
+import { IRoadmapCard } from '@/types/roadmap'
+
+export const roadmapData: IRoadmapCard[] = [
   {
-    id: 1,
-    image: '/img/roadmap/roadmapgreen.jpg',
-    status: 'scrap',
+    roadmapId: 1,
+    thumbnail: '/img/roadmap/roadmapgreen.jpg',
     title: 'AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide Guide ',
-    context:
+    summary:
       '효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 알 수 있음 효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 보여준다.',
-    tags: ['DataWrangler', 'GeneratedAI'],
-    comments: 2,
+    job: 'Developer',
+    service: 'Develoling',
+    commentsCnt: 2,
   },
   {
-    id: 2,
-    image: '/img/roadmap/roadmapblue.jpg',
-    status: 'scrap',
+    roadmapId: 2,
+    thumbnail: '/img/roadmap/roadmapblue.jpg',
     title: 'AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide Guide ',
-    context:
+    summary:
       '효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 알 수 있음 효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 보여준다.',
-    tags: ['DataWrangler', 'GeneratedAI'],
-    comments: 2,
+
+    job: 'Developer',
+    service: 'Develoling',
+    commentsCnt: 2,
   },
   {
-    id: 3,
-    image: '/img/roadmap/roadmapgreen.jpg',
-    status: 'scrap',
+    roadmapId: 3,
+    thumbnail: '/img/roadmap/roadmapgreen.jpg',
     title: 'AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide Guide ',
-    context:
+    summary:
       '효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 알 수 있음 효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 보여준다.',
-    tags: ['DataWrangler', 'GeneratedAI'],
-    comments: 2,
+    job: 'Developer',
+    service: 'Develoling',
+    commentsCnt: 2,
   },
   {
-    id: 4,
-    image: '/img/roadmap/roadmapgreen.jpg',
-    status: 'scrap',
+    roadmapId: 4,
+    thumbnail: '/img/roadmap/roadmapgreen.jpg',
     title: 'AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide AWS Skill Builder Learner Guide Guide ',
-    context:
+    summary:
       '효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 알 수 있음 효과적인 프롬포트를 설계하기 위한 원칙, 기법 및 모범 사례를 보여준다.',
-    tags: ['DataWrangler', 'GeneratedAI'],
-    comments: 2,
+    job: 'Developer',
+    service: 'Develoling',
+    commentsCnt: 2,
   },
 ]

@@ -5,7 +5,6 @@ import styles from './LearningSection.module.scss'
 import LearningInput from '../LearningInput'
 import LearningSearchResult from '../LearningSearchResult'
 import LearningList from '../LearningList'
-import LearningRecommend from '../LearningRecommend'
 
 const LearningSection = () => {
   const [value, setValue] = useState<string>('') // input value
@@ -15,8 +14,8 @@ const LearningSection = () => {
     <section className={styles.section}>
       <LearningInput value={value} setValue={setValue} keyword={keyword} setKeyword={setKeyword} />
       <LearningSearchResult keyword={keyword} />
-      <LearningRecommend />
-      <LearningList />
+      {/* <LearningRecommend /> */}
+      <LearningList keyword={keyword} />
     </section>
   )
 }
