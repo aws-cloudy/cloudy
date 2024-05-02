@@ -1,0 +1,1 @@
+export const LEARNING_ROWS_PER_PAGE = 12
