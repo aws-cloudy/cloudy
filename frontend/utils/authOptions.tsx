@@ -1,14 +1,7 @@
 import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
-
-// const cognitoClient = new CognitoIdentityProviderClient({
-//     region: process.env.AWS_REGION as string,
-//     credentials: {
-//       accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-//       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
-//     },
-//   })
+import { checkUserExists } from './cognito'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -22,39 +15,35 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // async redirect({ url, baseUrl, user }: any) {
-    //     // user 객체와 user.email의 존재 여부를 확인
-    //     if (!user || !user.email) {
-    //       console.error('User data is incomplete:', user)
-    //       throw new Error('User data is incomplete')
-    //     }
-
-    //     const params = {
-    //       UserPoolId: process.env.COGNITO_USER_POOL_ID,
-    //       Username: user.email,
-    //     }
-    //     const command = new AdminGetUserCommand(params)
-
-    //     try {
-    //       await cognitoClient.send(command)
-    //       // 사용자가 존재하면 원래 URL로 리디렉션
-    //       return url
-    //     } catch (error: any) {
-    //       if (error.name === 'UserNotFoundException') {
-    //         // 사용자가 존재하지 않으면 /join 페이지로 리디렉션
-    //         return `${baseUrl}/join`
-    //       }
-    //       console.error('Error validation user in Cognito: ', error)
-    //       throw new Error('Internal Server Error')
-    //     }
-    //   },
+    async signIn({ user, account, profile }) {
+      // 사용자의 이메일을 기반으로 데이터베이스에서 사용자 존재 여부를 확인
+      const userExists = await checkUserExists(user.email)
+      if (!userExists) {
+        // 데이터베이스에 사용자가 없으면 NewUser 에러를 발생시켜 리다이렉션 유도
+        throw new Error('NewUser')
+      }
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      if (url.includes('error=NewUser')) {
+        return `${baseUrl}/join`
+      }
+      return baseUrl
+    },
 
     // 토큰을 세션에 추가하는 콜백
-    async jwt({ token, account }: any) {
-      if (account) {
+    async jwt({ token, user, account, profile }: any) {
+      // Cognito로부터 받은 사용자 지정 클레임을 JWT 토큰에 추가
+      if (account?.provider === 'cognito' && user) {
+        token.job_id = user.job_id
+        token.service_id = user.service_id
+        token.user = user
+        token.account = account
+        token.profile = profile
         token.accessToken = account.access_token
         token.id = account.providerAccountId
       }
+
       return token
     },
     // 세션 데이터에 accessToken 추가
@@ -63,6 +52,8 @@ export const authOptions: NextAuthOptions = {
       session.user.id = token.id as string
       session.user.uuid = token.sub as string
       session.token = token
+      session.user.job_id = token.job_id
+      session.user.service_id = token.service_id
       return session
     },
   },
