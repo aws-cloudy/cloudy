@@ -4,13 +4,9 @@ import { ICustomInput } from '@/types/common'
 import { IoMdSearch } from 'react-icons/io'
 
 const CustomInput = (props: ICustomInput) => {
-  const { value, setValue, width } = props
+  const { value, setValue, width, onClick } = props
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
-
-  const onClick = () => {
-    console.log(value)
-  }
 
   return (
     <div className={styles.container} style={{ width }}>

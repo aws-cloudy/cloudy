@@ -3,13 +3,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import RoadmapCard from '@/components/common/RoadmapCard'
 import styles from './RoadmapListSection.module.scss'
-import { roadmapData } from './roadmapData'
 import { getRoadmaps } from '@/apis/roadmap'
 import { IRoadmapCard } from '@/types/roadmap'
 import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
 import Empty from '@/components/common/Empty'
 import { ROADMAP_ROWS_PER_PAGE } from '@/constants/rows'
+import { useRoadmapSearchValue } from '@/stores/roadmap'
 
 const RoadmapListSection = () => {
   const [list, setList] = useState<IRoadmapCard[]>([])
@@ -17,12 +17,14 @@ const RoadmapListSection = () => {
   const hasMore = useRef<boolean>(true)
   const [isFetching, setIsFetching] = useState<boolean>(true)
 
+  const searchValue = useRoadmapSearchValue()
+
   // fetch 로드맵
   const fetchRoadmaps = async () => {
     setIsFetching(true)
     if (!hasMore.current) return
 
-    const roadmaps = await getRoadmaps(offset.current)
+    const roadmaps = await getRoadmaps(offset.current, searchValue.keyword, searchValue.job, searchValue.service)
 
     if (roadmaps) {
       roadmaps.length < ROADMAP_ROWS_PER_PAGE && (hasMore.current = false)
@@ -44,7 +46,7 @@ const RoadmapListSection = () => {
     hasMore.current = true
     offset.current = 0
     fetchRoadmaps()
-  }, [])
+  }, [searchValue])
 
   if (isFetching) return <Loading />
   if (list.length <= 0)
