@@ -57,7 +57,6 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
     if (id && isUpdate) {
       await axios.put(`${commuURL}/question/update`, {
         questionId: id,
-        authorId,
         tags,
         title,
         desc,

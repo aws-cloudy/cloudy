@@ -6,10 +6,10 @@ import { auth } from '@/prisma/actions/auth'
 import { createHashtag, deleteHashtag, updateQH } from '@/prisma/actions/hashtag'
 import { updateQuestion } from '@/prisma/actions/question'
 import { createQuestionImage, deleteQuestionImage } from '@/prisma/actions/questionImage'
-import { revalidatePath } from 'next/cache'
+import prisma from '@/prisma/client'
 
 export async function PUT(req: NextRequest) {
-  const { questionId, authorId, tags, title, desc, imageData }: IUpdateQuestionAPI = await req.json()
+  const { questionId, tags, title, desc, imageData }: IUpdateQuestionAPI = await req.json()
 
   const userQuery = await auth()
 
@@ -19,7 +19,9 @@ export async function PUT(req: NextRequest) {
 
   const { memberId } = userQuery
 
-  if (memberId !== authorId) {
+  const question = await prisma.question.findUnique({ where: { id: Number(questionId) } })
+
+  if (!question || memberId !== question.memberId) {
     return NextResponse.json({ message: '권한이 없습니다.' }, { status: 403 })
   }
 
