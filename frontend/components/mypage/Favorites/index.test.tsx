@@ -3,6 +3,13 @@ import Favorites from '.'
 import RoadmapCard from '@/components/common/RoadmapCard'
 import { IRoadmapCard } from '@/types/roadmap'
 
+jest.mock('next/navigation', () => ({
+  ...jest.requireActual('next/navigation'),
+  useRouter: jest.fn().mockImplementation(() => ({
+    push: jest.fn(),
+  })),
+}))
+
 const mockItem: IRoadmapCard = {
   roadmapId: 1,
   thumbnail: '/img/roadmap/roadmapgreen.jpg',

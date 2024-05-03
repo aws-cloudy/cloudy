@@ -4,7 +4,10 @@ const nextConfig = {
     includePaths: ['styles'],
   },
   images: {
-    domains: ['cdn.inflearn.com', 'localhost'],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'cdn.inflearn.com' },
+      { protocol: 'http', hostname: 'localhost' },
+    ],
     formats: ['image/avif', 'image/webp'],
   },
   reactStrictMode: false,
