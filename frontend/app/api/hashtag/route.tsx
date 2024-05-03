@@ -2,7 +2,11 @@ import { fetchHashtags } from '@/prisma/data/hashtag'
 import { NextResponse } from 'next/server'
 
 export async function GET() {
-  const hashtags = await fetchHashtags()
+  const hashtagQuery = await fetchHashtags()
 
-  return NextResponse.json({ hashtags }, { status: 200 })
+  if (hashtagQuery.error) {
+    return NextResponse.json({ error: hashtagQuery.error }, { status: hashtagQuery.error.status })
+  }
+
+  return NextResponse.json({ hashtags: hashtagQuery.hashtags }, { status: 200 })
 }
