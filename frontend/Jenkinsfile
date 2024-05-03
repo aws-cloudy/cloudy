@@ -24,12 +24,12 @@ pipeline {
         stage('build test'){
                     steps{
                         script{
-                            dir('./frontend'){
+                            dir('./frontend') {
                                 sh 'corepack enable'
                                 sh 'corepack prepare pnpm@latest-9 --activate'
                                 sh 'pnpm install'
+                                sh 'pnpm run generate'
                                 sh 'pnpm run build'
-                                
                             }
 
                         }
