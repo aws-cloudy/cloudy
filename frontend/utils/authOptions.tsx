@@ -35,8 +35,8 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user, account, profile }: any) {
       // Cognito로부터 받은 사용자 지정 클레임을 JWT 토큰에 추가
       if (account?.provider === 'cognito' && user) {
-        token.job_id = user.job_id
-        token.service_id = user.service_id
+        token.job_id = profile.job_id
+        token.service_id = profile.service_id
         token.user = user
         token.account = account
         token.profile = profile
