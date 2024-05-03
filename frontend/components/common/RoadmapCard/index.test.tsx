@@ -1,6 +1,14 @@
 import { IRoadmapCard } from '@/types/roadmap'
 import { fireEvent, render, screen } from '@testing-library/react'
 import RoadmapCard from '.'
+import { useRouter } from 'next/router'
+
+jest.mock('next/navigation', () => ({
+  ...jest.requireActual('next/navigation'),
+  useRouter: jest.fn().mockImplementation(() => ({
+    push: jest.fn(),
+  })),
+}))
 
 describe('RoadmapCard', () => {
   const mockItem: IRoadmapCard = {
