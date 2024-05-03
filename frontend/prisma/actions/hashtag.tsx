@@ -16,7 +16,7 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
     const validated = CreateHashtag.safeParse(value)
     if (!validated.success) {
       console.log(validated.error.flatten().fieldErrors)
-      response.error = 'hashtag: invalid fields'
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
       return
     }
 
@@ -32,8 +32,7 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
           hashtags.push(hash)
         }
       } catch (e) {
-        console.log('error: hashtag: id exists')
-        response.error = 'hashtag: id exists'
+        response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
         return
       }
     } else {
@@ -45,8 +44,7 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
         })
         rawHash.push(hash)
       } catch (e) {
-        console.log('error: hashtag: create')
-        response.error = 'hashtag: an error occured while creating....'
+        response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
         return
       }
     }
@@ -67,7 +65,7 @@ export async function createQH(values: z.infer<typeof CreateQH>[]) {
   values.forEach(async value => {
     const validated = CreateQH.safeParse(value)
     if (!validated.success) {
-      response.error = 'QH: field error'
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
       return
     }
     data.push(validated.data)
@@ -78,7 +76,7 @@ export async function createQH(values: z.infer<typeof CreateQH>[]) {
       data,
     })
   } catch (e) {
-    response.error = 'QH: server error'
+    response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
     return response
   }
 
@@ -102,7 +100,7 @@ export async function updateQH(values: z.infer<typeof CreateQH>[], questionId: n
   values.forEach(async value => {
     const validated = CreateQH.safeParse(value)
     if (!validated.success) {
-      response.error = 'QH: field error'
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
       return
     }
     data.push(validated.data)
@@ -120,7 +118,7 @@ export async function updateQH(values: z.infer<typeof CreateQH>[], questionId: n
     })
   } catch (e) {
     console.log(e)
-    response.error = 'QH: server error'
+    response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
     return response
   }
 

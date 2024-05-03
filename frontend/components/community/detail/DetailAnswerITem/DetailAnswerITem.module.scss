@@ -9,12 +9,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 10px 0;
 }
 
 .nameBox {
   width: 100%;
   display: flex;
-  margin-bottom: 10px;
   align-items: center;
 
   & > * {
@@ -34,6 +34,7 @@
     color: $gray8;
     cursor: pointer;
     margin-left: 5px;
+    font-size: 0.9em;
 
     &:hover {
       color: $gray9;
@@ -57,4 +58,12 @@
   color: $green1;
   font-weight: 500;
   border-radius: 25px;
+}
+
+@media screen and (max-width: $tablet) {
+  .buttonBox {
+    & > button {
+      font-size: 1em;
+    }
+  }
 }

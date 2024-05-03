@@ -18,7 +18,7 @@ function DetailAnswerInput({ id, authId }: { id: string | number; authId: string
   ) => {
     if (e) e.preventDefault()
     const desc = getValues('desc')
-    await axios.post(`${commuURL}/question/answer`, { postId: id, desc })
+    const res = await axios.post(`${commuURL}/question/answer`, { postId: id, desc })
     router.refresh()
     reset()
   }

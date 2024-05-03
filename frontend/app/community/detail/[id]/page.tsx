@@ -17,7 +17,9 @@ const getQuestion = async (id: string) => {
 
 async function CommunityDetailPage({ params: { id } }: ICommunityDetailPage) {
   const question = await getQuestion(id)
-  if (!question.id) return <div>삭제되었거나 존재하지 않는 게시글입니다.</div>
+
+  if (!question.id) return <div className={styles.notfound}>삭제되었거나 존재하지 않는 게시글입니다.</div>
+
   const { id: questionId, memberId, title, hashtags, desc, createdAt, memberName, answers, checkedId, hit } = question
   const user = await getUser()
   const Q: IQuestionDetail = {

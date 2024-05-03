@@ -3,7 +3,8 @@ import CreateForm from '@/components/community/CreateForm'
 import { IQuestion } from '@/types/community'
 import { getUser } from '@/utils/getUser'
 import axios from 'axios'
-import { unstable_noStore as noStore, revalidatePath } from 'next/cache'
+import { unstable_noStore as noStore } from 'next/cache'
+import styles from './page.module.scss'
 
 const CommunityUpdatepage = async ({ params }: { params: { id: string } }) => {
   noStore()
@@ -12,7 +13,10 @@ const CommunityUpdatepage = async ({ params }: { params: { id: string } }) => {
     params: { id: params.id },
   })
   const isWriter = user?.id === post.data.memberId
-  revalidatePath(`/community/update/${params.id}`)
+
+  if (!post.data.id) {
+    return <div className={styles.notfound}>삭제되었거나 존재하지 않는 게시글입니다.</div>
+  }
 
   if (!isWriter) {
     return <div>권한이 없습니다.</div>

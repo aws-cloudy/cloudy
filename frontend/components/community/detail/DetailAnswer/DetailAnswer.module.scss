@@ -18,6 +18,8 @@
 
 .answers {
   min-height: 200px;
+  font-size: 0.8em;
+  padding: 10px 0;
 }
 
 .nodata {
@@ -37,5 +39,9 @@
   .inner {
     margin: 0;
     padding: 10px;
+  }
+
+  .answers {
+    font-size: 1em;
   }
 }

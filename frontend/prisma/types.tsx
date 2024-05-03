@@ -10,7 +10,11 @@ export interface IRQuestion extends Question {
 }
 
 export interface IPrismaError {
-  error?: string
+  error?: {
+    status: number
+    code: string
+    msg: string
+  }
 }
 
 export interface IfetchQuestions extends IPrismaError {
@@ -28,4 +32,9 @@ export interface IcreateHashtag extends IPrismaError {
 
 export interface IcreateQuestion extends IPrismaError {
   question?: Question
+}
+
+export interface IFetchMyAnswers extends IPrismaError {
+  answers: Answer[]
+  count: number
 }

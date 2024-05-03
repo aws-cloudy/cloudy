@@ -14,7 +14,7 @@ export async function createQuestionImage(values: {
   items.forEach(async item => {
     const validated = CreateQuestionImage.safeParse(item)
     if (!validated.success) {
-      response.error = '이미지 생성 필드 오류'
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
       return
     }
 
@@ -30,7 +30,7 @@ export async function createQuestionImage(values: {
       })
       return
     } catch (e) {
-      response.error = '이미지 필드 생성 중 에러 발생'
+      response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
       return
     }
   })
@@ -61,7 +61,7 @@ export async function deleteQuestionImage(questionId: number, desc: string) {
 
     await supabase.storage.from('cloudy_image').remove(notExist)
   } catch (e) {
-    response.error = '이미지 삭제 중 에러 발생'
+    response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
   }
   return response
 }

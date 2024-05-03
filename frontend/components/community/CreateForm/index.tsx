@@ -55,7 +55,7 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
     await Promise.all(uploadImages)
 
     if (id && isUpdate) {
-      await axios.put(`${commuURL}/question/update`, {
+      const res = await axios.put(`${commuURL}/question/update`, {
         questionId: id,
         tags,
         title,
