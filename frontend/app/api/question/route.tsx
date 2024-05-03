@@ -1,4 +1,3 @@
-import prisma from '@/prisma/client'
 import { fetchQuestions } from '@/prisma/data/question'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -14,7 +13,16 @@ export async function GET(req: NextRequest) {
   const questionQuery = await fetchQuestions(tags, searchword, Number(lastId))
 
   if (questionQuery.error) {
-    return NextResponse.json(null, { status: 400 })
+    return NextResponse.json(
+      {
+        error: {
+          status: 404,
+          code: 'CE006',
+          msg: '요청한 데이터가 존재하지 않습니다.',
+        },
+      },
+      { status: 404 },
+    )
   }
 
   const isLast = questionQuery.questions.length === 0

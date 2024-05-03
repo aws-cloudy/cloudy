@@ -60,7 +60,7 @@ export async function fetchQuestions(tags: string[], searchword: string | null, 
     }
     return response
   } catch (e) {
-    response.error = 'fetch error'
+    response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
     console.log(e)
     return response
   }
