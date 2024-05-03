@@ -76,6 +76,12 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.1'
 
+    //opensearch
+//    implementation 'org.opensearch.client:opensearch-rest-client:2.11.0'
+//    implementation 'org.opensearch.client:opensearch-java:2.10.0'
+    implementation 'org.opensearch.client:opensearch-rest-high-level-client:2.11.0'
+
+
 
 }
 
