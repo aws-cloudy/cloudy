@@ -15,9 +15,12 @@ function DetailContentSubtitle({ id, author, createdAt, authorId, authId }: IDet
   const isAuthor = authorId === authId
 
   const handleDelete = async () => {
-    const res = await axios.delete(`${commuURL}/question/detail/delete`, { params: { id } })
-    console.log(res)
+    await axios.delete(`${commuURL}/question/detail/delete`, { params: { id } })
     router.push('/community')
+  }
+
+  const handleUpdate = () => {
+    router.push(`/community/update/${id}`)
   }
 
   return (
@@ -30,10 +33,10 @@ function DetailContentSubtitle({ id, author, createdAt, authorId, authId }: IDet
       <div className={styles.buttonBox}>
         {isAuthor && (
           <>
-            <button>수정</button>
+            <button onClick={() => handleUpdate()}>수정</button>
+            <button onClick={() => handleDelete()}>삭제</button>
           </>
         )}
-        <button onClick={() => handleDelete()}>삭제</button>
       </div>
     </div>
   )

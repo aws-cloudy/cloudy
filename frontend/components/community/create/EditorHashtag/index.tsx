@@ -8,7 +8,7 @@ function EditorHashtag({ tags, setTags }: IEditorHashtag) {
   const { register, getValues, setValue } = useForm<{ hash: string }>()
 
   const onSpacebar = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    const tag = getValues('hash')
+    const tag = getValues('hash').toLowerCase()
 
     if (e.key === ' ' || e.key === 'Enter') {
       e.preventDefault()

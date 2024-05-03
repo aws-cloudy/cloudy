@@ -3,7 +3,6 @@ import { fetchQuestions } from '@/prisma/data/question'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
-  console.log(req.nextUrl.searchParams.get('tag'))
   let tags: string[] = []
 
   if (req.nextUrl.searchParams.get('tag')) {
@@ -20,5 +19,8 @@ export async function GET(req: NextRequest) {
 
   const isLast = questionQuery.questions.length === 0
 
-  return NextResponse.json({ questionList: questionQuery.questions, isLast }, { status: 200 })
+  return NextResponse.json(
+    { questionList: questionQuery.questions, count: questionQuery.count, isLast },
+    { status: 200 },
+  )
 }

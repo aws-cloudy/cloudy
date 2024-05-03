@@ -1,12 +1,12 @@
 'use server'
 
-import { IQuestion } from '@/types/community'
 import prisma from '../client'
-import { CreateQuestion, DeleteQuestion } from '../schemas'
+import { CreateQuestion, DeleteQuestion, UpdateQuestion } from '../schemas'
 import { z } from 'zod'
+import { IPrismaError, IcreateQuestion } from '../types'
 
 export async function createQuestion(values: z.infer<typeof CreateQuestion>) {
-  const response: { error?: string; question?: IQuestion } = {}
+  const response: IcreateQuestion = {}
 
   const validated = CreateQuestion.safeParse(values)
   if (!validated.success) {
@@ -40,7 +40,7 @@ export async function createQuestion(values: z.infer<typeof CreateQuestion>) {
 
 export async function deleteQuestion(value: z.infer<typeof DeleteQuestion>) {
   const validated = DeleteQuestion.safeParse(value)
-  const response: { error?: string } = {}
+  const response: IPrismaError = {}
 
   if (!validated.success) {
     response.error = 'delete question: invalid fields'
@@ -56,4 +56,27 @@ export async function deleteQuestion(value: z.infer<typeof DeleteQuestion>) {
     return response
   }
   return response
+}
+
+export async function updateQuestion(values: z.infer<typeof UpdateQuestion>) {
+  const validated = UpdateQuestion.safeParse(values)
+  const response: IPrismaError = {}
+
+  if (!validated.success) {
+    response.error = '업데이트 필드 에러'
+    return response
+  }
+  const { desc, id, title } = validated.data
+
+  try {
+    await prisma.question.update({
+      where: { id },
+      data: { title, desc },
+    })
+
+    return response
+  } catch (e) {
+    response.error = '업데이트 중 에러 발생'
+    return response
+  }
 }

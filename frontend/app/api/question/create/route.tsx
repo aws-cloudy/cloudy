@@ -5,10 +5,10 @@ import { z } from 'zod'
 import { auth } from '@/prisma/actions/auth'
 import { createHashtag, createQH } from '@/prisma/actions/hashtag'
 import { createQuestion } from '@/prisma/actions/question'
-import { redirect } from 'next/navigation'
+import { createQuestionImage } from '@/prisma/actions/questionImage'
 
 export async function POST(req: NextRequest) {
-  const { tags, title, desc }: ICreateQuestion = await req.json()
+  const { tags, title, desc, imageData }: ICreateQuestion = await req.json()
 
   const userQuery = await auth()
 
@@ -29,6 +29,13 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ message: questionQuery.error }, { status: 400 })
   }
   const { question } = questionQuery
+
+  if (question && imageData.length > 0) {
+    const imageQuery = await createQuestionImage({ items: imageData, questionId: question.id })
+    if (imageQuery.error) {
+      return NextResponse.json({ message: imageQuery.error }, { status: 400 })
+    }
+  }
 
   if (hashtags && question) {
     const QH: z.infer<typeof CreateQH>[] = hashtags.reduce(

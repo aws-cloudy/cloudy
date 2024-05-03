@@ -2,11 +2,11 @@
 
 import prisma from '../client'
 import { z } from 'zod'
-import { CreateAnswer, DeleteAnswer, UpdateQuestion } from '../schemas'
-import { IAnswer } from '@/types/community'
+import { CreateAnswer, DeleteAnswer } from '../schemas'
+import { IPrismaError, IcreateAnswer } from '../types'
 
 export async function createAnswer(values: z.infer<typeof CreateAnswer>) {
-  const response: { error?: string; answer?: IAnswer } = {}
+  const response: IcreateAnswer = {}
   const validated = CreateAnswer.safeParse(values)
 
   if (!validated.success) {
@@ -42,7 +42,7 @@ export async function createAnswer(values: z.infer<typeof CreateAnswer>) {
 
 export async function deleteAnswer(values: z.infer<typeof DeleteAnswer>) {
   const validated = DeleteAnswer.safeParse(values)
-  const response: { error?: string } = {}
+  const response: IPrismaError = {}
 
   if (!validated.success) {
     response.error = 'delete answer: invalid fields'
@@ -61,7 +61,7 @@ export async function deleteAnswer(values: z.infer<typeof DeleteAnswer>) {
 }
 
 export async function checkAnswer(postId: number, ansId: number | null) {
-  const response: { error?: string } = {}
+  const response: IPrismaError = {}
 
   try {
     await prisma.question.update({
