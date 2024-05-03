@@ -41,6 +41,24 @@ export default function RegistInfomation() {
     setConfirmScreen(false)
   }
 
+  const submit = async () => {
+    const response = await fetch('/api/updateUser', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ jobId: selectedJob?.value, serviceId: selectedService?.value }),
+    })
+
+    if (response.ok) {
+      // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
+      window.location.href = '/'
+    } else {
+      // 에러 처리
+      console.error('Failed to update user information')
+    }
+  }
+
   if (confirmScreen) {
     return (
       <div className={styles.section}>
@@ -61,7 +79,7 @@ export default function RegistInfomation() {
         <button className={styles.cancel} onClick={handleCancel}>
           취소
         </button>
-        <button className={styles.submit} onClick={handleConfirm}>
+        <button className={styles.submit} onClick={submit}>
           확인
         </button>
       </div>
