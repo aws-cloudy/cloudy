@@ -58,7 +58,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
           </div>
           <div className={styles.comment}>
             <BsChat className={styles.comment} />
-            {item.commentsCnt}
+            <span>{item.commentsCnt}</span>
           </div>
         </div>
       </div>
