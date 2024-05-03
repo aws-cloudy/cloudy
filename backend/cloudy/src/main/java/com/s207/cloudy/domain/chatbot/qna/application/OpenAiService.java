@@ -39,17 +39,25 @@ public class OpenAiService {
     }
 
     public Flux<String> ask(String question) throws JsonProcessingException {
-        CompletionReq request = new CompletionReq(question);
-        String requestValue = objectMapper.writeValueAsString(request);
+        String requestValue = getRequestValue(question);
 
-        Flux<String> eventStream = client.post()
-                .bodyValue(requestValue)
-                .accept(MediaType.TEXT_EVENT_STREAM)
-                .retrieve()
+        Flux<String> eventStream = getRetrieve(requestValue)
                 .bodyToFlux(String.class);
 
         return eventStream;
 
+    }
+
+    public String getRequestValue(String question) throws JsonProcessingException {
+        CompletionReq request = new CompletionReq(question);
+        return objectMapper.writeValueAsString(request);
+    }
+
+    public WebClient.ResponseSpec getRetrieve(String requestValue) {
+        return client.post()
+                .bodyValue(requestValue)
+                .accept(MediaType.TEXT_EVENT_STREAM)
+                .retrieve();
     }
 
 }
