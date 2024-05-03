@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './LearningList.module.scss'
 import LearningCard from '@/components/common/LearningCard'
-import { useLearninglayout } from '@/stores/search'
+import { useLearninglayout } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { ILearningCard, ILearningList } from '@/types/learning'
 import { LEARNING_ROWS_PER_PAGE } from '@/constants/rows'
