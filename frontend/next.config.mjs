@@ -5,6 +5,7 @@ const nextConfig = {
   },
   images: {
     remotePatterns: [
+      { protocol: 'https', hostname: 'explore.skillbuilder.aws' },
       { protocol: 'https', hostname: 'cdn.inflearn.com' },
       { protocol: 'http', hostname: 'localhost' },
     ],
