@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import styles from './CustomInput.module.scss'
 import { ICustomInput } from '@/types/common'
