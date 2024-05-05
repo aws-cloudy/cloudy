@@ -2,16 +2,17 @@ import React from 'react'
 import styles from './DetailTop.module.scss'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import Avatar from '@/components/common/Avatar'
+import { IRoadmapCard } from '@/types/roadmap'
 
-const DetailTop = () => {
+const DetailTop = ({ data }: { data: IRoadmapCard }) => {
   return (
     <>
       <div className={styles.tags}>
-        <div>#DataWrangler</div>
-        <div>#DataWrangler</div>
+        <div>#{data.job}</div>
+        <div>#{data.service}</div>
       </div>
       <div className={styles.title}>
-        Analyze security findings faster with no-code data preparation using generative AI and Amazon SageMaker Canvas
+        {data.title}
         <BsBookmarkFill className={styles.bookmark} />
       </div>
       <div className={styles.profile}>

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { IFilter } from './learning'
+import { IFilter, ILearningCard } from './learning'
 
 export interface IRoadmapFilterDropdown {
   job: IFilter
@@ -23,4 +23,11 @@ export interface IRoadmapCard {
   summary: string
   thumbnail: string
   title: string
+}
+
+export interface IRoadmapDetailSection {
+  data: {
+    detail: IRoadmapCard
+    courses: ILearningCard[]
+  }
 }

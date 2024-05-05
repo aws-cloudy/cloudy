@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import Layout from '@/components/common/Layout'
 import DetailSection from '@/components/roadmap/detail/DetailSection'
+import { getRoadmap } from '@/apis/roadmap'
 
-const RaodmapDetailPage = () => {
+interface IParams {
+  params: { id: number }
+}
+
+async function fetchRoadmap(id: number) {
+  const response = await getRoadmap(id)
+  return response
+}
+
+export default async function RaodmapDetailPage({ params: { id } }: IParams) {
+  const data = await fetchRoadmap(id)
+
   return (
     <Layout>
-      <DetailSection />
+      <Suspense fallback={<h1>Loading a roadmap ${id}</h1>}>
+        <DetailSection data={data} />
+      </Suspense>
     </Layout>
   )
 }
-
-export default RaodmapDetailPage

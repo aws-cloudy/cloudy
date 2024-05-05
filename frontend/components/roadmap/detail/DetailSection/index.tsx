@@ -3,11 +3,12 @@ import React from 'react'
 import CommentSection from '../CommentSection'
 import DetailTop from '../DetailTop'
 import DetailTab from '../DetailTab'
+import { IRoadmapDetailSection } from '@/types/roadmap'
 
-const DetailSection = () => {
+const DetailSection = ({ data }: IRoadmapDetailSection) => {
   return (
     <section className={styles.section}>
-      <DetailTop />
+      <DetailTop data={data.detail} />
       <div className={styles.row}>
         <div className={styles.left}>
           <DetailTab />
