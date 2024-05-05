@@ -1,15 +1,16 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 10px;
-
+  padding-inline: 10px;
+  h1,
   h2 {
-    padding-bottom: 4px;
+    padding-block: 16px;
   }
+
   h3 {
-    padding-top: 10px;
+    padding-block: 10px;
   }
-  ul {
-    padding: 10px;
+  li {
+    padding: 8px;
   }
 }

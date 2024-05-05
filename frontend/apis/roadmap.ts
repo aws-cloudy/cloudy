@@ -18,5 +18,6 @@ export const getRoadmap = async (id: number) => {
     .get(`${url}/${id}`)
     .then(res => res.data)
     .catch(err => err)
+  console.log(response)
   return response
 }
