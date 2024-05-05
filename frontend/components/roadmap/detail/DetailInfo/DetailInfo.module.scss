@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+  h2 {
+    padding-bottom: 4px;
+  }
+  h3 {
+    padding-top: 10px;
+  }
+  ul {
+    padding: 10px;
+  }
+}
