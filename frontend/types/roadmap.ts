@@ -25,7 +25,7 @@ export interface IRoadmapCard {
   title: string
 }
 
-export interface IRoadmapDetailSection {
+export interface IRoadmapDetailData {
   data: {
     detail: IRoadmapCard
     courses: ILearningCard[]

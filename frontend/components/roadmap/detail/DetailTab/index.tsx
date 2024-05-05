@@ -4,8 +4,9 @@ import React, { useState } from 'react'
 import styles from './DetailTab.module.scss'
 import DetailInfo from '../DetailInfo'
 import DetailCourse from '../DetailCourse'
+import { IRoadmapDetailData } from '@/types/roadmap'
 
-const DetailTab = () => {
+const DetailTab = ({ data }: IRoadmapDetailData) => {
   const [selectedTab, setSelectedTab] = useState<number>(0)
 
   return (
@@ -18,7 +19,7 @@ const DetailTab = () => {
           로드맵 코스
         </div>
       </div>
-      {!selectedTab ? <DetailInfo /> : <DetailCourse />}
+      {!selectedTab ? <DetailInfo /> : <DetailCourse data={data.courses} />}
     </>
   )
 }
