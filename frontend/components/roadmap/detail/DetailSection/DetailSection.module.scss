@@ -17,3 +17,16 @@
 .right {
   width: 30%;
 }
+
+@media screen and (max-width: $tablet) {
+  .row {
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+  }
+}

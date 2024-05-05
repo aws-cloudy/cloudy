@@ -17,9 +17,7 @@ export default async function RaodmapDetailPage({ params: { id } }: IParams) {
 
   return (
     <Layout>
-      <Suspense fallback={<h1>Loading a roadmap ${id}</h1>}>
-        <DetailSection data={data} />
-      </Suspense>
+      <DetailSection data={data} />
     </Layout>
   )
 }
