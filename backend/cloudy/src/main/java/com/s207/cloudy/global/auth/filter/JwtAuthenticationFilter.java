@@ -30,19 +30,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
 
+
+    private boolean isAuthenticatedPath(String path){
+        return (path.matches("^/api/v1/bookmarks/.*")||path.equals("/api/v1/bookmarks")||path.matches("^/api/v1/comments/.*"));
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(!request.getServletPath().matches("^/api/v1/bookmarks/.*")&&!request.getServletPath().equals("/api/v1/bookmarks")){
+        if(!isAuthenticatedPath(request.getServletPath())){
             filterChain.doFilter(request, response);
             return;
         }
-        try{
-            jwtService.extractAccessToken(request)
-                    .filter(jwtService::isTokenValid)
-                    .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
-        }catch(Exception e) {
-            log.error("{}", e.getMessage());
-        }
+
+        jwtService.extractAccessToken(request)
+                .filter(jwtService::isTokenValid)
+                .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
+
 
         filterChain.doFilter(request, response);
 
