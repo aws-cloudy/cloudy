@@ -7,6 +7,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'explore.skillbuilder.aws' },
       { protocol: 'https', hostname: 'cdn.inflearn.com' },
+      { protocol: 'https', hostname: 'rattle-stock-d32.notion.site' },
       { protocol: 'http', hostname: 'localhost' },
     ],
     minimumCacheTTL: 31536000,
