@@ -1,11 +1,11 @@
 import React from 'react'
 import Layout from '@/components/common/Layout'
-import Detail from '@/components/roadmap/detail'
+import DetailSection from '@/components/roadmap/detail/DetailSection'
 
 const RaodmapDetailPage = () => {
   return (
     <Layout>
-      <Detail />
+      <DetailSection />
     </Layout>
   )
 }

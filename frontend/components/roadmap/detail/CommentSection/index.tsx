@@ -1,9 +1,9 @@
-import Comment from './Comment'
-import styles from './CommentBox.module.scss'
+import styles from './CommentSection.module.scss'
 import React, { useState } from 'react'
 import { FaSquareCheck } from 'react-icons/fa6'
+import CommentItem from '../CommentItem'
 
-const CommentBox = ({ comments }: any) => {
+const CommentSection = ({ comments }: any) => {
   const [inputText, setInputText] = useState('')
 
   const handleInput = (event: any) => {
@@ -39,7 +39,7 @@ const CommentBox = ({ comments }: any) => {
         </button>
       </div>
       {comments.length > 0 ? (
-        <Comment comments={comments} />
+        <CommentItem comments={comments} />
       ) : (
         <div className={styles.notice}>첫번째 댓글을 남겨보세요.</div>
       )}
@@ -47,4 +47,4 @@ const CommentBox = ({ comments }: any) => {
   )
 }
 
-export default CommentBox
+export default CommentSection

@@ -1,13 +1,14 @@
 'use client'
+
 import Image from 'next/image'
-import styles from './Detail.module.scss'
+import styles from './DetailSection.module.scss'
 import React, { useState } from 'react'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import Avatar from '@/components/common/Avatar'
-import Description from './Description/indext'
-import CommentBox from './CommentBox'
+import Description from '../Description/indext'
+import CommentSection from '../CommentSection'
 
-const Detail = () => {
+const DetailSection = () => {
   const [selectedTab, setSelectedTab] = useState('introduce')
 
   const comments = [
@@ -65,11 +66,11 @@ const Detail = () => {
           {selectedTab === 'introduce' && <Description />}
         </div>
         <div className={styles.right}>
-          <CommentBox comments={comments} />
+          <CommentSection comments={comments} />
         </div>
       </div>
     </section>
   )
 }
 
-export default Detail
+export default DetailSection
