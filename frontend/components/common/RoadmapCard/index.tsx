@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { getShortText } from '@/utils/getShortText'
 import { IRoadmapCard } from '@/types/roadmap'
+import { useRouter } from 'next/navigation'
 
 const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const { item } = props
@@ -22,10 +23,13 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
     setClickMark('scrap')
   }
 
+  const router = useRouter()
+  const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
+
   return (
-    <div className={styles.card} key={item.id}>
+    <div className={styles.card} key={item.roadmapId} onClick={onClick}>
       <div className={styles.imageBox}>
-        <Image src={item.image} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
+        <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
         {clickMark === 'scrap' ? (
           <BsBookmarkFill
             className={styles.bookmark}
@@ -46,15 +50,15 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
       </div>
       <div className={styles.info}>
         <div className={styles.title}>{item.title}</div>
-        <div className={styles.context}>{getShortText(item.context, 50)}</div>
+        <div className={styles.context}>{getShortText(item.summary, 50)}</div>
         <div className={styles.row}>
           <div className={styles.tags}>
-            {item.tags.map(tag => (
-              <div key={tag}>#{tag}</div>
-            ))}
+            <div># {item.job}</div>
+            <div># {item.service}</div>
           </div>
           <div className={styles.comment}>
-            <BsChat className={styles.comment} /> 2
+            <BsChat className={styles.comment} />
+            <span>{item.commentsCnt}</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { IQuestionDetail } from '@/types/community'
 import styles from './DetailContent.module.scss'
 import dynamic from 'next/dynamic'
-import DetailContentSubtitle from '../DetaiContentSubtitle'
+import DetailContentSubtitle from '../DetailContentSubtitle'
 
 const DetailContentDesc = dynamic(() => import('../DetailContentDesc'), { ssr: false })
 

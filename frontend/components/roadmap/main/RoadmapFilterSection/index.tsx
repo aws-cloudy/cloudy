@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './RoadmapFilterSection.module.scss'
 import RoadmapFilterDropdown from '../RoadmapFilterDropdown'
 import RoadmapFilterInput from '../RoadmapFilterInput'
@@ -15,7 +15,7 @@ const RoadmapFilterSection = () => {
   return (
     <section className={styles.section}>
       <RoadmapFilterDropdown job={job} setJob={setJob} service={service} setService={setService} />
-      <RoadmapFilterInput value={keyword} setValue={setKeyword} />
+      <RoadmapFilterInput value={keyword} setValue={setKeyword} job={job} service={service} />
     </section>
   )
 }

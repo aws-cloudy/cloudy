@@ -1,7 +1,7 @@
 import styles from './LearningSearchResult.module.scss'
 import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
-import { useLearninglayout, useSearchActions } from '@/stores/search'
+import { useLearninglayout, useSearchActions } from '@/stores/layout'
 import { ILearningSearchResult } from '@/types/learning'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { useFilterCount, useLearningActions } from '@/stores/learning'
@@ -22,7 +22,7 @@ const LearningSearchResult = (props: ILearningSearchResult) => {
 
   return (
     <div className={styles.container}>
-      <div>{keyword && <div>{`'${keyword}' 검색결과 총 1건`}</div>}</div>
+      <div>{keyword && <div>{`'${keyword}' 검색결과`}</div>}</div>
       <div className={styles.rightWrap}>
         <div
           className={`${styles.filterText} ${filterCount ? styles.black : styles.gray}`}

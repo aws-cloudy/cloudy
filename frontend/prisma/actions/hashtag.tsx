@@ -3,29 +3,23 @@
 import prisma from '../client'
 import { z } from 'zod'
 import { CreateHashtag, CreateQH } from '../schemas'
-import { Prisma } from '@prisma/client'
+import { Hashtag, Prisma } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
-import { IHashtag } from '@/types/community'
+import { IPrismaError, IcreateHashtag } from '../types'
 
 export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
-  const rawHash: Prisma.Prisma__HashtagClient<
-    {
-      id: number
-      title: string
-    },
-    never,
-    DefaultArgs
-  >[] = []
-  const hashtags: IHashtag[] = []
-  let response: { error?: string; hashtags?: IHashtag[] } = {}
+  const rawHash: Prisma.Prisma__HashtagClient<Hashtag, never, DefaultArgs>[] = []
+  const hashtags: Hashtag[] = []
+  let response: IcreateHashtag = {}
 
-  values.forEach(async value => {
+  const maketag = values.map(async value => {
     const validated = CreateHashtag.safeParse(value)
     if (!validated.success) {
       console.log(validated.error.flatten().fieldErrors)
-      response.error = 'hashtag: invalid fields'
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
       return
     }
+
     const { id, title } = validated.data
 
     if (id) {
@@ -33,12 +27,12 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
         const hash = await prisma.hashtag.findUnique({
           where: { id },
         })
+
         if (hash) {
           hashtags.push(hash)
         }
       } catch (e) {
-        console.log('error: hashtag: id exists')
-        response.error = 'hashtag: id exists'
+        response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
         return
       }
     } else {
@@ -50,12 +44,13 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
         })
         rawHash.push(hash)
       } catch (e) {
-        console.log('error: hashtag: create')
-        response.error = 'hashtag: an error occured while creating....'
+        response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
         return
       }
     }
   })
+
+  await Promise.all(maketag)
 
   const newhash = await prisma.$transaction([...rawHash])
   response.hashtags = hashtags.concat(newhash)
@@ -64,13 +59,13 @@ export async function createHashtag(values: z.infer<typeof CreateHashtag>[]) {
 }
 
 export async function createQH(values: z.infer<typeof CreateQH>[]) {
-  let response: { error?: string } = {}
+  let response: IPrismaError = {}
   let data: z.infer<typeof CreateQH>[] = []
 
   values.forEach(async value => {
     const validated = CreateQH.safeParse(value)
     if (!validated.success) {
-      response.error = 'QH: field error'
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
       return
     }
     data.push(validated.data)
@@ -81,7 +76,7 @@ export async function createQH(values: z.infer<typeof CreateQH>[]) {
       data,
     })
   } catch (e) {
-    response.error = 'QH: server error'
+    response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
     return response
   }
 
@@ -96,4 +91,36 @@ export async function deleteHashtag() {
       },
     },
   })
+}
+
+export async function updateQH(values: z.infer<typeof CreateQH>[], questionId: number) {
+  let response: IPrismaError = {}
+  let data: z.infer<typeof CreateQH>[] = []
+
+  values.forEach(async value => {
+    const validated = CreateQH.safeParse(value)
+    if (!validated.success) {
+      response.error = { status: 400, code: 'CE001', msg: 'API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다. ' }
+      return
+    }
+    data.push(validated.data)
+  })
+
+  try {
+    await prisma.questionhash.deleteMany({
+      where: {
+        questionId,
+      },
+    })
+
+    await prisma.questionhash.createMany({
+      data,
+    })
+  } catch (e) {
+    console.log(e)
+    response.error = { status: 500, code: 'SE001', msg: 'Internal Server Error / 데이터베이스 오류입니다.' }
+    return response
+  }
+
+  return response
 }

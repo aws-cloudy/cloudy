@@ -8,7 +8,10 @@ export async function POST(req: NextRequest) {
   const userQuery = await auth()
 
   if (userQuery === undefined) {
-    return NextResponse.json({ message: '로그인해주세요' }, { status: 401 })
+    return NextResponse.json(
+      { error: { status: 401, code: 'CA004', msg: '로그인 한 회원만 요청 가능합니다.' } },
+      { status: 401 },
+    )
   }
 
   const { memberId, memberName } = userQuery
@@ -18,7 +21,7 @@ export async function POST(req: NextRequest) {
     const answerQuery = await createAnswer({ postId: id, desc, memberId, memberName })
 
     if (answerQuery.error) {
-      return NextResponse.json({ message: answerQuery.error }, { status: 400 })
+      return NextResponse.json({ error: answerQuery.error }, { status: answerQuery.error.status })
     }
     return NextResponse.json({ ...answerQuery.answer })
   }

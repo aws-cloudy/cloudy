@@ -119,6 +119,7 @@
   margin-top: 8px;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
 }
 
 .duration {
@@ -135,7 +136,8 @@
   cursor: pointer;
 }
 
-.linkButton {
+.link {
+  font-size: 0.8em;
   border: none;
   display: flex;
   background-color: $white;

@@ -10,7 +10,7 @@ const meta = {
   },
 
   tags: ['autodocs'],
-  args: { value: '', setValue: fn() },
+  args: { value: '', setValue: fn(), onClick: fn() },
 } satisfies Meta<typeof CustomInput>
 
 export default meta

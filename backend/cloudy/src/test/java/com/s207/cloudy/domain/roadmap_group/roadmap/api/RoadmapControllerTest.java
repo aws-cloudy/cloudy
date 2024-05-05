@@ -93,7 +93,7 @@ class RoadmapControllerTest {
     }
 
     @Test
-    @DisplayName("전체 로드맵 리스트를 정상적으로 조회해 반환하고, 200 OK를 반환한다.")
+    @DisplayName("전체  반환하고, 200 OK를 반환한다.")
     void findAllSuccess() throws Exception {
 
         List<RoadmapRes> dummyList = List.of(dummyRoadmapRes1, dummyRoadmapRes2);

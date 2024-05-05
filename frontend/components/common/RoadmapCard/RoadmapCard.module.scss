@@ -7,6 +7,11 @@
   height: 100%;
   border-radius: 12px;
   border: 1px solid $gray5;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.01);
+    transition-duration: 0.5s;
+  }
 }
 
 .imageBox {
@@ -71,4 +76,7 @@
 
 .comment {
   color: $gray8;
+  span {
+    margin-left: 6px;
+  }
 }

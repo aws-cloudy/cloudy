@@ -1,11 +1,12 @@
+'use client'
+
 import React from 'react'
 import styles from './CustomInput.module.scss'
 import { ICustomInput } from '@/types/common'
 import { IoMdSearch } from 'react-icons/io'
 
 const CustomInput = (props: ICustomInput) => {
-  const { value, setValue, width } = props
-
+  const { value, setValue, width, onClick } = props
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
 
   return (
@@ -17,7 +18,7 @@ const CustomInput = (props: ICustomInput) => {
         className={styles.input}
         name="custom-input"
       />
-      <div className={styles.iconWrap}>
+      <div className={styles.iconWrap} onClick={onClick}>
         <IoMdSearch color="#ccc" />
       </div>
     </div>

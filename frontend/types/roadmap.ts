@@ -11,14 +11,16 @@ export interface IRoadmapFilterDropdown {
 export interface IRoadmapFilterInput {
   value: string
   setValue: Dispatch<SetStateAction<string>>
+  job: IFilter
+  service: IFilter
 }
 
 export interface IRoadmapCard {
-  id: number
-  image: string
-  status: string
+  roadmapId: number
+  commentsCnt: number
+  job: string
+  service: string
+  summary: string
+  thumbnail: string
   title: string
-  context: string
-  tags: string[]
-  comments: number
 }

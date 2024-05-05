@@ -57,12 +57,13 @@ public class JwtServiceImpl implements JwtService {
 
         var algorithm = buildAlgorithm((jwk));
 
-
+        log.error("decodedJwt::{}", decodedJWT);
         String userId = JWT.require(algorithm)
                 .build()
                 .verify(token)
                 .getClaim(SUB)
                 .asString();
+        log.error("[JwtServiceImpl isTokenValid] ::{}", userId);
         generateAuthentication(userId);
 
         return true;
@@ -79,8 +80,7 @@ public class JwtServiceImpl implements JwtService {
                 .map(accessToken -> accessToken.replace(BEARER, ""));
 
     }
-
-
+    
 
 
     private JwkDto getJwk(String kid){
@@ -104,6 +104,7 @@ public class JwtServiceImpl implements JwtService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
         Member member = new Member(userId,userId);
+        log.error("[JwtServiceImpl generateAuthentication] :: {}", member);
         Authentication authentication = new UsernamePasswordAuthenticationToken(member, null,
                 authoritiesMapper.mapAuthorities(member.getAuthorities()));
         // Authentication 객체를 SecurityContext에 설정

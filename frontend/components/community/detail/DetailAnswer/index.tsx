@@ -9,17 +9,20 @@ function DetailAnswer({ answer }: { answer: IQuestionAnswer }) {
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
-        <DetailAnswerInput id={id} authId={authId} />
         <p className={styles.count}>댓글 {answers?.length}개</p>
-        {answers?.map(answer => (
-          <DetailAnswerITem
-            key={answer.id}
-            ans={answer}
-            isChecked={answer.id === checkedId}
-            authId={authId}
-            isWriter={isWriter}
-          />
-        ))}
+        <div className={styles.answers}>
+          {answers.length === 0 && <div className={styles.nodata}>등록된 댓글이 없습니다.</div>}
+          {answers.map(answer => (
+            <DetailAnswerITem
+              key={answer.id}
+              ans={answer}
+              isChecked={answer.id === checkedId}
+              authId={authId}
+              isWriter={isWriter}
+            />
+          ))}
+        </div>
+        <DetailAnswerInput id={id} authId={authId} />
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 package com.s207.cloudy.global.auth.filter;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.global.auth.service.JwtService;
@@ -30,21 +31,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtService jwtService;
 
 
+    private boolean isAuthenticatedPath(String path){
+        return (path.matches("^/api/v1/bookmarks/.*")||path.equals("/api/v1/bookmarks")||path.matches("^/api/v1/comments/.*"));
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if(!request.getServletPath().equals("/api/v1/my/**")){
+        if(!isAuthenticatedPath(request.getServletPath())){
             filterChain.doFilter(request, response);
             return;
         }
 
-        try{
-            jwtService.extractAccessToken(request)
-                    .filter(jwtService::isTokenValid)
-                    .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
-        }catch(Exception e) {
-            e.printStackTrace();
-            log.error("{}", e.getMessage());
-        }
+        jwtService.extractAccessToken(request)
+                .filter(jwtService::isTokenValid)
+                .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
+
 
         filterChain.doFilter(request, response);
 
