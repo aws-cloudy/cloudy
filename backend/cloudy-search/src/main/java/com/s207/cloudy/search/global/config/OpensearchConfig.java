@@ -1,4 +1,4 @@
-package com.s207.cloudy.global.config;
+package com.s207.cloudy.search.global.config;
 
 
 import lombok.Getter;

@@ -1,10 +1,10 @@
-# test ?
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
-    name: catalog-server
+    name:
+      search-server
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: ${DB_URL}
@@ -27,5 +27,8 @@ spring:
         show_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
 
-cognito:
-  iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"
+opensearch:
+  host: ${ES_HOST}
+  port: 443
+  username: ${ES_USER}
+  password: ${ES_PASSWORD}
