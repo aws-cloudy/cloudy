@@ -9,10 +9,10 @@ const client = new CognitoIdentityProviderClient({
 });
 
 
-export async function checkUserExists(email: string): Promise<boolean> {
+export async function checkUserExists(username: string): Promise<boolean> {
   const command = new AdminGetUserCommand({
     UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
-    Username: email
+    Username: username
   });
 
   try {
