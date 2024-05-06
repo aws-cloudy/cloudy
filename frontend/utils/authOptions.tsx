@@ -50,39 +50,24 @@ export const authOptions: NextAuthOptions = {
 
     // 토큰을 세션에 추가하는 콜백
     async jwt({ token, user, account, profile }: any) {
-      if (user) {
-        const userExists = await checkUserExists(user.email)
-        token.isNewUser = !userExists // 존재하지 않는 사용자라면 true
-        if (user?.isNewUser) {
-          token.isNewUser = user.isNewUser
-        }
-        // Cognito로부터 받은 사용자 지정 클레임을 JWT 토큰에 추가
-        if (account?.provider === 'cognito' && user) {
-          // 프로필에서 job_id, service_id를 추출해 JWT 토큰에 추가
-          token.job_id = user?.job_id || profile?.['custom:job_id']
-          token.service_id = user?.service_id || profile?.['custom:service_id']
-          token.jobId = user?.jobId || profile?.['custom:job_id']
-          token.serviceId = user?.serviceId || profile?.['custom:service_id']
-          token.user = user
-          token.account = account
-          token.profile = profile
-          token.accessToken = account.access_token
-          token.id = account.providerAccountId
-        }
-        return token
+      if (user?.isNewUser) {
+        token.isNewUser = user.isNewUser
       }
+      // Cognito로부터 받은 사용자 지정 클레임을 JWT 토큰에 추가
+      if (account?.provider === 'cognito' && user) {
+        // 프로필에서 job_id, service_id를 추출해 JWT 토큰에 추가
+        token.job_id = user?.job_id || profile?.['custom:job_id']
+        token.service_id = user?.service_id || profile?.['custom:service_id']
+        token.user = user
+        token.account = account
+        token.profile = profile
+        token.accessToken = account.access_token
+        token.id = account.providerAccountId
+      }
+      return token
     },
     // 세션 데이터에 accessToken 추가
     async session({ session, token }: any) {
-      if (token) {
-        session.user.isNewUser = token.isNewUser
-        session.accessToken = token.accessToken as string
-        session.user.id = token.id as string
-        session.user.uuid = token.sub as string
-        session.token = token
-        session.user.jobId = token.job_id
-        session.user.serviceId = token.service_id
-      }
       if (token?.isNewUser) {
         session.user.isNewUser = token.isNewUser
       }

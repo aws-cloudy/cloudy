@@ -14,15 +14,15 @@ export async function POST(req:Request) {
     UserAttributes: [
       {
         Name: 'custom:job_id',
-        Value: jobId
+        Value: "0"
       },
       {
         Name: 'custom:service_id',
-        Value: serviceId
+        Value: "1"
       }
     ],
     UserPoolId: process.env.COGNITO_USER_POOL_ID as string, // Cognito 사용자 풀 ID
-    Username: 'tkdgns0545@naver.com' // 사용자 이메일 or 사용자 이름
+    Username: 'google_101390828415766152009' // 사용자 이메일 or 사용자 이름
   };
 
   try {
