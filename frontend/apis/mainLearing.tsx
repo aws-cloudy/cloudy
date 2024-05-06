@@ -1,6 +1,6 @@
 import axiosInstance from '@/utils/axiosInstance'
 
-export const fetchLearningRecom = async (job: number) => {
-  const res = await axiosInstance.get(`/v1/my/learnings/search/job/${job}`, { params: { count: 10 } })
+export const fetchLearningRecomWithoutJob = async () => {
+  const res = await axiosInstance.get(`/learnings/search/job`)
   return res.data.learningList
 }
