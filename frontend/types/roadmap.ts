@@ -25,9 +25,13 @@ export interface IRoadmapCard {
   title: string
 }
 
+export interface IRoadmapCardExtend extends IRoadmapCard {
+  desc: string
+}
+
 export interface IRoadmapDetailData {
   data: {
-    detail: IRoadmapCard
+    detail: IRoadmapCardExtend
     courses: ILearningCard[]
   }
 }
