@@ -21,7 +21,7 @@ const CustomSelect = (props: ICustomSelect) => {
 
   return (
     <div className={styles.select}>
-      <div className={`${styles.selected} ${!isDefault && styles.isNotDefault}`} onClick={e => setOpen(!open)}>
+      <div className={`${styles.selected} ${!isDefault && styles.isNotDefault}`} onClick={() => setOpen(!open)}>
         <span>{item.name}</span>
         {open ? (
           <IoIosArrowUp color={isDefault ? '#000' : '#fff'} />
@@ -31,7 +31,7 @@ const CustomSelect = (props: ICustomSelect) => {
       </div>
       <div className={`${styles.optionWrap} ${open ? styles.visible : styles.none} `} role="listbox">
         {options.map(v => (
-          <div className={styles.option} onClick={e => onChange(v)} key={v.name}>
+          <div className={styles.option} onClick={() => onChange(v)} key={v.name}>
             {v.name}
           </div>
         ))}

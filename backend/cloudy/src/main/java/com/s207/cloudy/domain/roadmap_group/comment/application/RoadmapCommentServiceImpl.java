@@ -37,7 +37,7 @@ public class RoadmapCommentServiceImpl implements RoadmapCommentService{
     }
 
     @Override
-    public Integer postRoadmapComment(RoadmapCommentPostReq roadmapCommentPostReq) {
+    public Integer postRoadmapComment(RoadmapCommentPostReq roadmapCommentPostReq, String userId) {
 
 
 
@@ -50,7 +50,7 @@ public class RoadmapCommentServiceImpl implements RoadmapCommentService{
         //todo
         //  프론트 jwt 안정화되면 member와 jwt내부 id 비교해서 맞는지 체크하는 로직 추가해야함
 
-        Member member = memberRepository.findById(roadmapCommentPostReq.memberId())
+        Member member = memberRepository.findById(userId)
                 .orElseThrow(()-> new MemberException(ErrorCode.NOT_FOUND));
 
         // RoadmapComment 객체 생성

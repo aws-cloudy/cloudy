@@ -1,0 +1,32 @@
+@import '@/styles/theme.scss';
+
+.section {
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 70px;
+}
+
+.left {
+  width: 70%;
+}
+
+.right {
+  width: 30%;
+}
+
+@media screen and (max-width: $tablet) {
+  .row {
+    flex-direction: column;
+  }
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 100%;
+  }
+}
