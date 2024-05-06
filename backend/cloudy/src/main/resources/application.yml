@@ -33,3 +33,7 @@ cognito:
 openai:
   url: ${OPENAI_URL}
   key: ${OPENAI_KEY}
+pinecone:
+  key: ${PINECONE_KEY}
+  id:
+    qna: ${PINECONE_ID_QNA}

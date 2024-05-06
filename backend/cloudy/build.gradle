@@ -77,6 +77,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.1'
 
+    // https://mvnrepository.com/artifact/dev.langchain4j/langchain4j
+    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:0.30.0'
+    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:0.30.0'
+    implementation 'dev.langchain4j:langchain4j-pinecone:0.30.0'
 
 }
 

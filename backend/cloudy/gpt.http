@@ -13,9 +13,9 @@ Authorization: Bearer sk-proj-KBRoz4HFJOgiJKPKXII1T3BlbkFJu4XLp8I7PtMdZK546Eeb
 }
 
 ### 우리 서버로 요청
-POST http://localhost:8080/ask
+POST http://localhost:8080/chatbot
 content-Type: application/json
 
 {
-"question": "안녕"
+"question": "데이터베이스 마이그레이션"
 }
