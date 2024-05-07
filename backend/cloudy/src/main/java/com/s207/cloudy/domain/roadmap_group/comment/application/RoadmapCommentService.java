@@ -10,5 +10,5 @@ import java.util.List;
 public interface RoadmapCommentService {
     List<RoadmapCommentDto> getRoadmapList(Integer roadmapId);
 
-    Integer postRoadmapComment(RoadmapCommentPostReq roadmapCommentPostReq);
+    Integer postRoadmapComment(RoadmapCommentPostReq roadmapCommentPostReq, String userId);
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import styles from './CustomInput.module.scss'
 import { ICustomInput } from '@/types/common'
@@ -5,7 +7,6 @@ import { IoMdSearch } from 'react-icons/io'
 
 const CustomInput = (props: ICustomInput) => {
   const { value, setValue, width, onClick } = props
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => setValue(e.target.value)
 
   return (

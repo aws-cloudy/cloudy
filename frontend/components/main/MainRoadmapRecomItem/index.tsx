@@ -3,7 +3,7 @@ import styles from './MainRoadmapRecomItem.module.scss'
 type Props = {
   title: string
   content: string
-  link: string
+  link?: string
 }
 
 function MainRoadmapRecomItem({ title, content, link }: Props) {

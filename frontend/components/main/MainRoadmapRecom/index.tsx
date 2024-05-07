@@ -1,11 +1,14 @@
+import { getMainRoadmaps } from '@/apis/roadmap'
 import MainRoadmapRecomItem from '../MainRoadmapRecomItem'
-import { roadMap } from '../dummy'
 import styles from './MainRoadmapRecom.module.scss'
 
 import { FaChevronLeft } from 'react-icons/fa6'
 import { FaChevronRight } from 'react-icons/fa6'
+import { IRoadmapCard } from '@/types/roadmap'
 
-function MainRoadmapRecom() {
+async function MainRoadmapRecom() {
+  const roadmaps = (await getMainRoadmaps()) as IRoadmapCard[]
+
   return (
     <div className={styles.container}>
       <div className={styles.inner}>
@@ -20,9 +23,7 @@ function MainRoadmapRecom() {
           </div>
         </div>
         <div className={styles.roadmapBox}>
-          {roadMap.map((e, i) => (
-            <MainRoadmapRecomItem key={i} title={e.title} content={e.content} link={e.link} />
-          ))}
+          {roadmaps && roadmaps.map((e, i) => <MainRoadmapRecomItem key={i} title={e.title} content={e.summary} />)}
         </div>
       </div>
     </div>

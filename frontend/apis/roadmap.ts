@@ -11,3 +11,26 @@ export const getRoadmaps = async (offset: number, query: string, job: string, se
     .catch(err => err)
   return response
 }
+
+// 로드맵 상세 조회
+export const getRoadmap = async (id: number) => {
+  const response = await axiosInstance
+    .get(`${url}/${id}`)
+    .then(res => res.data)
+    .catch(err => err)
+  console.log(response)
+  return response
+}
+
+export const getMainRoadmaps = async () => {
+  try {
+    const res = await axiosInstance.get('/v1/roadmaps', {
+      params: {
+        size: 6,
+      },
+    })
+    return res.data
+  } catch (e) {
+    return null
+  }
+}

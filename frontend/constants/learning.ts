@@ -20,7 +20,7 @@ export const serviceData = [
 
 export const typeData = [
   { value: 'Digital_Course', name: 'Digital Course', category: 'type' },
-  { value: 'Digital_Course_with_Lab', name: 'Digital Course With Lab', category: 'type' },
+  { value: 'Digital_Course_With_Lab', name: 'Digital Course With Lab', category: 'type' },
   { value: 'Exam_Preparation', name: 'Exam Preparation', category: 'type' },
 ]
 

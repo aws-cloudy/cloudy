@@ -1,10 +1,6 @@
-#
-# Dockerfile
-#
 FROM node:20-alpine AS base
 RUN corepack enable && corepack prepare pnpm@latest-9 --activate
 
-# Install dependencies only when needed
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
@@ -12,20 +8,15 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm i --frozen-lockfile
 
-
-# Rebuild the source code only when needed
 FROM base AS builder
 WORKDIR /app
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-
 RUN pnpm generate
-RUN pnpm build
 
-# If using npm comment out above and use below instead
-# RUN npm run build
+RUN pnpm build
 
 # Production image, copy all the files and run next
 FROM base AS runner
@@ -49,9 +40,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 ### aws-lambda-adapter
 ###
 COPY --from=public.ecr.aws/awsguru/aws-lambda-adapter:0.6.0 /lambda-adapter /opt/extensions/lambda-adapter
-###
-###
-###
 
 USER nextjs
 

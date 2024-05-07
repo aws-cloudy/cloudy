@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 10px;
+  h1,
+  h2 {
+    padding-block: 16px;
+  }
+
+  h3 {
+    padding-block: 10px;
+  }
+  li {
+    padding: 8px;
+  }
+}
