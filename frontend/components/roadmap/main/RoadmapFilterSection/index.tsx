@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './RoadmapFilterSection.module.scss'
 import RoadmapFilterDropdown from '../RoadmapFilterDropdown'
 import RoadmapFilterInput from '../RoadmapFilterInput'
