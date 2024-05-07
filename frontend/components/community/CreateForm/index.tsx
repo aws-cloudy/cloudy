@@ -62,8 +62,8 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
         desc,
         imageData,
       })
-      router.refresh()
       router.push(`/community/detail/${id}`)
+      router.refresh()
     } else {
       const res = await axios.post(`${commuURL}question/create`, {
         tags,
@@ -71,7 +71,7 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
         desc,
         imageData,
       })
-      router.push(`/community/detail/${res.data.question.id}`)
+      // router.push(`/community/detail/${res.data.question.id}`)
     }
   }
 
