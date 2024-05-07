@@ -24,7 +24,7 @@ function CommunityList() {
     if (isLast.current) return
 
     try {
-      const res = await axios.get(`${commuURL}/question`, {
+      const res = await axios.get(`${commuURL}question`, {
         params: {
           searchword: keyword.length > 0 ? keyword : null,
           tag: selected.length > 0 ? selected.map(e => `#${e.title}`).join('') : null,
