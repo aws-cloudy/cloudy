@@ -4,12 +4,19 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import rehypeHighlight from 'rehype-highlight'
 import 'highlight.js/styles/atom-one-dark.css'
+import { IRoadmapCardExtend } from '@/types/roadmap'
+import Image from 'next/image'
 
-const DetailInfo = ({ data }: { data: string }) => {
+const DetailInfo = ({ data }: { data: IRoadmapCardExtend }) => {
   return (
-    <div className={styles.container}>
-      <ReactMarkdown children={data} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} />
-    </div>
+    <>
+      <div className={styles.imgWrap}>
+        <Image src={data.thumbnail} alt={data.title} priority fill />
+      </div>
+      <div className={styles.container}>
+        <ReactMarkdown children={data.desc} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} />
+      </div>
+    </>
   )
 }
 

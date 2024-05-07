@@ -11,13 +11,13 @@ function DetailAnswerITem({ ans, isChecked, authId, isWriter }: IDetailAnswerIte
   const router = useRouter()
 
   const deleteAnswer = async () => {
-    await axios.delete(`${commuURL}/question/answer/delete`, { params: { id: ans.id } })
+    await axios.delete(`${commuURL}question/answer/delete`, { params: { id: ans.id } })
     router.refresh()
   }
 
   const checkAnswer = async () => {
     const ansId = isChecked ? null : ans.id
-    await axios.put(`${commuURL}/question/answer/check`, { postId: ans.questionId, ansId })
+    await axios.put(`${commuURL}question/answer/check`, { postId: ans.questionId, ansId })
     router.refresh()
   }
 

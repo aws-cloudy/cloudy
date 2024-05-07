@@ -11,7 +11,7 @@ import styles from './page.module.scss'
 import { getUser } from '@/utils/getUser'
 
 const getQuestion = async (id: string) => {
-  const res = await axios.get(`${commuURL}/question/detail`, { params: { id } })
+  const res = await axios.get(`${commuURL}question/detail`, { params: { id } })
   return res.data as IQuestion
 }
 

@@ -15,7 +15,7 @@ function DetailContentSubtitle({ id, author, createdAt, authorId, authId }: IDet
   const isAuthor = authorId === authId
 
   const handleDelete = async () => {
-    await axios.delete(`${commuURL}/question/detail/delete`, { params: { id } })
+    await axios.delete(`${commuURL}question/detail/delete`, { params: { id } })
     router.push('/community')
   }
 

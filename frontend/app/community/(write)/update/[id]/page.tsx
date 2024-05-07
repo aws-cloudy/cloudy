@@ -9,7 +9,7 @@ import styles from './page.module.scss'
 const CommunityUpdatepage = async ({ params }: { params: { id: string } }) => {
   noStore()
   const user = await getUser()
-  const post = await axios.get(`${commuURL}/question/detail`, {
+  const post = await axios.get(`${commuURL}question/detail`, {
     params: { id: params.id },
   })
   const isWriter = user?.id === post.data.memberId
