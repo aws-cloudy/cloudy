@@ -22,14 +22,15 @@ export const getRoadmap = async (id: number) => {
   return response
 }
 
-export const getMainRoadmaps = async () => {
+export const getMainRoadmaps = async (page: number | null) => {
   try {
-    const res = await axiosInstance.get('/v1/roadmaps', {
+    const res = await axiosInstance.get(url, {
       params: {
-        size: 6,
+        page,
+        size: 3,
       },
     })
-    return res.data
+    return res.data.roadmaps
   } catch (e) {
     return null
   }
