@@ -7,7 +7,7 @@ declare module 'next-auth' {
    */
   interface Session {
     user: {
-      isNewUser?: boolean // 신규 사용자 플래그를 추가
+      // isNewUser?: boolean // 신규 사용자 플래그를 추가
       id?: string
       name?: string
       email?: string
@@ -19,7 +19,7 @@ declare module 'next-auth' {
 declare module 'next-auth/jwt' {
   /** Represents the JWT token structure. */
   interface JWT {
-    username: string
-    isNewUser?: boolean // 신규 사용자 플래그를 추가
+    // username: string
+    // isNewUser?: boolean // 신규 사용자 플래그를 추가
   }
 }
