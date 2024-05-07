@@ -71,7 +71,7 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
         desc,
         imageData,
       })
-      router.push(`/community/detail/${res.data.question.id}`)
+      // router.push(`/community/detail/${res.data.question.id}`)
     }
   }
 
