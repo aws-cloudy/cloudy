@@ -12,11 +12,9 @@ spring:
     password: ${DB_PASSWORD}
     hikari:
       max-lifetime: 160000
-
   jpa:
     defer-datasource-initialization: false
     generate-ddl: false
-
     hibernate:
       ddl-auto: none
     open-in-view: false
@@ -26,6 +24,10 @@ spring:
         format_sql: true
         show_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
+  data:
+    redis:
+      host: localhost
+      port: 6379
 
 opensearch:
   host: ${ES_HOST}
