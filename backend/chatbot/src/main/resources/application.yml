@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: chatbot-server
+
+
+openai:
+    key: ${OPENAI_KEY}
+pinecone:
+  key: ${PINECONE_KEY}
+  env:
+    qna: aped-4627-b74a
+  #    qna: ${PINECONE_ENV_QNA}
+  id:
+    #    qna: ${PINECONE_ID_QNA}
+    qna: kyr8e0r
+

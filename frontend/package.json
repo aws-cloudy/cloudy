@@ -18,12 +18,15 @@
     "generate": "prisma generate"
   },
   "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.568.0",
+    "@aws-sdk/credential-provider-node": "^3.568.0",
     "@prisma/client": "5.13.0",
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.42.7",
     "@tanstack/react-query": "^5.32.0",
     "@toast-ui/editor": "^3.2.2",
     "@toast-ui/react-editor": "^3.2.3",
+    "aws-sdk": "^2.1612.0",
     "axios": "^1.6.8",
     "dotenv-cli": "^7.4.1",
     "jest-junit": "^16.0.0",

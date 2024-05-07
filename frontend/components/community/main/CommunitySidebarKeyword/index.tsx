@@ -6,6 +6,7 @@ import React, { Suspense, useEffect, useState } from 'react'
 import axios from 'axios'
 import { IHashtag } from '@/types/community'
 import Loading from '@/components/common/Loading'
+import { commuURL } from '@/apis/urls'
 
 function CommunitySidebarKeyword() {
   const [keywords, setKeywords] = useState<IHashtag[]>([])
@@ -15,7 +16,7 @@ function CommunitySidebarKeyword() {
 
   useEffect(() => {
     const hashes = async () => {
-      const res = await axios.get('http://localhost:3000/api/hashtag')
+      const res = await axios.get(`${commuURL}hashtag`)
       const selectedTitle = selected.map(ea => ea.title)
       setKeywords(
         res.data.hashtags.filter((e: IHashtag) => {

@@ -3,7 +3,7 @@ import Select from 'react-select'
 import styles from './RegistInfomation.module.scss'
 import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Dropdown from '../common/Dropdown'
 
 interface OptionType {
@@ -11,13 +11,13 @@ interface OptionType {
   label: string
 }
 
-export default function RegistInfomation() {
+export default function RegistInfomation(email: any) {
   const options: OptionType[] = [
-    { value: 'Data Scientist', label: 'Data Scientist' },
-    { value: 'Data2', label: 'Data2' },
-    { value: 'Data3', label: 'Data3' },
-    { value: 'Data4', label: 'Data4' },
-    { value: 'Data5', label: 'Data5' },
+    { value: '0', label: 'Data Scientist' },
+    { value: '1', label: 'Data2' },
+    { value: '2', label: 'Data3' },
+    { value: '3', label: 'Data4' },
+    { value: '4', label: 'Data5' },
   ]
 
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
@@ -41,6 +41,24 @@ export default function RegistInfomation() {
     setConfirmScreen(false)
   }
 
+  const submit = async () => {
+    const response = await fetch('/api/update', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ jobId: selectedJob?.value, serviceId: selectedService?.value }),
+    })
+    console.log('결과', response)
+    if (response.ok) {
+      // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
+      window.location.href = '/'
+    } else {
+      // 에러 처리
+      console.error('Failed to update user information')
+    }
+  }
+
   if (confirmScreen) {
     return (
       <div className={styles.section}>
@@ -61,7 +79,7 @@ export default function RegistInfomation() {
         <button className={styles.cancel} onClick={handleCancel}>
           취소
         </button>
-        <button className={styles.submit} onClick={handleConfirm}>
+        <button className={styles.submit} onClick={submit}>
           확인
         </button>
       </div>

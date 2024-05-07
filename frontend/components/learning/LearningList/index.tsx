@@ -30,7 +30,6 @@ const LearningList = (props: ILearningList) => {
 
   // fetch
   const fetchLearnings = async () => {
-    setIsFetching(true)
     if (!hasMore.current) return
 
     const learnings = await getLearnings(
@@ -59,6 +58,7 @@ const LearningList = (props: ILearningList) => {
   }
 
   useEffect(() => {
+    setIsFetching(true)
     window.scrollTo(0, 0) // 맨 위로 이동
     setList([])
     hasMore.current = true

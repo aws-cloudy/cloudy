@@ -55,23 +55,23 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
     await Promise.all(uploadImages)
 
     if (id && isUpdate) {
-      const res = await axios.put(`${commuURL}/question/update`, {
+      const res = await axios.put(`${commuURL}question/update`, {
         questionId: id,
         tags,
         title,
         desc,
         imageData,
       })
-      router.prefetch(`/community/detail/${id}`)
       router.push(`/community/detail/${id}`)
+      router.refresh()
     } else {
-      const res = await axios.post(`${commuURL}/question/create`, {
+      const res = await axios.post(`${commuURL}question/create`, {
         tags,
         title,
         desc,
         imageData,
       })
-      router.push(`/community/detail/${res.data.question.id}`)
+      // router.push(`/community/detail/${res.data.question.id}`)
     }
   }
 
