@@ -4,6 +4,7 @@ import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import com.s207.cloudy.search.global.error.enums.ErrorCode;
 import com.s207.cloudy.search.global.error.exception.OpensearchException;
+import com.s207.cloudy.search.global.util.RedisUtils;
 import com.s207.cloudy.search.global.util.SearchResultMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,13 +14,11 @@ import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.unit.Fuzziness;
 import org.opensearch.index.query.*;
-import org.opensearch.search.SearchHit;
 import org.opensearch.search.builder.SearchSourceBuilder;
-import org.opensearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -28,12 +27,29 @@ public class SearchServiceImpl implements SearchService{
 
     private final RestHighLevelClient client;
     private final SearchResultMapper mapper;
+    private final RedisUtils redisUtils;
 
     @Override
     public SearchListRes getSearchAutoCompleteList(SearchReq req) {
         String query = req.getQuery();
 
-        // 검색 요청 구성
+        // Check if the search result is cached in Redis
+        Optional<SearchListRes> cachedResult = redisUtils.getData(query, SearchListRes.class);
+        if (cachedResult.isPresent()) {
+            return cachedResult.get();
+        }
+
+        // Perform a search using Opensearch if the result is not cached in Redis
+        SearchListRes searchResult = performOpensearch(query);
+
+        // Cache the search result in Redis
+        redisUtils.saveData(query, searchResult, 10800000L); // 3 Hours
+
+        return searchResult;
+    }
+
+    private SearchListRes performOpensearch(String query) {
+        // Construct the search request
         SearchRequest searchRequest = new SearchRequest("learning");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -49,15 +65,15 @@ public class SearchServiceImpl implements SearchService{
         searchRequest.source(sourceBuilder);
 
         try {
+            // Execute the search request
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
-            // SearchResponse로부터 검색 결과를 매핑하여 반환
-            return  mapper.mapSearchResponse(searchResponse, query);
+            // Map the search response to a SearchListRes object
+            return mapper.mapSearchResponse(searchResponse);
         } catch (IOException e) {
+            // Handle connection errors with Opensearch
             throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
         }
-
     }
-
 
 }

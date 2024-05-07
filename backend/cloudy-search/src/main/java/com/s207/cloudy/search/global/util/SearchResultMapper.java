@@ -3,24 +3,17 @@ package com.s207.cloudy.search.global.util;
 import com.s207.cloudy.search.domain.learning.dto.SearchListItem;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
 import org.opensearch.action.search.SearchResponse;
-import org.opensearch.core.common.text.Text;
 import org.opensearch.search.SearchHit;
-import org.opensearch.search.SearchHits;
-import org.opensearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 @Component
 public class SearchResultMapper {
 
-    public SearchListRes mapSearchResponse(SearchResponse searchResponse, String query) {
+    public SearchListRes mapSearchResponse(SearchResponse searchResponse) {
         List<SearchListItem> searchList = new ArrayList<>();
 
         // 검색 결과 추출
