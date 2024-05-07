@@ -21,3 +21,17 @@ export const getRoadmap = async (id: number) => {
   console.log(response)
   return response
 }
+
+export const getMainRoadmaps = async (page: number | null) => {
+  try {
+    const res = await axiosInstance.get(url, {
+      params: {
+        page,
+        size: 3,
+      },
+    })
+    return res.data.roadmaps
+  } catch (e) {
+    return null
+  }
+}

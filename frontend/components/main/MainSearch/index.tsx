@@ -43,9 +43,9 @@ function MainSearch() {
           <div className={styles.searchItemBox}>
             <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('안녕')}></div>
             <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('안녕하세요')}></div>
-            <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('안녕이라말하지마')}></div>
-            <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('그런눈빛으로내게말하지마')}></div>
-            <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('모나리자같은표정을하고')}></div>
+            <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('안녕하세요1')}></div>
+            <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('안녕하세요2')}></div>
+            <div className={styles.searchItem} dangerouslySetInnerHTML={innerHtml('안녕하세요3')}></div>
           </div>
         )}
       </div>

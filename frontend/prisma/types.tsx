@@ -38,3 +38,7 @@ export interface IFetchMyAnswers extends IPrismaError {
   answers: Answer[]
   count: number
 }
+
+export interface IfetchHashtags extends IPrismaError {
+  hashtags: Hashtag[]
+}

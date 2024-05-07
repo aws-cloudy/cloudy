@@ -29,6 +29,40 @@
   }
 }
 
+.recomBox {
+  width: calc(100vw - 10%);
+  height: calc(90% - 50px);
+  overflow-x: auto;
+  margin-top: 50px;
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    height: 10px;
+
+    &-track {
+      background-color: $gray3;
+      border-radius: 25px;
+    }
+
+    &-thumb {
+      background-color: $primary;
+      border-radius: 25px;
+    }
+  }
+
+  &Inner {
+    width: 300%;
+    height: 100%;
+    display: flex;
+
+    & > * {
+      margin: 0 30px;
+      width: 33%;
+      height: fit-content;
+    }
+  }
+}
+
 @media screen and (max-width: $tablet) {
   .titleBox {
     &Item1 {
@@ -37,6 +71,12 @@
 
     &Item2 {
       font-size: 1.1em;
+    }
+  }
+
+  .recomBoxInner {
+    & > * {
+      width: 50%;
     }
   }
 }
