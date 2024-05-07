@@ -102,13 +102,19 @@ public class LearningServiceImpl implements LearningService {
     }
 
     public String[] covertJobName(String[] jobName) {
-        String[] convertJobName = new String[jobName.length];
+        List<String> convertJobName = new ArrayList<>();
+        String[] etcArr = new String[] {"Account/Sales Manager", "Alliance Lead", "Business Development/Analyst Manager", "Data Scientist", "Decision Maker", "DevOps Engineer", "Pre-Sales Consultant", "Project/Program/Delivery Manager", "Security Engineer"};
 
         for(int i=0; i<jobName.length; i++) {
-            convertJobName[i] = JobNameType.getByJobName(jobName[i]);
+            if(jobName[i].equals("etc")) {
+                convertJobName.addAll(List.of(etcArr));
+                continue;
+            }
+
+            convertJobName.add(JobNameType.getByJobName(jobName[i]));
         }
 
-        return convertJobName;
+        return convertJobName.toArray(new String[0]);
     }
 
     public String[] covertServiceName(String[] serviceName) {
