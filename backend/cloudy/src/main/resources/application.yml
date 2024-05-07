@@ -29,3 +29,4 @@ spring:
 
 cognito:
   iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"
+
