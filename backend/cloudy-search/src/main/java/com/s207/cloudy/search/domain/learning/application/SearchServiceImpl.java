@@ -1,6 +1,7 @@
 package com.s207.cloudy.search.domain.learning.application;
 
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
+import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import com.s207.cloudy.search.global.error.enums.ErrorCode;
 import com.s207.cloudy.search.global.error.exception.OpensearchException;
 import com.s207.cloudy.search.global.util.SearchResultMapper;
@@ -29,7 +30,9 @@ public class SearchServiceImpl implements SearchService{
     private final SearchResultMapper mapper;
 
     @Override
-    public SearchListRes getSearchAutoCompleteList(String query) {
+    public SearchListRes getSearchAutoCompleteList(SearchReq req) {
+        String query = req.getQuery();
+
         // 검색 요청 구성
         SearchRequest searchRequest = new SearchRequest("learning");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
