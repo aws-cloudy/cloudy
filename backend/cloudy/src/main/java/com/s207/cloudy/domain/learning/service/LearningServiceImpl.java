@@ -15,6 +15,8 @@ import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -110,12 +112,18 @@ public class LearningServiceImpl implements LearningService {
     }
 
     public String[] covertServiceName(String[] serviceName) {
-        String[] convertServiceName = new String[serviceName.length];
+        List<String> convertServiceName = new ArrayList<>();
+        String[] etcArr = new String[] {"Data Analytics","Architecting","Business Applications","Cloud Financial Management","Containers","Compute","DevOps","Developer Tools","AWS for Games","Internet of Things (IoT)","Management & Governance","Media Services","Migration & Transfer","Security, Identity & Compliance","SAP on AWS","SaaS","End-user Computing","Developing","Cloud Operations (SysOps)"};
 
         for(int i=0; i<serviceName.length; i++) {
-            convertServiceName[i] = ServiceNameType.getByServiceName(serviceName[i]);
+            if(serviceName[i].equals("etc")) {
+                convertServiceName.addAll(List.of(etcArr));
+                continue;
+            }
+
+            convertServiceName.add(ServiceNameType.getByServiceName(serviceName[i]));
         }
 
-        return convertServiceName;
+        return convertServiceName.toArray(new String[0]);
     }
 }
