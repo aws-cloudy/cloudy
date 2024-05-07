@@ -5,7 +5,8 @@ import { ILearningCard } from '@/types/learning'
 
 const mockItem: ILearningCard = {
   learningId: 0,
-  thumbnail: '/img/learning/1.png',
+  thumbnail:
+    '"//explore.skillbuilder.aws/files/a/w/aws_prod1_docebosaas_com/assets/courselogo/original/course-type-digital-2021-09-02-21-37-20.jpeg?enhanced_signature=yC5WA1SQjxbpnm4fJm8ztKE6n1P-Zw215RU6-PjydKU"',
   title: 'test title',
   difficulty: 'Intermediate',
   duration: '2h 10m',

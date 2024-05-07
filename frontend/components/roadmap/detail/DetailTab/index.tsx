@@ -19,7 +19,7 @@ const DetailTab = ({ data }: IRoadmapDetailData) => {
           로드맵 코스
         </div>
       </div>
-      {!selectedTab ? <DetailInfo data={data.detail.desc} /> : <DetailCourse data={data.courses} />}
+      {!selectedTab ? <DetailInfo data={data.detail} /> : <DetailCourse data={data.courses} />}
     </>
   )
 }

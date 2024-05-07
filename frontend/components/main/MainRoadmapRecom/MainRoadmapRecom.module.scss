@@ -2,7 +2,7 @@
 
 .container {
   width: 100vw;
-  height: 80vh;
+  height: 55vh;
   background-color: $black2;
   color: $white;
   display: flex;
@@ -43,6 +43,15 @@
 
   &:hover {
     color: $gray7;
+  }
+
+  &Disabled {
+    cursor: initial;
+    color: $gray8;
+
+    &:hover {
+      color: $gray8;
+    }
   }
 }
 
