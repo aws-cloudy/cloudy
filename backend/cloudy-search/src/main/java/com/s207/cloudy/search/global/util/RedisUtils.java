@@ -20,6 +20,15 @@ public class RedisUtils {
     private final RedisTemplate<String, String> redisTemplate;
     private final ObjectMapper objectMapper;
 
+    public boolean extendExpire(String key, Long expiredTime) {
+        try {
+            redisTemplate.expire(key, expiredTime, TimeUnit.MILLISECONDS);
+            return true;
+        } catch(Exception e){
+            return false;
+        }
+    }
+
     public <T> boolean saveData(String key, T data, Long expiredTime) {
         try {
             String value = objectMapper.writeValueAsString(data);

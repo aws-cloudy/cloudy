@@ -36,6 +36,7 @@ public class SearchServiceImpl implements SearchService{
         // Check if the search result is cached in Redis
         Optional<SearchListRes> cachedResult = redisUtils.getData(query, SearchListRes.class);
         if (cachedResult.isPresent()) {
+            redisUtils.extendExpire(query, 10800000L); // 3 Hours
             return cachedResult.get();
         }
 
@@ -43,7 +44,7 @@ public class SearchServiceImpl implements SearchService{
         SearchListRes searchResult = performOpensearch(query);
 
         // Cache the search result in Redis
-        redisUtils.saveData(query, searchResult, 10800000L); // 3 Hours
+        redisUtils.saveData(query, searchResult, 10800000L);
 
         return searchResult;
     }
