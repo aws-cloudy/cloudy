@@ -18,6 +18,7 @@ import EditorTitle from '@/components/community/create/EditorTitle'
 import Layout from '@/components/common/Layout'
 import { IHashtag, IImage, IUpdateQuestion } from '@/types/community'
 import { Editor as EditorType } from '@toast-ui/react-editor'
+import { Hashtag } from '@prisma/client'
 
 const EditorBody = dynamic(() => import('@/components/community/create/EditorBody'), { ssr: false })
 
@@ -61,8 +62,8 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
         desc,
         imageData,
       })
-      router.push(`/community/detail/${id}`)
       router.refresh()
+      router.push(`/community/detail/${id}`)
     } else {
       const res = await axios.post(`${commuURL}question/create`, {
         tags,
