@@ -1,5 +1,6 @@
-package com.s207.cloudy.domain.learning.dto.annotation;
+package com.s207.cloudy.domain.learning.dto.annotation.validation;
 
+import com.s207.cloudy.domain.learning.dto.annotation.validator.TypeValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

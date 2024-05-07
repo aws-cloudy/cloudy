@@ -6,6 +6,8 @@ import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.entity.enums.CourseType;
 import com.s207.cloudy.domain.learning.entity.enums.DifficultyType;
 
+import com.s207.cloudy.domain.learning.entity.enums.JobNameType;
+import com.s207.cloudy.domain.learning.entity.enums.ServiceNameType;
 import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
@@ -37,8 +39,16 @@ public class LearningServiceImpl implements LearningService {
         }
 
         // 직무명 파라미터 변환
+        if(learningSearchReq.getJobName() != null) {
+            String[] covertJobName = covertJobName(learningSearchReq.getJobName());
+            learningSearchReq.setJobName(covertJobName);
+        }
 
         // 서비스명 파라미터 변환
+        if(learningSearchReq.getServiceName() != null) {
+            String[] covertServiceName = covertServiceName(learningSearchReq.getServiceName());
+            learningSearchReq.setServiceName(covertServiceName);
+        }
 
         List<LearningItem> items = learningRepository.findLearnings(learningSearchReq);
         return LearningListRes.builder()
@@ -87,5 +97,25 @@ public class LearningServiceImpl implements LearningService {
         }
 
         return convertType;
+    }
+
+    public String[] covertJobName(String[] jobName) {
+        String[] convertJobName = new String[jobName.length];
+
+        for(int i=0; i<jobName.length; i++) {
+            convertJobName[i] = JobNameType.getByJobName(jobName[i]);
+        }
+
+        return convertJobName;
+    }
+
+    public String[] covertServiceName(String[] serviceName) {
+        String[] convertServiceName = new String[serviceName.length];
+
+        for(int i=0; i<serviceName.length; i++) {
+            convertServiceName[i] = ServiceNameType.getByServiceName(serviceName[i]);
+        }
+
+        return convertServiceName;
     }
 }
