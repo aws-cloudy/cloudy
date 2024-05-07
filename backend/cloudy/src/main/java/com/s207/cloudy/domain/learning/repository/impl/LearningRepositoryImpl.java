@@ -68,8 +68,25 @@ public class LearningRepositoryImpl implements LearningRepositoryCustom {
             );
         }
 
-        // 서비스명에 대한 필터링 나중에 추가해야!! @@@@@@
-//        String[] serviceName = learningSearchReq.getServiceName();
+        // 서비스명에 대한 필터링
+        String[] serviceName = learningSearchReq.getServiceName();
+        if (serviceName != null && serviceName.length > 0) {
+            searchOptions.and(
+                    learning.id.in(
+                            JPAExpressions.select(learningService.learningServicePK.learning.id)
+                                    .from(learningService)
+                                    .where(
+                                            learningService.learningServicePK.service.id.in(
+                                                    JPAExpressions.select(service.id)
+                                                            .from(service)
+                                                            .where(
+                                                                    service.type.in(serviceName)
+                                                            )
+                                            )
+                                    )
+                    )
+            );
+        }
 
         return searchOptions;
     }
