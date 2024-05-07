@@ -1,0 +1,40 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.s207.cloudy'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	sourceCompatibility = '17'
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+
+    // https://mvnrepository.com/artifact/dev.langchain4j/langchain4j
+    implementation 'dev.langchain4j:langchain4j-spring-boot-starter:0.30.0'
+    implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:0.30.0'
+    implementation 'dev.langchain4j:langchain4j-pinecone:0.30.0'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

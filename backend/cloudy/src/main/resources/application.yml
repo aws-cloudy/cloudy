@@ -30,10 +30,3 @@ spring:
 cognito:
   iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"
 
-openai:
-  url: ${OPENAI_URL}
-  key: ${OPENAI_KEY}
-pinecone:
-  key: ${PINECONE_KEY}
-  id:
-    qna: ${PINECONE_ID_QNA}
