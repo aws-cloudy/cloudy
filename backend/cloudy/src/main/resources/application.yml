@@ -31,9 +31,14 @@ cognito:
   iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"
 
 openai:
-  url: ${OPENAI_URL}
-  key: ${OPENAI_KEY}
+#  key: ${OPENAI_KEY}
+  key: sk-proj-p2ti3uV1OWTRF3d5IljCT3BlbkFJGUHpeTHBINuJDMP5x5l3
 pinecone:
   key: ${PINECONE_KEY}
+  env:
+    qna: aped-4627-b74a
+#    qna: ${PINECONE_ENV_QNA}
   id:
-    qna: ${PINECONE_ID_QNA}
+#    qna: ${PINECONE_ID_QNA}
+    qna: kyr8e0r
+

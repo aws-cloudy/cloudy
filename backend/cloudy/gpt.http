@@ -17,5 +17,5 @@ POST http://localhost:8080/chatbot
 content-Type: application/json
 
 {
-"question": "데이터베이스 마이그레이션"
+"question": "데이터베이스 마이그레이션을 자동으로 하고싶어. 방법을 알려줘."
 }
