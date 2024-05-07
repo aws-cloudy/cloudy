@@ -1,4 +1,4 @@
-package com.s207.cloudy.chatbot.qna.application;
+package com.s207.cloudy.infra.chat;
 
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class OpenAiChatService implements ChatService {
 
 
     @Override
-    public void generateStreamingChat(String template, Map<String, Object> variables) {
+    public Flux<String> generateStreamingChat(String template, Map<String, Object> variables) {
 
         Prompt prompt = getPrompt(template, variables);
 
@@ -48,27 +49,32 @@ public class OpenAiChatService implements ChatService {
                     .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
                     .build();
         }
-        openAiStreamingChatModel.generate(prompt.text(), new StreamingResponseHandler<>() {
 
-            @Override
-            public void onNext(String token) {
+        return Flux.create(emitter ->
+                openAiStreamingChatModel.generate(prompt.text(), new StreamingResponseHandler<>() {
 
-//                Flux<String> just = Flux.just(token);
-                log.info("onNext(): " + token);
-            }
+                    @Override
+                    public void onNext(String token) {
 
-            @Override
-            public void onComplete(Response<AiMessage> response) {
-                log.info("onComplete(): " + response);
-            }
+//                    log.info("onNext(): " + token);
+                        emitter.next(token);
+                    }
 
-            @Override
-            public void onError(Throwable error) {
-                Arrays.stream(error.getStackTrace())
-                        .toList()
-                        .forEach(stackTraceElement -> log.error(stackTraceElement.toString()));
-            }
-        });
+                    @Override
+                    public void onComplete(Response<AiMessage> response) {
+//                        log.info("onComplete(): " + response);
+                        emitter.complete();
+                    }
+
+
+                    @Override
+                    public void onError(Throwable error) {
+                        emitter.error(error);
+//                        Arrays.stream(error.getStackTrace())
+//                                .toList()
+//                                .forEach(stackTraceElement -> log.error(stackTraceElement.toString()));
+                    }
+                }));
     }
 
     private Prompt getPrompt(String template, Map<String, Object> variables) {

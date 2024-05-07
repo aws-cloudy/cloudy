@@ -1,7 +1,6 @@
-### 우리 서버로 요청
 POST http://localhost:8080/chatbot
-content-Type: application/json
+content-Type: application/json; charset=utf-8
 
 {
-"question": "데이터베이스 마이그레이션을 자동으로 하고싶어. 방법을 알려줘."
+  "inputData": "데이터베이스 마이그레이션을 자동으로 하고싶어. 방법을 알려줘."
 }

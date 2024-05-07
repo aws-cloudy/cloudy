@@ -1,4 +1,4 @@
-package com.s207.cloudy.chatbot.qna.dto;
+package com.s207.cloudy.domain.chatbot.qna.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
