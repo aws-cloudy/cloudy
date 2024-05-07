@@ -28,6 +28,7 @@ public class SearchServiceImpl implements SearchService{
     private final RestHighLevelClient client;
     private final SearchResultMapper mapper;
     private final RedisUtils redisUtils;
+    private static final long EXPIRATION_TIME = (long)3*60*60*1000; // 3 Hours
 
     @Override
     public SearchListRes getSearchAutoCompleteList(SearchReq req) {
@@ -36,7 +37,7 @@ public class SearchServiceImpl implements SearchService{
         // Check if the search result is cached in Redis
         Optional<SearchListRes> cachedResult = redisUtils.getData(query, SearchListRes.class);
         if (cachedResult.isPresent()) {
-            redisUtils.extendExpire(query, 10800000L); // 3 Hours
+            redisUtils.extendExpire(query, EXPIRATION_TIME);
             return cachedResult.get();
         }
 
@@ -44,7 +45,7 @@ public class SearchServiceImpl implements SearchService{
         SearchListRes searchResult = performOpensearch(query);
 
         // Cache the search result in Redis
-        redisUtils.saveData(query, searchResult, 10800000L);
+        redisUtils.saveData(query, searchResult, EXPIRATION_TIME);
 
         return searchResult;
     }
