@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         // 일반 Cognito 사용자의 경우 이메일을 사용
         username = user.email
       }
-
+      user.username = username
       const { exists, hasJobId } = await checkUserExists(username)
       if (!exists || !hasJobId) {
         return `/join?auth=${encodeURIComponent(username)}`
@@ -38,25 +38,24 @@ export const authOptions: NextAuthOptions = {
         token.username = user.username
         token.jobId = user?.jobId || profile?.job_id
         token.serviceId = user?.serviceId || profile?.service_id
+<<<<<<< 913daa5de8e8c52892ee71680b2e17e4442daf5a
+=======
         token.user = user
         token.account = account
+>>>>>>> a6bee0ecdfdbaa3c749182a818642155b5890957
         token.accessToken = account.id_token
         token.id = account.providerAccountId
       }
-
       return token
     },
 
     async session({ session, token }: any) {
       session.user.username = token.username
-      session.user.isNewUser = token.isNewUser
       session.accessToken = token.accessToken as string
       session.user.id = token.id as string
       session.user.uuid = token.sub as string
-      session.token = token
       session.user.jobId = token.jobId
       session.user.serviceId = token.serviceId
-
       return session
     },
   },
