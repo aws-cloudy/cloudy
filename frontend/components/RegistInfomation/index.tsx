@@ -1,4 +1,5 @@
 'use client'
+
 import styles from './RegistInfomation.module.scss'
 import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
