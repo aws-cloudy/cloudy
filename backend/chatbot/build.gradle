@@ -28,12 +28,17 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
-
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
     // https://mvnrepository.com/artifact/dev.langchain4j/langchain4j
     implementation 'dev.langchain4j:langchain4j-spring-boot-starter:0.30.0'
     implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:0.30.0'
     implementation 'dev.langchain4j:langchain4j-pinecone:0.30.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+	implementation 'org.webjars:sockjs-client:1.5.1'
+	implementation 'org.webjars:stomp-websocket:2.3.4'
 
 	//deploy by sam and lambda
 	implementation 'com.amazonaws.serverless:aws-serverless-java-container-springboot3:2.0.0-M2'
