@@ -1,7 +1,7 @@
 import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
-import { checkUserExists } from './cognito'
+import { checkUserExists, getUser } from './cognito'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -23,23 +23,24 @@ export const authOptions: NextAuthOptions = {
       } else {
         // 일반 Cognito 사용자의 경우 이메일을 사용
         username = user.email
-        username = user.email
       }
-      user.username = username
-      // const { exists, hasJobId } = await checkUserExists(username)
-      console.log(user)
-      // if (!exists || !hasJobId) {
-      // user.isNewUser = false
+      const { exists, user: cognitoUser } = await getUser(username)
+      if (!exists) {
+        return `/join?username=${encodeURIComponent(username)}`
+      }
 
-      // return `/join`
-      // return true
-      // }
+      // 사용자가 존재하면 추가 정보를 체크
+      const jobInfoExists = cognitoUser?.UserAttributes?.find(attr => attr.Name === 'custom:job_id')
+      if (!jobInfoExists) {
+        return `/join?username=${encodeURIComponent(username)}`
+      }
       return true
     },
 
     // 토큰을 세션에 추가하는 콜백
     async jwt({ token, user, account, profile }: any) {
       if (user) {
+        token.username = user.username
         // const userExists  = await checkUserExists(user.email);
         // token.isNewUser = !userExists ;  // 존재하지 않는 사용자라면 true
         // 프로필에서 job_id, service_id를 추출해 JWT 토큰에 추가
@@ -57,21 +58,17 @@ export const authOptions: NextAuthOptions = {
 
     // 세션 데이터에 accessToken 추가
     async session({ session, token }: any) {
-      if (token) {
-        session.user.isNewUser = token.isNewUser
-        session.accessToken = token.accessToken as string
-        session.user.id = token.id as string
-        session.user.uuid = token.sub as string
-        session.token = token
-        session.user.jobId = token.jobId
-        session.user.serviceId = token.serviceId
-      }
+      session.user.username = token.username
+      session.user.isNewUser = token.isNewUser
+      session.accessToken = token.accessToken as string
+      session.user.id = token.id as string
+      session.user.uuid = token.sub as string
+      session.token = token
+      session.user.jobId = token.jobId
+      session.user.serviceId = token.serviceId
+
       return session
     },
-  },
-  secret: process.env.NEXT_PUBLIC_SECRET,
-  pages: {
-    newUser: '/join',
   },
   secret: process.env.NEXT_PUBLIC_SECRET,
   pages: {

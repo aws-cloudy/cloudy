@@ -5,13 +5,14 @@ import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
 import { useEffect, useState } from 'react'
 import Dropdown from '../common/Dropdown'
+import { signIn } from 'next-auth/react'
 
 interface OptionType {
   value: string
   label: string
 }
 
-export default function RegistInfomation(email: any) {
+export default function RegistInfomation({ username }: any) {
   const options: OptionType[] = [
     { value: '0', label: 'Data Scientist' },
     { value: '1', label: 'Data2' },
@@ -42,17 +43,18 @@ export default function RegistInfomation(email: any) {
   }
 
   const submit = async () => {
-    const response = await fetch('/api/update', {
+    const response = await fetch('/api/user/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ jobId: selectedJob?.value, serviceId: selectedService?.value }),
+      body: JSON.stringify({ username, jobId: selectedJob?.value, serviceId: selectedService?.value }),
     })
     console.log('결과', response)
     if (response.ok) {
       // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
-      window.location.href = '/'
+      // window.location.href = '/'
+      signIn('cognito', { callbackUrl: '/' })
     } else {
       // 에러 처리
       console.error('Failed to update user information')

@@ -18,6 +18,7 @@ export async function POST(req: Request) {
   const requestData = await req.json()
   const { username, jobId, serviceId } = requestData
 
+  console.log(username, jobId, serviceId)
   const params = {
     UserAttributes: [
       {
