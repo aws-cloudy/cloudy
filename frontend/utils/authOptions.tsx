@@ -24,39 +24,30 @@ export const authOptions: NextAuthOptions = {
         // 일반 Cognito 사용자의 경우 이메일을 사용
         username = user.email
       }
-      const { exists, user: cognitoUser } = await getUser(username)
-      if (!exists) {
-        return `/join?username=${encodeURIComponent(username)}`
+
+      const { exists, hasJobId } = await checkUserExists(username)
+      if (!exists || !hasJobId) {
+        return `/join?auth=${encodeURIComponent(username)}`
       }
 
-      // 사용자가 존재하면 추가 정보를 체크
-      const jobInfoExists = cognitoUser?.UserAttributes?.find(attr => attr.Name === 'custom:job_id')
-      if (!jobInfoExists) {
-        return `/join?username=${encodeURIComponent(username)}`
-      }
       return true
     },
 
-    // 토큰을 세션에 추가하는 콜백
     async jwt({ token, user, account, profile }: any) {
       if (user) {
         token.username = user.username
-        // const userExists  = await checkUserExists(user.email);
-        // token.isNewUser = !userExists ;  // 존재하지 않는 사용자라면 true
-        // 프로필에서 job_id, service_id를 추출해 JWT 토큰에 추가
         token.jobId = user?.jobId || profile?.job_id
         token.serviceId = user?.serviceId || profile?.service_id
         token.user = user
         token.account = account
         token.profile = profile
-        token.accessToken = account.access_token
+        token.accessToken = account.id_token
         token.id = account.providerAccountId
       }
 
       return token
     },
 
-    // 세션 데이터에 accessToken 추가
     async session({ session, token }: any) {
       session.user.username = token.username
       session.user.isNewUser = token.isNewUser

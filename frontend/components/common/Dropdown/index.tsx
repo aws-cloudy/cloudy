@@ -10,15 +10,19 @@ interface DropdownProps {
   width: number
 }
 
-const Dropdown = ({ options, value, onChange, placeholder, height = 50, width = 300 }: any) => {
+const Dropdown = ({ options, value, onChange, placeholder, height, width }: any) => {
   const customStyles = {
     control: (base: any) => ({
       ...base,
-      height: height,
-      minheight: height,
+      height: '50%',
+      minheight: '100%',
       width: width,
       minwidth: width,
     }),
+    // valueContainer: (base: any) => ({
+    //   ...base,
+    //   justifyContent: 'flex-end',
+    // }),
   }
 
   const theme = (theme: any) => ({
