@@ -14,7 +14,10 @@ import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.unit.Fuzziness;
 import org.opensearch.index.query.*;
+import org.opensearch.search.SearchHit;
 import org.opensearch.search.builder.SearchSourceBuilder;
+import org.opensearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.opensearch.search.fetch.subphase.highlight.HighlightField;
 import org.opensearch.search.sort.SortBuilders;
 import org.opensearch.search.sort.SortOrder;
 import org.springframework.stereotype.Service;
@@ -55,17 +58,48 @@ public class SearchServiceImpl implements SearchService{
     @Override
     public String getFinalQuery(String query) {
         // 일치하는 검색어 있는지 확인
-        if(searchIsExistQuery(query, 1)) {
-            return query; // 검색어 그대로 리턴
+        if(IsQueryExist(query, 1)) {
+            return query;
         }
 
         // 일치하는 검색어 없다면, 오타교정된 검색어 있는지 확인
-
-
-        return query;
+        return ModifiedQueryIfExist(query, 1);
     }
 
-    private boolean searchIsExistQuery(String query, int size) {
+    private String ModifiedQueryIfExist(String query, int size) {
+        // Construct the search request
+        SearchRequest searchRequest = new SearchRequest("test");
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // Fuzzy query
+        BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
+        String[] queryTerms = query.split("\\s+");
+        for (String term : queryTerms) {
+            fuzzyBoolQuery.must(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
+        }
+
+        // Highlighting setting
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.field("title");
+
+        sourceBuilder.query(fuzzyBoolQuery);
+        sourceBuilder.size(1);
+        sourceBuilder.highlighter(highlightBuilder);
+        searchRequest.source(sourceBuilder);
+
+        try {
+            // Execute the search request
+            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+
+            // Map the search response to a SearchListRes object
+            return mapper.mapSearchModifiedResponse(searchResponse, query);
+        } catch (IOException e) {
+            // Handle connection errors with Opensearch
+            throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
+        }
+    }
+
+    private boolean IsQueryExist(String query, int size) {
         // Construct the search request
         SearchRequest searchRequest = new SearchRequest("test");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -102,7 +136,7 @@ public class SearchServiceImpl implements SearchService{
         BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
         String[] queryTerms = query.split("\\s+");
         for (String term : queryTerms) {
-            fuzzyBoolQuery.should(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
+            fuzzyBoolQuery.must(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
         }
         boolQuery.should(fuzzyBoolQuery);
 
