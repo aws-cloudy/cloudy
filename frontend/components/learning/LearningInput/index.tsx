@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './LearningInput.module.scss'
 import { ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
-import { useRouter, useSearchParams, usePathname } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const LearningInput = (props: ILearningInput) => {
   const { value, setValue } = props

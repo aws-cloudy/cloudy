@@ -2,17 +2,13 @@ import React from 'react'
 import styles from './LearningSearchList.module.scss'
 import LearningSearchListItem from '../LearningSearchListItem'
 import { ILearningSearchList } from '@/types/learning'
-import { useLearningActions } from '@/stores/learning'
 
 const LearningSearchList = (props: ILearningSearchList) => {
   const { setValue } = props
 
-  const { setKeyword } = useLearningActions()
-
   // 자동 검색어 클릭시
   const onClick = (v: string) => {
     setValue(v)
-    setKeyword(v)
   }
 
   return (
