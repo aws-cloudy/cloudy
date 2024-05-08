@@ -3,3 +3,8 @@ node_modules
 .gitignore
 *.md
 dist
+
+Dockerfile
+.dockerignore
+npm-debug.log
+.next
