@@ -5,7 +5,6 @@ import styles from './MainSearch.module.scss'
 import { BiSearch } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { getSearchAutoComplete } from '@/apis/learning'
-import { useLearningActions } from '@/stores/learning'
 import { useRouter } from 'next/navigation'
 
 function MainSearch() {
@@ -16,8 +15,6 @@ function MainSearch() {
   const serchResultRef = useRef<HTMLDivElement>(null)
 
   const router = useRouter()
-
-  const { setKeyword } = useLearningActions()
 
   const keyword = watch('search', '')
 
@@ -37,8 +34,8 @@ function MainSearch() {
     setList(data)
   }
 
-  const onSearch = () => {
-    router.push(`/learning`)
+  const onSearch = (v: string) => {
+    router.push('/learning' + '?query=' + v)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

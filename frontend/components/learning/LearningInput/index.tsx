@@ -2,17 +2,18 @@ import React from 'react'
 import styles from './LearningInput.module.scss'
 import { ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
-import { useLearningActions, useLearningKeyword } from '@/stores/learning'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 const LearningInput = (props: ILearningInput) => {
   const { value, setValue } = props
 
-  const keyword = useLearningKeyword()
-  const { setKeyword } = useLearningActions()
+  const router = useRouter()
+  const params = useSearchParams()
+
+  const keyword = params.get('query') || ''
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
-    setKeyword('')
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -22,7 +23,7 @@ const LearningInput = (props: ILearningInput) => {
   }
 
   const handleSubmit = () => {
-    setKeyword(value)
+    router.push('/learning' + '?query=' + value)
   }
 
   return (

@@ -2,27 +2,21 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './LearningList.module.scss'
+
 import LearningCard from '@/components/common/LearningCard'
 import { useLearninglayout } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { ILearningCard } from '@/types/learning'
 import { LEARNING_ROWS_PER_PAGE } from '@/constants/rows'
 import { getLearnings } from '@/apis/learning'
-import {
-  useDifficultyFilter,
-  useLearningKeyword,
-  useServiceFilter,
-  useTypeFilter,
-  usejobFilter,
-} from '@/stores/learning'
+import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
 import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
 import { getTextFilter } from '@/utils/getTextFilter'
 import Empty from '@/components/common/Empty'
+import { useSearchParams } from 'next/navigation'
 
 const LearningList = () => {
-  const keyword = useLearningKeyword()
-
   const jobs = usejobFilter()
   const services = useServiceFilter()
   const types = useTypeFilter()
@@ -33,10 +27,13 @@ const LearningList = () => {
   const hasMore = useRef<boolean>(true)
   const [list, setList] = useState<ILearningCard[]>([])
   const [isFetching, setIsFetching] = useState<boolean>(true)
+  const params = useSearchParams()
 
   // fetch
   const fetchLearnings = async () => {
     if (!hasMore.current) return
+
+    const keyword = params.get('query') || ''
 
     const learnings = await getLearnings(
       offset.current,
@@ -70,7 +67,7 @@ const LearningList = () => {
     hasMore.current = true
     offset.current = 1
     fetchLearnings()
-  }, [keyword, jobs, services, types, difficulties])
+  }, [jobs, services, types, difficulties, params])
 
   // 반응형 width 감지
   const { isTablet } = useResponsiveWidth()
