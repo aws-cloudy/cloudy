@@ -1,6 +1,10 @@
 spring:
   application:
     name: chatbot-server
+  http:
+    encoding:
+      charset: UTF-8
+
 
 
 openai:

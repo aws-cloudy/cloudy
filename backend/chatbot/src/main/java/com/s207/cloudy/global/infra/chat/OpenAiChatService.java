@@ -1,4 +1,4 @@
-package com.s207.cloudy.infra.chat;
+package com.s207.cloudy.global.infra.chat;
 
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-import java.util.Arrays;
 import java.util.Map;
 
 import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
@@ -28,24 +27,14 @@ public class OpenAiChatService implements ChatService {
     private OpenAiChatModel openAiChatModel;
     private OpenAiStreamingChatModel openAiStreamingChatModel;
 
-
-    private void initOpenAiChatModel() {
-        openAiChatModel = OpenAiChatModel.builder()
-                .apiKey(openAiKey)
-                .modelName(GPT_3_5_TURBO)
-                .maxTokens(50)
-                .build();
-    }
-
-
     @Override
     public Flux<String> generateStreamingChat(String template, Map<String, Object> variables) {
 
         Prompt prompt = getPrompt(template, variables);
 
-        log.debug("generate prompt: {}", prompt.text().substring(0, 15));
+        log.info("generate prompt: {}", prompt.text().substring(0, 15));
 
-        if (openAiChatModel == null) {
+        if (openAiStreamingChatModel == null) {
             openAiStreamingChatModel = OpenAiStreamingChatModel.builder()
                     .apiKey(openAiKey)
                     .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
@@ -57,13 +46,13 @@ public class OpenAiChatService implements ChatService {
 
                     @Override
                     public void onNext(String token) {
-                        log.debug("onNext(): " + token);
+                        log.info("onNext(): " + token);
                         emitter.next(token);
                     }
 
                     @Override
                     public void onComplete(Response<AiMessage> response) {
-                        log.debug("onComplete(): " + response);
+                        log.info("onComplete(): " + response);
                         emitter.complete();
                     }
 
@@ -76,6 +65,23 @@ public class OpenAiChatService implements ChatService {
 //                                .forEach(stackTraceElement -> log.error(stackTraceElement.toString()));
                     }
                 }));
+    }
+
+    @Override
+    public String generateChat(String template, Map<String, Object> variables) {
+
+        Prompt prompt = getPrompt(template, variables);
+
+        log.info("generate prompt: {}", prompt.text().substring(0, 15));
+
+        if (openAiChatModel == null) {
+            openAiChatModel = OpenAiChatModel.builder()
+                    .apiKey(openAiKey)
+                    .modelName(GPT_3_5_TURBO)
+                    .build();
+        }
+
+        return openAiChatModel.generate(prompt.text());
     }
 
     private Prompt getPrompt(String template, Map<String, Object> variables) {

@@ -34,6 +34,14 @@ dependencies {
     implementation 'dev.langchain4j:langchain4j-spring-boot-starter:0.30.0'
     implementation 'dev.langchain4j:langchain4j-open-ai-spring-boot-starter:0.30.0'
     implementation 'dev.langchain4j:langchain4j-pinecone:0.30.0'
+
+	//deploy by sam and lambda
+	implementation 'com.amazonaws.serverless:aws-serverless-java-container-springboot3:2.0.0-M2'
+	implementation 'com.amazonaws:aws-lambda-java-events:3.11.4'
+	implementation 'com.amazonaws:aws-lambda-java-log4j2:1.5.1'
+	implementation platform('software.amazon.awssdk:bom:2.23.12')
+	implementation 'software.amazon.awssdk:s3'
+
 }
 
 tasks.named('test') {
