@@ -30,9 +30,7 @@ export async function checkUserExists(username: string): Promise<{ exists: boole
 
   try {
     const response = await client.send(command)
-    const hasJobId = response.UserAttributes?.some(
-      (attr: { Name: string; Value: any }) => attr.Name === 'custom:job_id' && attr.Value,
-    )
+    const hasJobId = response.UserAttributes?.some((attr: any) => attr.Name === 'custom:job_id' && attr.Value)
     return { exists: true, hasJobId: !!hasJobId }
   } catch (error: any) {
     if (error.name === 'UserNotFoundException') {
