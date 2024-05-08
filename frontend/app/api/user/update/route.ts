@@ -6,7 +6,7 @@ import {
 import { NextResponse } from 'next/server'
 
 const client = new CognitoIdentityProviderClient({
-  region: process.env.AWS_REGION, // AWS 리전 설정
+  region: process.env.AMPLIFY_REGION, // AWS 리전 설정
 })
 
 export async function POST(req: Request) {
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         Value: serviceId,
       },
     ],
-    UserPoolId: process.env.COGNITO_USER_POOL_ID as string, // Cognito 사용자 풀 ID
+    UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string, // Cognito 사용자 풀 ID
     Username: username,
   }
   try {
