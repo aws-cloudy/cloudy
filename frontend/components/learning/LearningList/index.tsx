@@ -5,17 +5,23 @@ import styles from './LearningList.module.scss'
 import LearningCard from '@/components/common/LearningCard'
 import { useLearninglayout } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
-import { ILearningCard, ILearningList } from '@/types/learning'
+import { ILearningCard } from '@/types/learning'
 import { LEARNING_ROWS_PER_PAGE } from '@/constants/rows'
 import { getLearnings } from '@/apis/learning'
-import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
+import {
+  useDifficultyFilter,
+  useLearningKeyword,
+  useServiceFilter,
+  useTypeFilter,
+  usejobFilter,
+} from '@/stores/learning'
 import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
 import { getTextFilter } from '@/utils/getTextFilter'
 import Empty from '@/components/common/Empty'
 
-const LearningList = (props: ILearningList) => {
-  const { keyword } = props
+const LearningList = () => {
+  const keyword = useLearningKeyword()
 
   const jobs = usejobFilter()
   const services = useServiceFilter()

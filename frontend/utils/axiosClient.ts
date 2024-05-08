@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 
-const client = axios.create({
+export const client = axios.create({
   baseURL: '/cloudy-api',
 })
 
@@ -12,4 +12,10 @@ client.interceptors.response.use(
   err => Promise.reject(alert(err.response.data.errorMap.type.message)),
 )
 
-export default client
+export const searchClient = axios.create({
+  baseURL: '/cloudy-search-api',
+})
+
+export const chatClient = axios.create({
+  baseURL: '/cloudy-chat-api',
+})

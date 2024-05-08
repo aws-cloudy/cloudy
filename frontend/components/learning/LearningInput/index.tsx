@@ -2,9 +2,13 @@ import React from 'react'
 import styles from './LearningInput.module.scss'
 import { ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
+import { useLearningActions, useLearningKeyword } from '@/stores/learning'
 
 const LearningInput = (props: ILearningInput) => {
-  const { value, setValue, keyword, setKeyword } = props
+  const { value, setValue } = props
+
+  const keyword = useLearningKeyword()
+  const { setKeyword } = useLearningActions()
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -32,7 +36,7 @@ const LearningInput = (props: ILearningInput) => {
           onKeyDown={handleKeyDown}
           name="learning-input"
         />
-        {value && keyword === '' && <LearningSearchList setKeyword={setKeyword} setValue={setValue} />}
+        {value && keyword === '' && <LearningSearchList setValue={setValue} />}
       </div>
     </>
   )
