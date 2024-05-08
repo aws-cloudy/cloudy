@@ -14,7 +14,7 @@ const Dropdown = ({ options, value, onChange, placeholder, height, width }: any)
   const customStyles = {
     control: (base: any) => ({
       ...base,
-      height: '50%',
+      height: height,
       minheight: '100%',
       width: width,
       minwidth: width,

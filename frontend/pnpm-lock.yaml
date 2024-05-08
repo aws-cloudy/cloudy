@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@aws-sdk/client-cognito-identity-provider':
-        specifier: ^3.568.0
+        specifier: ^3.569.0
         version: 3.569.0
       '@aws-sdk/credential-provider-node':
         specifier: ^3.568.0
@@ -41,6 +41,9 @@ importers:
       dotenv-cli:
         specifier: ^7.4.1
         version: 7.4.1
+      highlight.js:
+        specifier: ^11.9.0
+        version: 11.9.0
       jest-junit:
         specifier: ^16.0.0
         version: 16.0.0

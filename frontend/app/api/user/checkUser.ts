@@ -19,7 +19,7 @@ export default async function handler(
   const client = new CognitoIdentityProviderClient({ region: 'us-west-2' })
 
   const command = new AdminGetUserCommand({
-    UserPoolId: process.env.COGNITO_USER_POOL_ID,
+    UserPoolId: process.env.AMPLIFY_USERPOOL_ID,
     Username: username,
   })
 
