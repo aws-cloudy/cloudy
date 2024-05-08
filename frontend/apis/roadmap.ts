@@ -1,5 +1,5 @@
 import { ROADMAP_ROWS_PER_PAGE } from '@/constants/rows'
-import client from '@/utils/axiosClient'
+import { client } from '@/utils/axiosClient'
 import server from '@/utils/axiosServer'
 
 const url = '/roadmaps'

@@ -7,12 +7,14 @@ interface ILearningState {
   types: IFilter[]
   difficulties: IFilter[]
   filterCount: number
+  keyword: string
   actions: {
     setJobFilter: (v: IFilter) => void
     setServiceFilter: (v: IFilter) => void
     setTypeFilter: (v: IFilter) => void
     setDifficultyFilter: (v: IFilter) => void
     resetFilter: () => void
+    setKeyword: (v: string) => void
   }
 }
 
@@ -22,6 +24,7 @@ const learningStore = create<ILearningState>(set => ({
   types: [],
   difficulties: [],
   filterCount: 0,
+  keyword: '',
   actions: {
     setJobFilter: v =>
       set(state => {
@@ -56,6 +59,7 @@ const learningStore = create<ILearningState>(set => ({
             }
       }),
     resetFilter: () => set({ jobs: [], services: [], types: [], difficulties: [], filterCount: 0 }),
+    setKeyword: v => set({ keyword: v }),
   },
 }))
 
@@ -64,5 +68,6 @@ export const useServiceFilter = () => learningStore(state => state.services)
 export const useTypeFilter = () => learningStore(state => state.types)
 export const useDifficultyFilter = () => learningStore(state => state.difficulties)
 export const useFilterCount = () => learningStore(state => state.filterCount)
+export const useLearningKeyword = () => learningStore(state => state.keyword)
 
 export const useLearningActions = () => learningStore(state => state.actions)
