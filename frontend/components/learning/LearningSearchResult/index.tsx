@@ -3,10 +3,12 @@ import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
 import { useLearninglayout, useSearchActions } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
-import { useFilterCount, useLearningActions, useLearningKeyword } from '@/stores/learning'
+import { useFilterCount, useLearningActions } from '@/stores/learning'
+import { useSearchParams } from 'next/navigation'
 
 const LearningSearchResult = () => {
-  const keyword = useLearningKeyword()
+  const params = useSearchParams()
+  const keyword = params.get('query') || ''
 
   // 레이아웃
   const layout = useLearninglayout()
