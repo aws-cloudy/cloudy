@@ -44,7 +44,7 @@ public class SearchServiceImpl implements SearchService{
         }
 
         // Perform a search using Opensearch if the result is not cached in Redis
-        SearchListRes searchResult = performOpensearch(query, 5, "searchAll");
+        SearchListRes searchResult = searchAutoCompleteList(query, 5);
 
         // Cache the search result in Redis
         redisUtils.saveData(query, searchResult, EXPIRATION_TIME);
@@ -55,21 +55,43 @@ public class SearchServiceImpl implements SearchService{
     @Override
     public String getFinalQuery(String query) {
         // 일치하는 검색어 있는지 확인
-        SearchListRes searchResult = performOpensearch(query,1,"isExist");
-        if(searchResult.getSearchList() != null && searchResult.getSearchList().size() == 1) {
+        if(searchIsExistQuery(query, 1)) {
             return query; // 검색어 그대로 리턴
         }
 
         // 일치하는 검색어 없다면, 오타교정된 검색어 있는지 확인
-        searchResult = performOpensearch(query,1,"modifiedQuery");
 
 
         return query;
     }
 
-    private SearchListRes performOpensearch(String query, int size, String type) {
+    private boolean searchIsExistQuery(String query, int size) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("learning");
+        SearchRequest searchRequest = new SearchRequest("test");
+        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+
+        // Match phrase prefix query
+        sourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery("title", query));
+
+        sourceBuilder.size(size);
+        searchRequest.source(sourceBuilder);
+
+        try {
+            // Execute the search request
+            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+            
+            // Map the search response to a SearchListRes object
+            SearchListRes response = mapper.mapSearchResponse(searchResponse);
+            return response.getSearchList().size()>0 ? true : false;
+        } catch (IOException e) {
+            // Handle connection errors with Opensearch
+            throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
+        }
+    }
+
+    private SearchListRes searchAutoCompleteList(String query, int size) {
+        // Construct the search request
+        SearchRequest searchRequest = new SearchRequest("test");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
@@ -77,18 +99,16 @@ public class SearchServiceImpl implements SearchService{
         boolQuery.should(QueryBuilders.matchPhrasePrefixQuery("title", query).slop(10));
 
         // Fuzzy query
-        if(type.equals("searchAll")) {
-            BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
-            String[] queryTerms = query.split("\\s+");
-            for (String term : queryTerms) {
-                fuzzyBoolQuery.should(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
-            }
-
-            boolQuery.should(fuzzyBoolQuery);
-
-//            sourceBuilder.sort("counter", SortOrder.DESC);
-//            sourceBuilder.sort(SortBuilders.scoreSort().order(SortOrder.DESC));
+        BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
+        String[] queryTerms = query.split("\\s+");
+        for (String term : queryTerms) {
+            fuzzyBoolQuery.should(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
         }
+        boolQuery.should(fuzzyBoolQuery);
+
+        // Multiple sort options
+        sourceBuilder.sort("counter", SortOrder.DESC);
+        sourceBuilder.sort(SortBuilders.scoreSort().order(SortOrder.DESC));
 
         sourceBuilder.query(boolQuery);
         sourceBuilder.size(size);
