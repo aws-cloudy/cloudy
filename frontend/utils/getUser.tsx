@@ -8,6 +8,6 @@ export async function getUser() {
   if (!session?.user) {
     return undefined
   } else {
-    return session.user as ISessionUser
+    return session.user
   }
 }

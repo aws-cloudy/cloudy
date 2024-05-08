@@ -73,8 +73,4 @@ export const authOptions: NextAuthOptions = {
   pages: {
     newUser: '/join',
   },
-  secret: process.env.NEXT_PUBLIC_SECRET,
-  pages: {
-    newUser: '/join',
-  },
 }
