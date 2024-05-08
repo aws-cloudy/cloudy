@@ -1,14 +1,17 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './MainSearch.module.scss'
 import { BiSearch } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 
 function MainSearch() {
-  const [isOpen, setIsOpen] = useState(false)
-  const { register, watch } = useForm<{ search: string }>()
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+  // const [keyword, setKeyword] = useState<string>('')
+  const { register, watch, handleSubmit } = useForm<{ search: string }>()
+
   const keyword = watch('search', '')
+
   const innerHtml = (word: string) => {
     return {
       __html: word.replace(keyword, matched => {
@@ -16,6 +19,12 @@ function MainSearch() {
       }),
     }
   }
+
+  const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    await new Promise(resolve => setTimeout(resolve, 5000))
+  }
+
+  const onSubmit = (data: any) => console.log(data)
 
   useEffect(() => {
     if (!keyword) return
@@ -26,6 +35,15 @@ function MainSearch() {
     }
   }, [keyword])
 
+  // useEffect(() => {
+  //   const subscirbe = watch((data, { name }) => {
+  //     setKeyword(data.search)
+  //     console.log(data, name)
+  //   })
+  //   //모든 input 데이터를 담은 객체 data, change 이벤트가 발생하고 있는 input의 name을 인자로 받는 콜백함수
+  //   return () => subscirbe.unsubscribe()
+  // }, [watch])
+
   return (
     <div
       className={styles.container}
@@ -35,8 +53,8 @@ function MainSearch() {
       }}
     >
       <div className={styles.searchBox}>
-        <form>
-          <input type="text" className={styles.searchInput} {...register('search')} />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input type="text" className={styles.searchInput} {...register('search')} onChange={handleChange} />
         </form>
         <BiSearch className={styles.searchIcon} />
         {isOpen && (
