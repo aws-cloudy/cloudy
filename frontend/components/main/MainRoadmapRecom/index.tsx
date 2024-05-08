@@ -16,6 +16,7 @@ function MainRoadmapRecom() {
   const getRoadmaps = async () => {
     const pg = page ? page : null
     const res = await getMainRoadmaps(pg)
+    console.log(res)
     setRoadmaps(res)
   }
 
@@ -49,7 +50,7 @@ function MainRoadmapRecom() {
         <div className={styles.roadmapBox}>
           {roadmaps &&
             roadmaps.map((e, i) => (
-              <MainRoadmapRecomItem key={i} title={e.title} content={e.summary} id={e.roadmapId} />
+              <MainRoadmapRecomItem key={i} title={e.title} content={e.summary} id={e.roadmapId} imgSrc={e.thumbnail} />
             ))}
         </div>
       </div>
