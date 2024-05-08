@@ -24,7 +24,7 @@ export const authOptions: NextAuthOptions = {
         // 일반 Cognito 사용자의 경우 이메일을 사용
         username = user.email
       }
-
+      user.username = username
       const { exists, hasJobId } = await checkUserExists(username)
       if (!exists || !hasJobId) {
         return `/join?auth=${encodeURIComponent(username)}`

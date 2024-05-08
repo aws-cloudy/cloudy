@@ -1,5 +1,5 @@
 'use client'
-import { useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import styles from './page.module.scss'
 import MyPageTab from '@/components/mypage/MyPageTab'
 import { useEffect, useState } from 'react'
@@ -12,10 +12,15 @@ const MyPage = () => {
   const [selectedTab, setSelectedTab] = useState('account')
 
   useEffect(() => {
-    console.log('유저 정보', session)
-  })
+    if (status === 'unauthenticated') {
+      alert('로그인이 필요한 페이지입니다.')
+      signIn('cognito', { callbackUrl: '/' })
+    }
+  }, [session, status])
 
-  if (status === 'authenticated') {
+  if (status === 'loading') {
+    return null
+  } else if (status === 'authenticated') {
     return (
       <>
         <section className={styles.section}>
@@ -23,12 +28,12 @@ const MyPage = () => {
             <div className={styles.intro}>
               안녕하세요
               <br />
-              {session.user?.name}님
+              {session?.user?.name}님
             </div>
             <MyPageTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           </div>
           <div className={styles.right}>
-            {selectedTab === 'account' && <Account user={session?.user} />}
+            {selectedTab === 'account' && session && <Account user={session.user} />}
             {selectedTab === 'activity' && <Activity />}
             {selectedTab === 'favorites' && <Favorites />}
           </div>

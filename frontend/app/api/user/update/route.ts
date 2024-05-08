@@ -2,7 +2,7 @@ import {
   AdminUpdateUserAttributesCommand,
   CognitoIdentityProviderClient,
 } from '@aws-sdk/client-cognito-identity-provider'
-import { getSession } from 'next-auth/react'
+
 import { NextResponse } from 'next/server'
 
 const client = new CognitoIdentityProviderClient({
@@ -10,10 +10,8 @@ const client = new CognitoIdentityProviderClient({
 })
 
 export async function POST(req: Request) {
-  console.log('Request', req)
+  // console.log('Request', req)
 
-  // const session = await getSession({ req })
-  // const username = session?.user.username
   // req.body를 JSON으로 파싱
   const requestData = await req.json()
   const { username, jobId, serviceId } = requestData

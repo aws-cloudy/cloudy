@@ -109,6 +109,7 @@ export default function RegistInfomation({ username }: any) {
               placeholder="직무"
               width={730}
             />
+
             <Dropdown
               options={serviceOptions}
               value={selectedService}
