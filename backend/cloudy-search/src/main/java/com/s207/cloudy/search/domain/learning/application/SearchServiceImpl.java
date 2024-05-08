@@ -14,15 +14,18 @@ import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.unit.Fuzziness;
 import org.opensearch.index.query.*;
-import org.opensearch.search.SearchHit;
 import org.opensearch.search.builder.SearchSourceBuilder;
-import org.opensearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.opensearch.search.fetch.subphase.highlight.HighlightField;
 import org.opensearch.search.sort.SortBuilders;
 import org.opensearch.search.sort.SortOrder;
+import org.opensearch.search.suggest.Suggest;
+import org.opensearch.search.suggest.SuggestBuilder;
+import org.opensearch.search.suggest.SuggestBuilders;
+import org.opensearch.search.suggest.term.TermSuggestion;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -67,36 +70,41 @@ public class SearchServiceImpl implements SearchService{
     }
 
     private String ModifiedQueryIfExist(String query, int size) {
-        // Construct the search request
+        String[] modifiedQuery = query.split(" ");
+
+        // SearchRequest 생성
         SearchRequest searchRequest = new SearchRequest("test");
-        SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
-        // Fuzzy query
-        BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
-        String[] queryTerms = query.split("\\s+");
-        for (String term : queryTerms) {
-            fuzzyBoolQuery.must(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
-        }
+        // Suggest 쿼리 생성
+        SuggestBuilder suggestBuilder = new SuggestBuilder();
+        suggestBuilder.addSuggestion("query-suggestion", SuggestBuilders.termSuggestion("title").text(query));
 
-        // Highlighting setting
-        HighlightBuilder highlightBuilder = new HighlightBuilder();
-        highlightBuilder.field("title");
-
-        sourceBuilder.query(fuzzyBoolQuery);
-        sourceBuilder.size(1);
-        sourceBuilder.highlighter(highlightBuilder);
-        searchRequest.source(sourceBuilder);
+        searchSourceBuilder.suggest(suggestBuilder);
+        searchRequest.source(searchSourceBuilder);
 
         try {
-            // Execute the search request
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
 
-            // Map the search response to a SearchListRes object
-            return mapper.mapSearchModifiedResponse(searchResponse, query);
+            // 검색 결과 처리
+            Suggest suggest = searchResponse.getSuggest();
+            if (suggest != null) {
+                TermSuggestion completionSuggestion = suggest.getSuggestion("query-suggestion");
+                List<TermSuggestion.Entry> entries = completionSuggestion.getEntries();
+                for (int i=0; i<entries.size(); i++) {
+                    if(entries.get(i).getOptions().size() == 0) {
+                        continue;
+                    }
+                    modifiedQuery[i] = entries.get(i).getOptions().get(0).getText().string();
+                }
+            }
+
+            return String.join(" ", modifiedQuery);
         } catch (IOException e) {
             // Handle connection errors with Opensearch
             throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
         }
+
     }
 
     private boolean IsQueryExist(String query, int size) {

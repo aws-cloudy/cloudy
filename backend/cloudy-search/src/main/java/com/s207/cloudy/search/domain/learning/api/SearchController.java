@@ -26,7 +26,6 @@ public class SearchController {
     // 학습 검색어 오타가 있으면 교정된 결과
     @GetMapping("/final")
     public ResponseEntity<String> getFinalQuery(@RequestParam String query) {
-        System.out.println(query);
         return ResponseEntity.ok(searchService.getFinalQuery(query));
     }
 
