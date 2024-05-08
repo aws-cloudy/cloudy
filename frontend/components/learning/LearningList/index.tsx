@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './LearningList.module.scss'
+import { useRouter } from 'next/navigation'
 import LearningCard from '@/components/common/LearningCard'
 import { useLearninglayout } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
@@ -33,6 +34,8 @@ const LearningList = () => {
   const hasMore = useRef<boolean>(true)
   const [list, setList] = useState<ILearningCard[]>([])
   const [isFetching, setIsFetching] = useState<boolean>(true)
+
+  const router = useRouter()
 
   // fetch
   const fetchLearnings = async () => {
@@ -71,6 +74,10 @@ const LearningList = () => {
     offset.current = 1
     fetchLearnings()
   }, [keyword, jobs, services, types, difficulties])
+
+  useEffect(() => {
+    router.push(`/learning/query=${keyword}`)
+  }, [keyword])
 
   // 반응형 width 감지
   const { isTablet } = useResponsiveWidth()
