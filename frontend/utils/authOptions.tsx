@@ -40,7 +40,6 @@ export const authOptions: NextAuthOptions = {
         token.serviceId = user?.serviceId || profile?.service_id
         token.user = user
         token.account = account
-        token.profile = profile
         token.accessToken = account.id_token
         token.id = account.providerAccountId
       }

@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 function CommunityListItem({ question }: { question: ICommunityListItem }) {
   const descWithoutImage = question.desc.replace(/!\[alt text]\(.+\)/g, '')
   let desc = descWithoutImage.length > 120 ? descWithoutImage.substring(0, 120) + '...' : descWithoutImage
+
   const router = useRouter()
   const handleClick = () => {
     router.push(`/community/detail/${question.id}`)
