@@ -49,7 +49,7 @@ function MainRoadmapRecom() {
         <div className={styles.roadmapBox}>
           {roadmaps &&
             roadmaps.map((e, i) => (
-              <MainRoadmapRecomItem key={i} title={e.title} content={e.summary} id={e.roadmapId} />
+              <MainRoadmapRecomItem key={i} title={e.title} content={e.summary} id={e.roadmapId} imgSrc={e.thumbnail} />
             ))}
         </div>
       </div>

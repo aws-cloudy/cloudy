@@ -35,6 +35,22 @@ const nextConfig = {
       },
     ]
   },
+  rewrites() {
+    return [
+      {
+        source: '/cloudy-api/:path*',
+        destination: 'https://3m8faj87ji.execute-api.ap-northeast-2.amazonaws.com/prod/api/v1/:path*',
+      },
+      {
+        source: '/cloudy-search-api/:path*',
+        destination: 'https://o5u2oz980k.execute-api.ap-northeast-2.amazonaws.com/prod/api/v1/:path*',
+      },
+      {
+        source: '/cloudy-chat-api/:path*',
+        destination: 'https://u2r68k1fi0.execute-api.ap-northeast-2.amazonaws.com/prod/api/v1/:path*',
+      },
+    ]
+  },
 }
 
 export default nextConfig

@@ -18,7 +18,7 @@
     "generate": "prisma generate"
   },
   "dependencies": {
-    "@aws-sdk/client-cognito-identity-provider": "^3.568.0",
+    "@aws-sdk/client-cognito-identity-provider": "^3.569.0",
     "@aws-sdk/credential-provider-node": "^3.568.0",
     "@prisma/client": "5.13.0",
     "@supabase/ssr": "^0.3.0",
@@ -29,6 +29,7 @@
     "aws-sdk": "^2.1612.0",
     "axios": "^1.6.8",
     "dotenv-cli": "^7.4.1",
+    "highlight.js": "^11.9.0",
     "jest-junit": "^16.0.0",
     "jest-mock-extended": "^3.0.7",
     "next": "^14.2.2",

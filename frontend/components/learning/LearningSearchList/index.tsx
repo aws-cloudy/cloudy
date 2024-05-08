@@ -4,12 +4,11 @@ import LearningSearchListItem from '../LearningSearchListItem'
 import { ILearningSearchList } from '@/types/learning'
 
 const LearningSearchList = (props: ILearningSearchList) => {
-  const { setValue, setKeyword } = props
+  const { setValue } = props
 
   // 자동 검색어 클릭시
   const onClick = (v: string) => {
     setValue(v)
-    setKeyword(v)
   }
 
   return (

@@ -1,7 +1,7 @@
 import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
-import { checkUserExists } from './cognito'
+import { checkUserExists, getUser } from './cognito'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -23,55 +23,38 @@ export const authOptions: NextAuthOptions = {
       } else {
         // 일반 Cognito 사용자의 경우 이메일을 사용
         username = user.email
-        username = user.email
       }
       user.username = username
-      // const { exists, hasJobId } = await checkUserExists(username)
-      console.log(user)
-      // if (!exists || !hasJobId) {
-      // user.isNewUser = false
+      const { exists, hasJobId } = await checkUserExists(username)
+      if (!exists || !hasJobId) {
+        return `/join?auth=${encodeURIComponent(username)}`
+      }
 
-      // return `/join`
-      // return true
-      // }
       return true
     },
 
-    // 토큰을 세션에 추가하는 콜백
     async jwt({ token, user, account, profile }: any) {
       if (user) {
-        // const userExists  = await checkUserExists(user.email);
-        // token.isNewUser = !userExists ;  // 존재하지 않는 사용자라면 true
-        // 프로필에서 job_id, service_id를 추출해 JWT 토큰에 추가
+        token.username = user.username
         token.jobId = user?.jobId || profile?.job_id
         token.serviceId = user?.serviceId || profile?.service_id
         token.user = user
         token.account = account
-        token.profile = profile
-        token.accessToken = account.access_token
+        token.accessToken = account.id_token
         token.id = account.providerAccountId
       }
-
       return token
     },
 
-    // 세션 데이터에 accessToken 추가
     async session({ session, token }: any) {
-      if (token) {
-        session.user.isNewUser = token.isNewUser
-        session.accessToken = token.accessToken as string
-        session.user.id = token.id as string
-        session.user.uuid = token.sub as string
-        session.token = token
-        session.user.jobId = token.jobId
-        session.user.serviceId = token.serviceId
-      }
+      session.user.username = token.username
+      session.accessToken = token.accessToken as string
+      session.user.id = token.id as string
+      session.user.uuid = token.sub as string
+      session.user.jobId = token.jobId
+      session.user.serviceId = token.serviceId
       return session
     },
-  },
-  secret: process.env.NEXT_PUBLIC_SECRET,
-  pages: {
-    newUser: '/join',
   },
   secret: process.env.NEXT_PUBLIC_SECRET,
   pages: {

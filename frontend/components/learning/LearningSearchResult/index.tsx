@@ -2,12 +2,13 @@ import styles from './LearningSearchResult.module.scss'
 import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
 import { useLearninglayout, useSearchActions } from '@/stores/layout'
-import { ILearningSearchResult } from '@/types/learning'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { useFilterCount, useLearningActions } from '@/stores/learning'
+import { useSearchParams } from 'next/navigation'
 
-const LearningSearchResult = (props: ILearningSearchResult) => {
-  const { keyword } = props
+const LearningSearchResult = () => {
+  const params = useSearchParams()
+  const keyword = params.get('query') || ''
 
   // 레이아웃
   const layout = useLearninglayout()

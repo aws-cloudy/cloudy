@@ -2,22 +2,21 @@ import {
   AdminUpdateUserAttributesCommand,
   CognitoIdentityProviderClient,
 } from '@aws-sdk/client-cognito-identity-provider'
-import { getSession } from 'next-auth/react'
+
 import { NextResponse } from 'next/server'
 
 const client = new CognitoIdentityProviderClient({
-  region: process.env.AWS_REGION, // AWS 리전 설정
+  region: process.env.AMPLIFY_REGION, // AWS 리전 설정
 })
 
 export async function POST(req: Request) {
-  console.log('Request', req)
+  // console.log('Request', req)
 
-  // const session = await getSession({ req })
-  // const username = session?.user.username
   // req.body를 JSON으로 파싱
   const requestData = await req.json()
   const { username, jobId, serviceId } = requestData
 
+  console.log(username, jobId, serviceId)
   const params = {
     UserAttributes: [
       {
@@ -29,7 +28,7 @@ export async function POST(req: Request) {
         Value: serviceId,
       },
     ],
-    UserPoolId: process.env.COGNITO_USER_POOL_ID as string, // Cognito 사용자 풀 ID
+    UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string, // Cognito 사용자 풀 ID
     Username: username,
   }
   try {

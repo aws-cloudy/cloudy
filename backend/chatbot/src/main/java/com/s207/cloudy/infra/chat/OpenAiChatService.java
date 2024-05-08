@@ -43,6 +43,8 @@ public class OpenAiChatService implements ChatService {
 
         Prompt prompt = getPrompt(template, variables);
 
+        log.debug("generate prompt: {}", prompt.text().substring(0, 15));
+
         if (openAiChatModel == null) {
             openAiStreamingChatModel = OpenAiStreamingChatModel.builder()
                     .apiKey(openAiKey)
@@ -55,14 +57,13 @@ public class OpenAiChatService implements ChatService {
 
                     @Override
                     public void onNext(String token) {
-
-//                    log.info("onNext(): " + token);
+                        log.debug("onNext(): " + token);
                         emitter.next(token);
                     }
 
                     @Override
                     public void onComplete(Response<AiMessage> response) {
-//                        log.info("onComplete(): " + response);
+                        log.debug("onComplete(): " + response);
                         emitter.complete();
                     }
 
