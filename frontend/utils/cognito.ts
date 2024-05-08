@@ -8,6 +8,20 @@ const client = new CognitoIdentityProviderClient({
   },
 })
 
+export async function getUser(username: string) {
+  const params = {
+    UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
+    Username: username,
+  }
+  try {
+    const data = await client.send(new AdminGetUserCommand(params))
+    return { user: data, exists: true }
+  } catch (errror) {
+    console.error('Error fetching user from Cognito:', errror)
+    return { user: null, exists: false }
+  }
+}
+
 export async function checkUserExists(username: string): Promise<{ exists: boolean; hasJobId: boolean }> {
   const command = new AdminGetUserCommand({
     UserPoolId: process.env.COGNITO_USER_POOL_ID as string,
