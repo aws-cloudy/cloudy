@@ -1,6 +1,9 @@
-import axiosInstance from '@/utils/axiosInstance'
+import server from '@/utils/axiosServer'
 
 export const fetchLearningRecomWithoutJob = async () => {
-  const res = await axiosInstance.get(`/learnings/search/job`)
-  return res.data.learningList
+  const response = await server
+    .get(`/learnings/search/job`)
+    .then(res => res.data.learningList)
+    .catch(err => err)
+  return response
 }

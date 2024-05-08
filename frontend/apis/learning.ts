@@ -1,4 +1,4 @@
-import axiosInstance from '@/utils/axiosInstance'
+import client from '@/utils/axiosClient'
 
 // 학습 전체 조회 - 검색어 오타 교정 전
 export const getLearnings = async (
@@ -10,7 +10,7 @@ export const getLearnings = async (
   type: string,
   difficulty: string,
 ) => {
-  const response = axiosInstance
+  const response = client
     .get(
       `/learnings/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
     )
