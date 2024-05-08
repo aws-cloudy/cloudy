@@ -9,19 +9,21 @@ type Props = {
 }
 
 function MainRoadmapRecomItem({ title, content, id, imgSrc }: Props) {
-  const shortTitle = title.length > 60 ? title.substring(0, 60) + '...' : title
-  const shortContent = content.length > 200 ? content.substring(0, 200) + '...' : content
+  const shortTitle = title.replace(/(?<=^.{60}).+/, '...')
+  const shortContent = content.replace(/(?<=^.{200}).+/, '...')
 
   return (
     <div className={styles.container}>
       <div className={styles.imgWrap}>
         <Image src={imgSrc} alt={title} fill sizes="auto" />
       </div>
-      <p className={styles.title}>{shortTitle}</p>
-      <p className={styles.content}>{shortContent}</p>
-      <a href={`/roadmap/${id}`} className={styles.link}>
-        {'자세히 보기 〉'}
-      </a>
+      <div className={styles.textBox}>
+        <p className={styles.title}>{shortTitle}</p>
+        <p className={styles.content}>{shortContent}</p>
+        <a href={`/roadmap/${id}`} className={styles.link}>
+          {'자세히 보기 〉'}
+        </a>
+      </div>
     </div>
   )
 }

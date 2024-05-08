@@ -8,8 +8,14 @@ const url = '/roadmaps'
 export const getRoadmaps = async (offset: number, query: string, job: string, service: string) => {
   const response = await client
     .get(`${url}?page=${offset}&size=${ROADMAP_ROWS_PER_PAGE}&query=${query}&job=${job}&service=${service}`)
-    .then(res => res.data.roadmaps)
-    .catch(err => err)
+    .then(res => {
+      console.log(res)
+      return res.data.roadmaps
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  console.log(response)
   return response
 }
 

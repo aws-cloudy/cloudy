@@ -7,3 +7,11 @@ export const fetchLearningRecomWithoutJob = async () => {
     .catch(err => err)
   return response
 }
+
+export const fetchLearningRecom = async (jobNo: number) => {
+  const response = await server
+    .get(`/my/learnings/search/job/${jobNo}`)
+    .then(res => res.data.learningList)
+    .catch(err => err)
+  return response
+}
