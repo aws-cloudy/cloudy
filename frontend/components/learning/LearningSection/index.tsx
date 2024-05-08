@@ -8,14 +8,13 @@ import LearningList from '../LearningList'
 
 const LearningSection = () => {
   const [value, setValue] = useState<string>('') // input value
-  const [keyword, setKeyword] = useState<string>('') // 검색어
 
   return (
     <section className={styles.section}>
-      <LearningInput value={value} setValue={setValue} keyword={keyword} setKeyword={setKeyword} />
-      <LearningSearchResult keyword={keyword} />
+      <LearningInput value={value} setValue={setValue} />
+      <LearningSearchResult />
       {/* <LearningRecommend /> */}
-      <LearningList keyword={keyword} />
+      <LearningList />
     </section>
   )
 }

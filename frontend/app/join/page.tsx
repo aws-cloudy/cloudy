@@ -1,15 +1,16 @@
 'use client'
+
 import RegistInfomation from '@/components/RegistInfomation'
 import styles from './page.module.scss'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import { Suspense, useEffect } from 'react'
 
-const joinPage = () => {
+const joinPage = ({ params }: { params: { auth: string } }) => {
   const { data: session, status } = useSession()
   const router = useRouter()
-  const searchParams = useSearchParams()
-  const username = searchParams.get('auth')
+
+  const username = params.auth
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -21,7 +22,9 @@ const joinPage = () => {
   return (
     <>
       <section className={styles.section}>
-        <RegistInfomation username={username} />
+        <Suspense>
+          <RegistInfomation username={username} />
+        </Suspense>
       </section>
     </>
   )

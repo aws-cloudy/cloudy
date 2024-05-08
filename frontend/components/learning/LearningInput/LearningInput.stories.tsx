@@ -10,7 +10,7 @@ const meta = {
   },
 
   tags: ['autodocs'],
-  args: { value: 'value', setValue: fn(), keyword: 'keyword', setKeyword: fn() },
+  args: { value: 'value', setValue: fn() },
 } satisfies Meta<typeof LearningInput>
 
 export default meta

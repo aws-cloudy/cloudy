@@ -1,34 +1,14 @@
 'use client'
+
 import styles from './RegistInfomation.module.scss'
 import '@/styles/theme.scss'
 import ProgressBar from '../ProgressBar'
 import { useState } from 'react'
 import Dropdown from '../common/Dropdown'
 import { signIn } from 'next-auth/react'
-
-interface OptionType {
-  value: string
-  label: string
-}
+import { OptionType, jobOptions, serviceOptions } from '@/constants/user'
 
 export default function RegistInfomation({ username }: any) {
-  const jobOptions: OptionType[] = [
-    { value: '0', label: 'Architect' },
-    { value: '1', label: 'Business User' },
-    { value: '2', label: 'Cloud Operator' },
-    { value: '3', label: 'Data Engineer' },
-    { value: '4', label: 'Developer' },
-    { value: '5', label: 'Infrastructure Engineer' },
-  ]
-  const serviceOptions: OptionType[] = [
-    { value: '0', label: 'Database' },
-    { value: '1', label: 'Storage' },
-    { value: '2', label: 'Machine Learning' },
-    { value: '3', label: 'Cloud Essentials' },
-    { value: '4', label: 'Network & ContentDelivery' },
-    { value: '5', label: 'Serverless' },
-  ]
-
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
   const [selectedService, setSelectedService] = useState<OptionType | null>(null)
   const [confirmScreen, setConfirmScreen] = useState(false)
