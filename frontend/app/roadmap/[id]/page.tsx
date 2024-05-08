@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import Layout from '@/components/common/Layout'
 import DetailSection from '@/components/roadmap/detail/DetailSection'
 import { getRoadmap } from '@/apis/roadmap'
