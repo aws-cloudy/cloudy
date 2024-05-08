@@ -16,7 +16,6 @@ function MainRoadmapRecom() {
   const getRoadmaps = async () => {
     const pg = page ? page : null
     const res = await getMainRoadmaps(pg)
-    console.log(res)
     setRoadmaps(res)
   }
 
