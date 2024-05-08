@@ -41,6 +41,8 @@ public class QnaService {
         // 벡터DB에서 유사한 데이터 상위 n개 조회
         List<EmbeddingMatch<TextSegment>> relevant = pineconeService.findRelevant(inputData, 1);
 
+        log.debug("find relevant data: {}", relevant.get(0).embedded().text());
+
         String template = """ 
                 아래의 상황을 참고해 질문에 대한 답을 작성해줘.
                 모든 질문의 답변을 최대한 AWS(Amazon Web Service) 서비스로 해결할 수 있도록 제시해줘.
