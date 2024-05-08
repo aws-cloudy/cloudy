@@ -13,16 +13,6 @@ export interface ILearningSearchListItem {
   onClick: (v: string) => void
 }
 
-export interface IJob {
-  id: number
-  name: string
-}
-
-export interface IService {
-  id: number
-  name: string
-}
-
 export interface ILearningCard {
   learningId: number
   title: string

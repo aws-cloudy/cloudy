@@ -5,11 +5,17 @@ import styles from './MainSearch.module.scss'
 import { BiSearch } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { getSearchAutoComplete } from '@/apis/learning'
+import { useLearningActions } from '@/stores/learning'
+import { useRouter } from 'next/navigation'
 
 function MainSearch() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [list, setList] = useState<{ learningId: number; title: string }[]>([])
   const { register, watch, handleSubmit } = useForm<{ search: string }>()
+
+  const router = useRouter()
+
+  const { setKeyword } = useLearningActions()
 
   const keyword = watch('search', '')
 
@@ -29,9 +35,10 @@ function MainSearch() {
     setList(data)
   }
 
-  const onSearch = () => {}
-
-  const onSubmit = (data: any) => console.log(data)
+  const onSearch = (v: string) => {
+    router.push(`/learning`)
+    setKeyword(v)
+  }
 
   useEffect(() => {
     if (!keyword) return
@@ -51,7 +58,7 @@ function MainSearch() {
       }}
     >
       <div className={styles.searchBox}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(() => onSearch(keyword))}>
           <input type="text" className={styles.searchInput} {...register('search')} onKeyUp={handleKeyUp} />
         </form>
         <BiSearch className={styles.searchIcon} />
@@ -63,6 +70,7 @@ function MainSearch() {
                   key={item.learningId}
                   className={styles.searchItem}
                   dangerouslySetInnerHTML={innerHtml(item.title)}
+                  onMouseDown={e => onSearch(item.title)}
                 />
               ))}
           </div>
