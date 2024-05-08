@@ -44,12 +44,7 @@ function MainSearch() {
     } else if (e.key === 'ArrowUp') {
       setSelected(prev => (prev > -1 ? prev - 1 : -1))
     } else if (e.key === 'Enter') {
-      if (selected !== -1) {
-        setKeyword(list[selected].title)
-        onSearch()
-      } else {
-        setKeyword(keyword)
-      }
+      selected !== -1 && onSearch(keyword)
     } else if (!e.key.startsWith('Arrow')) {
       setSelected(-1)
     }
@@ -75,7 +70,7 @@ function MainSearch() {
       <div className={styles.searchBox}>
         <form
           onSubmit={handleSubmit(() => {
-            onSearch()
+            onSearch(keyword)
           })}
         >
           <input
@@ -96,8 +91,7 @@ function MainSearch() {
                   className={`${styles.searchItem} ${selected === idx && styles.selected}`}
                   dangerouslySetInnerHTML={innerHtml(item.title)}
                   onMouseDown={() => {
-                    setKeyword(item.title)
-                    onSearch()
+                    onSearch(item.title)
                   }}
                   onMouseEnter={() => setSelected(-1)}
                 />
