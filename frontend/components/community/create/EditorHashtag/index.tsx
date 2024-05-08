@@ -7,7 +7,7 @@ function EditorHashtag({ tags, setTags }: IEditorHashtag) {
   const [isAdding, setIsAdding] = useState(false)
   const { register, getValues, setValue } = useForm<{ hash: string }>()
 
-  const onSpacebar = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const tag = getValues('hash').toLowerCase()
 
     if (e.key === ' ' || e.key === 'Enter') {
@@ -23,6 +23,8 @@ function EditorHashtag({ tags, setTags }: IEditorHashtag) {
       e.preventDefault()
       setValue('hash', '')
       setIsAdding(false)
+    } else if (e.key === '#') {
+      e.preventDefault()
     }
   }
 
@@ -40,7 +42,7 @@ function EditorHashtag({ tags, setTags }: IEditorHashtag) {
         </span>
       ))}
       {isAdding ? (
-        <input type="text" {...register('hash')} onKeyDown={onSpacebar} defaultValue="" maxLength={20} minLength={1} />
+        <input type="text" {...register('hash')} onKeyDown={onKeyDown} defaultValue="" maxLength={20} minLength={1} />
       ) : (
         <button className={styles.addbutton} type="button" onClick={() => setIsAdding(true)}>
           + 태그추가

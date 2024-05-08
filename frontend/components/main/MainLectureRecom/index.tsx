@@ -18,7 +18,12 @@ async function MainLectureRecom() {
         </div>
         <div className={styles.recomBox}>
           <div className={styles.recomBoxInner}>
-            {learningList && learningList.map(each => <LearningCard key={each.learningId} item={each} layout="grid" />)}
+            {learningList &&
+              learningList.map(each => (
+                <div className={styles.recomBoxInnerItem} key={each.learningId}>
+                  <LearningCard item={each} layout="grid" />
+                </div>
+              ))}
           </div>
         </div>
       </div>
