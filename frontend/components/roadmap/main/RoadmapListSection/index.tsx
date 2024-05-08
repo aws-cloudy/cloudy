@@ -21,7 +21,6 @@ const RoadmapListSection = () => {
 
   // fetch 로드맵
   const fetchRoadmaps = async () => {
-    setIsFetching(true)
     if (!hasMore.current) return
 
     const roadmaps = await getRoadmaps(offset.current, searchValue.keyword, searchValue.job, searchValue.service)
@@ -41,6 +40,7 @@ const RoadmapListSection = () => {
   }
 
   useEffect(() => {
+    setIsFetching(true)
     window.scrollTo(0, 0)
     setList([])
     hasMore.current = true
