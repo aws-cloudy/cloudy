@@ -44,7 +44,7 @@ public class SearchServiceImpl implements SearchService{
         }
 
         // Perform a search using Opensearch if the result is not cached in Redis
-        SearchListRes searchResult = performOpensearch(query);
+        SearchListRes searchResult = performOpensearch(query, 5, "searchAll");
 
         // Cache the search result in Redis
         redisUtils.saveData(query, searchResult, EXPIRATION_TIME);
@@ -52,22 +52,46 @@ public class SearchServiceImpl implements SearchService{
         return searchResult;
     }
 
-    private SearchListRes performOpensearch(String query) {
+    @Override
+    public String getFinalQuery(String query) {
+        // 일치하는 검색어 있는지 확인
+        SearchListRes searchResult = performOpensearch(query,1,"isExist");
+        if(searchResult.getSearchList() != null && searchResult.getSearchList().size() == 1) {
+            return query; // 검색어 그대로 리턴
+        }
+
+        // 일치하는 검색어 없다면, 오타교정된 검색어 있는지 확인
+        searchResult = performOpensearch(query,1,"modifiedQuery");
+
+
+        return query;
+    }
+
+    private SearchListRes performOpensearch(String query, int size, String type) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("test");
+        SearchRequest searchRequest = new SearchRequest("learning");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
         // Match phrase prefix query
-        boolQuery.should(QueryBuilders.matchPhrasePrefixQuery("title", query));
+        boolQuery.should(QueryBuilders.matchPhrasePrefixQuery("title", query).slop(10));
 
         // Fuzzy query
-        boolQuery.should(QueryBuilders.fuzzyQuery("title", query).fuzziness(Fuzziness.AUTO));
+        if(type.equals("searchAll")) {
+            BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
+            String[] queryTerms = query.split("\\s+");
+            for (String term : queryTerms) {
+                fuzzyBoolQuery.should(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
+            }
+
+            boolQuery.should(fuzzyBoolQuery);
+
+//            sourceBuilder.sort("counter", SortOrder.DESC);
+//            sourceBuilder.sort(SortBuilders.scoreSort().order(SortOrder.DESC));
+        }
 
         sourceBuilder.query(boolQuery);
-        sourceBuilder.size(5);
-        sourceBuilder.sort("counter", SortOrder.DESC);
-        sourceBuilder.sort(SortBuilders.scoreSort().order(SortOrder.DESC));
+        sourceBuilder.size(size);
         searchRequest.source(sourceBuilder);
 
         try {
