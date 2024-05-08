@@ -12,12 +12,21 @@ interface OptionType {
 }
 
 export default function RegistInfomation({ username }: any) {
-  const options: OptionType[] = [
-    { value: '0', label: 'Data Scientist' },
-    { value: '1', label: 'Data2' },
-    { value: '2', label: 'Data3' },
-    { value: '3', label: 'Data4' },
-    { value: '4', label: 'Data5' },
+  const jobOptions: OptionType[] = [
+    { value: '0', label: 'Architect' },
+    { value: '1', label: 'Business User' },
+    { value: '2', label: 'Cloud Operator' },
+    { value: '3', label: 'Data Engineer' },
+    { value: '4', label: 'Developer' },
+    { value: '5', label: 'Infrastructure Engineer' },
+  ]
+  const serviceOptions: OptionType[] = [
+    { value: '0', label: 'Database' },
+    { value: '1', label: 'Storage' },
+    { value: '2', label: 'Machine Learning' },
+    { value: '3', label: 'Cloud Essentials' },
+    { value: '4', label: 'Network & ContentDelivery' },
+    { value: '5', label: 'Serverless' },
   ]
 
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
@@ -31,10 +40,14 @@ export default function RegistInfomation({ username }: any) {
   const handleServiceChange = (selectedObtion: any) => setSelectedService(selectedObtion)
 
   const handleConfirm = () => {
-    if (currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1)
+    if (selectedJob && selectedService) {
+      if (currentStep < totalSteps) {
+        setCurrentStep(currentStep + 1)
+      }
+      setConfirmScreen(true)
+    } else {
+      alert('직무와 서비스를 선택해주세요.')
     }
-    setConfirmScreen(true)
   }
   const handleCancel = () => {
     setCurrentStep(currentStep - 1)
@@ -71,11 +84,11 @@ export default function RegistInfomation({ username }: any) {
           <div className={styles.info}>
             <div className={styles.infoContainer}>
               <div className={styles.infoTitle}>직무</div>
-              <div id="selectedJob">{selectedJob ? selectedJob.label : '선택되지 않음'}</div>
+              <div id="selectedJob">{selectedJob?.label}</div>
             </div>
             <div className={styles.infoContainer}>
               <div className={styles.infoTitle}>관심 서비스</div>
-              <div>{selectedService ? selectedService.label : '선택되지 않음'}</div>
+              <div>{selectedService?.label}</div>
             </div>
           </div>
           <button className={styles.cancel} onClick={handleCancel}>
@@ -89,9 +102,15 @@ export default function RegistInfomation({ username }: any) {
         <>
           <div className={styles.blackText}>등록한 정보는 마이페이지에서 변경할 수 있습니다.</div>
           <div className={styles.drops}>
-            <Dropdown options={options} value={selectedJob} onChange={handleJobChange} placeholder="직무" width={730} />
             <Dropdown
-              options={options}
+              options={jobOptions}
+              value={selectedJob}
+              onChange={handleJobChange}
+              placeholder="직무"
+              width={730}
+            />
+            <Dropdown
+              options={serviceOptions}
               value={selectedService}
               onChange={handleServiceChange}
               placeholder="관심 서비스"
