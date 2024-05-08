@@ -12,6 +12,7 @@ const MyPage = () => {
   const [selectedTab, setSelectedTab] = useState('account')
 
   useEffect(() => {
+    console.log(session)
     if (status === 'unauthenticated') {
       alert('로그인이 필요한 페이지입니다.')
       signIn('cognito', { callbackUrl: '/' })
@@ -28,7 +29,7 @@ const MyPage = () => {
             <div className={styles.intro}>
               안녕하세요
               <br />
-              {session?.user?.name}님
+              {session.user.name}님
             </div>
             <MyPageTab selectedTab={selectedTab} setSelectedTab={setSelectedTab} />
           </div>

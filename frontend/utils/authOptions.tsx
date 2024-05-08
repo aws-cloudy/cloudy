@@ -38,26 +38,19 @@ export const authOptions: NextAuthOptions = {
         token.username = user.username
         token.jobId = user?.jobId || profile?.job_id
         token.serviceId = user?.serviceId || profile?.service_id
-        token.user = user
-        token.account = account
-        token.profile = profile
         token.accessToken = account.id_token
         token.id = account.providerAccountId
       }
-
       return token
     },
 
     async session({ session, token }: any) {
       session.user.username = token.username
-      session.user.isNewUser = token.isNewUser
       session.accessToken = token.accessToken as string
       session.user.id = token.id as string
       session.user.uuid = token.sub as string
-      session.token = token
       session.user.jobId = token.jobId
       session.user.serviceId = token.serviceId
-
       return session
     },
   },
