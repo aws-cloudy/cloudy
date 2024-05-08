@@ -15,6 +15,8 @@ import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.unit.Fuzziness;
 import org.opensearch.index.query.*;
 import org.opensearch.search.builder.SearchSourceBuilder;
+import org.opensearch.search.sort.SortBuilders;
+import org.opensearch.search.sort.SortOrder;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -52,7 +54,7 @@ public class SearchServiceImpl implements SearchService{
 
     private SearchListRes performOpensearch(String query) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("learning");
+        SearchRequest searchRequest = new SearchRequest("test");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
@@ -64,6 +66,8 @@ public class SearchServiceImpl implements SearchService{
 
         sourceBuilder.query(boolQuery);
         sourceBuilder.size(5);
+        sourceBuilder.sort("counter", SortOrder.DESC);
+        sourceBuilder.sort(SortBuilders.scoreSort().order(SortOrder.DESC));
         searchRequest.source(sourceBuilder);
 
         try {
