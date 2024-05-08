@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './MainSearch.module.scss'
 import { BiSearch } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
@@ -12,6 +12,8 @@ function MainSearch() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [list, setList] = useState<{ learningId: number; title: string }[]>([])
   const { register, watch, handleSubmit } = useForm<{ search: string }>()
+  const [selected, setSelected] = useState(-1)
+  const serchResultRef = useRef<HTMLDivElement>(null)
 
   const router = useRouter()
 
@@ -35,9 +37,25 @@ function MainSearch() {
     setList(data)
   }
 
-  const onSearch = (v: string) => {
+  const onSearch = () => {
     router.push(`/learning`)
-    setKeyword(v)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowDown') {
+      setSelected(prev => (prev < list.length - 1 ? prev + 1 : list.length - 1))
+    } else if (e.key === 'ArrowUp') {
+      setSelected(prev => (prev > -1 ? prev - 1 : -1))
+    } else if (e.key === 'Enter') {
+      if (selected !== -1) {
+        setKeyword(list[selected].title)
+        onSearch()
+      } else {
+        setKeyword(keyword)
+      }
+    } else if (!e.key.startsWith('Arrow')) {
+      setSelected(-1)
+    }
   }
 
   useEffect(() => {
@@ -58,19 +76,33 @@ function MainSearch() {
       }}
     >
       <div className={styles.searchBox}>
-        <form onSubmit={handleSubmit(() => onSearch(keyword))}>
-          <input type="text" className={styles.searchInput} {...register('search')} onKeyUp={handleKeyUp} />
+        <form
+          onSubmit={handleSubmit(() => {
+            onSearch()
+          })}
+        >
+          <input
+            type="text"
+            className={styles.searchInput}
+            {...register('search')}
+            onKeyUp={handleKeyUp}
+            onKeyDown={handleKeyDown}
+          />
         </form>
         <BiSearch className={styles.searchIcon} />
         {isOpen && (
-          <div className={styles.searchItemBox}>
+          <div className={styles.searchItemBox} ref={serchResultRef}>
             {list &&
-              list.map(item => (
+              list.map((item, idx) => (
                 <div
                   key={item.learningId}
-                  className={styles.searchItem}
+                  className={`${styles.searchItem} ${selected === idx && styles.selected}`}
                   dangerouslySetInnerHTML={innerHtml(item.title)}
-                  onMouseDown={e => onSearch(item.title)}
+                  onMouseDown={() => {
+                    setKeyword(item.title)
+                    onSearch()
+                  }}
+                  onMouseEnter={() => setSelected(-1)}
                 />
               ))}
           </div>
