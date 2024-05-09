@@ -18,4 +18,6 @@ public class SearchListItem {
 
     private String title;
 
+    private int documentId;
+
 }

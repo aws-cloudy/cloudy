@@ -1,5 +1,6 @@
 package com.s207.cloudy.search.domain.learning.application;
 
+import com.s207.cloudy.search.domain.learning.dto.SearchListItem;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import com.s207.cloudy.search.global.error.enums.ErrorCode;
@@ -10,10 +11,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.opensearch.action.search.SearchRequest;
 import org.opensearch.action.search.SearchResponse;
+import org.opensearch.action.update.UpdateRequest;
+import org.opensearch.action.update.UpdateResponse;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.unit.Fuzziness;
+import org.opensearch.common.xcontent.XContentType;
 import org.opensearch.index.query.*;
+import org.opensearch.script.Script;
+import org.opensearch.script.ScriptType;
 import org.opensearch.search.builder.SearchSourceBuilder;
 import org.opensearch.search.sort.SortBuilders;
 import org.opensearch.search.sort.SortOrder;
@@ -25,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -124,10 +131,43 @@ public class SearchServiceImpl implements SearchService{
             
             // Map the search response to a SearchListRes object
             SearchListRes response = mapper.mapSearchResponse(searchResponse);
-            return response.getSearchList().size()>0 ? true : false;
+
+            if (response.getSearchList().size() > 0) {
+                incrementCounter(response); // Increment the counter field value for each search result
+
+                return true;
+            }
+
         } catch (IOException e) {
             // Handle connection errors with Opensearch
             throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
+        }
+
+        return false;
+    }
+
+    private void incrementCounter(SearchListRes response) {
+        for (SearchListItem hit : response.getSearchList()) {
+            String documentId = String.valueOf(hit.getDocumentId());
+
+            // Construct the update reques
+            UpdateRequest request = new UpdateRequest("test", documentId)
+                    .script(
+                            new Script(
+                                    ScriptType.INLINE,
+                                    "painless",
+                                    "ctx._source.counter += params.increment",
+                                    Collections.singletonMap("increment", 0.01)
+                            )
+                    );
+
+            try {
+                // Execute the update request
+                client.update(request, RequestOptions.DEFAULT);
+            } catch (IOException e) {
+                // Handle connection errors with Opensearch
+                throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
+            }
         }
     }
 
