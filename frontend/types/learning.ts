@@ -37,3 +37,19 @@ export interface IFilter {
   name: string
   category: string
 }
+
+export interface ILearningFilter {
+  [key: string]: IFilter[]
+}
+
+export interface ILearningFilterToggle {
+  title: string
+  data: IFilter[]
+  setFilter: (v: IFilter[]) => void
+}
+
+export interface ILearningFilterToggoleItem {
+  item: IFilter
+  list: IFilter[]
+  setList: React.Dispatch<React.SetStateAction<IFilter[]>>
+}

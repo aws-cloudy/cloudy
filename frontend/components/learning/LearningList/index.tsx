@@ -9,19 +9,12 @@ import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { ILearningCard } from '@/types/learning'
 import { LEARNING_ROWS_PER_PAGE } from '@/constants/rows'
 import { getLearnings } from '@/apis/learning'
-import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
 import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
-import { getTextFilter } from '@/utils/getTextFilter'
 import Empty from '@/components/common/Empty'
 import { useSearchParams } from 'next/navigation'
 
 const LearningList = () => {
-  const jobs = usejobFilter()
-  const services = useServiceFilter()
-  const types = useTypeFilter()
-  const difficulties = useDifficultyFilter()
-
   // 무한 스크롤
   const offset = useRef<number>(1)
   const hasMore = useRef<boolean>(true)
@@ -34,15 +27,19 @@ const LearningList = () => {
     if (!hasMore.current) return
 
     const keyword = params.get('query') || ''
+    const job = params.get('job') || ''
+    const service = params.get('service') || ''
+    const type = params.get('type') || ''
+    const difficulty = params.get('difficulty') || ''
 
     const learnings = await getLearnings(
       offset.current,
       LEARNING_ROWS_PER_PAGE,
       keyword,
-      getTextFilter(jobs),
-      getTextFilter(services),
-      getTextFilter(types),
-      getTextFilter(difficulties),
+      job,
+      service,
+      type,
+      difficulty,
     )
 
     if (learnings) {
@@ -67,7 +64,7 @@ const LearningList = () => {
     hasMore.current = true
     offset.current = 1
     fetchLearnings()
-  }, [jobs, services, types, difficulties, params])
+  }, [params])
 
   // 반응형 width 감지
   const { isTablet } = useResponsiveWidth()

@@ -10,7 +10,7 @@ describe('LearningTagListItem', () => {
   }
 
   it('태그 이름이 올바르게 렌더링됩니다', () => {
-    const { getByText } = render(<LearningTagListItem item={mockItem} />)
+    const { getByText } = render(<LearningTagListItem item={mockItem} onClick={jest.fn()} />)
 
     const filterName = getByText(mockItem.name)
     expect(filterName).toBeInTheDocument()

@@ -11,6 +11,10 @@ const LearningInput = (props: ILearningInput) => {
   const params = useSearchParams()
 
   const keyword = params.get('query') || ''
+  const job = params.get('job') || ''
+  const service = params.get('service') || ''
+  const type = params.get('type') || ''
+  const difficulty = params.get('difficulty') || ''
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -23,7 +27,12 @@ const LearningInput = (props: ILearningInput) => {
   }
 
   const handleSubmit = () => {
-    router.push('/learning' + '?query=' + value)
+    let url = `/learning?query=${value}`
+    job && (url += `&job=${job}`)
+    service && (url += `&service=${service}`)
+    type && (url += `&type=${type}`)
+    difficulty && (url += `&difficulty=${difficulty}`)
+    router.push(url)
   }
 
   return (
