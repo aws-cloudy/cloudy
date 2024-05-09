@@ -6,5 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SearchReq {
-    String query;
+    private String query;
+    private int count;
 }
