@@ -2,6 +2,7 @@ package com.s207.cloudy.search.domain.learning.api;
 
 import com.s207.cloudy.search.domain.learning.application.SearchService;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
+import com.s207.cloudy.search.domain.learning.dto.SearchQueryRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class SearchController {
 
     // 학습 검색어 오타가 있으면 교정된 결과
     @GetMapping("/final")
-    public ResponseEntity<String> getFinalQuery(@RequestParam String query) {
+    public ResponseEntity<SearchQueryRes> getFinalQuery(@RequestParam String query) {
         return ResponseEntity.ok(searchService.getFinalQuery(query));
     }
 

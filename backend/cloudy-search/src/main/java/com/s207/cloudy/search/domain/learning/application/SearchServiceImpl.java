@@ -2,6 +2,7 @@ package com.s207.cloudy.search.domain.learning.application;
 
 import com.s207.cloudy.search.domain.learning.dto.SearchListItem;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
+import com.s207.cloudy.search.domain.learning.dto.SearchQueryRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import com.s207.cloudy.search.global.error.enums.ErrorCode;
 import com.s207.cloudy.search.global.error.exception.OpensearchException;
@@ -48,12 +49,14 @@ public class SearchServiceImpl implements SearchService{
 
     @Override
     public SearchListRes getAutoCompleteList(SearchReq req) {
+        log.info("getAutoCompleteList - Request : {}", req.toString());
         int count = req.getCount();
         String query = req.getQuery();
 
         // 캐시에 해당 검색어 있는지 확인
         Optional<SearchListRes> cachedResult = searchListFromCache(query);
         if (cachedResult.isPresent()) {
+            log.info("getAutoCompleteList - Response From Cache : {}", cachedResult.get().toString());
             return cachedResult.get();
         }
 
@@ -61,11 +64,17 @@ public class SearchServiceImpl implements SearchService{
         SearchListRes searchResult = searchListFromOpensearch(query, count);
         cacheSearchResult(query, searchResult);
 
+        log.info("getAutoCompleteList - Response From Opensearch : {}", searchResult.toString());
         return searchResult;
     }
 
     @Override
-    public String getFinalQuery(String query) {
+    public SearchQueryRes getFinalQuery(String query) {
+        log.info("getFinalQuery Request - : {}", query);
+
+        SearchQueryRes res = new SearchQueryRes();
+        res.setQuery(query);
+
         // Opensearch에서 해당 검색어의 검색결과 있는지 확인
         SearchListRes searchResult = isQueryExistInOpensearch(query);
         if(!searchResult.getSearchList().isEmpty()) {
@@ -74,23 +83,27 @@ public class SearchServiceImpl implements SearchService{
             // 검색결과의 Hit 개수 증가
             increaseCounter(searchResult);
 
-            return query;
+            log.info("getFinalQuery - Response when Query is exist : {}", res);
+            return res;
         }
 
         // Opensearch에서 오타교정된 검색어의 검색결과 있는지 확인
         String modifidedQuery = isModifiedQueryExistInOpensearch(query);
         if(!modifidedQuery.equals(query)) {
-            return modifidedQuery;
+            res.setModifiedQuery(modifidedQuery);
+            log.info("getFinalQuery - Response when Modified Query is exist : {}", res);
+            return res;
         }
 
-        return query;
+        log.info("getFinalQuery - Response : {}", res);
+        return res;
     }
 
     private Optional<SearchListRes> searchListFromCache(String query) {
         Optional<SearchListRes> cachedResult = redisUtils.getData(query, SearchListRes.class);
-        if (cachedResult.isPresent()) {
-            redisUtils.extendExpire(query, EXPIRATION_TIME); // 캐시 유효시간 다시 초기화
-        }
+//        if (cachedResult.isPresent()) {
+//            redisUtils.extendExpire(query, EXPIRATION_TIME); // 캐시 유효시간 다시 초기화
+//        }
         return cachedResult;
     }
 
