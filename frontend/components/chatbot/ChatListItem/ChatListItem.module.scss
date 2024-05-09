@@ -2,42 +2,67 @@
 
 .container {
   width: 100%;
-  height: 60px;
-  overflow-y: auto;
-  border-bottom: 1px solid $gray7;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
+  height: 25%;
+  border-bottom: 1px solid $gray6;
+  position: relative;
+  margin: 3px 0;
   cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    & > .cover {
+      opacity: 0;
+    }
+    & > .image {
+      transform: scale(1.05);
+    }
+
+    & .name {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .titleBox {
-  width: 100%;
+  position: absolute;
+  z-index: 2;
+  text-align: right;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
 
-  *:nth-child(1) {
-    font-weight: 500;
+.name {
+  font-size: 1.3em;
+  transition: all 0.3s ease;
+
+  & > span:nth-child(1) {
+    font-weight: 300;
   }
-  *:nth-child(2) {
-    color: $gray8;
+
+  & > span:nth-child(2) {
+    color: $primary;
   }
 }
 
-.content {
-  color: $gray8;
-  font-size: 0.9em;
+.image {
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  transition: transform 0.2s ease;
 }
 
-@media screen and (max-width: $tablet) {
-  .titleBox {
-    font-size: 1.3em;
-  }
-  .content {
-    font-size: 1.2em;
-  }
+.cover {
+  position: absolute;
+  background: linear-gradient(to right, transparent -50%, $white 50%);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }

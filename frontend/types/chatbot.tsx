@@ -1,9 +1,14 @@
 import { Dispatch, SetStateAction } from 'react'
 import { IconType } from 'react-icons'
 
+export interface IChatBotList {
+  [botType: string]: { sub: string; name: string; msg: string; image: string }
+}
+
 export interface IMessage {
   sender: 'cpu' | 'user'
   content: string
+  waiting?: boolean
 }
 
 export interface IChat {
@@ -13,14 +18,11 @@ export interface IChat {
   date: string
 }
 
-export interface IChatRoomInput {
-  setMessages: Dispatch<SetStateAction<IMessage[]>>
-}
-
 export interface IChatListItem {
-  chat: IChat
+  botType: 'cla' | 'oudy' | 'ama' | 'john'
 }
 
-export interface IChatRoomMessage extends IMessage {
-  ico: IconType
+export interface IChatRoomInput {
+  handleConnect: (userMessage: string) => void
+  setIsReceiving: React.Dispatch<SetStateAction<boolean>>
 }

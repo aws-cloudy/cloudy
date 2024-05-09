@@ -9,6 +9,7 @@ import { createQuestionImage } from '@/prisma/actions/questionImage'
 
 export async function POST(req: NextRequest) {
   const { tags, title, desc, imageData }: ICreateQuestion = await req.json()
+  console.log(req)
 
   const userQuery = await auth()
 

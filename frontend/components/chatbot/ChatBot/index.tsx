@@ -3,37 +3,39 @@
 import { useChatbotActions, useChatbotType, useIsChatbotOpen } from '@/stores/chatbotStore'
 import styles from './ChatBot.module.scss'
 
-import { FaChevronDown } from 'react-icons/fa'
 import ChatList from '../ChatList'
-import ChatStartButton from '../ChatStartButton'
-import { chatbotHeader } from '../dummy'
 import ChatRoom from '../ChatRoom'
+import { useEffect, useRef } from 'react'
+import ChatBotHeader from '../ChatBotHeader'
 
 function ChatBot() {
   const isChatbotOpen = useIsChatbotOpen()
   const chatBotType = useChatbotType()
+  const chatbotRef = useRef<HTMLDivElement>(null)
   const { setIsChatbotOpen } = useChatbotActions()
+
+  const autoCloseChatbot = (e: MouseEvent) => {
+    const chatbot = chatbotRef.current
+    const target = e.target as HTMLElement
+    if (!chatbot) return
+    if (!chatbot.contains(target)) {
+      setIsChatbotOpen(false)
+    }
+  }
+
+  useEffect(() => {
+    if (isChatbotOpen) {
+      window.addEventListener('mousedown', autoCloseChatbot)
+      return () => window.removeEventListener('mousedown', autoCloseChatbot)
+    }
+  }, [isChatbotOpen])
 
   return (
     isChatbotOpen && (
-      <div className={styles.container}>
+      <div className={styles.container} ref={chatbotRef}>
         <div className={styles.inner}>
-          <div className={styles.header}>
-            <div>
-              <div className={styles.title}>{chatbotHeader[chatBotType].title}</div>
-              <div className={styles.desc}>{chatbotHeader[chatBotType].msg}</div>
-            </div>
-            <FaChevronDown className={styles.icon} onClick={() => setIsChatbotOpen(false)} />
-          </div>
-          <div className={styles.content}>
-            {chatBotType === 'main' && (
-              <>
-                <ChatList />
-                <ChatStartButton />
-              </>
-            )}
-            {(chatBotType === 'cla' || chatBotType === 'oudy') && <ChatRoom />}
-          </div>
+          <ChatBotHeader />
+          <div className={styles.content}>{chatBotType === 'main' ? <ChatList /> : <ChatRoom />}</div>
         </div>
       </div>
     )
