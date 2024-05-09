@@ -13,7 +13,6 @@ import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.search.SearchRequest;
 import org.opensearch.action.search.SearchResponse;
 import org.opensearch.action.update.UpdateRequest;
-import org.opensearch.action.update.UpdateResponse;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
 import org.opensearch.common.unit.Fuzziness;
@@ -31,7 +30,6 @@ import org.opensearch.search.suggest.term.TermSuggestion;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -44,7 +42,9 @@ public class SearchServiceImpl implements SearchService{
     private final RestHighLevelClient client;
     private final SearchResultMapper mapper;
     private final RedisUtils redisUtils;
-    private static final long EXPIRATION_TIME = (long)3*60*60*1000; // 3 Hours
+    private static final long EXPIRATION_TIME = 3*60*60*1000L; // 3 Hours
+    private static final String INDEX_NAME = "learning";
+    private static final String FIND_FIELD = "title";
 
     @Override
     public SearchListRes getSearchAutoCompleteList(SearchReq req) {
@@ -69,24 +69,24 @@ public class SearchServiceImpl implements SearchService{
     @Override
     public String getFinalQuery(String query) {
         // 일치하는 검색어 있는지 확인
-        if(IsQueryExist(query)) {
+        if(isQueryExist(query)) {
             return query;
         }
 
         // 일치하는 검색어 없다면, 오타교정된 검색어 있는지 확인
-        return ModifiedQueryIfExist(query);
+        return modifiedQueryIfExist(query);
     }
 
-    private String ModifiedQueryIfExist(String query) {
+    private String modifiedQueryIfExist(String query) {
         String[] modifiedQuery = query.split(" ");
 
         // SearchRequest 생성
-        SearchRequest searchRequest = new SearchRequest("learning");
+        SearchRequest searchRequest = new SearchRequest(INDEX_NAME);
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         // Suggest 쿼리 생성
         SuggestBuilder suggestBuilder = new SuggestBuilder();
-        suggestBuilder.addSuggestion("query-suggestion", SuggestBuilders.termSuggestion("title").text(query));
+        suggestBuilder.addSuggestion("query-suggestion", SuggestBuilders.termSuggestion(FIND_FIELD).text(query));
 
         searchSourceBuilder.suggest(suggestBuilder);
         searchRequest.source(searchSourceBuilder);
@@ -100,7 +100,7 @@ public class SearchServiceImpl implements SearchService{
                 TermSuggestion completionSuggestion = suggest.getSuggestion("query-suggestion");
                 List<TermSuggestion.Entry> entries = completionSuggestion.getEntries();
                 for (int i=0; i<entries.size(); i++) {
-                    if(entries.get(i).getOptions().size() == 0) {
+                    if(entries.get(i).getOptions().isEmpty()) {
                         continue;
                     }
                     modifiedQuery[i] = entries.get(i).getOptions().get(0).getText().string();
@@ -115,13 +115,13 @@ public class SearchServiceImpl implements SearchService{
 
     }
 
-    private boolean IsQueryExist(String query) {
+    private boolean isQueryExist(String query) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("learning");
+        SearchRequest searchRequest = new SearchRequest(INDEX_NAME);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
         // Match phrase prefix query
-        sourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery("title", query));
+        sourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery(FIND_FIELD, query));
 
         searchRequest.source(sourceBuilder);
 
@@ -132,9 +132,9 @@ public class SearchServiceImpl implements SearchService{
             // Map the search response to a SearchListRes object
             SearchListRes response = mapper.mapSearchResponse(searchResponse);
 
-            if (response.getSearchList().size() > 0) {
+            if (!response.getSearchList().isEmpty()) {
                 addDocumentToOpensearch(response, query);
-                incrementCounterAndAddDocument(response, query);
+                incrementCounterAndAddDocument(response);
 
                 return true;
             }
@@ -156,10 +156,10 @@ public class SearchServiceImpl implements SearchService{
         }
 
         // 같은 쿼리를 가진 문서가 없으면 새로운 문서를 추가
-        IndexRequest indexRequest = new IndexRequest("learning")
+        IndexRequest indexRequest = new IndexRequest(INDEX_NAME)
                 .source(XContentType.JSON,
                         "counter", 0.01,
-                        "title", query
+                        FIND_FIELD, query
                 );
 
         try {
@@ -172,12 +172,12 @@ public class SearchServiceImpl implements SearchService{
         return true;
     }
 
-    private void incrementCounterAndAddDocument(SearchListRes response, String query) {
+    private void incrementCounterAndAddDocument(SearchListRes response) {
         for (SearchListItem hit : response.getSearchList()) {
             String documentId = String.valueOf(hit.getDocumentId());
 
             // Construct the update reques
-            UpdateRequest request = new UpdateRequest("learning", documentId)
+            UpdateRequest request = new UpdateRequest(INDEX_NAME, documentId)
                     .script(
                             new Script(
                                     ScriptType.INLINE,
@@ -199,18 +199,18 @@ public class SearchServiceImpl implements SearchService{
 
     private SearchListRes searchAutoCompleteList(String query, int size) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("learning");
+        SearchRequest searchRequest = new SearchRequest(INDEX_NAME);
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
         // Match phrase prefix query
-        boolQuery.should(QueryBuilders.matchPhrasePrefixQuery("title", query).slop(10));
+        boolQuery.should(QueryBuilders.matchPhrasePrefixQuery(FIND_FIELD, query).slop(10));
 
         // Fuzzy query
         BoolQueryBuilder fuzzyBoolQuery = QueryBuilders.boolQuery();
         String[] queryTerms = query.split("\\s+");
         for (String term : queryTerms) {
-            fuzzyBoolQuery.must(QueryBuilders.fuzzyQuery("title", term).fuzziness(Fuzziness.AUTO));
+            fuzzyBoolQuery.must(QueryBuilders.fuzzyQuery(FIND_FIELD, term).fuzziness(Fuzziness.AUTO));
         }
         boolQuery.should(fuzzyBoolQuery);
 

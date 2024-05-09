@@ -3,10 +3,8 @@ package com.s207.cloudy.search.domain.learning.api;
 import com.s207.cloudy.search.domain.learning.application.SearchService;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

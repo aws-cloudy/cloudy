@@ -4,7 +4,6 @@ import com.s207.cloudy.search.domain.learning.dto.SearchListItem;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
 import org.opensearch.action.search.SearchResponse;
 import org.opensearch.search.SearchHit;
-import org.opensearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -37,17 +36,4 @@ public class SearchResultMapper {
                 .build();
     }
 
-    public String mapSearchModifiedResponse(SearchResponse searchResponse, String query) {
-        if (searchResponse.getHits().getHits().length <= 0) {
-            return query;
-        };
-
-        SearchHit hit = searchResponse.getHits().getHits()[0];
-
-        HighlightField highlightField = hit.getHighlightFields().get("title");
-        String highlightedTitle = highlightField.getFragments()[0].string();
-        System.out.println("Highlighted Title: " + highlightedTitle);
-
-        return highlightedTitle;
-    }
 }
