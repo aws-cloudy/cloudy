@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchListItem {
 
-    private int learningId;
+    private String learningId;
 
     private String title;
 
-    private int documentId;
+    private String documentId;
 
 }

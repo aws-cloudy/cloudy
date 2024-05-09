@@ -9,6 +9,7 @@ import com.s207.cloudy.search.global.util.RedisUtils;
 import com.s207.cloudy.search.global.util.SearchResultMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.search.SearchRequest;
 import org.opensearch.action.search.SearchResponse;
 import org.opensearch.action.update.UpdateRequest;
@@ -68,15 +69,15 @@ public class SearchServiceImpl implements SearchService{
     @Override
     public String getFinalQuery(String query) {
         // 일치하는 검색어 있는지 확인
-        if(IsQueryExist(query, 1)) {
+        if(IsQueryExist(query)) {
             return query;
         }
 
         // 일치하는 검색어 없다면, 오타교정된 검색어 있는지 확인
-        return ModifiedQueryIfExist(query, 1);
+        return ModifiedQueryIfExist(query);
     }
 
-    private String ModifiedQueryIfExist(String query, int size) {
+    private String ModifiedQueryIfExist(String query) {
         String[] modifiedQuery = query.split(" ");
 
         // SearchRequest 생성
@@ -114,7 +115,7 @@ public class SearchServiceImpl implements SearchService{
 
     }
 
-    private boolean IsQueryExist(String query, int size) {
+    private boolean IsQueryExist(String query) {
         // Construct the search request
         SearchRequest searchRequest = new SearchRequest("test");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
@@ -122,7 +123,6 @@ public class SearchServiceImpl implements SearchService{
         // Match phrase prefix query
         sourceBuilder.query(QueryBuilders.matchPhrasePrefixQuery("title", query));
 
-        sourceBuilder.size(size);
         searchRequest.source(sourceBuilder);
 
         try {
@@ -133,7 +133,8 @@ public class SearchServiceImpl implements SearchService{
             SearchListRes response = mapper.mapSearchResponse(searchResponse);
 
             if (response.getSearchList().size() > 0) {
-                incrementCounter(response); // Increment the counter field value for each search result
+                addDocumentToOpensearch(response, query);
+                incrementCounterAndAddDocument(response, query);
 
                 return true;
             }
@@ -146,7 +147,32 @@ public class SearchServiceImpl implements SearchService{
         return false;
     }
 
-    private void incrementCounter(SearchListRes response) {
+    private boolean addDocumentToOpensearch(SearchListRes response, String query) {
+        for (SearchListItem hit : response.getSearchList()) {
+            String findQuery = hit.getTitle();
+            if(findQuery.equals(query)) {
+                return false;
+            }
+        }
+
+        // 같은 쿼리를 가진 문서가 없으면 새로운 문서를 추가
+        IndexRequest indexRequest = new IndexRequest("test")
+                .source(XContentType.JSON,
+                        "counter", 0.01,
+                        "title", query
+                );
+
+        try {
+            client.index(indexRequest, RequestOptions.DEFAULT);
+        } catch (IOException e) {
+            // Opensearch 연결 오류를 처리
+            throw new OpensearchException(ErrorCode.OPENSEARCH_CONNECTION_ERROR);
+        }
+
+        return true;
+    }
+
+    private void incrementCounterAndAddDocument(SearchListRes response, String query) {
         for (SearchListItem hit : response.getSearchList()) {
             String documentId = String.valueOf(hit.getDocumentId());
 

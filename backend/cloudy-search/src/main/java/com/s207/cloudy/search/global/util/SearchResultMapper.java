@@ -25,8 +25,8 @@ public class SearchResultMapper {
             String title = sourceAsMap.get("title").toString();
 
             SearchListItem item = SearchListItem.builder()
-                    .learningId(Integer.parseInt(hit.getId()))
-                    .documentId(Integer.parseInt(hit.getId()))
+                    .learningId(hit.getId())
+                    .documentId(hit.getId())
                     .title(title)
                     .build();
             searchList.add(item);
