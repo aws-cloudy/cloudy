@@ -56,6 +56,9 @@ importers:
       next-auth:
         specifier: ^4.24.7
         version: 4.24.7(next@14.2.2(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+      next-sitemap:
+        specifier: ^4.2.3
+        version: 4.2.3(next@14.2.2(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0))
       prisma:
         specifier: ^5.13.0
         version: 5.13.0
@@ -1021,6 +1024,9 @@ packages:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
     engines: {node: '>=0.1.90'}
 
+  '@corex/deepmerge@4.0.43':
+    resolution: {integrity: sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ==}
+
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
@@ -1468,6 +1474,9 @@ packages:
 
   '@ndelangen/get-tarball@3.0.9':
     resolution: {integrity: sha512-9JKTEik4vq+yGosHYhZ1tiH/3WpUS0Nh0kej4Agndhox8pAdWhEx5knFVRcb/ya9knCRCs1rPxNrSXTDdfVqpA==}
+
+  '@next/env@13.5.6':
+    resolution: {integrity: sha512-Yac/bV5sBGkkEXmAX5FWPS9Mmo2rthrOPRQQNfycJPkjUAUclomCPH7QFVCDQ4Mp2k2K1SSM6m0zrxYrOwtFQw==}
 
   '@next/env@14.2.2':
     resolution: {integrity: sha512-sk72qRfM1Q90XZWYRoJKu/UWlTgihrASiYw/scb15u+tyzcze3bOuJ/UV6TBOQEeUaxOkRqGeuGUdiiuxc5oqw==}
@@ -5174,6 +5183,13 @@ packages:
       nodemailer:
         optional: true
 
+  next-sitemap@4.2.3:
+    resolution: {integrity: sha512-vjdCxeDuWDzldhCnyFCQipw5bfpl4HmZA7uoo3GAaYGjGgfL4Cxb1CiztPuWGmS+auYs7/8OekRS8C2cjdAsjQ==}
+    engines: {node: '>=14.18'}
+    hasBin: true
+    peerDependencies:
+      next: '*'
+
   next@14.2.2:
     resolution: {integrity: sha512-oGwUaa2bCs47FbuxWMpOoXtBMPYpvTPgdZr3UAo+pu7Ns00z9otmYpoeV1HEiYL06AlRQQIA/ypK526KjJfaxg==}
     engines: {node: '>=18.17.0'}
@@ -8254,6 +8270,8 @@ snapshots:
   '@colors/colors@1.5.0':
     optional: true
 
+  '@corex/deepmerge@4.0.43': {}
+
   '@discoveryjs/json-ext@0.5.7': {}
 
   '@emnapi/runtime@1.1.1':
@@ -8727,6 +8745,8 @@ snapshots:
       gunzip-maybe: 1.4.2
       pump: 3.0.0
       tar-fs: 2.1.1
+
+  '@next/env@13.5.6': {}
 
   '@next/env@14.2.2': {}
 
@@ -13972,6 +13992,14 @@ snapshots:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       uuid: 8.3.2
+
+  next-sitemap@4.2.3(next@14.2.2(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0)):
+    dependencies:
+      '@corex/deepmerge': 4.0.43
+      '@next/env': 13.5.6
+      fast-glob: 3.3.2
+      minimist: 1.2.8
+      next: 14.2.2(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0)
 
   next@14.2.2(@babel/core@7.24.4)(babel-plugin-macros@3.1.0)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(sass@1.75.0):
     dependencies:
