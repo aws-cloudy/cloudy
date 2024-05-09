@@ -18,7 +18,6 @@ export const getLearnings = async (
     )
     .then(res => res.data.learningList)
     .catch(err => err)
-
   return response
 }
 
