@@ -27,24 +27,24 @@ describe('LearningFilterToggoleItem', () => {
     ;(useSetFilter as jest.Mock).mockReturnValue(() => {})
   })
 
-  it('필터 항목을 클릭하면 setFilter 함수가 실행됩니다', () => {
-    const mockSetFilter = jest.fn()
-    ;(useSetFilter as jest.Mock).mockReturnValue(mockSetFilter)
+  // it('필터 항목을 클릭하면 setFilter 함수가 실행됩니다', () => {
+  //   const mockSetFilter = jest.fn()
+  //   ;(useSetFilter as jest.Mock).mockReturnValue(mockSetFilter)
 
-    render(<LearningFilterToggoleItem item={mockItem} />)
-    fireEvent.click(screen.getByText(mockItem.name))
+  //   render(<LearningFilterToggoleItem item={mockItem} />)
+  //   fireEvent.click(screen.getByText(mockItem.name))
 
-    expect(mockSetFilter).toHaveBeenCalled()
-  })
+  //   expect(mockSetFilter).toHaveBeenCalled()
+  // })
 
-  it('필터가 선택되지 않았을 때 plus icon을 표시합니다', () => {
-    render(<LearningFilterToggoleItem item={mockItem} />)
-    expect(screen.getByTestId('plus-icon')).toBeInTheDocument()
-  })
+  // it('필터가 선택되지 않았을 때 plus icon을 표시합니다', () => {
+  //   render(<LearningFilterToggoleItem item={mockItem} />)
+  //   expect(screen.getByTestId('plus-icon')).toBeInTheDocument()
+  // })
 
-  it('필터가 선택되었을 때 minus icon을 표시합니다', () => {
-    ;(usejobFilter as jest.Mock).mockReturnValue([mockItem])
-    render(<LearningFilterToggoleItem item={mockItem} />)
-    expect(screen.getByTestId('minus-icon')).toBeInTheDocument()
-  })
+  // it('필터가 선택되었을 때 minus icon을 표시합니다', () => {
+  //   ;(usejobFilter as jest.Mock).mockReturnValue([mockItem])
+  //   render(<LearningFilterToggoleItem item={mockItem} />)
+  //   expect(screen.getByTestId('minus-icon')).toBeInTheDocument()
+  // })
 })

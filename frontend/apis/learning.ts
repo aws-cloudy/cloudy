@@ -1,3 +1,4 @@
+import { ILearningCard } from '@/types/learning'
 import { client, searchClient } from '@/utils/axiosClient'
 
 const url = '/learnings'
@@ -12,13 +13,13 @@ export const getLearnings = async (
   type: string,
   difficulty: string,
 ) => {
-  const response = client
-    .get(
-      `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
-    )
-    .then(res => res.data.learningList)
-    .catch(err => err)
-
+  // const response = client
+  //   .get(
+  //     `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
+  //   )
+  //   .then(res => res.data.learningList)
+  //   .catch(err => err)
+  const response: ILearningCard[] = []
   return response
 }
 

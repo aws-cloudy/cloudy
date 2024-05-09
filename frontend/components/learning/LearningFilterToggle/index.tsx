@@ -1,16 +1,21 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './LearningFilterToggle.module.scss'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoIosArrowUp } from 'react-icons/io'
-import { IFilter } from '@/types/learning'
+import { IFilter, ILearningFilterToggle } from '@/types/learning'
 import LearningFilterToggoleItem from '../LearningFilterToggleItem'
 
-const LearningFilterToggle = (props: { title: string; data: IFilter[] }) => {
-  const { title, data } = props
+const LearningFilterToggle = (props: ILearningFilterToggle) => {
+  const { title, data, setFilter } = props
 
   const [open, setOpen] = useState<boolean>(false)
+  const [list, setList] = useState<IFilter[]>([])
+
+  useEffect(() => {
+    setFilter(list)
+  }, [list])
 
   return (
     <div className={styles.container}>
@@ -22,7 +27,7 @@ const LearningFilterToggle = (props: { title: string; data: IFilter[] }) => {
         {open && (
           <>
             {data.map(v => (
-              <LearningFilterToggoleItem key={v.name} item={v} />
+              <LearningFilterToggoleItem key={v.name} item={v} list={list} setList={setList} />
             ))}
           </>
         )}
