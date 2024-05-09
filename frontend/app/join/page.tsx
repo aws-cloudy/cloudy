@@ -6,11 +6,11 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { Suspense, useEffect } from 'react'
 
-const joinPage = ({ params }: { params: { auth: string } }) => {
+const joinPage = ({ searchParams }: { searchParams: { auth: string } }) => {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const username = params.auth
+  const username = searchParams.auth
 
   useEffect(() => {
     if (status === 'authenticated') {

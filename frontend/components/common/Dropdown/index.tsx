@@ -37,6 +37,7 @@ const Dropdown = ({ options, value, onChange, placeholder, height, width }: any)
 
   return (
     <Select
+      instanceId="dropdown"
       options={options}
       value={value}
       onChange={onChange}

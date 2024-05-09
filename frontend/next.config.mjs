@@ -47,7 +47,7 @@ const nextConfig = {
       },
       {
         source: '/cloudy-chat-api/:path*',
-        destination: 'https://u2r68k1fi0.execute-api.ap-northeast-2.amazonaws.com/prod/api/v1/:path*',
+        destination: 'http://cloudy-chatbot-lb-2064037433.ap-northeast-2.elb.amazonaws.com/prod/api/v1/:path*',
       },
     ]
   },

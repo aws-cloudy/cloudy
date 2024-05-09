@@ -22,6 +22,15 @@ export const jobOptions = [
   { value: '16', label: 'Security Engineer' },
 ]
 
+export const jobSelections = [
+  { value: '3', label: 'Architect' },
+  { value: '5', label: 'Business User' },
+  { value: '6', label: 'Cloud Operator' },
+  { value: '8', label: 'Data Engineer' },
+  { value: '11', label: 'Developer' },
+  { value: '13', label: 'Infrastructure Engineer' },
+]
+
 export const serviceOptions = [
   { value: '0', label: 'Database' },
   { value: '1', label: 'Storage' },

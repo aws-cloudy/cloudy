@@ -7,6 +7,10 @@ import { NextResponse } from 'next/server'
 
 const client = new CognitoIdentityProviderClient({
   region: process.env.AMPLIFY_REGION, // AWS 리전 설정
+  credentials: {
+    accessKeyId: process.env.AMPLIFY_ACCESS_KEY_ID as string,
+    secretAccessKey: process.env.AMPLIFY_SECRET_ACCESS_KEY as string,
+  },
 })
 
 export async function POST(req: Request) {
@@ -31,6 +35,7 @@ export async function POST(req: Request) {
     UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string, // Cognito 사용자 풀 ID
     Username: username,
   }
+
   try {
     await client.send(new AdminUpdateUserAttributesCommand(params))
     return NextResponse.json({ message: 'User attributes updated successfully' })
