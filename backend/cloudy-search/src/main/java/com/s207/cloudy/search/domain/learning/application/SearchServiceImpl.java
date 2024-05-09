@@ -48,12 +48,14 @@ public class SearchServiceImpl implements SearchService{
 
     @Override
     public SearchListRes getAutoCompleteList(SearchReq req) {
+        log.info("getAutoCompleteList - Request : {}", req.toString());
         int count = req.getCount();
         String query = req.getQuery();
 
         // 캐시에 해당 검색어 있는지 확인
         Optional<SearchListRes> cachedResult = searchListFromCache(query);
         if (cachedResult.isPresent()) {
+            log.info("getAutoCompleteList - Response From Cache : {}", cachedResult.get().toString());
             return cachedResult.get();
         }
 
@@ -61,11 +63,13 @@ public class SearchServiceImpl implements SearchService{
         SearchListRes searchResult = searchListFromOpensearch(query, count);
         cacheSearchResult(query, searchResult);
 
+        log.info("getAutoCompleteList - Response From Opensearch : {}", searchResult.toString());
         return searchResult;
     }
 
     @Override
     public String getFinalQuery(String query) {
+        log.info("getFinalQuery Request - : {}", query);
         // Opensearch에서 해당 검색어의 검색결과 있는지 확인
         SearchListRes searchResult = isQueryExistInOpensearch(query);
         if(!searchResult.getSearchList().isEmpty()) {
@@ -74,23 +78,26 @@ public class SearchServiceImpl implements SearchService{
             // 검색결과의 Hit 개수 증가
             increaseCounter(searchResult);
 
+            log.info("getFinalQuery - Response when Query is exist : {}", query);
             return query;
         }
 
         // Opensearch에서 오타교정된 검색어의 검색결과 있는지 확인
         String modifidedQuery = isModifiedQueryExistInOpensearch(query);
         if(!modifidedQuery.equals(query)) {
+            log.info("getFinalQuery - Response when Modified Query is exist : {}", modifidedQuery);
             return modifidedQuery;
         }
 
+        log.info("getFinalQuery - Response : {}", query);
         return query;
     }
 
     private Optional<SearchListRes> searchListFromCache(String query) {
         Optional<SearchListRes> cachedResult = redisUtils.getData(query, SearchListRes.class);
-        if (cachedResult.isPresent()) {
-            redisUtils.extendExpire(query, EXPIRATION_TIME); // 캐시 유효시간 다시 초기화
-        }
+//        if (cachedResult.isPresent()) {
+//            redisUtils.extendExpire(query, EXPIRATION_TIME); // 캐시 유효시간 다시 초기화
+//        }
         return cachedResult;
     }
 
