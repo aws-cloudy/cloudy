@@ -39,10 +39,7 @@ export interface IFilter {
 }
 
 export interface ILearningFilter {
-  job: IFilter[]
-  service: IFilter[]
-  type: IFilter[]
-  difficulty: IFilter[]
+  [key: string]: IFilter[]
 }
 
 export interface ILearningFilterToggle {

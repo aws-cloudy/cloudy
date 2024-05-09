@@ -12,7 +12,7 @@ import { getLearnings } from '@/apis/learning'
 import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
 import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
-import { getTextFilter } from '@/utils/getTextFilter'
+import { getTextFilter } from '@/utils/getFilterFunc'
 import Empty from '@/components/common/Empty'
 import { useSearchParams } from 'next/navigation'
 
@@ -34,12 +34,13 @@ const LearningList = () => {
     if (!hasMore.current) return
 
     const keyword = params.get('query') || ''
+    const job = params.get('job') || ''
 
     const learnings = await getLearnings(
       offset.current,
       LEARNING_ROWS_PER_PAGE,
       keyword,
-      getTextFilter(jobs),
+      job,
       getTextFilter(services),
       getTextFilter(types),
       getTextFilter(difficulties),

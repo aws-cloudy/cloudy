@@ -8,7 +8,7 @@ import LearningTagList from '../LearningTagList'
 import LearningFilterToggle from '../LearningFilterToggle'
 import { difficultyData, jobData, serviceData, typeData } from '@/constants/learning'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { getTextFilter } from '@/utils/getTextFilter'
+import { extractArrFromQuery, getTextFilter } from '@/utils/getFilterFunc'
 
 const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const { closeFilter } = props
@@ -16,7 +16,22 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const router = useRouter()
   const params = useSearchParams()
 
-  const [filter, setFilter] = useState<ILearningFilter>({ job: [], service: [], type: [], difficulty: [] })
+  const job = params.get('job')
+  const service = params.get('service')
+  const type = params.get('type')
+  const difficulty = params.get('difficulty')
+
+  const jobs = extractArrFromQuery(job, jobData)
+  const services = extractArrFromQuery(service, serviceData)
+  const types = extractArrFromQuery(type, typeData)
+  const difficulties = extractArrFromQuery(difficulty, difficultyData)
+
+  const [filter, setFilter] = useState<ILearningFilter>({
+    job: jobs,
+    service: services,
+    type: types,
+    difficulty: difficulties,
+  })
 
   useEffect(() => {
     let url = `/learning?query=${params.get('query') || ''}`
