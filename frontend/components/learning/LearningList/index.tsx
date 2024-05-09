@@ -81,7 +81,7 @@ const LearningList = () => {
   return (
     <>
       <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
-        {list && list.map(item => <LearningCard key={item.learningId} item={item} layout={layout} />)}
+        {list && list.map((item, i) => <LearningCard key={i} item={item} layout={layout} />)}
       </div>
       <Observer callback={observerCallback} />
     </>
