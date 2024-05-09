@@ -3,6 +3,8 @@ import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
 import { checkUserExists, getUser } from './cognito'
 import { redirect } from 'next/navigation'
+import { client } from './axiosClient'
+import server from './axiosServer'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -30,6 +32,7 @@ export const authOptions: NextAuthOptions = {
       if (!exists || !hasJobId) {
         return `/join?auth=${encodeURIComponent(username)}`
       }
+
       return true
     },
     async jwt({ token, user, account, profile }: any) {

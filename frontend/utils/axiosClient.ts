@@ -1,6 +1,7 @@
 'use client'
 
 import axios from 'axios'
+import { getSession, useSession } from 'next-auth/react'
 
 export const client = axios.create({
   baseURL: '/cloudy-api',
@@ -10,6 +11,21 @@ export const client = axios.create({
 client.interceptors.response.use(
   res => res,
   err => Promise.reject(alert(err.response.data.errorMap.type.message)),
+)
+
+client.interceptors.request.use(
+  async config => {
+    const session = await getSession()
+    const accessToken = session?.accessToken
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`
+    }
+
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  },
 )
 
 export const searchClient = axios.create({

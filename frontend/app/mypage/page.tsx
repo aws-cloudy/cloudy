@@ -36,7 +36,7 @@ const MyPage = () => {
           <div className={styles.right}>
             {selectedTab === 'account' && session && <Account user={session.user} />}
             {selectedTab === 'activity' && <Activity />}
-            {selectedTab === 'favorites' && <Favorites />}
+            {selectedTab === 'favorites' && session && <Favorites user={session.user} />}
           </div>
         </section>
       </>
