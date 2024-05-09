@@ -1,9 +1,14 @@
 spring:
   application:
     name: chatbot-server
-  http:
-    encoding:
-      charset: UTF-8
+  cloud:
+    aws:
+      credentials:
+        access-key: AKIA3FLD3AUJDWR3ILYN
+        secret-key: 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
+      dynamodb:
+        region: ap-northeast-2
+        endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
 
 
 
@@ -17,4 +22,8 @@ pinecone:
   id:
     #    qna: ${PINECONE_ID_QNA}
     qna: kyr8e0r
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
 

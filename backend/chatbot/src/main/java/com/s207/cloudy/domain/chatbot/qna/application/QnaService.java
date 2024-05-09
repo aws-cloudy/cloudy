@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.chatbot.qna.application;
 
+import com.s207.cloudy.domain.chatbot.common.application.ChatService;
 import com.s207.cloudy.domain.chatbot.qna.dto.QuestionReq;
 import com.s207.cloudy.global.infra.chat.OpenAiChatService;
 import com.s207.cloudy.global.infra.embeddingstore.PineconeService;
@@ -18,7 +19,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class QnaService {
+public class QnaService implements ChatService {
     private static final String INDEX_NAME = "qna";
     private static final String NAMESPACE = "question";
     private static final String METADATA_TEXT_KEY = "ans";
@@ -35,7 +36,8 @@ public class QnaService {
 
     }
 
-    public Flux<String> generateChat(QuestionReq questionReq) {
+    @Override
+    public Flux<String> generateChatStream(QuestionReq questionReq) {
         String inputData = questionReq.getInputData();
 
         // 벡터DB에서 유사한 데이터 상위 n개 조회
@@ -60,7 +62,8 @@ public class QnaService {
 
     }
 
-    public String generateChat2(QuestionReq questionReq) {
+    @Override
+    public String generateChatString(QuestionReq questionReq) {
         String inputData = questionReq.getInputData();
 
 

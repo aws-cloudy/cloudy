@@ -1,9 +1,11 @@
-package com.s207.cloudy.domain.chatbot.qna.api;
+package com.s207.cloudy.domain.chatbot.common.api;
 
 import static org.springframework.http.HttpStatus.OK;
 
+import com.s207.cloudy.domain.chatbot.common.application.ChatbotService;
 import com.s207.cloudy.domain.chatbot.qna.application.QnaService;
 import com.s207.cloudy.domain.chatbot.qna.dto.QuestionReq;
+import com.s207.cloudy.global.infra.chat.ChatService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -17,24 +19,22 @@ import reactor.core.publisher.Flux;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1/chatbot")
+@RequestMapping("/api/v1/chats")
 public class ChatBotController {
-    private final QnaService qnaService;
+    private final ChatbotService chatbotService;
 
-    @PostMapping(value = "/qna",
-        produces = MediaType.TEXT_EVENT_STREAM_VALUE
-    )
-    public Flux<String> qnaChat(@RequestBody QuestionReq question) {
+    @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<String> generateChat(@RequestBody QuestionReq question) {
         log.info("컨트롤러 입력");
-        return qnaService.generateChat(question);
+        return chatbotService.question(question);
     }
 
 
-    @PostMapping(value = "chatbot2")
-    public ResponseEntity<String> eturnChat(@RequestBody QuestionReq question) {
-        log.info("컨트롤러 입력");
-        return ResponseEntity
-            .status(OK)
-            .body(qnaService.generateChat2(question));
-    }
+//    @PostMapping(value = "chatbot2")
+//    public ResponseEntity<String> eturnChat(@RequestBody QuestionReq question) {
+//        log.info("컨트롤러 입력");
+//        return ResponseEntity
+//                .status(OK)
+//                .body(qnaService.generateChat2(question));
+//    }
 }

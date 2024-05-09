@@ -1,6 +1,5 @@
 package com.s207.cloudy.global.config;
 
-import com.s207.cloudy.global.handler.ChatErrorHandler;
 import com.s207.cloudy.global.handler.StompHandshakeInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +14,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     //    private final ChatPreHandler chatPreHandler;
-    private final ChatErrorHandler chatErrorHandler;
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
