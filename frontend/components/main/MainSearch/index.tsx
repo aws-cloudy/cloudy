@@ -30,7 +30,7 @@ function MainSearch() {
   }
 
   const handleKeyUp = async () => {
-    const data = await getSearchAutoComplete(keyword)
+    const data = await getSearchAutoComplete(keyword, 7)
     setList(data)
   }
 
