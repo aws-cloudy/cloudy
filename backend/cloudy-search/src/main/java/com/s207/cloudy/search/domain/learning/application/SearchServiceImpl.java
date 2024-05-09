@@ -2,6 +2,7 @@ package com.s207.cloudy.search.domain.learning.application;
 
 import com.s207.cloudy.search.domain.learning.dto.SearchListItem;
 import com.s207.cloudy.search.domain.learning.dto.SearchListRes;
+import com.s207.cloudy.search.domain.learning.dto.SearchQueryRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import com.s207.cloudy.search.global.error.enums.ErrorCode;
 import com.s207.cloudy.search.global.error.exception.OpensearchException;
@@ -68,8 +69,12 @@ public class SearchServiceImpl implements SearchService{
     }
 
     @Override
-    public String getFinalQuery(String query) {
+    public SearchQueryRes getFinalQuery(String query) {
         log.info("getFinalQuery Request - : {}", query);
+
+        SearchQueryRes res = new SearchQueryRes();
+        res.setQuery(query);
+
         // Opensearch에서 해당 검색어의 검색결과 있는지 확인
         SearchListRes searchResult = isQueryExistInOpensearch(query);
         if(!searchResult.getSearchList().isEmpty()) {
@@ -78,19 +83,20 @@ public class SearchServiceImpl implements SearchService{
             // 검색결과의 Hit 개수 증가
             increaseCounter(searchResult);
 
-            log.info("getFinalQuery - Response when Query is exist : {}", query);
-            return query;
+            log.info("getFinalQuery - Response when Query is exist : {}", res);
+            return res;
         }
 
         // Opensearch에서 오타교정된 검색어의 검색결과 있는지 확인
         String modifidedQuery = isModifiedQueryExistInOpensearch(query);
         if(!modifidedQuery.equals(query)) {
-            log.info("getFinalQuery - Response when Modified Query is exist : {}", modifidedQuery);
-            return modifidedQuery;
+            res.setModifiedQuery(modifidedQuery);
+            log.info("getFinalQuery - Response when Modified Query is exist : {}", res);
+            return res;
         }
 
-        log.info("getFinalQuery - Response : {}", query);
-        return query;
+        log.info("getFinalQuery - Response : {}", res);
+        return res;
     }
 
     private Optional<SearchListRes> searchListFromCache(String query) {

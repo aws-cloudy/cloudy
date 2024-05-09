@@ -8,6 +8,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class SearchReq {
+
     private String query;
+
     private int count;
+
 }
