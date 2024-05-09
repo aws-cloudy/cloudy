@@ -3,7 +3,6 @@ import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
 import { useLearninglayout, useSearchActions } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
-import { useFilterCount, useLearningActions } from '@/stores/learning'
 import { useSearchParams } from 'next/navigation'
 
 const LearningSearchResult = () => {
@@ -18,17 +17,13 @@ const LearningSearchResult = () => {
   }
   const { isTablet } = useResponsiveWidth()
 
-  const filterCount = useFilterCount()
-  const { resetFilter } = useLearningActions()
+  const resetFilter = () => console.log('reset')
 
   return (
     <div className={styles.container}>
       <div>{keyword && <div>{`'${keyword}' 검색결과`}</div>}</div>
       <div className={styles.rightWrap}>
-        <div
-          className={`${styles.filterText} ${filterCount ? styles.black : styles.gray}`}
-          onClick={e => resetFilter()}
-        >
+        <div className={`${styles.filterText} ${1 ? styles.black : styles.gray}`} onClick={e => resetFilter()}>
           필터 초기화
         </div>
         {!isTablet && (
