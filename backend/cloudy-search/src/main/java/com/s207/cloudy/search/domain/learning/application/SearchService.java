@@ -5,7 +5,7 @@ import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 
 public interface SearchService {
 
-    SearchListRes getSearchAutoCompleteList(SearchReq req);
+    SearchListRes getAutoCompleteList(SearchReq req);
 
     String getFinalQuery(String query);
 }

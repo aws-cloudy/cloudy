@@ -18,7 +18,7 @@ public class SearchController {
     // 학습 검색어 자동완성
     @PostMapping("/autocomplete")
     public ResponseEntity<SearchListRes> getSearchAutoCompleteList(@RequestBody SearchReq req) {
-        return ResponseEntity.ok(searchService.getSearchAutoCompleteList(req));
+        return ResponseEntity.ok(searchService.getAutoCompleteList(req));
     }
 
     // 학습 검색어 오타가 있으면 교정된 결과
