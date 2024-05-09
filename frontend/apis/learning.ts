@@ -22,9 +22,9 @@ export const getLearnings = async (
 }
 
 // 학습 검색어 자동 완성 조회
-export const getSearchAutoComplete = async (query: string) => {
+export const getSearchAutoComplete = async (query: string, count: number) => {
   const response = searchClient
-    .post(`${url}/search/autocomplete`, { query: query })
+    .post(`${url}/search/autocomplete`, { query, count })
     .then(res => res.data.searchList)
     .catch(err => err)
   return response
