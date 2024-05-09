@@ -81,7 +81,7 @@ public class SearchServiceImpl implements SearchService{
         String[] modifiedQuery = query.split(" ");
 
         // SearchRequest 생성
-        SearchRequest searchRequest = new SearchRequest("test");
+        SearchRequest searchRequest = new SearchRequest("learning");
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 
         // Suggest 쿼리 생성
@@ -117,7 +117,7 @@ public class SearchServiceImpl implements SearchService{
 
     private boolean IsQueryExist(String query) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("test");
+        SearchRequest searchRequest = new SearchRequest("learning");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
         // Match phrase prefix query
@@ -156,7 +156,7 @@ public class SearchServiceImpl implements SearchService{
         }
 
         // 같은 쿼리를 가진 문서가 없으면 새로운 문서를 추가
-        IndexRequest indexRequest = new IndexRequest("test")
+        IndexRequest indexRequest = new IndexRequest("learning")
                 .source(XContentType.JSON,
                         "counter", 0.01,
                         "title", query
@@ -177,7 +177,7 @@ public class SearchServiceImpl implements SearchService{
             String documentId = String.valueOf(hit.getDocumentId());
 
             // Construct the update reques
-            UpdateRequest request = new UpdateRequest("test", documentId)
+            UpdateRequest request = new UpdateRequest("learning", documentId)
                     .script(
                             new Script(
                                     ScriptType.INLINE,
@@ -199,7 +199,7 @@ public class SearchServiceImpl implements SearchService{
 
     private SearchListRes searchAutoCompleteList(String query, int size) {
         // Construct the search request
-        SearchRequest searchRequest = new SearchRequest("test");
+        SearchRequest searchRequest = new SearchRequest("learning");
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
 
