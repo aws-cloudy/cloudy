@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SearchListItem {
 
     private int learningId;

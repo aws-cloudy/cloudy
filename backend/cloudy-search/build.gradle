@@ -62,6 +62,8 @@ dependencies {
 //    implementation 'org.opensearch.client:opensearch-java:2.10.0'
 	implementation 'org.opensearch.client:opensearch-rest-high-level-client:2.11.0'
 
+	// redis
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 	//deploy by sam and lambda
 	implementation 'com.amazonaws.serverless:aws-serverless-java-container-springboot3:2.0.0-M2'
