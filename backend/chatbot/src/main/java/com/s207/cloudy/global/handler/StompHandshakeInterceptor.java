@@ -1,3 +1,4 @@
+/*
 package com.s207.cloudy.global.handler;
 
 import java.util.Map;
@@ -8,10 +9,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.HandshakeInterceptor;
 
+*/
 /**
  * @author 이하늬
  * @since 1.0
- */
+ *//*
+
 
 
 @Slf4j
@@ -31,3 +34,4 @@ public class StompHandshakeInterceptor implements HandshakeInterceptor {
         return true;
     }
 }
+*/

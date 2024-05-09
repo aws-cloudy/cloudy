@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.chatbot.qna.application;
 
+import com.s207.cloudy.domain.chatbot.common.application.ChatQueryService;
 import com.s207.cloudy.domain.chatbot.common.application.ChatService;
 import com.s207.cloudy.domain.chatbot.qna.dto.QuestionReq;
 import com.s207.cloudy.global.infra.chat.OpenAiChatService;
@@ -28,7 +29,6 @@ public class QnaService implements ChatService {
 
     private final PineconeService pineconeService;
     private final OpenAiChatService openAiChatService;
-
     @PostConstruct
     public void init() {
         // 파인콘 설정 초기화
@@ -59,7 +59,6 @@ public class QnaService implements ChatService {
         variables.put("input", inputData);
 
         return openAiChatService.generateStreamingChat(template, variables);
-
     }
 
     @Override

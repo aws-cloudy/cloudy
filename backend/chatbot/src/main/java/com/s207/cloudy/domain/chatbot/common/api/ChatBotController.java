@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,12 @@ public class ChatBotController {
     public Flux<String> generateChat(@RequestBody QuestionReq question) {
         log.info("컨트롤러 입력");
         return chatbotService.question(question);
+    }
+
+    @GetMapping
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok()
+            .body("HI");
     }
 
 

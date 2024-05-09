@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.chatbot.domain;
+package com.s207.cloudy.domain.chatbot.entity;
 
 import lombok.Getter;
 

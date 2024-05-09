@@ -9,6 +9,9 @@ spring:
       dynamodb:
         region: ap-northeast-2
         endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
+  devtools:
+    restart:
+      enabled: false
 
 
 

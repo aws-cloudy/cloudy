@@ -1,3 +1,4 @@
+/*
 package com.s207.cloudy.global.config;
 
 import com.s207.cloudy.global.handler.StompHandshakeInterceptor;
@@ -43,3 +44,4 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 //        registration.interceptors(chatPreHandler);
     }
 }
+*/

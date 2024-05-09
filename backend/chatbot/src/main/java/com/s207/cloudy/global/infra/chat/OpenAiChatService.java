@@ -1,5 +1,9 @@
 package com.s207.cloudy.global.infra.chat;
 
+import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
+
+import com.s207.cloudy.domain.chatbot.common.application.ChatQueryService;
+import com.s207.cloudy.domain.chatbot.entity.Chatbot;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
 import dev.langchain4j.model.input.Prompt;
@@ -8,15 +12,12 @@ import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModelName;
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
 import dev.langchain4j.model.output.Response;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
-
-import java.util.Map;
-
-import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
 
 @Service
 @Slf4j
@@ -26,6 +27,7 @@ public class OpenAiChatService implements ChatService {
     private String openAiKey;
     private OpenAiChatModel openAiChatModel;
     private OpenAiStreamingChatModel openAiStreamingChatModel;
+    private final ChatQueryService chatQueryService;
 
     @Override
     public Flux<String> generateStreamingChat(String template, Map<String, Object> variables) {
@@ -36,35 +38,38 @@ public class OpenAiChatService implements ChatService {
 
         if (openAiStreamingChatModel == null) {
             openAiStreamingChatModel = OpenAiStreamingChatModel.builder()
-                    .apiKey(openAiKey)
-                    .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
-                    .build();
+                .apiKey(openAiKey)
+                .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
+                .build();
         }
 
+
         return Flux.create(emitter ->
-                openAiStreamingChatModel.generate(prompt.text(), new StreamingResponseHandler<>() {
+            openAiStreamingChatModel.generate(prompt.text(), new StreamingResponseHandler<>() {
 
-                    @Override
-                    public void onNext(String token) {
-                        log.info("onNext(): " + token);
-                        emitter.next(token);
-                    }
+                @Override
+                public void onNext(String token) {
+                    log.info("onNext(): " + token);
+                    emitter.next(token);
+                }
 
-                    @Override
-                    public void onComplete(Response<AiMessage> response) {
-                        log.info("onComplete(): " + response);
-                        emitter.complete();
-                    }
+                @Override
+                public void onComplete(Response<AiMessage> response) {
+                    log.info("onComplete(): " + response);
+                    chatQueryService.saveChat("userIdTest", Chatbot.QNA, response.content()
+                        .text(), false);
+                    emitter.complete();
+                }
 
 
-                    @Override
-                    public void onError(Throwable error) {
-                        emitter.error(error);
+                @Override
+                public void onError(Throwable error) {
+                    emitter.error(error);
 //                        Arrays.stream(error.getStackTrace())
 //                                .toList()
 //                                .forEach(stackTraceElement -> log.error(stackTraceElement.toString()));
-                    }
-                }));
+                }
+            }));
     }
 
     @Override
@@ -76,9 +81,9 @@ public class OpenAiChatService implements ChatService {
 
         if (openAiChatModel == null) {
             openAiChatModel = OpenAiChatModel.builder()
-                    .apiKey(openAiKey)
-                    .modelName(GPT_3_5_TURBO)
-                    .build();
+                .apiKey(openAiKey)
+                .modelName(GPT_3_5_TURBO)
+                .build();
         }
 
         return openAiChatModel.generate(prompt.text());
