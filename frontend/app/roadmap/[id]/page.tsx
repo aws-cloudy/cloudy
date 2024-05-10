@@ -2,6 +2,8 @@ import React from 'react'
 import Layout from '@/components/common/Layout'
 import DetailSection from '@/components/roadmap/detail/DetailSection'
 import { getRoadmap, getRoadmapComments } from '@/apis/roadmap'
+import { getSession } from 'next-auth/react'
+import { getBookmarks } from '@/apis/bookmark'
 
 interface IParams {
   params: { id: number }

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './RoadmapCard.module.scss'
 import Image from 'next/image'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
@@ -42,10 +42,6 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
     //북마크 스크랩
     setClickMark(true)
   }
-
-  useEffect(() => {
-    console.log('북마크된 로드맵', item.isScrapped)
-  })
 
   const router = useRouter()
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)

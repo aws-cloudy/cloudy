@@ -46,7 +46,7 @@ const RoadmapListSection = () => {
         isScrapped: bookmarks.includes(roadmap.roadmapId),
       }))
       setList(prev => [...prev, ...updatedRoadmaps])
-      // setList(prev => [...prev, ...roadmaps])
+
       offset.current += 1
     }
     setIsFetching(false)
@@ -77,7 +77,6 @@ const RoadmapListSection = () => {
           list.map(road => (
             <RoadmapCard item={{ ...road, isScrapped: bookmarks.includes(road.roadmapId) }} key={road.roadmapId} />
           ))}
-        {/* {list && list.map(road => <RoadmapCard item={road} key={road.roadmapId} />)} */}
       </div>
       <Observer callback={observerCallback} />
     </>

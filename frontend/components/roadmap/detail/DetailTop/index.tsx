@@ -4,29 +4,40 @@ import styles from './DetailTop.module.scss'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import Avatar from '@/components/common/Avatar'
 import { IRoadmapCard } from '@/types/roadmap'
-import { deleteBookmark, postBookmark } from '@/apis/bookmark'
+import { deleteBookmark, getBookmarks, postBookmark } from '@/apis/bookmark'
+import { useSession } from 'next-auth/react'
 
 const DetailTop = ({ data }: { data: IRoadmapCard }) => {
-  const [clickMark, setClickMark] = useState('unscrap')
+  const { data: session, status } = useSession()
+  const [clickMark, setClickMark] = useState(false)
+
+  useEffect(() => {
+    const fetchBookmarks = async () => {
+      if (session?.user.id) {
+        const bookmarks = await getBookmarks(session.user.id)
+        const isBookmarked = bookmarks.roadmaps.some((mark: { roadmapId: number }) => mark.roadmapId === data.roadmapId)
+        setClickMark(isBookmarked)
+      }
+    }
+    fetchBookmarks()
+  }, [session, data.roadmapId])
 
   const handleMarkClear = async () => {
     try {
       await deleteBookmark(data.roadmapId)
-      setClickMark('unscrap')
+      setClickMark(false)
     } catch (error) {
       console.error('스크랩 해제 실패하였습니다.', error)
     }
-    setClickMark('unscrap')
   }
 
   const handleMarkSelect = async () => {
     try {
       await postBookmark(data.roadmapId)
-      setClickMark('scrap')
+      setClickMark(true)
     } catch (error) {
       console.error('스크랩 실패하였습니다.', error)
     }
-    setClickMark('scrap')
   }
 
   return (
@@ -37,7 +48,7 @@ const DetailTop = ({ data }: { data: IRoadmapCard }) => {
       </div>
       <div className={styles.title}>
         {data.title}
-        {clickMark === 'scrap' ? (
+        {clickMark ? (
           <BsBookmarkFill
             className={styles.bookmark}
             onClick={handleMarkClear}

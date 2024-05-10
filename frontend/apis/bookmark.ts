@@ -7,24 +7,16 @@ const url = '/bookmarks'
 export const getBookmarks = async (memberId: string) => {
   const response = await client
     .get(url, { params: { memberId } })
-    .then(res => {
-      console.log(res)
-      return res.data
-    })
+    .then(res => res.data)
     .catch(err => err)
-  console.log('받음', response)
   return response
 }
 
 // 회원 로드맵 북마크 생성
 export const postBookmark = async (roadmapId: number) => {
-  console.log('북마크아이디', roadmapId)
   const response = await client
     .post(url, { roadmapId: roadmapId })
-    .then(res => {
-      console.log(res)
-      return res.data
-    })
+    .then(res => res.data)
     .catch(err => {
       console.error(err)
     })
