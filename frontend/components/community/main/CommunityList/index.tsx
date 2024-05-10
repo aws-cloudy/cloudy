@@ -5,9 +5,9 @@ import styles from './CommunityList.module.scss'
 import CommunityListItem from '../CommunityListItem'
 import { useCommuSearchKeyword, useSelectedTags } from '@/stores/communityStore'
 import { ICommunityListItem } from '@/types/community'
-import { commuURL } from '@/apis/urls'
 import Loading from '@/components/common/Loading'
 import Observer from '../../../common/Observer'
+import { commuURL } from '@/apis/urls'
 
 function CommunityList() {
   const [questions, setQuestions] = useState<ICommunityListItem[]>([])

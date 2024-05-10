@@ -21,32 +21,6 @@
   flex-direction: column;
 }
 
-.header {
-  width: 100%;
-  height: 80px;
-  background-color: $black;
-  color: $white;
-  padding: 20px 25px;
-  position: relative;
-}
-
-.title {
-  font-weight: 500;
-  font-size: 1.1em;
-}
-
-.desc {
-  font-size: 0.8em;
-}
-
-.icon {
-  position: absolute;
-  right: 20px;
-  top: 25px;
-  font-size: 2em;
-  cursor: pointer;
-}
-
 .content {
   width: 100%;
   height: calc(85% - 80px);
@@ -61,15 +35,5 @@
     top: 0;
     right: 0;
     bottom: 0;
-  }
-
-  .title {
-    font-size: 1.5em;
-  }
-  .desc {
-    font-size: 1em;
-  }
-  .icon {
-    font-size: 3em;
   }
 }
