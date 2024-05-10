@@ -52,7 +52,7 @@ const LearningList = () => {
   }
 
   const observerCallback: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    if (isIntersecting && hasMore.current) {
+    if (isIntersecting && hasMore.current && offset.current > 1) {
       fetchLearnings()
     }
   }

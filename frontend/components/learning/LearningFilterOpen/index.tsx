@@ -40,7 +40,7 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
       type: extractArrFromQuery(params.get('type'), typeData),
       difficulty: extractArrFromQuery(params.get('difficulty'), difficultyData),
     })
-  }, [])
+  }, [params])
 
   useEffect(() => {
     let url = `/learning?query=${params.get('query') || ''}`
@@ -61,21 +61,25 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
         <LearningFilterToggle
           title="직무"
           data={jobData}
+          filter={filter.job}
           setFilter={(v: IFilter[]) => setFilter({ ...filter, job: v })}
         />
         <LearningFilterToggle
           title="주요 서비스"
           data={serviceData}
+          filter={filter.service}
           setFilter={(v: IFilter[]) => setFilter({ ...filter, service: v })}
         />
         <LearningFilterToggle
           title="분류"
           data={typeData}
+          filter={filter.type}
           setFilter={(v: IFilter[]) => setFilter({ ...filter, type: v })}
         />
         <LearningFilterToggle
           title="난이도"
           data={difficultyData}
+          filter={filter.difficulty}
           setFilter={(v: IFilter[]) => setFilter({ ...filter, difficulty: v })}
         />
         <LearningTagList filter={filter} setFilter={setFilter} />

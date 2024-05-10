@@ -8,10 +8,10 @@ import { IFilter, ILearningFilterToggle } from '@/types/learning'
 import LearningFilterToggoleItem from '../LearningFilterToggleItem'
 
 const LearningFilterToggle = (props: ILearningFilterToggle) => {
-  const { title, data, setFilter } = props
+  const { title, data, filter, setFilter } = props
 
   const [open, setOpen] = useState<boolean>(false)
-  const [list, setList] = useState<IFilter[]>([])
+  const [list, setList] = useState<IFilter[]>(filter)
 
   useEffect(() => {
     setFilter(list)

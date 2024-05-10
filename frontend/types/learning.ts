@@ -50,6 +50,7 @@ export interface ILearningFilter {
 export interface ILearningFilterToggle {
   title: string
   data: IFilter[]
+  filter: IFilter[]
   setFilter: (v: IFilter[]) => void
 }
 
