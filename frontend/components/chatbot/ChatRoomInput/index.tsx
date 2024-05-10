@@ -2,13 +2,14 @@ import { useForm } from 'react-hook-form'
 import styles from './ChatRoomInput.module.scss'
 import { IChatRoomInput } from '@/types/chatbot'
 
-function ChatRoomInput({ setMessages }: IChatRoomInput) {
+function ChatRoomInput({ handleConnect, setIsReceiving }: IChatRoomInput) {
   const { register, handleSubmit, getValues, reset } = useForm<{ msg: string }>()
 
   const onSubmit = () => {
     const content = getValues('msg')
     if (content === '') return
-    setMessages(prev => [...prev, { sender: 'user', content }])
+    handleConnect(content)
+    setIsReceiving(true)
     reset()
   }
 

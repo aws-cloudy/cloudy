@@ -1,11 +1,26 @@
 'use client'
 
 import axios from 'axios'
-import { getSession, useSession } from 'next-auth/react'
+
+import { getSession } from 'next-auth/react'
 
 export const client = axios.create({
   baseURL: '/cloudy-api',
 })
+
+client.interceptors.request.use(
+  async config => {
+    const session = await getSession()
+    if (session?.accessToken) {
+      const token = session.accessToken
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
+  error => {
+    throw new Error(error)
+  },
+)
 
 // 응답 인터셉터
 client.interceptors.response.use(
@@ -17,6 +32,7 @@ client.interceptors.request.use(
   async config => {
     const session = await getSession()
     const accessToken = session?.accessToken
+    console.log('token', accessToken)
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }

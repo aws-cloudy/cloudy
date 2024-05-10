@@ -47,8 +47,7 @@ export const getBookmarks = async (memberId: string) => {
 // 회원 로드맵 북마크 생성
 export const postBookmark = async (roadmapId: number) => {
   console.log('북마크아이디', roadmapId)
-  const session = await getSession()
-  const token = session?.accessToken
+
   const response = await client
     .post(url, { roadmapId: roadmapId })
     .then(res => {
@@ -64,11 +63,9 @@ export const postBookmark = async (roadmapId: number) => {
 
 // 회원 로드맵 북마크 해제
 export const deleteBookmark = async (roadmapId: number) => {
-  const session = await getSession()
-  const token = session?.accessToken
   const bookmarkId = roadmapId
   const response = await server
-    .delete(`${url}/${bookmarkId}`, { headers: { Authorization: `Bearer ${token}` } })
+    .delete(`${url}/${bookmarkId}`)
     .then(res => res.data)
     .catch(err => err)
   return response

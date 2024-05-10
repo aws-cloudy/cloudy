@@ -1,21 +1,19 @@
 package com.s207.cloudy.search.domain.learning.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 @Getter
+@Setter
 @ToString
 @JsonNaming(PropertyNamingStrategies.LowerCamelCaseStrategy.class)
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class SearchListItem {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class SearchQueryRes {
 
-    private String learningId;
+    private String query;
 
-    private String title;
-
-    private String documentId;
+    private String modifiedQuery;
 
 }
