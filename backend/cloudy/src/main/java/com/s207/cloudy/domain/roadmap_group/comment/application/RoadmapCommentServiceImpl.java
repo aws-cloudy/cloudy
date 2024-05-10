@@ -7,7 +7,6 @@ import com.s207.cloudy.domain.roadmap_group.comment.dao.RoadmapCommentRepository
 import com.s207.cloudy.domain.roadmap_group.comment.domain.RoadmapComment;
 import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentDto;
 import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentPostReq;
-import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapNotFoundException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
