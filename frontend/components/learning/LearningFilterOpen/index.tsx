@@ -34,10 +34,16 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   })
 
   useEffect(() => {
-    setFilter({ job: jobs, service: services, type: types, difficulty: difficulties })
+    setFilter({
+      job: extractArrFromQuery(params.get('job'), jobData),
+      service: extractArrFromQuery(params.get('service'), serviceData),
+      type: extractArrFromQuery(params.get('type'), typeData),
+      difficulty: extractArrFromQuery(params.get('difficulty'), difficultyData),
+    })
   }, [])
 
   useEffect(() => {
+    console.log(filter)
     let url = `/learning?query=${params.get('query') || ''}`
     filter.job.length !== 0 && (url += `&job=${getTextFilter(filter.job)}`)
     filter.service.length !== 0 && (url += `&service=${getTextFilter(filter.service)}`)
@@ -73,7 +79,7 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
           data={difficultyData}
           setFilter={(v: IFilter[]) => setFilter({ ...filter, difficulty: v })}
         />
-        <LearningTagList />
+        <LearningTagList filter={filter} setFilter={setFilter} />
       </div>
     </div>
   )

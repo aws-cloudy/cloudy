@@ -12,14 +12,14 @@ export const getLearnings = async (
   type: string,
   difficulty: string,
 ) => {
-  // const response = client
-  //   .get(
-  //     `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
-  //   )
-  //   .then(res => res.data.learningList)
-  //   .catch(() => [])
-  const response: never[] = []
-  return response
+  const response = client
+    .get(
+      `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
+    )
+    .then(res => res.data.learningList)
+    .catch(() => [])
+
+  return []
 }
 
 // 학습 검색어 자동 완성 조회

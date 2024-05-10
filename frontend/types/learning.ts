@@ -64,3 +64,8 @@ export interface ILearningAutocomplete {
   title: string
   documentId: string
 }
+
+export interface ILearningTagList {
+  filter: ILearningFilter
+  setFilter: Dispatch<SetStateAction<ILearningFilter>>
+}
