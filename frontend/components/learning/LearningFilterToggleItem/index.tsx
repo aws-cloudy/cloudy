@@ -5,7 +5,7 @@ import { FiMinus } from 'react-icons/fi'
 import { ILearningFilterToggoleItem } from '@/types/learning'
 
 const LearningFilterToggoleItem = (props: ILearningFilterToggoleItem) => {
-  const { item, list, setList } = props
+  const { item, list, setList, filter } = props
 
   const onClick = () => {
     const index = list.indexOf(item)
@@ -15,7 +15,7 @@ const LearningFilterToggoleItem = (props: ILearningFilterToggoleItem) => {
   return (
     <div className={styles.container} onClick={e => onClick()}>
       <div className={styles.wrap}>
-        {list.every(v => v.name !== item.name) ? (
+        {filter.every(v => v.name !== item.name) ? (
           <FiPlus data-testid="plus-icon" />
         ) : (
           <FiMinus data-testid="minus-icon" />

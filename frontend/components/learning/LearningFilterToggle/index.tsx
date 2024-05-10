@@ -27,7 +27,7 @@ const LearningFilterToggle = (props: ILearningFilterToggle) => {
         {open && (
           <>
             {data.map(v => (
-              <LearningFilterToggoleItem key={v.name} item={v} list={list} setList={setList} />
+              <LearningFilterToggoleItem key={v.name} item={v} list={list} setList={setList} filter={filter} />
             ))}
           </>
         )}

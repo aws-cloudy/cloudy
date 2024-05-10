@@ -34,6 +34,7 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   })
 
   useEffect(() => {
+    console.log('jobs filter:', extractArrFromQuery(params.get('job'), jobData))
     setFilter({
       job: extractArrFromQuery(params.get('job'), jobData),
       service: extractArrFromQuery(params.get('service'), serviceData),
