@@ -2,6 +2,7 @@ import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
 import { checkUserExists, getUser } from './cognito'
+import { redirect } from 'next/navigation'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -29,18 +30,14 @@ export const authOptions: NextAuthOptions = {
       if (!exists || !hasJobId) {
         return `/join?auth=${encodeURIComponent(username)}`
       }
-
       return true
     },
-
     async jwt({ token, user, account, profile }: any) {
       if (user) {
         token.username = user.username
         token.jobId = user?.jobId || profile?.job_id
         token.serviceId = user?.serviceId || profile?.service_id
-        token.user = user
-        token.account = account
-        token.accessToken = account.id_token
+        token.accessToken = account.access_token
         token.id = account.providerAccountId
       }
       return token

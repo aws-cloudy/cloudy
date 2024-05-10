@@ -6,7 +6,7 @@ import ProgressBar from '../ProgressBar'
 import { useState } from 'react'
 import Dropdown from '../common/Dropdown'
 import { signIn } from 'next-auth/react'
-import { OptionType, jobOptions, serviceOptions } from '@/constants/user'
+import { OptionType, jobSelections, serviceOptions } from '@/constants/user'
 
 export default function RegistInfomation({ username }: any) {
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
@@ -83,7 +83,7 @@ export default function RegistInfomation({ username }: any) {
           <div className={styles.blackText}>등록한 정보는 마이페이지에서 변경할 수 있습니다.</div>
           <div className={styles.drops}>
             <Dropdown
-              options={jobOptions}
+              options={jobSelections}
               value={selectedJob}
               onChange={handleJobChange}
               placeholder="직무"

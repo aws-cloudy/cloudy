@@ -30,7 +30,7 @@ function MainSearch() {
   }
 
   const handleKeyUp = async () => {
-    const data = await getSearchAutoComplete(keyword)
+    const data = await getSearchAutoComplete(keyword, 7)
     setList(data)
   }
 
@@ -44,7 +44,12 @@ function MainSearch() {
     } else if (e.key === 'ArrowUp') {
       setSelected(prev => (prev > -1 ? prev - 1 : -1))
     } else if (e.key === 'Enter') {
-      selected !== -1 && onSearch(keyword)
+      e.preventDefault()
+      if (selected !== -1) {
+        onSearch(list[selected].title)
+      } else {
+        onSearch(keyword)
+      }
     } else if (!e.key.startsWith('Arrow')) {
       setSelected(-1)
     }
@@ -69,7 +74,8 @@ function MainSearch() {
     >
       <div className={styles.searchBox}>
         <form
-          onSubmit={handleSubmit(() => {
+          onSubmit={handleSubmit((...args) => {
+            console.log(...args)
             onSearch(keyword)
           })}
         >

@@ -3,6 +3,7 @@ import Dropdown from '@/components/common/Dropdown'
 import styles from './Account.module.scss'
 import { useEffect, useState } from 'react'
 import { signIn } from 'next-auth/react'
+import { jobOptions, jobSelections, serviceOptions } from '@/constants/user'
 
 interface OptionType {
   value: string
@@ -10,23 +11,6 @@ interface OptionType {
 }
 
 const Account = ({ user }: any) => {
-  const jobOptions: OptionType[] = [
-    { value: '0', label: 'Architect' },
-    { value: '1', label: 'Business User' },
-    { value: '2', label: 'Cloud Operator' },
-    { value: '3', label: 'Data Engineer' },
-    { value: '4', label: 'Developer' },
-    { value: '5', label: 'Infrastructure Engineer' },
-  ]
-  const serviceOptions: OptionType[] = [
-    { value: '0', label: 'Database' },
-    { value: '1', label: 'Storage' },
-    { value: '2', label: 'Machine Learning' },
-    { value: '3', label: 'Cloud Essentials' },
-    { value: '4', label: 'Network & ContentDelivery' },
-    { value: '5', label: 'Serverless' },
-  ]
-
   const findOptionById = (options: any[], id: any) => options.find((option: { value: any }) => option.value === id)
 
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(findOptionById(jobOptions, user.jobId))

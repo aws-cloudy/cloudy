@@ -27,6 +27,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) {
         try{
+            log.info("ExceptionHandlerFilter 진입");
             filterChain.doFilter(request, response);
         }catch (TokenExpiredException e){
             log.error("exception : 엑세스 토큰 기간 만료");

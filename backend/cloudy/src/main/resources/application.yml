@@ -23,8 +23,8 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         dialect: org.hibernate.dialect.MySQLDialect
 
 cognito:

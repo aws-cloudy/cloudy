@@ -18,6 +18,10 @@ const Header = () => {
   const [style, setStyle] = useState(isDark ? mainStyles : styles)
   const { data: session } = useSession()
 
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
   const scrollHandler = () => {
     if (typeof window !== 'undefined') {
       if (isMain && window.scrollY < window.innerHeight - 80) {

@@ -9,8 +9,8 @@ export default async function LearningPage() {
       <Layout>
         <Suspense>
           <LearningSection />
+          <LearningFilterSection />
         </Suspense>
-        <LearningFilterSection />
       </Layout>
     </>
   )

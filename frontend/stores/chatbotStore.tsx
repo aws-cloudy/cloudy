@@ -2,10 +2,10 @@ import { create } from 'zustand'
 
 interface IChatbotStore {
   isChatbotOpen: boolean
-  chatbotType: 'oudy' | 'cla' | 'main'
+  chatbotType: 'oudy' | 'cla' | 'ama' | 'john' | 'main'
   actions: {
     setIsChatbotOpen: (by: boolean) => void
-    setChatbotType: (by: 'oudy' | 'cla' | 'main') => void
+    setChatbotType: (by: 'oudy' | 'cla' | 'ama' | 'john' | 'main') => void
   }
 }
 

@@ -12,9 +12,11 @@ public enum ErrorCode {
     //Opensearch 에러
     OPENSEARCH_CONNECTION_ERROR("OE001", "Opensearch 연결에 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
 
+    //Redis 에러
+    JSON_PARSING_ERROR("RE001", "캐시에 데이터를 저장하거나 읽어들이는데 실패하였습니다.", HttpStatus.INTERNAL_SERVER_ERROR),
+
     //서버에러
     SERVER_ERROR("SE001", "Internal Server Error / 데이터베이스 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR);
-    
 
     private final String code;
 

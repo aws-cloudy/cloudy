@@ -2,9 +2,15 @@ package com.s207.cloudy.search.domain.learning.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class SearchReq {
-    String query;
+
+    private String query;
+
+    private int count;
+
 }
