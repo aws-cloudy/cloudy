@@ -1,6 +1,7 @@
 package com.s207.cloudy.infra.modetation;
 
 
+import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
 import dev.langchain4j.model.input.Prompt;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.model.openai.OpenAiModerationModel;
@@ -10,7 +11,6 @@ import dev.langchain4j.service.ModerationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import com.s207.cloudy.infra.chat.OpenAiChatService;
 
 import java.util.HashMap;
 import java.util.Map;
