@@ -16,21 +16,11 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const router = useRouter()
   const params = useSearchParams()
 
-  const job = params.get('job')
-  const service = params.get('service')
-  const type = params.get('type')
-  const difficulty = params.get('difficulty')
-
-  const jobs = extractArrFromQuery(job, jobData)
-  const services = extractArrFromQuery(service, serviceData)
-  const types = extractArrFromQuery(type, typeData)
-  const difficulties = extractArrFromQuery(difficulty, difficultyData)
-
   const [filter, setFilter] = useState<ILearningFilter>({
-    job: jobs,
-    service: services,
-    type: types,
-    difficulty: difficulties,
+    job: extractArrFromQuery(params.get('job'), jobData),
+    service: extractArrFromQuery(params.get('service'), serviceData),
+    type: extractArrFromQuery(params.get('type'), typeData),
+    difficulty: extractArrFromQuery(params.get('difficulty'), difficultyData),
   })
 
   useEffect(() => {

@@ -57,8 +57,7 @@ export interface ILearningFilterToggle {
 export interface ILearningFilterToggoleItem {
   item: IFilter
   list: IFilter[]
-  setList: React.Dispatch<React.SetStateAction<IFilter[]>>
-  filter: IFilter[]
+  setList: (v: IFilter[]) => void
 }
 
 export interface ILearningAutocomplete {
