@@ -9,8 +9,8 @@ import lombok.ToString;
 @ToString
 public class SearchReq {
 
-    private String query;
+    private String query = "";
 
-    private int count;
+    private int count = 3;
 
 }
