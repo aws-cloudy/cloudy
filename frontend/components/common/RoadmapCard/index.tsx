@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './RoadmapCard.module.scss'
 import Image from 'next/image'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
@@ -15,33 +15,37 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
 
   const { data: session, status } = useSession()
 
-  const [clickMark, setClickMark] = useState('scrap')
+  const [clickMark, setClickMark] = useState(item.isScrapped)
 
   const handleMarkClear = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
-    // try {
-    //   await deleteBookmark(item.roadmapId)
-    //   setClickMark('unscrap')
-    // } catch (error) {
-    //   console.error('스크랩 해제 실패하였습니다.', error)
-    // }
+    try {
+      await deleteBookmark(item.roadmapId)
+      setClickMark(false)
+    } catch (error) {
+      console.error('스크랩 해제 실패하였습니다.', error)
+    }
 
     //북마크 스크랩 해제
-    setClickMark('unscrap')
+    setClickMark(false)
   }
 
   const handleMarkSelect = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
-    // try {
-    //   await postBookmark(item.roadmapId)
-    //   setClickMark('scrap')
-    // } catch (error) {
-    //   console.error('스크랩 실패하였습니다.', error)
-    // }
+    try {
+      await postBookmark(item.roadmapId)
+      setClickMark(true)
+    } catch (error) {
+      console.error('스크랩 실패하였습니다.', error)
+    }
 
     //북마크 스크랩
-    setClickMark('scrap')
+    setClickMark(true)
   }
+
+  useEffect(() => {
+    console.log('북마크된 로드맵', item.isScrapped)
+  })
 
   const router = useRouter()
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
@@ -51,7 +55,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
       <div className={styles.imageBox}>
         <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
         {status === 'authenticated' &&
-          (clickMark === 'scrap' ? (
+          (clickMark ? (
             <BsBookmarkFill
               className={styles.bookmark}
               onClick={handleMarkClear}

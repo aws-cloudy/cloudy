@@ -24,13 +24,15 @@ const RoadmapListSection = () => {
   const { data: session, status } = useSession()
 
   // 찜한 로드맵 목록
-  // const fetchBookmarks = async () => {
-  //   const memberId = session?.user.id
-  //   const bokkmarks = await getBookmarks(memberId);
-  //   if (bookmarks) {
-  //     setBookmarks(bookmarks.map(b => b.roadmapId))
-  //   }
-  // }
+  const fetchBookmarks = async () => {
+    const memberId = session?.user.id
+    if (!memberId) return
+    const response = await getBookmarks(memberId)
+    if (response?.roadmaps) {
+      const marksIds = response.roadmaps.map((bookmark: Bookmark) => bookmark.roadmapId)
+      setBookmarks(marksIds)
+    }
+  }
 
   // fetch 로드맵
   const fetchRoadmaps = async () => {
@@ -39,12 +41,12 @@ const RoadmapListSection = () => {
     const roadmaps = await getRoadmaps(offset.current, searchValue.keyword, searchValue.job, searchValue.service)
     if (roadmaps) {
       roadmaps.length < ROADMAP_ROWS_PER_PAGE && (hasMore.current = false)
-      // const updatedRoadmaps = roadmaps.map(roadmap => ({
-      //   ...roadmap,
-      //   isScrapped: bookmarks.includes(roadmap.roadmapId)
-      // }))
-      // setList(prev => [...prev, ...updatedRoadmaps])
-      setList(prev => [...prev, ...roadmaps])
+      const updatedRoadmaps = roadmaps.map((roadmap: IRoadmapCard) => ({
+        ...roadmap,
+        isScrapped: bookmarks.includes(roadmap.roadmapId),
+      }))
+      setList(prev => [...prev, ...updatedRoadmaps])
+      // setList(prev => [...prev, ...roadmaps])
       offset.current += 1
     }
     setIsFetching(false)
@@ -62,7 +64,7 @@ const RoadmapListSection = () => {
     setList([])
     hasMore.current = true
     offset.current = 0
-    fetchRoadmaps()
+    fetchBookmarks().then(fetchRoadmaps)
   }, [searchValue])
 
   if (isFetching) return <Loading />
@@ -71,8 +73,11 @@ const RoadmapListSection = () => {
   return (
     <>
       <div className={styles.container}>
-        {/* {list && list.map(road => <RoadmapCard item={{ ...road, isScrapped: bookmarks.includes(road.roadmapId) }} key={road.roadmapId} />)} */}
-        {list && list.map(road => <RoadmapCard item={road} key={road.roadmapId} />)}
+        {list &&
+          list.map(road => (
+            <RoadmapCard item={{ ...road, isScrapped: bookmarks.includes(road.roadmapId) }} key={road.roadmapId} />
+          ))}
+        {/* {list && list.map(road => <RoadmapCard item={road} key={road.roadmapId} />)} */}
       </div>
       <Observer callback={observerCallback} />
     </>

@@ -10,22 +10,22 @@ const DetailTop = ({ data }: { data: IRoadmapCard }) => {
   const [clickMark, setClickMark] = useState('unscrap')
 
   const handleMarkClear = async () => {
-    // try {
-    // await deleteBookmark(data.roadmapId)
-    //   setClickMark('unscrap')
-    // } catch (error) {
-    //   console.error('스크랩 해제 실패하였습니다.', error)
-    // }
+    try {
+      await deleteBookmark(data.roadmapId)
+      setClickMark('unscrap')
+    } catch (error) {
+      console.error('스크랩 해제 실패하였습니다.', error)
+    }
     setClickMark('unscrap')
   }
 
   const handleMarkSelect = async () => {
-    // try {
-    // await postBookmark(data.roadmapId)
-    //   setClickMark('scrap')
-    // } catch (error) {
-    //   console.error('스크랩 실패하였습니다.', error)
-    // }
+    try {
+      await postBookmark(data.roadmapId)
+      setClickMark('scrap')
+    } catch (error) {
+      console.error('스크랩 실패하였습니다.', error)
+    }
     setClickMark('scrap')
   }
 

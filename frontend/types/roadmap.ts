@@ -23,6 +23,7 @@ export interface IRoadmapCard {
   summary: string
   thumbnail: string
   title: string
+  isScrapped: boolean
 }
 
 export interface IMember {
