@@ -23,6 +23,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -53,7 +55,7 @@ public class SecurityConfig {
         .headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()))
         .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(exceptionHandlerFilter(), JwtAuthenticationFilter.class) // ExceptionHandlerFilter 추가
-       .addFilterAfter(memberRegistryFilter(),JwtAuthenticationFilter.class);
+        .addFilterAfter(memberRegistryFilter(),JwtAuthenticationFilter.class);
 
 
 
@@ -66,13 +68,15 @@ public class SecurityConfig {
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
+        RequestMatcher requestMatcher = new AntPathRequestMatcher("/api/v1/bookmarks/**");
 
-        return new JwtAuthenticationFilter(jwtService);
+        return new JwtAuthenticationFilter(jwtService, requestMatcher);
     }
 
 
     @Bean
     public MemberRegistryFilter memberRegistryFilter(){
+        RequestMatcher requestMatcher = new AntPathRequestMatcher("/api/v1/bookmarks/**");
         return new MemberRegistryFilter(memberService);
     }
 
