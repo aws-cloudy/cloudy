@@ -1,12 +1,13 @@
-package com.s207.cloudy.infra.embeddingstore;
+package com.s207.cloudy.global.infra.embeddingstore;
 
-import com.s207.cloudy.infra.embeddingmodel.OpenAiEmbeddingService;
+import com.s207.cloudy.global.infra.embeddingmodel.OpenAiEmbeddingService;
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 import dev.langchain4j.store.embedding.EmbeddingStore;
 import dev.langchain4j.store.embedding.pinecone.PineconeEmbeddingStore;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PineconeService implements EmbeddingStoreService {
 
     @Value("${pinecone.key}")
@@ -48,6 +50,7 @@ public class PineconeService implements EmbeddingStoreService {
     public List<EmbeddingMatch<TextSegment>> findRelevant(String question, int maxNum) {
         // 사용자 입력 문자 임베딩 데이터로 변환
         Embedding queryEmbedding = openAiEmbeddingService.getEmbeddingQuery(question);
+        log.info("임베딩 결과 :: {}", queryEmbedding.vectorAsList());
         return embeddingStore.findRelevant(queryEmbedding, maxNum);
     }
 

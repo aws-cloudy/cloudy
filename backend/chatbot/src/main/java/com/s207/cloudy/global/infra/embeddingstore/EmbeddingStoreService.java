@@ -1,4 +1,4 @@
-package com.s207.cloudy.infra.embeddingstore;
+package com.s207.cloudy.global.infra.embeddingstore;
 
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
