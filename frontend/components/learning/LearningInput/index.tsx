@@ -3,6 +3,7 @@ import styles from './LearningInput.module.scss'
 import { ILearningAutocomplete, ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
 import { useRouter, useSearchParams } from 'next/navigation'
+import { getSearchAutoComplete } from '@/apis/learning'
 
 const LearningInput = (props: ILearningInput) => {
   const { value, setValue } = props
@@ -12,25 +13,14 @@ const LearningInput = (props: ILearningInput) => {
 
   const [list, setList] = useState<ILearningAutocomplete[]>([])
 
-  useEffect(() => {
-    setList([
-      {
-        learningId: '61',
-        title: 'Amazon ElastiCache Service Introduction (Korean)',
-        documentId: '3',
-      },
-      {
-        learningId: '74',
-        title: 'Amazon ElastiCache Service Primer (Korean)',
-        documentId: '28',
-      },
-    ])
-  }, [])
+  const handleKeyUp = async () => {
+    const data = await getSearchAutoComplete(value)
+    setList(data)
+  }
 
   const router = useRouter()
   const params = useSearchParams()
 
-  const keyword = params.get('query') || ''
   const job = params.get('job') || ''
   const service = params.get('service') || ''
   const type = params.get('type') || ''
@@ -52,7 +42,6 @@ const LearningInput = (props: ILearningInput) => {
     } else if (e.key === 'Enter') {
       e.preventDefault()
       selected !== -1 ? handleSubmit(list[selected].title) : handleSubmit()
-      setIsOpen(false)
     } else if (!e.key.startsWith('Arrow')) {
       setSelected(-1)
     }
@@ -66,6 +55,7 @@ const LearningInput = (props: ILearningInput) => {
     difficulty && (url += `&difficulty=${difficulty}`)
     setValue(title || value)
     router.push(url)
+    setIsOpen(false)
   }
 
   return (
@@ -82,11 +72,14 @@ const LearningInput = (props: ILearningInput) => {
           placeholder="무엇이든 검색해보세요 ..."
           value={value}
           onChange={onChange}
+          onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
           onMouseEnter={() => setSelected(-1)}
           name="learning-input"
         />
-        {isOpen && <LearningSearchList list={list} setIsOpen={setIsOpen} selected={selected} setValue={setValue} />}
+        {isOpen && list.length > 0 && (
+          <LearningSearchList list={list} setIsOpen={setIsOpen} selected={selected} setValue={setValue} />
+        )}
       </div>
     </>
   )
