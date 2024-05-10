@@ -11,8 +11,8 @@ const LearningTagList = ({ filter, setFilter }: ILearningTagList) => {
   return (
     <div className={styles.container}>
       {filter &&
-        [...filter.job, ...filter.service, ...filter.type, ...filter.difficulty].map(v => (
-          <LearningTagListItem key={v.name} item={v} onClick={() => onClick(v)} />
+        [...filter.job, ...filter.service, ...filter.type, ...filter.difficulty].map((v, i) => (
+          <LearningTagListItem key={i} item={v} onClick={() => onClick(v)} />
         ))}
     </div>
   )

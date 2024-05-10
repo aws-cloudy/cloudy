@@ -24,7 +24,7 @@ client.interceptors.request.use(
 // 응답 인터셉터
 client.interceptors.response.use(
   res => res,
-  err => Promise.reject(alert(err.response.data.errorMap.type.message)),
+  err => Promise.reject(err.response.data.errorMap.type.message),
 )
 
 export const searchClient = axios.create({
