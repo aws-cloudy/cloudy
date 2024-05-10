@@ -15,9 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 
 import org.springframework.security.web.DefaultRedirectStrategy;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Optional;
 
 
 import static com.s207.cloudy.global.error.enums.ErrorCode.UNAUTHORIZED;
@@ -29,6 +31,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private final JwtService jwtService;
+    private final RequestMatcher requestMatcher;
 
 
     private boolean isAuthenticatedPath(String path){
@@ -37,19 +40,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        log.info("JwtAuthenticationFilter 진입");
-        if(!isAuthenticatedPath(request.getServletPath())){
-            filterChain.doFilter(request, response);
-            return;
-        }
-        log.info("jwt 인증 시작");
-        jwtService.extractAccessToken(request)
-                .filter(jwtService::isTokenValid)
-                .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
 
+        log.info("JwtAuthenticationFilter :: 필터 진입");
+
+        Optional<String> token =  jwtService.extractAccessToken(request);
+
+        if(token.isPresent()){
+            token.filter(jwtService::isTokenValid)
+                .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
+        }
 
         filterChain.doFilter(request, response);
-
     }
 
 

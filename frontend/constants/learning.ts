@@ -1,5 +1,5 @@
 export const jobData = [
-  { value: 'Architect', name: 'Architect', category: 'job' },
+  { value: 'Architect1', name: 'Architect', category: 'job' },
   { value: 'Business_User', name: 'Business User', category: 'job' },
   { value: 'Cloud_Operator', name: 'Cloud Operator', category: 'job' },
   { value: 'Data_Engineer', name: 'Data Engineer', category: 'job' },

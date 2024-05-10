@@ -34,7 +34,12 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   })
 
   useEffect(() => {
-    setFilter({ job: jobs, service: services, type: types, difficulty: difficulties })
+    setFilter({
+      job: extractArrFromQuery(params.get('job'), jobData),
+      service: extractArrFromQuery(params.get('service'), serviceData),
+      type: extractArrFromQuery(params.get('type'), typeData),
+      difficulty: extractArrFromQuery(params.get('difficulty'), difficultyData),
+    })
   }, [])
 
   useEffect(() => {
@@ -73,7 +78,7 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
           data={difficultyData}
           setFilter={(v: IFilter[]) => setFilter({ ...filter, difficulty: v })}
         />
-        <LearningTagList />
+        <LearningTagList filter={filter} setFilter={setFilter} />
       </div>
     </div>
   )

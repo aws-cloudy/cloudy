@@ -16,6 +16,8 @@ public enum ErrorCode {
     NOT_FOUND("CE005", "조건에 일치하는 값이 없습니다.", HttpStatus.NOT_FOUND),
 
 
+    DUPLICATED("CE006", "이미 존재합니다.", HttpStatus.CONFLICT),
+
     //서버에러
     SERVER_ERROR("SE001", "Internal Server Error / 데이터베이스 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_JOB_ID("SE002", "존재하지 않는 직무 아이디입니다", HttpStatus.INTERNAL_SERVER_ERROR),

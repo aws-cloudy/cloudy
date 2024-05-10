@@ -6,11 +6,16 @@ export interface ILearningInput {
 }
 
 export interface ILearningSearchList {
+  list: ILearningAutocomplete[]
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+  selected: number
   setValue: Dispatch<SetStateAction<string>>
 }
 
 export interface ILearningSearchListItem {
-  onClick: (v: string) => void
+  onClick: () => void
+  item: ILearningAutocomplete
+  selected: boolean
 }
 
 export interface ILearningCard {
@@ -52,4 +57,15 @@ export interface ILearningFilterToggoleItem {
   item: IFilter
   list: IFilter[]
   setList: React.Dispatch<React.SetStateAction<IFilter[]>>
+}
+
+export interface ILearningAutocomplete {
+  learningId: string
+  title: string
+  documentId: string
+}
+
+export interface ILearningTagList {
+  filter: ILearningFilter
+  setFilter: Dispatch<SetStateAction<ILearningFilter>>
 }

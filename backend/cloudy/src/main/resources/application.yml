@@ -12,7 +12,8 @@ spring:
     password: ${DB_PASSWORD}
     hikari:
       max-lifetime: 160000
-
+  jackson:
+    time-zone: Asia/Seoul
   jpa:
     defer-datasource-initialization: false
     generate-ddl: false
