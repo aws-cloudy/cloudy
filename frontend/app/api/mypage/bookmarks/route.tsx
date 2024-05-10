@@ -13,7 +13,7 @@ export const getBookmarks = async (memberId: string) => {
       return res.data
     })
     .catch(err => err)
-  console.log('받음', response)
+
   return response
 }
 

@@ -5,16 +5,16 @@ import DetailTop from '../DetailTop'
 import DetailTab from '../DetailTab'
 import { IRoadmapDetailData } from '@/types/roadmap'
 
-const DetailSection = ({ data }: IRoadmapDetailData) => {
+const DetailSection = ({ data, comments }: IRoadmapDetailData) => {
   return (
     <section className={styles.section}>
       <DetailTop data={data.detail} />
       <div className={styles.row}>
         <div className={styles.left}>
-          <DetailTab data={data} />
+          <DetailTab data={data} comments={comments} />
         </div>
         <div className={styles.right}>
-          <CommentSection />
+          <CommentSection data={data} comments={comments} />
         </div>
       </div>
     </section>

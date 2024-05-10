@@ -37,3 +37,15 @@ export const getMainRoadmaps = async (page: number | null) => {
     return null
   }
 }
+
+// 로드맵 댓글 전체 조회
+export const getRoadmapComments = async (id: number) => {
+  const response = await server
+    .get(`${url}/${id}/comments`)
+    .then(res => {
+      console.log('받은 데이터', res.data)
+      return res.data
+    })
+    .catch(err => err)
+  return response
+}

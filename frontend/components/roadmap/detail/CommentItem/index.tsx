@@ -5,12 +5,12 @@ const CommentItem = ({ comments }: any) => {
   return (
     <>
       {comments.map((comment: any) => (
-        <div key={comment.id}>
+        <div key={comment.commentId}>
           <div className={styles.row}>
-            <div className={styles.name}>{comment.name}</div>
-            <div className={styles.date}>{comment.date}</div>
+            <div className={styles.name}>{comment.memeber.name}</div>
+            <div className={styles.date}>{comment.regAt}</div>
           </div>
-          <div className={styles.comment}>{comment.context}</div>
+          <div className={styles.comment}>{comment.content}</div>
         </div>
       ))}
     </>
