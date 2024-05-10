@@ -24,8 +24,6 @@ public class MemberRoadmapController {
     @GetMapping
     public ResponseEntity<BookmarkListRes> getMyRoadmapList(@AuthenticationPrincipal Member member) {
 
-        log.debug("memberId: {}", member.getUsername());
-
         return ResponseEntity
                 .status(OK)
                 .body(memberRoadmapService.findRoadmapListByMember(member));

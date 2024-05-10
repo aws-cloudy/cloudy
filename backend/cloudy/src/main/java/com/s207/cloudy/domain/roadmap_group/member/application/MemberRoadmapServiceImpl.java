@@ -51,6 +51,7 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int memberRoadmapId) {
         MemberRoadmap memberRoadmap = findMemberRoadmapEntity(memberRoadmapId);
         memberRoadmapRepository.delete(memberRoadmap);

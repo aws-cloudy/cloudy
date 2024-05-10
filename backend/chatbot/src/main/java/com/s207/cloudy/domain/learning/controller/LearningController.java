@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.learning.controller;
 
 
-import com.s207.cloudy.domain.chatbot.qna.dto.QuestionReq;
+import com.s207.cloudy.domain.chatbot.common.dto.QuestionReq;
 import com.s207.cloudy.infra.modetation.ModerationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
