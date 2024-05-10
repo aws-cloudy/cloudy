@@ -12,19 +12,20 @@ export const getLearnings = async (
   type: string,
   difficulty: string,
 ) => {
-  const response = client
-    .get(
-      `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
-    )
-    .then(res => res.data.learningList)
-    .catch(err => err)
+  // const response = client
+  //   .get(
+  //     `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
+  //   )
+  //   .then(res => res.data.learningList)
+  //   .catch(() => [])
+  const response: never[] = []
   return response
 }
 
 // 학습 검색어 자동 완성 조회
-export const getSearchAutoComplete = async (query: string, count: number) => {
+export const getSearchAutoComplete = async (query: string) => {
   const response = searchClient
-    .post(`${url}/search/autocomplete`, { query, count })
+    .post(`${url}/search/autocomplete`, { query, count: 7 })
     .then(res => res.data.searchList)
     .catch(err => err)
   return response
