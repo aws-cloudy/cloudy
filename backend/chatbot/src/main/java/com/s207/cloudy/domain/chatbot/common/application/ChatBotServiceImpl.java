@@ -15,21 +15,20 @@ public class ChatBotServiceImpl implements ChatBotService {
     private final ChatQueryService chatQueryService;
 
     @Override
-    public Flux<String> question(QuestionReq question) {
+    public Flux<String> question(QuestionReq question, String userId) {
 
-        String type = question.getType();
-        if (Chatbot.QNA.name().equals(type)) {
-            chatQueryService.saveChat("userIdTest", Chatbot.QNA,
+        int type = question.getType();
+        if (Chatbot.QNA.getNum() == type){
+            chatQueryService.saveChat(userId, Chatbot.QNA,
                     question.getInputData(), true);
-            return qnaService.generateChatStream(question);
+            return qnaService.generateChatStream(question, userId);
         }
 
         return null;
     }
 
     @Override
-    public ChatListRes getChatList(int type) {
-        String userId = "userIdTest";
+    public ChatListRes getChatList(int type, String userId) {
         return new ChatListRes(chatQueryService.getChatListByUserId(userId, type));
     }
 }

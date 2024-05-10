@@ -9,5 +9,5 @@ import java.util.List;
 
 @EnableScan
 public interface ChatRepository extends CrudRepository<Chat, ChatId> {
-    List<Chat> findAllByChatId_userId(String userId);
+    List<Chat> findAllByChatId_userId_OrderByRegAtDesc(String userId);
 }

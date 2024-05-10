@@ -20,24 +20,15 @@ public class ChatBotController {
     private final ChatBotService chatBotService;
 
     @PostMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> generateChat(@RequestBody QuestionReq question) {
-        log.info("컨트롤러 입력");
-        return chatBotService.question(question);
+    public Flux<String> generateChat(@RequestBody QuestionReq question, @RequestHeader(name = "User-Id") String userId) {
+        return chatBotService.question(question, userId);
     }
 
     @GetMapping
-    public ResponseEntity<ChatListRes> getChatList(@RequestParam int type) {
+    public ResponseEntity<ChatListRes> getChatList(@RequestParam int type, @RequestHeader(name = "User-Id") String userId) {
         return ResponseEntity
                 .status(OK)
-                .body(chatBotService.getChatList(type));
+                .body(chatBotService.getChatList(type, userId));
     }
 
-
-//    @PostMapping(value = "chatbot2")
-//    public ResponseEntity<String> eturnChat(@RequestBody QuestionReq question) {
-//        log.info("컨트롤러 입력");
-//        return ResponseEntity
-//                .status(OK)
-//                .body(qnaService.generateChat2(question));
-//    }
 }

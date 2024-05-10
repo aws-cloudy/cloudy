@@ -36,7 +36,7 @@ public class QnaService implements ChatService {
     }
 
     @Override
-    public Flux<String> generateChatStream(QuestionReq questionReq) {
+    public Flux<String> generateChatStream(QuestionReq questionReq, String userId) {
         String inputData = questionReq.getInputData();
 
         // 벡터DB에서 유사한 데이터 상위 n개 조회
@@ -57,7 +57,7 @@ public class QnaService implements ChatService {
         variables.put("context", relevant.get(0).embedded().text());
         variables.put("input", inputData);
 
-        return openAiChatService.generateStreamingChat(template, variables);
+        return openAiChatService.generateStreamingChat(template, variables, userId);
     }
 
     @Override

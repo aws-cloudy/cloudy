@@ -5,7 +5,7 @@ import com.s207.cloudy.domain.chatbot.common.dto.QuestionReq;
 import reactor.core.publisher.Flux;
 
 public interface ChatService {
-    Flux<String> generateChatStream(QuestionReq questionReq);
+    Flux<String> generateChatStream(QuestionReq questionReq, String userId);
 
     String generateChatString(QuestionReq questionReq);
 }

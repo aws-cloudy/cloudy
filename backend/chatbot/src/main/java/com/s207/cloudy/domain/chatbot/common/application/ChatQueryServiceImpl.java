@@ -4,15 +4,13 @@ import com.s207.cloudy.domain.chatbot.common.dao.ChatRepository;
 import com.s207.cloudy.domain.chatbot.common.dto.ChatRes;
 import com.s207.cloudy.domain.chatbot.entity.Chat;
 import com.s207.cloudy.domain.chatbot.entity.Chatbot;
-//import io.awspring.cloud.dynamodb.DynamoDbTemplate;
+import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 /*
  * @author 이하늬
@@ -25,11 +23,14 @@ import org.springframework.stereotype.Service;
 public class ChatQueryServiceImpl implements ChatQueryService {
     private final ChatRepository chatRepository;
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Chat saveChat(String userId, Chatbot chatbot, String content,
-                         boolean isUserSent) {
+    public Chat saveChat(String userId, Chatbot chatbot, String content, boolean isUserSent) {
         Chat chat = new Chat();
-        chat.setUserId(userId + "_" + chatbot.QNA.getNum());
+        chat.setUserId(getTableKey(userId, chatbot.getNum()));
         chat.setRegAt(Timestamp.valueOf(LocalDateTime.now()).toString());
         chat.setContent(content);
         chat.setUserSent(isUserSent);
@@ -38,10 +39,14 @@ public class ChatQueryServiceImpl implements ChatQueryService {
 
     @Override
     public List<ChatRes> getChatListByUserId(String userId, int type) {
-        String id = userId + "_" + type;
-        return chatRepository.findAllByChatId_userId(id)
+        return chatRepository.findAllByChatId_userId_OrderByRegAtDesc(getTableKey(userId, type))
                 .stream()
                 .map(ChatRes::of)
-                .collect(Collectors.toList());
+                .toList();
+    }
+
+    @NotNull
+    private String getTableKey(String userId, int type) {
+        return userId + "_" + type;
     }
 }

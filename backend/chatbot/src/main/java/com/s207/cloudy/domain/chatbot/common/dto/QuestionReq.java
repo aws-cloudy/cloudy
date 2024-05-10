@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionReq {
-    private String type;
+    private int type;
     private String inputData;
 }
 
