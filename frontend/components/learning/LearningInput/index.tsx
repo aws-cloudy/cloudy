@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './LearningInput.module.scss'
 import { ILearningAutocomplete, ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
@@ -26,12 +26,9 @@ const LearningInput = (props: ILearningInput) => {
   const type = params.get('type') || ''
   const difficulty = params.get('difficulty') || ''
 
-  useEffect(() => {
-    value ? setIsOpen(true) : setIsOpen(false)
-  }, [value])
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
+    setIsOpen(true)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -75,6 +72,7 @@ const LearningInput = (props: ILearningInput) => {
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
           onMouseEnter={() => setSelected(-1)}
+          autoComplete="off"
           name="learning-input"
         />
         {isOpen && list.length > 0 && (
