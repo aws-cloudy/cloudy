@@ -18,7 +18,7 @@ const RoadmapListSection = () => {
   const offset = useRef<number>(0)
   const hasMore = useRef<boolean>(true)
   const [isFetching, setIsFetching] = useState<boolean>(true)
-  const [bookmarks, setBookmarks] = useState<number[]>([])
+  const [bookmarks, setBookmarks] = useState<{ roadmapId: number; bookmarkId: number }[]>([])
 
   const searchValue = useRoadmapSearchValue()
   const { data: session, status } = useSession()
@@ -29,8 +29,11 @@ const RoadmapListSection = () => {
     if (!memberId) return
     const response = await getBookmarks(memberId)
     if (response?.roadmaps) {
-      const marksIds = response.roadmaps.map((bookmark: Bookmark) => bookmark.roadmapId)
-      setBookmarks(marksIds)
+      const marksData = response.roadmaps.map((bookmark: Bookmark) => ({
+        roadmapId: bookmark.roadmapId,
+        bookmarkId: bookmark.bookmarkId,
+      }))
+      setBookmarks(marksData)
     }
   }
 
@@ -41,10 +44,14 @@ const RoadmapListSection = () => {
     const roadmaps = await getRoadmaps(offset.current, searchValue.keyword, searchValue.job, searchValue.service)
     if (roadmaps) {
       roadmaps.length < ROADMAP_ROWS_PER_PAGE && (hasMore.current = false)
-      const updatedRoadmaps = roadmaps.map((roadmap: IRoadmapCard) => ({
-        ...roadmap,
-        isScrapped: bookmarks.includes(roadmap.roadmapId),
-      }))
+      const updatedRoadmaps = roadmaps.map((roadmap: IRoadmapCard) => {
+        const bookmark = bookmarks.find(bm => bm.roadmapId === roadmap.roadmapId)
+        return {
+          ...roadmap,
+          isScrapped: !bookmark,
+          bookmarkId: bookmark ? bookmark.bookmarkId : -1,
+        }
+      })
       setList(prev => [...prev, ...updatedRoadmaps])
 
       offset.current += 1
@@ -75,7 +82,14 @@ const RoadmapListSection = () => {
       <div className={styles.container}>
         {list &&
           list.map(road => (
-            <RoadmapCard item={{ ...road, isScrapped: bookmarks.includes(road.roadmapId) }} key={road.roadmapId} />
+            <RoadmapCard
+              item={{
+                ...road,
+                isScrapped: bookmarks.some(bm => bm.roadmapId === road.roadmapId),
+                bookmarkId: bookmarks.find(bm => bm.roadmapId === road.roadmapId)?.bookmarkId ?? -1,
+              }}
+              key={road.roadmapId}
+            />
           ))}
       </div>
       <Observer callback={observerCallback} />

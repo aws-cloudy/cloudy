@@ -24,6 +24,7 @@ export interface IRoadmapCard {
   thumbnail: string
   title: string
   isScrapped: boolean
+  bookmarkId: number
 }
 
 export interface IMember {

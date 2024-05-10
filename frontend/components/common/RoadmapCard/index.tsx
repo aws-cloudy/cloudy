@@ -20,7 +20,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const handleMarkClear = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
     try {
-      await deleteBookmark(item.roadmapId)
+      await deleteBookmark(item.bookmarkId)
       setClickMark(false)
     } catch (error) {
       console.error('스크랩 해제 실패하였습니다.', error)
