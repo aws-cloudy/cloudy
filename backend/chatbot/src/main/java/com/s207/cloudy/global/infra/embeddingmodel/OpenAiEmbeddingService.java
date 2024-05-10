@@ -1,4 +1,4 @@
-package com.s207.cloudy.infra.embeddingmodel;
+package com.s207.cloudy.global.infra.embeddingmodel;
 
 import dev.langchain4j.data.embedding.Embedding;
 import dev.langchain4j.model.openai.OpenAiEmbeddingModel;
