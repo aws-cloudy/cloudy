@@ -46,12 +46,12 @@ public class DummyLearning {
 
     public static SearchQueryRes getDummySearchQueryWhenModified() {
         SearchQueryRes res = new SearchQueryRes();
-        res.setQuery("amazen");
+        res.setQuery("amezon");
         res.setModifiedQuery("amazon");
         return res;
     }
 
-    public static SearchQueryRes getDummySearchQueryWhenNotExistANdNotModified() {
+    public static SearchQueryRes getDummySearchQueryWhenNotExistAndNotModified() {
         SearchQueryRes res = new SearchQueryRes();
         res.setQuery("abcdefghijklmsopqrstuvwxyz");
         return res;

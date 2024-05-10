@@ -7,6 +7,7 @@ import com.s207.cloudy.search.global.error.exception.OpensearchException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -43,8 +44,8 @@ public class GlobalExceptionHandler {
                 );
     }
 
-    @ExceptionHandler({HttpMessageNotReadableException.class})
-    public ResponseEntity<CommonErrorResponse> badRequestException400(RuntimeException e) {
+    @ExceptionHandler({HttpMessageNotReadableException.class, MissingServletRequestParameterException.class})
+    public ResponseEntity<CommonErrorResponse> badRequestException400(Exception e) {
         log.error("Exception type : {}, message :{}", e.getClass(), e.getMessage());
         return ResponseEntity
                 .status(BAD_REQUEST)

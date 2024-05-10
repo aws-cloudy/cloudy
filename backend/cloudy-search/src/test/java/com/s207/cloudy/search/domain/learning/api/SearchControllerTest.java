@@ -3,6 +3,7 @@ package com.s207.cloudy.search.domain.learning.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.s207.cloudy.search.domain.learning.application.SearchService;
 import com.s207.cloudy.search.domain.learning.dto.SearchListItem;
+import com.s207.cloudy.search.domain.learning.dto.SearchQueryRes;
 import com.s207.cloudy.search.domain.learning.dto.SearchReq;
 import com.s207.cloudy.search.dummy.learning.DummyLearning;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
 
+import static com.s207.cloudy.search.dummy.learning.DummyLearning.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -119,6 +122,51 @@ public class SearchControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code", equalTo("CE001"), String.class))
                 .andExpect(jsonPath("$.message", equalTo("API 요청 URL의 프로토콜, 파라미터 등에 오류가 있습니다."), String.class))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("오타가 포함된 검색어를 입력하면, 오타 교정된 검색어와 200 OK를 반환한다.")
+    void getFinalQueryModifiedSuccess() throws Exception {
+        SearchQueryRes res = getDummySearchQueryWhenModified();
+
+        given(mockSearchService.getFinalQuery(any()))
+                .willReturn(res);
+
+        mockMvc.perform(get("/api/v1/learnings/search/final?query=" + res.getQuery()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.query", equalTo("amezon"), String.class))
+                .andExpect(jsonPath("$.modifiedQuery", equalTo("amazon"), String.class))
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("오타가 포함되지 않은 검색어를 입력하면, 검색어 그대로와 200 OK를 반환한다.")
+    void getFinalQuerySuccess() throws Exception {
+        SearchQueryRes res = getDummySearchQueryWhenExist();
+
+        given(mockSearchService.getFinalQuery(any()))
+                .willReturn(res);
+
+        mockMvc.perform(get("/api/v1/learnings/search/final?query=" + res.getQuery()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.query", equalTo("amazon"), String.class))
+                .andExpect(jsonPath("$.modifiedQuery").doesNotExist())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("오타 교정 결과가 없는 검색어를 입력하면, 검색어 그대로와 200 OK를 반환한다.")
+    void getFinalQueryWhenNotExistAndNotModifiedSuccess() throws Exception {
+        SearchQueryRes res = getDummySearchQueryWhenNotExistAndNotModified();
+
+        given(mockSearchService.getFinalQuery(any()))
+                .willReturn(res);
+
+        mockMvc.perform(get("/api/v1/learnings/search/final?query=" + res.getQuery()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.query", equalTo("abcdefghijklmsopqrstuvwxyz"), String.class))
+                .andExpect(jsonPath("$.modifiedQuery").doesNotExist())
                 .andDo(print());
     }
 
