@@ -1,9 +1,8 @@
 package com.s207.cloudy.domain.chatbot.qna.application;
 
-import com.s207.cloudy.domain.chatbot.common.application.ChatQueryService;
 import com.s207.cloudy.domain.chatbot.common.application.ChatService;
-import com.s207.cloudy.domain.chatbot.qna.dto.QuestionReq;
-import com.s207.cloudy.global.infra.chat.OpenAiChatService;
+import com.s207.cloudy.domain.chatbot.common.dto.QuestionReq;
+import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
 import com.s207.cloudy.global.infra.embeddingstore.PineconeService;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingMatch;

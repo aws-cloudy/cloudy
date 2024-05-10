@@ -1,4 +1,4 @@
-package com.s207.cloudy.global.infra.chat;
+package com.s207.cloudy.global.infra.chatmodel;
 
 import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
 

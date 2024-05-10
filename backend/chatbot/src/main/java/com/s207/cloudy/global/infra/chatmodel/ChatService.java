@@ -1,4 +1,4 @@
-package com.s207.cloudy.global.infra.chat;
+package com.s207.cloudy.global.infra.chatmodel;
 
 import reactor.core.publisher.Flux;
 

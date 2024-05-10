@@ -1,17 +1,7 @@
 spring:
   application:
     name: chatbot-server
-  cloud:
-    aws:
-      credentials:
-        access-key: AKIA3FLD3AUJDWR3ILYN
-        secret-key: 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
-      dynamodb:
-        region: ap-northeast-2
-        endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
-  devtools:
-    restart:
-      enabled: false
+
 
 
 
@@ -30,3 +20,10 @@ server:
     encoding:
       charset: UTF-8
 
+amazon:
+  aws:
+    credentials:
+      accesskey: ${AWS_ACCESS_KEY}
+      secretkey: ${AWS_SECRET_KEY}
+    dynamodb:
+      endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
