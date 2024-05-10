@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
 
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -52,6 +53,8 @@ public class OpenAiChatService implements ChatService {
                     .build();
         }
 
+
+
         return Flux.create(emitter ->
                 openAiStreamingChatModel.generate(prompt.text(), new StreamingResponseHandler<>() {
 
@@ -77,10 +80,29 @@ public class OpenAiChatService implements ChatService {
                     }
                 }));
     }
+    @Override
+    public String generateChat(String template, Map<String, Object> variables) {
+
+        Prompt prompt = getPrompt(template, variables);
+
+        log.info("generate prompt: {}", prompt.text().substring(0, 15));
+
+        if (openAiChatModel == null) {
+            openAiChatModel = OpenAiChatModel.builder()
+                    .apiKey(openAiKey)
+                    .modelName(GPT_3_5_TURBO)
+                    .build();
+        }
+
+        return openAiChatModel.generate(prompt.text());
+    }
 
     private Prompt getPrompt(String template, Map<String, Object> variables) {
         PromptTemplate promptTemplate = PromptTemplate.from(template);
         return promptTemplate.apply(variables);
     }
+
+
+
 
 }
