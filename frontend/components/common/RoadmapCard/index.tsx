@@ -7,18 +7,23 @@ import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { getShortText } from '@/utils/getShortText'
 import { IRoadmapCard } from '@/types/roadmap'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
 const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const { item } = props
 
+  const { data: session, status } = useSession()
+
   const [clickMark, setClickMark] = useState('scrap')
 
-  const handleMarkClear = () => {
+  const handleMarkClear = (event: { stopPropagation: () => void }) => {
+    event.stopPropagation()
     //북마크 스크랩 해제
     setClickMark('unscrap')
   }
 
-  const handleMarkSelect = () => {
+  const handleMarkSelect = (event: { stopPropagation: () => void }) => {
+    event.stopPropagation()
     //북마크 스크랩
     setClickMark('scrap')
   }
@@ -30,23 +35,24 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
     <div className={styles.card} key={item.roadmapId} onClick={onClick}>
       <div className={styles.imageBox}>
         <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
-        {clickMark === 'scrap' ? (
-          <BsBookmarkFill
-            className={styles.bookmark}
-            onClick={handleMarkClear}
-            size={20}
-            role="button"
-            data-testid="scrap-icon"
-          />
-        ) : (
-          <BsBookmark
-            className={styles.bookmark}
-            onClick={handleMarkSelect}
-            size={20}
-            role="button"
-            data-testid="unscrap-icon"
-          />
-        )}
+        {status === 'authenticated' &&
+          (clickMark === 'scrap' ? (
+            <BsBookmarkFill
+              className={styles.bookmark}
+              onClick={handleMarkClear}
+              size={20}
+              role="button"
+              data-testid="scrap-icon"
+            />
+          ) : (
+            <BsBookmark
+              className={styles.bookmark}
+              onClick={handleMarkSelect}
+              size={20}
+              role="button"
+              data-testid="unscrap-icon"
+            />
+          ))}
       </div>
       <div className={styles.info}>
         <div className={styles.title}>{item.title}</div>

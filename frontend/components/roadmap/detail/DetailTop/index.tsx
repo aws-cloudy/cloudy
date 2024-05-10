@@ -9,27 +9,23 @@ import { deleteBookmark, postBookmark } from '@/app/api/mypage/bookmarks/route'
 const DetailTop = ({ data }: { data: IRoadmapCard }) => {
   const [clickMark, setClickMark] = useState('unscrap')
 
-  const handleMarkClear = async () => {
-    try {
-      await deleteBookmark(data.roadmapId)
-      setClickMark('unscrap')
-    } catch (error) {
-      console.error('스크랩 해제 실패하였습니다.', error)
-    }
-  }
+  // const handleMarkClear = async () => {
+  //   try {
+  //     await deleteBookmark(data.roadmapId)
+  //     setClickMark('unscrap')
+  //   } catch (error) {
+  //     console.error('스크랩 해제 실패하였습니다.', error)
+  //   }
+  // }
 
-  const handleMarkSelect = async () => {
-    try {
-      await postBookmark(data.roadmapId)
-      setClickMark('scrap')
-    } catch (error) {
-      console.error('스크랩 실패하였습니다.', error)
-    }
-  }
-
-  useEffect(() => {
-    console.log('받았어유', data)
-  })
+  // const handleMarkSelect = async () => {
+  //   try {
+  //     await postBookmark(data.roadmapId)
+  //     setClickMark('scrap')
+  //   } catch (error) {
+  //     console.error('스크랩 실패하였습니다.', error)
+  //   }
+  // }
 
   return (
     <>
