@@ -26,7 +26,7 @@ export interface IRoadmapCard {
 }
 
 export interface IMember {
-  memberId: number
+  memberId: string
   name: string
 }
 
@@ -46,5 +46,5 @@ export interface IRoadmapDetailData {
     detail: IRoadmapCardExtend
     courses: ILearningCard[]
   }
-  commentsData: IComment[]
+  comments: IComment[]
 }
