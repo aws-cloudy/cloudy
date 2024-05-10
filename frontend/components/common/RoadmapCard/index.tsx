@@ -8,6 +8,7 @@ import { getShortText } from '@/utils/getShortText'
 import { IRoadmapCard } from '@/types/roadmap'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
+import { deleteBookmark, postBookmark } from '@/apis/bookmark'
 
 const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const { item } = props
@@ -16,14 +17,28 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
 
   const [clickMark, setClickMark] = useState('scrap')
 
-  const handleMarkClear = (event: { stopPropagation: () => void }) => {
+  const handleMarkClear = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
+    // try {
+    //   await deleteBookmark(item.roadmapId)
+    //   setClickMark('unscrap')
+    // } catch (error) {
+    //   console.error('스크랩 해제 실패하였습니다.', error)
+    // }
+
     //북마크 스크랩 해제
     setClickMark('unscrap')
   }
 
-  const handleMarkSelect = (event: { stopPropagation: () => void }) => {
+  const handleMarkSelect = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
+    // try {
+    //   await postBookmark(item.roadmapId)
+    //   setClickMark('scrap')
+    // } catch (error) {
+    //   console.error('스크랩 실패하였습니다.', error)
+    // }
+
     //북마크 스크랩
     setClickMark('scrap')
   }
