@@ -9,6 +9,7 @@ import com.s207.cloudy.domain.chatbot.entity.Chatbot;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,11 @@ public class ChatQueryServiceImpl implements ChatQueryService {
     }
 
     @Override
-    public List<ChatRes> getChatListByUserId() {
-//        dynamoDbTemplate.
-        return null;
+    public List<ChatRes> getChatListByUserId(String userId, int type) {
+        String id = userId + "_" + type;
+        return chatRepository.findAllByChatId_userId(id)
+                .stream()
+                .map(ChatRes::of)
+                .collect(Collectors.toList());
     }
 }

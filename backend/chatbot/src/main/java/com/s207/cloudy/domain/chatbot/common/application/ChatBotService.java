@@ -7,5 +7,5 @@ import reactor.core.publisher.Flux;
 public interface ChatBotService {
     Flux<String> question(QuestionReq question);
 
-    ChatListRes getChatList();
+    ChatListRes getChatList(int type);
 }

@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import software.amazon.awssdk.utils.StringUtils;
 
-import java.net.URI;
-
 @Configuration
 @EnableDynamoDBRepositories
         (basePackages = "com.s207.cloudy.domain.chatbot.common.dao")

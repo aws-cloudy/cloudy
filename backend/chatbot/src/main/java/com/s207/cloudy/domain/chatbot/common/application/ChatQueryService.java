@@ -15,5 +15,5 @@ import java.util.List;
 public interface ChatQueryService {
     Chat saveChat(String userId, Chatbot chatbot, String content, boolean isUserSent);
 
-    List<ChatRes> getChatListByUserId();
+    List<ChatRes> getChatListByUserId(String userId, int type);
 }

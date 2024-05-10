@@ -28,7 +28,8 @@ public class ChatBotServiceImpl implements ChatBotService {
     }
 
     @Override
-    public ChatListRes getChatList() {
-        return new ChatListRes(chatQueryService.getChatListByUserId());
+    public ChatListRes getChatList(int type) {
+        String userId = "userIdTest";
+        return new ChatListRes(chatQueryService.getChatListByUserId(userId, type));
     }
 }
