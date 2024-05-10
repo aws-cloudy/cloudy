@@ -37,11 +37,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.info("JwtAuthenticationFilter 진입");
         if(!isAuthenticatedPath(request.getServletPath())){
             filterChain.doFilter(request, response);
             return;
         }
-
+        log.info("jwt 인증 시작");
         jwtService.extractAccessToken(request)
                 .filter(jwtService::isTokenValid)
                 .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));

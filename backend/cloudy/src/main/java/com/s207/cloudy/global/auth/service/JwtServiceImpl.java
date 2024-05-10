@@ -57,13 +57,13 @@ public class JwtServiceImpl implements JwtService {
 
         var algorithm = buildAlgorithm((jwk));
 
-        log.error("decodedJwt::{}", decodedJWT);
+        log.info("decodedJwt::{}", decodedJWT);
         String userId = JWT.require(algorithm)
                 .build()
                 .verify(token)
                 .getClaim(SUB)
                 .asString();
-        log.error("[JwtServiceImpl isTokenValid] ::{}", userId);
+        log.info("[JwtServiceImpl isTokenValid] ::{}", userId);
         generateAuthentication(userId);
 
         return true;
