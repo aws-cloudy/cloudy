@@ -23,6 +23,20 @@ export interface IRoadmapCard {
   summary: string
   thumbnail: string
   title: string
+  isScrapped: boolean
+  bookmarkId: number
+}
+
+export interface IMember {
+  id: string
+  name: string
+}
+
+export interface IComment {
+  commentId: number
+  member: IMember
+  content: string
+  regAt: string
 }
 
 export interface IRoadmapCardExtend extends IRoadmapCard {
@@ -34,4 +48,7 @@ export interface IRoadmapDetailData {
     detail: IRoadmapCardExtend
     courses: ILearningCard[]
   }
+  memberId: string | undefined
+  comments: IComment[]
+  bookmarkId?: number
 }

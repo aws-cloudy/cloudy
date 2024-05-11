@@ -1,15 +1,16 @@
 package com.s207.cloudy.domain.roadmap_group.member.application;
 
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
 import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkListRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
-import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapNotFoundException;
+import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,10 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     @Override
     @Transactional
     public MemberRoadmap createRoadmapBookmark(Member member, CreateRoadmapReq req) {
+        if(memberRoadmapRepository.existsByRoadmapIdAndMemberId(member.getId(), req.getRoadmapId())){
+            throw new MemberRoadmapException(ErrorCode.DUPLICATED);
+        }
+
         Roadmap roadmap = roadmapService.findRoadmapEntity(req.getRoadmapId());
 
         String memberId = member.getUsername();
@@ -46,6 +51,7 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int memberRoadmapId) {
         MemberRoadmap memberRoadmap = findMemberRoadmapEntity(memberRoadmapId);
         memberRoadmapRepository.delete(memberRoadmap);
@@ -54,6 +60,6 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     @Override
     public MemberRoadmap findMemberRoadmapEntity(int memberRoadmapId) {
         return memberRoadmapRepository.findById(memberRoadmapId)
-                .orElseThrow(MemberRoadmapNotFoundException::new);
+                .orElseThrow(()-> new MemberRoadmapException(ErrorCode.NOT_FOUND));
     }
 }

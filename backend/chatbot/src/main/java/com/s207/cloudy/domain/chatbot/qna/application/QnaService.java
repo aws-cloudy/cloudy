@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.chatbot.qna.application;
 
 import com.s207.cloudy.domain.chatbot.common.application.ChatService;
-import com.s207.cloudy.domain.chatbot.common.dto.QuestionReq;
+import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
 import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
 import com.s207.cloudy.global.infra.embeddingstore.PineconeService;
 import dev.langchain4j.data.segment.TextSegment;
@@ -36,8 +36,8 @@ public class QnaService implements ChatService {
     }
 
     @Override
-    public Flux<String> generateChatStream(QuestionReq questionReq, String userId) {
-        String inputData = questionReq.getInputData();
+    public Flux<String> generateChatStream(ChatReq chatReq, String userId) {
+        String inputData = chatReq.getInputData();
 
         // 벡터DB에서 유사한 데이터 상위 n개 조회
         List<EmbeddingMatch<TextSegment>> relevant = pineconeService.findRelevant(inputData, 1);
@@ -61,8 +61,8 @@ public class QnaService implements ChatService {
     }
 
     @Override
-    public String generateChatString(QuestionReq questionReq) {
-        String inputData = questionReq.getInputData();
+    public String generateChatString(ChatReq chatReq) {
+        String inputData = chatReq.getInputData();
 
 
         log.info("inputData :: {}, inputData", inputData);

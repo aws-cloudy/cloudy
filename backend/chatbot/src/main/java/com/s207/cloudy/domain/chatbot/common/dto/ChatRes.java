@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.chatbot.common.dto;
 
-import com.s207.cloudy.domain.chatbot.entity.Chat;
+import com.s207.cloudy.domain.chatbot.common.entity.Chat;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

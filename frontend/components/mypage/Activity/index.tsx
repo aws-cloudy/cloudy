@@ -3,6 +3,9 @@ import styles from './Activity.module.scss'
 import ActivityWrite from './ActivityWrite'
 import ActivityComment from './ActivityComment/indext'
 import Dropdown from '@/components/common/Dropdown'
+import CustomSelect from '@/components/common/CustomSelect'
+import { IFilter } from '@/types/learning'
+import { IoIosSearch } from 'react-icons/io'
 
 const Activity = () => {
   const [selectedTab, setSelectedTab] = useState('write')
@@ -53,6 +56,13 @@ const Activity = () => {
     },
   ]
 
+  const drop = [
+    { value: '', name: '전체', category: 'question' },
+    { value: '', name: '작성일순', category: 'question' },
+  ]
+
+  const [options, setOptions] = useState<IFilter>(drop[0])
+
   return (
     <section className={styles.section}>
       <div className={styles.intro}>활동내역</div>
@@ -75,8 +85,11 @@ const Activity = () => {
         </div>
       </div>
       <div className={styles.row}>
-        <Dropdown placeholder="작성일순" width={130} height={30} />
-        <input type="text" placeholder="검색어를 입력해주세요." className={styles.input} />
+        <CustomSelect item={options} setItem={setOptions} options={drop} />
+        <div className={styles.inputContainer}>
+          <IoIosSearch className={styles.icon} />
+          <input type="text" placeholder="검색어를 입력해주세요." className={styles.input} />
+        </div>
       </div>
       {selectedTab === 'write' && <ActivityWrite posts={wData} />}
       {selectedTab === 'comment' && <ActivityComment comments={cData} />}

@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.comment.dao;
 
 import com.s207.cloudy.TestQueryDslConfig;
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.comment.domain.RoadmapComment;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.dummy.DummyRoadmap;

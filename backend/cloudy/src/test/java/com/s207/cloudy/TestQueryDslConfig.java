@@ -1,7 +1,7 @@
 package com.s207.cloudy;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.s207.cloudy.domain.learning.repository.impl.LearningRepositoryImpl;
+import com.s207.cloudy.domain.learning.dao.impl.LearningRepositoryImpl;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapQueryRepository;
 import jakarta.persistence.EntityManager;

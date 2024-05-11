@@ -1,13 +1,13 @@
 package com.s207.cloudy.global.infra.chatmodel;
 
 import com.s207.cloudy.domain.chatbot.common.application.ChatQueryService;
-import com.s207.cloudy.domain.chatbot.entity.Chatbot;
+import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
 import dev.langchain4j.model.input.Prompt;
 import dev.langchain4j.model.input.PromptTemplate;
 import dev.langchain4j.model.openai.OpenAiChatModel;
-import dev.langchain4j.model.openai.OpenAiChatModelName;
+
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
 import dev.langchain4j.model.output.Response;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,7 @@ import reactor.core.publisher.Flux;
 import java.util.Map;
 
 import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
+
 
 @Service
 @Slf4j
@@ -40,9 +41,10 @@ public class OpenAiChatService implements ChatService {
         if (openAiStreamingChatModel == null) {
             openAiStreamingChatModel = OpenAiStreamingChatModel.builder()
                     .apiKey(openAiKey)
-                    .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
+                    .modelName(GPT_3_5_TURBO)
                     .build();
         }
+
 
 
         return Flux.create(emitter ->
@@ -70,7 +72,6 @@ public class OpenAiChatService implements ChatService {
                     }
                 }));
     }
-
     @Override
     public String generateChat(String template, Map<String, Object> variables) {
 
@@ -84,13 +85,17 @@ public class OpenAiChatService implements ChatService {
                     .modelName(GPT_3_5_TURBO)
                     .build();
         }
-
-        return openAiChatModel.generate(prompt.text());
+        var result =openAiChatModel.generate(prompt.text());
+        log.info("generateChat :: input={}, result = {}", prompt.text(), result);
+        return result;
     }
 
     private Prompt getPrompt(String template, Map<String, Object> variables) {
         PromptTemplate promptTemplate = PromptTemplate.from(template);
         return promptTemplate.apply(variables);
     }
+
+
+
 
 }

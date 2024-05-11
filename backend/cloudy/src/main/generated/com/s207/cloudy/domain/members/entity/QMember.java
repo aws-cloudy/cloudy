@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.members.entity;
+package com.s207.cloudy.domain.members.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
