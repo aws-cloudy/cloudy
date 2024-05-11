@@ -4,12 +4,15 @@ import { ILearningAutocomplete, ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { getSearchAutoComplete } from '@/apis/learning'
+import { useLearningActions } from '@/stores/learning'
 
 const LearningInput = (props: ILearningInput) => {
   const { value, setValue } = props
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selected, setSelected] = useState<number>(-1)
+
+  const { setLearningOriginalQuery } = useLearningActions()
 
   const [list, setList] = useState<ILearningAutocomplete[]>([])
 
@@ -53,6 +56,7 @@ const LearningInput = (props: ILearningInput) => {
     setValue(title || value)
     router.push(url)
     setIsOpen(false)
+    setLearningOriginalQuery('')
   }
 
   return (

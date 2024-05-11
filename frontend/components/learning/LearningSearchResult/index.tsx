@@ -1,10 +1,11 @@
 import styles from './LearningSearchResult.module.scss'
 import { MdOutlineGridView } from 'react-icons/md'
 import { LuAlignJustify } from 'react-icons/lu'
-import { useLearninglayout, useSearchActions } from '@/stores/layout'
+import { useLearninglayout, useLayoutActions } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useLearningActions, useLearningOriginalQuery } from '@/stores/learning'
 
 const LearningSearchResult = () => {
   const params = useSearchParams()
@@ -16,13 +17,24 @@ const LearningSearchResult = () => {
 
   // 레이아웃
   const layout = useLearninglayout()
-  const { setLearningLayout } = useSearchActions()
+  const { setLearningLayout } = useLayoutActions()
   const onChangeLearningLayout = (v: 'grid' | 'justify') => {
     setLearningLayout(v)
   }
   const { isTablet } = useResponsiveWidth()
 
-  const resetFilter = () => router.push('/learning')
+  // 원본 검색어
+  const originalQuery = useLearningOriginalQuery()
+  const { setLearningOriginalQuery } = useLearningActions()
+  const searchWithOriginalQuery = () => {
+    setLearningOriginalQuery('')
+    router.push(`/learning?oquery=${keyword}`)
+  }
+
+  const resetFilter = () => {
+    router.push(`/learning?query=${keyword}`)
+    setLearningOriginalQuery('')
+  }
 
   useEffect(() => {
     setFilterCount(
@@ -35,7 +47,10 @@ const LearningSearchResult = () => {
 
   return (
     <div className={styles.container}>
-      <div>{keyword && <div>{`'${keyword}' 검색결과`}</div>}</div>
+      <div>
+        <div>{originalQuery && <div>{`수정된 검색어 '${originalQuery}' 검색결과`}</div>}</div>
+        {keyword && originalQuery && <button onClick={searchWithOriginalQuery}>{keyword}로 검색`</button>}
+      </div>
       <div className={styles.rightWrap}>
         <div
           className={`${styles.filterText} ${filterCount ? styles.black : styles.gray}`}

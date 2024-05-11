@@ -8,11 +8,12 @@ import { useLearninglayout } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { ILearningCard } from '@/types/learning'
 import { LEARNING_ROWS_PER_PAGE } from '@/constants/rows'
-import { getLearnings } from '@/apis/learning'
+import { getFinalSearch, getLearnings } from '@/apis/learning'
 import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
 import Empty from '@/components/common/Empty'
 import { useSearchParams } from 'next/navigation'
+import { useLearningActions, useLearningOriginalQuery } from '@/stores/learning'
 
 const LearningList = () => {
   // 무한 스크롤
@@ -21,6 +22,10 @@ const LearningList = () => {
   const [list, setList] = useState<ILearningCard[]>([])
   const [isFetching, setIsFetching] = useState<boolean>(true)
   const params = useSearchParams()
+
+  // 원본 검색어
+  const originalQuery = useLearningOriginalQuery()
+  const { setLearningOriginalQuery } = useLearningActions()
 
   // fetch
   const fetchLearnings = async () => {
@@ -32,15 +37,19 @@ const LearningList = () => {
     const type = params.get('type') || ''
     const difficulty = params.get('difficulty') || ''
 
-    const learnings = await getLearnings(
-      offset.current,
-      LEARNING_ROWS_PER_PAGE,
-      keyword,
-      job,
-      service,
-      type,
-      difficulty,
-    )
+    const final = await getFinalSearch(keyword)
+
+    let word = ''
+    console.log('현재 수정된 검색어 있니', originalQuery)
+    if (final.modifiedQuery === undefined || originalQuery) {
+      // 수정할 검색어가 없을 때
+      word = keyword
+    } else {
+      word = final.modifiedQuery
+      setLearningOriginalQuery(final.modifiedQuery)
+    }
+
+    const learnings = await getLearnings(offset.current, LEARNING_ROWS_PER_PAGE, word, job, service, type, difficulty)
 
     if (learnings) {
       learnings.length < LEARNING_ROWS_PER_PAGE && (hasMore.current = false) // 더 이상 로드할 데이터가 없을 때

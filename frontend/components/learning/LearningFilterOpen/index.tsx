@@ -34,7 +34,9 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   }, [params])
 
   useEffect(() => {
-    let url = `/learning?query=${params.get('query') || ''}`
+    let url = `/learning?`
+    params.get('query') && (url += `query=${params.get('query')}`)
+    params.get('oquery') && (url += `oquery=${params.get('oquery')}`)
     filter.job.length !== 0 && (url += `&job=${getTextFilter(filter.job)}`)
     filter.service.length !== 0 && (url += `&service=${getTextFilter(filter.service)}`)
     filter.type.length !== 0 && (url += `&type=${getTextFilter(filter.type)}`)
