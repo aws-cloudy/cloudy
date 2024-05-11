@@ -5,14 +5,9 @@ const url = '/bookmarks'
 
 // 찜한 로드맵 전체 조회
 export const getBookmarks = async (memberId: string) => {
-  const response = await client
-    .get(url, { params: { memberId } })
-    .then(res => {
-      console.log('찜한 로드맵 조회', res.data)
-      return res.data
-    })
-    .catch(err => err)
-  return response
+  const response = await client.get(url, { params: { memberId } })
+  console.log(response.data)
+  return response.data
 }
 
 // 회원 로드맵 북마크 생성
@@ -32,7 +27,11 @@ export const deleteBookmark = async (bookmarkId: number) => {
   const response = await client
     .delete(`${url}/${bookmarkId}`)
     .then(res => {
+<<<<<<< 0cfe879d577b2a01a9c103b11e8fe1686e7d1ff0
       // console.log(res.status)
+=======
+      console.log(res)
+>>>>>>> ddce8c2e507a651ddcd4fa8ef5b10055b6d7a514
       return res.data
     })
     .catch(err => err)

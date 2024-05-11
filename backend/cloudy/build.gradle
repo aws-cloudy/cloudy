@@ -27,7 +27,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+
 
     // lombok
     compileOnly 'org.projectlombok:lombok'
@@ -91,6 +91,22 @@ test {
     // finalizedBy : 이(test) 작업에 대해 주어진 종료자 작업을 추가
     finalizedBy jacocoTestReport // test 작업이 끝나고 jacocoTestReport를 실행
     useJUnitPlatform()
+
+    jacoco {
+        excludes += [
+                "**/*Application*",
+                "**/*Config*",
+                "**/dto/**",
+                "**/entity/**",
+                "**/global/**",
+                "**/infra/**",
+                "**/*Interceptor*",
+                "**/*Filter*",
+                "**/*Handler*",
+                "**/*Exception*",
+                "**/*Provider*"
+        ]
+    }
 }
 
 
@@ -101,11 +117,36 @@ jacocoTestReport {
         html.required = true
         csv.required = false
     }
-}
 
+    def Qdomains = []
+    for (qPattern in '**/QA'..'**/QZ') {
+        Qdomains.add(qPattern + '*')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect {
+                    fileTree(dir: it, excludes: [
+                            "**/*Application*",
+                            "**/*Config*",
+                            "**/dto/**",
+                            "**/global/**",
+                            "**/infra/**",
+                            "**/domain/**/domain/**",
+                            "**/*Interceptor*",
+                            "**/*Filter*",
+                            "**/*Handler*",
+                            "**/*Exception*",
+                            "**/*Provider*"
+                    ] + Qdomains)
+                })
+        )
+    }
+}
 
 sonarqube {
     properties {
-        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacocoTestReport.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+        property "sonar.exclusions", "**/*Application*, **/*Config*, **/dto/**, **/global/**, **/infra/**, **/domain/**/domain/**, **/*Interceptor*, **/*Filter*, **/*Handler*, **/*Exception*, **/*Provider*"
     }
 }

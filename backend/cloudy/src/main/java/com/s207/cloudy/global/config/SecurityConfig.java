@@ -2,13 +2,10 @@ package com.s207.cloudy.global.config;
 
 
 import com.s207.cloudy.domain.members.application.MemberService;
-import com.s207.cloudy.domain.members.dao.MemberRepository;
 import com.s207.cloudy.global.auth.filter.ExceptionHandlerFilter;
 import com.s207.cloudy.global.auth.filter.JwtAuthenticationFilter;
 import com.s207.cloudy.global.auth.filter.MemberRegistryFilter;
 import com.s207.cloudy.global.auth.service.JwtService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,16 +16,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.List;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -54,7 +44,6 @@ public class SecurityConfig {
         .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
         .addFilterBefore(exceptionHandlerFilter(), JwtAuthenticationFilter.class) // ExceptionHandlerFilter 추가
        .addFilterAfter(memberRegistryFilter(),JwtAuthenticationFilter.class);
-
 
 
         return http.build();

@@ -8,11 +8,18 @@ export const getTextFilter = (data: IFilter[]): string => {
 // query string을 IFilter 배열로 반환
 export const extractArrFromQuery = (queryString: string | null, data: IFilter[]) => {
   const list: IFilter[] = []
+  const addedSet = new Set() // 이미 추가된 값 제거하기 위해 사용
+
   if (queryString && queryString.length !== 0) {
     const values = queryString.split(',')
     for (const value of values) {
-      const isValue = data.find(v => v.value === value)
-      isValue && list.push(isValue)
+      if (!addedSet.has(value)) {
+        const isValue = data.find(v => v.value === value)
+        if (isValue) {
+          list.push(isValue)
+          addedSet.add(value)
+        }
+      }
     }
   }
   return list

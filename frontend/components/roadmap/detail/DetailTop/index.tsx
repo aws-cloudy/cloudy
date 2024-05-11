@@ -1,36 +1,14 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './DetailTop.module.scss'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import Avatar from '@/components/common/Avatar'
 import { IRoadmapCard } from '@/types/roadmap'
-import { deleteBookmark, getBookmarks, postBookmark } from '@/apis/bookmark'
-import { useSession } from 'next-auth/react'
+import { deleteBookmark, postBookmark } from '@/apis/bookmark'
 
-const DetailTop = ({ data }: { data: IRoadmapCard }) => {
-  const { data: session, status } = useSession()
-  const [clickMark, setClickMark] = useState(false)
-  const [bookmarkId, setBookmarkId] = useState<number | null>(null)
-
-  useEffect(() => {
-    const fetchBookmarks = async () => {
-      if (session?.user.id) {
-        const bookmarks = await getBookmarks(session.user.id)
-        const roadmapBookmark = bookmarks.roadmaps.find(
-          (mark: { roadmapId: number }) => mark.roadmapId === data.roadmapId,
-        )
-
-        if (roadmapBookmark) {
-          setClickMark(true)
-          setBookmarkId(roadmapBookmark.bookmarkId)
-        } else {
-          setClickMark(false)
-          setBookmarkId(null)
-        }
-      }
-    }
-    fetchBookmarks()
-  }, [session, data.roadmapId])
+const DetailTop = ({ data, bookId }: { data: IRoadmapCard; bookId: number | null }) => {
+  const [clickMark, setClickMark] = useState(Boolean(bookId))
+  const [bookmarkId, setBookmarkId] = useState<number | null>(bookId)
 
   const handleMarkClear = async () => {
     if (bookmarkId === null) return

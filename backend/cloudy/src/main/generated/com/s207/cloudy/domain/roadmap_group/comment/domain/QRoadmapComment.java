@@ -26,7 +26,7 @@ public class QRoadmapComment extends EntityPathBase<RoadmapComment> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final com.s207.cloudy.domain.members.entity.QMember member;
+    public final com.s207.cloudy.domain.members.domain.QMember member;
 
     public final DateTimePath<java.time.LocalDateTime> regAt = createDateTime("regAt", java.time.LocalDateTime.class);
 
@@ -50,7 +50,7 @@ public class QRoadmapComment extends EntityPathBase<RoadmapComment> {
 
     public QRoadmapComment(Class<? extends RoadmapComment> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.member = inits.isInitialized("member") ? new com.s207.cloudy.domain.members.entity.QMember(forProperty("member")) : null;
+        this.member = inits.isInitialized("member") ? new com.s207.cloudy.domain.members.domain.QMember(forProperty("member")) : null;
         this.roadmap = inits.isInitialized("roadmap") ? new com.s207.cloudy.domain.roadmap_group.roadmap.domain.QRoadmap(forProperty("roadmap")) : null;
     }
 

@@ -4,7 +4,7 @@ package com.s207.cloudy.global.auth.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.global.auth.util.RsaKeyProvider;
 import com.s207.cloudy.global.error.enums.ErrorCode;
 import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
@@ -57,13 +57,12 @@ public class JwtServiceImpl implements JwtService {
 
         var algorithm = buildAlgorithm((jwk));
 
-        log.error("decodedJwt::{}", decodedJWT);
         String userId = JWT.require(algorithm)
                 .build()
                 .verify(token)
                 .getClaim(SUB)
                 .asString();
-        log.error("[JwtServiceImpl isTokenValid] ::{}", userId);
+        log.info("[JwtServiceImpl isTokenValid] user가 접속하였습니다. ::{}", userId);
         generateAuthentication(userId);
 
         return true;

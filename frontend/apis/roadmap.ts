@@ -43,7 +43,6 @@ export const getRoadmapComments = async (id: number) => {
   const response = await server
     .get(`${url}/${id}/comments`)
     .then(res => {
-      console.log('받은 데이터', res.data)
       return res.data
     })
     .catch(err => err)

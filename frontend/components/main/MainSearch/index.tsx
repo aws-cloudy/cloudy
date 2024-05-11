@@ -6,10 +6,11 @@ import { BiSearch } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { getSearchAutoComplete } from '@/apis/learning'
 import { useRouter } from 'next/navigation'
+import { ILearningAutocomplete } from '@/types/learning'
 
 function MainSearch() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const [list, setList] = useState<{ learningId: number; title: string }[]>([])
+  const [list, setList] = useState<ILearningAutocomplete[]>([])
   const { register, watch, handleSubmit } = useForm<{ search: string }>()
   const [selected, setSelected] = useState(-1)
   const serchResultRef = useRef<HTMLDivElement>(null)
@@ -30,7 +31,7 @@ function MainSearch() {
   }
 
   const handleKeyUp = async () => {
-    const data = await getSearchAutoComplete(keyword, 7)
+    const data = await getSearchAutoComplete(keyword)
     setList(data)
   }
 
@@ -85,6 +86,7 @@ function MainSearch() {
             {...register('search')}
             onKeyUp={handleKeyUp}
             onKeyDown={handleKeyDown}
+            autoComplete="off"
           />
         </form>
         <BiSearch className={styles.searchIcon} />
@@ -99,7 +101,6 @@ function MainSearch() {
                   onMouseDown={() => {
                     onSearch(item.title)
                   }}
-                  onMouseEnter={() => setSelected(-1)}
                 />
               ))}
           </div>

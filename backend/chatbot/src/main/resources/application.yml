@@ -3,6 +3,8 @@ spring:
     name: chatbot-server
 
 
+
+
 openai:
     key: ${OPENAI_KEY}
 pinecone:
@@ -13,4 +15,18 @@ pinecone:
   id:
     #    qna: ${PINECONE_ID_QNA}
     qna: kyr8e0r
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
 
+amazon:
+  aws:
+    credentials:
+      accesskey: ${AWS_ACCESS_KEY}
+      secretkey: ${AWS_SECRET_KEY}
+    dynamodb:
+      endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
+
+cognito:
+  iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"

@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.entity;
+package com.s207.cloudy.domain.learning.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -22,7 +22,7 @@ public class QLearningService extends EntityPathBase<LearningService> {
 
     public static final QLearningService learningService = new QLearningService("learningService");
 
-    public final com.s207.cloudy.domain.learning.entity.embedded.QLearningServicePK learningServicePK;
+    public final com.s207.cloudy.domain.learning.domain.embedded.QLearningServicePK learningServicePK;
 
     public QLearningService(String variable) {
         this(LearningService.class, forVariable(variable), INITS);
@@ -42,7 +42,7 @@ public class QLearningService extends EntityPathBase<LearningService> {
 
     public QLearningService(Class<? extends LearningService> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.learningServicePK = inits.isInitialized("learningServicePK") ? new com.s207.cloudy.domain.learning.entity.embedded.QLearningServicePK(forProperty("learningServicePK"), inits.get("learningServicePK")) : null;
+        this.learningServicePK = inits.isInitialized("learningServicePK") ? new com.s207.cloudy.domain.learning.domain.embedded.QLearningServicePK(forProperty("learningServicePK"), inits.get("learningServicePK")) : null;
     }
 
 }

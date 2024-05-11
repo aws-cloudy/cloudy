@@ -4,13 +4,15 @@
   color: $gray8;
 }
 
-.row{
+.row {
   display: flex;
   flex-direction: row;
   gap: 10px;
   margin-bottom: 4px;
+  font-size: 0.8em;
 }
 
-.comment{
+.comment {
   margin-bottom: 20px;
+  font-size: 0.8em;
 }

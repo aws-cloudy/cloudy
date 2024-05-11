@@ -2,7 +2,7 @@ package com.s207.cloudy.domain.learning.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.s207.cloudy.domain.learning.entity.Learning;
+import com.s207.cloudy.domain.learning.domain.Learning;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,37 +1,45 @@
+import { IComment } from '@/types/roadmap'
 import styles from './CommentItem.module.scss'
 import React from 'react'
+import { getFullDay } from '@/utils/common/getFullDay'
+import { deleteRoadmapComment } from '@/apis/comment'
 
-const formatDate = (isoString: string | number | Date) => {
-  const date = new Date(isoString);
-  const datePart = date.toLocaleDateString('ko-KR', {
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour12: false
-  }).replace(/(\d+)\. (\d+)\. (\d+)/, '$1.$2.$3');
+const CommentItem = ({
+  roadmapId,
+  comments,
+  memberId,
+}: {
+  roadmapId: number
+  comments: IComment[]
+  memberId: string | undefined
+}) => {
+  console.log(comments)
+  const handleDelete = async (commentId: number) => {
+    try {
+      await deleteRoadmapComment(roadmapId, commentId)
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
-  const timePart = date.toLocaleTimeString('ko-KR', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
-  });
-
-  return `${datePart} ${timePart}`;
-};
-
-
-const CommentItem = ({ comments }: any) => {
   return (
     <>
-      {comments.map((comment: any) => (
-        <div key={comment.commentId}>
-          <div className={styles.row}>
-            <div className={styles.name}>{comment.member.name}</div>
-            <div className={styles.date}>{formatDate(comment.regAt)}</div>
+      {comments.map((comment: IComment) => {
+        const date = new Date(comment.regAt)
+        const fulldate = getFullDay(date)
+        const isWriter = comment.member.id === memberId
+
+        return (
+          <div key={comment.commentId}>
+            <div className={styles.row}>
+              <div className={styles.name}>{comment.member.name}</div>
+              <div className={styles.date}>{fulldate}</div>
+              {isWriter && <button onClick={() => handleDelete(comment.commentId)}>삭제</button>}
+            </div>
+            <div className={styles.comment}>{comment.content}</div>
           </div>
-          <div className={styles.comment}>{comment.content}</div>
-        </div>
-      ))}
+        )
+      })}
     </>
   )
 }

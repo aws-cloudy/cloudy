@@ -16,4 +16,4 @@ const layoutStore = create<ILayoutState>(set => ({
 
 export const useLearninglayout = () => layoutStore(state => state.learninglayout)
 
-export const useSearchActions = () => layoutStore(state => state.actions)
+export const useLayoutActions = () => layoutStore(state => state.actions)
