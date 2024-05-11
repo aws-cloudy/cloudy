@@ -31,6 +31,7 @@ const LearningList = () => {
   const fetchLearnings = async () => {
     if (!hasMore.current) return
 
+    const oKeyword = params.get('oquery')
     const keyword = params.get('query') || ''
     const job = params.get('job') || ''
     const service = params.get('service') || ''
@@ -41,7 +42,9 @@ const LearningList = () => {
 
     let word = ''
     console.log('현재 수정된 검색어 있니', originalQuery)
-    if (final.modifiedQuery === undefined || originalQuery) {
+    if (oKeyword) {
+      word = oKeyword
+    } else if (final.modifiedQuery === undefined || originalQuery) {
       // 수정할 검색어가 없을 때
       word = keyword
     } else {
@@ -72,6 +75,7 @@ const LearningList = () => {
     setList([])
     hasMore.current = true
     offset.current = 1
+    setLearningOriginalQuery('')
     fetchLearnings()
   }, [params])
 

@@ -9,12 +9,15 @@ import LearningFilterToggle from '../LearningFilterToggle'
 import { difficultyData, jobData, serviceData, typeData } from '@/constants/learning'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { extractArrFromQuery, getTextFilter } from '@/utils/getFilterFunc'
+import { useLearningActions } from '@/stores/learning'
 
 const LearningFilterOpen = (props: ILearningFilterOpen) => {
   const { closeFilter } = props
 
   const router = useRouter()
   const params = useSearchParams()
+
+  const { setLearningFilterCount } = useLearningActions()
 
   const [filter, setFilter] = useState<ILearningFilter>({
     job: extractArrFromQuery(params.get('job'), jobData),
@@ -24,7 +27,6 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
   })
 
   useEffect(() => {
-    console.log('jobs filter:', extractArrFromQuery(params.get('job'), jobData))
     setFilter({
       job: extractArrFromQuery(params.get('job'), jobData),
       service: extractArrFromQuery(params.get('service'), serviceData),
@@ -35,6 +37,14 @@ const LearningFilterOpen = (props: ILearningFilterOpen) => {
 
   useEffect(() => {
     let url = `/learning?`
+
+    const count = //  필터 개수
+      params.getAll('job').length +
+      params.getAll('service').length +
+      params.getAll('type').length +
+      params.getAll('difficulty').length
+    setLearningFilterCount(count)
+
     params.get('query') && (url += `query=${params.get('query')}`)
     params.get('oquery') && (url += `oquery=${params.get('oquery')}`)
     filter.job.length !== 0 && (url += `&job=${getTextFilter(filter.job)}`)

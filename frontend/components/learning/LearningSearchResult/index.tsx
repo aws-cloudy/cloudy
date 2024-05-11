@@ -4,15 +4,16 @@ import { LuAlignJustify } from 'react-icons/lu'
 import { useLearninglayout, useLayoutActions } from '@/stores/layout'
 import { useResponsiveWidth } from '@/hooks/useResonsiveWidth'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { useLearningActions, useLearningOriginalQuery } from '@/stores/learning'
+import { useState } from 'react'
+import { useLearningActions, useLearningFilterCount, useLearningOriginalQuery } from '@/stores/learning'
 
 const LearningSearchResult = () => {
   const params = useSearchParams()
   const router = useRouter()
 
-  const [filterCount, setFilterCount] = useState<number>(0)
+  const count = useLearningFilterCount()
 
+  const oKeyword = params.get('oquery') || ''
   const keyword = params.get('query') || ''
 
   // 레이아웃
@@ -36,15 +37,6 @@ const LearningSearchResult = () => {
     setLearningOriginalQuery('')
   }
 
-  useEffect(() => {
-    setFilterCount(
-      params.getAll('job').length +
-        params.getAll('service').length +
-        params.getAll('type').length +
-        params.getAll('difficulty').length,
-    )
-  }, [params])
-
   return (
     <div className={styles.container}>
       <div>
@@ -52,10 +44,7 @@ const LearningSearchResult = () => {
         {keyword && originalQuery && <button onClick={searchWithOriginalQuery}>{keyword}로 검색`</button>}
       </div>
       <div className={styles.rightWrap}>
-        <div
-          className={`${styles.filterText} ${filterCount ? styles.black : styles.gray}`}
-          onClick={e => resetFilter()}
-        >
+        <div className={`${styles.filterText} ${count ? styles.black : styles.gray}`} onClick={e => resetFilter()}>
           필터 초기화
         </div>
         {!isTablet && (
