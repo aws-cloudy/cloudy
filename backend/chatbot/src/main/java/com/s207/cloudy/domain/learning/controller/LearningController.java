@@ -1,8 +1,8 @@
 package com.s207.cloudy.domain.learning.controller;
 
 
-import com.s207.cloudy.domain.chatbot.common.dto.QuestionReq;
-import com.s207.cloudy.infra.modetation.ModerationService;
+import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
+import com.s207.cloudy.global.infra.modertation.ModerationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +26,7 @@ public class LearningController {
     }
 
     @GetMapping("/test")
-    public ResponseEntity<Boolean> moderate(@RequestBody QuestionReq question){
+    public ResponseEntity<Boolean> moderate(@RequestBody ChatReq question){
         //부적절한 질문인지 판단
             //부적절한 질문일 경우 
 

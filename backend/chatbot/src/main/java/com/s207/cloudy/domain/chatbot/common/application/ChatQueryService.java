@@ -1,8 +1,8 @@
 package com.s207.cloudy.domain.chatbot.common.application;
 
 import com.s207.cloudy.domain.chatbot.common.dto.ChatRes;
-import com.s207.cloudy.domain.chatbot.entity.Chat;
-import com.s207.cloudy.domain.chatbot.entity.Chatbot;
+import com.s207.cloudy.domain.chatbot.common.entity.Chat;
+import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 
 import java.util.List;
 

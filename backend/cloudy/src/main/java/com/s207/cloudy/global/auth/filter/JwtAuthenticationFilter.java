@@ -1,20 +1,14 @@
 package com.s207.cloudy.global.auth.filter;
 
-import com.auth0.jwt.exceptions.JWTDecodeException;
-import com.auth0.jwt.exceptions.TokenExpiredException;
-import com.s207.cloudy.domain.members.entity.Member;
 import com.s207.cloudy.global.auth.service.JwtService;
 import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
-import com.s207.cloudy.global.error.enums.ErrorCode;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.authentication.AuthenticationManager;
 
-import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -31,7 +25,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private final JwtService jwtService;
-    private final RequestMatcher requestMatcher;
 
 
     private boolean isAuthenticatedPath(String path){

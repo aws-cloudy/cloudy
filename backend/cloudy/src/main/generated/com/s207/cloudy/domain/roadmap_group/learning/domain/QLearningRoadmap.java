@@ -24,7 +24,7 @@ public class QLearningRoadmap extends EntityPathBase<LearningRoadmap> {
 
     public final NumberPath<Integer> id = createNumber("id", Integer.class);
 
-    public final com.s207.cloudy.domain.learning.entity.QLearning learning;
+    public final com.s207.cloudy.domain.learning.domain.QLearning learning;
 
     public final NumberPath<Integer> rank = createNumber("rank", Integer.class);
 
@@ -48,7 +48,7 @@ public class QLearningRoadmap extends EntityPathBase<LearningRoadmap> {
 
     public QLearningRoadmap(Class<? extends LearningRoadmap> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.learning = inits.isInitialized("learning") ? new com.s207.cloudy.domain.learning.entity.QLearning(forProperty("learning")) : null;
+        this.learning = inits.isInitialized("learning") ? new com.s207.cloudy.domain.learning.domain.QLearning(forProperty("learning")) : null;
         this.roadmap = inits.isInitialized("roadmap") ? new com.s207.cloudy.domain.roadmap_group.roadmap.domain.QRoadmap(forProperty("roadmap")) : null;
     }
 

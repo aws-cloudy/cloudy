@@ -1,8 +1,7 @@
 package com.s207.cloudy.domain.learning.api;
 
-import com.s207.cloudy.domain.learning.controller.LearningController;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
-import com.s207.cloudy.domain.learning.service.LearningService;
+import com.s207.cloudy.domain.learning.application.LearningService;
 import com.s207.cloudy.dummy.learning.DummyLearning;
 import com.s207.cloudy.global.auth.service.JwtService;
 import com.s207.cloudy.global.config.aop.CustomValidationAdvice;
