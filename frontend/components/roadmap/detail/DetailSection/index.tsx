@@ -5,16 +5,16 @@ import DetailTop from '../DetailTop'
 import DetailTab from '../DetailTab'
 import { IRoadmapDetailData } from '@/types/roadmap'
 
-const DetailSection = ({ data }: IRoadmapDetailData) => {
+const DetailSection = ({ data, comments, memberId, bookmarkId }: IRoadmapDetailData) => {
   return (
     <section className={styles.section}>
-      <DetailTop data={data.detail} />
+      <DetailTop data={data.detail} bookId={bookmarkId ? bookmarkId : null} />
       <div className={styles.row}>
         <div className={styles.left}>
-          <DetailTab data={data} />
+          <DetailTab data={data} memberId={memberId} comments={comments} />
         </div>
         <div className={styles.right}>
-          <CommentSection />
+          <CommentSection data={data} memberId={memberId} comments={comments} />
         </div>
       </div>
     </section>
