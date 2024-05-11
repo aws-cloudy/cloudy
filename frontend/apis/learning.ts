@@ -6,10 +6,7 @@ const url = '/learnings'
 export const getFinalSearch = async (query: string) => {
   const response = searchClient
     .get(`${url}/search/final?query=${query}`)
-    .then(res => {
-      console.log('오타 교정', res.data)
-      return res.data
-    })
+    .then(res => res.data)
     .catch(() => {})
   return response
 }
@@ -28,10 +25,7 @@ export const getLearnings = async (
     .get(
       `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
     )
-    .then(res => {
-      console.log('실제 데이터 갯수', res.data.learningList.length)
-      return res.data.learningList
-    })
+    .then(res => res.data.learningList)
     .catch(() => [])
 
   return response

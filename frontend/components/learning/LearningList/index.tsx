@@ -41,7 +41,6 @@ const LearningList = () => {
     const final = await getFinalSearch(keyword)
 
     let word = ''
-    console.log('현재 수정된 검색어 있니', originalQuery)
     if (oKeyword) {
       word = oKeyword
     } else if (final.modifiedQuery === undefined || originalQuery) {

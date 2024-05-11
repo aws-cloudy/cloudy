@@ -3,12 +3,19 @@
 .container {
   display: flex;
   justify-content: space-between;
-  margin: 32px 0;
+  margin-top: 32px;
 }
 
 .rightWrap {
   display: flex;
   align-items: center;
+}
+
+.resultText {
+  font-size: 1.1em;
+  b {
+    font-weight: 600;
+  }
 }
 
 .filterText {
@@ -29,4 +36,17 @@
   cursor: pointer;
   margin-left: 10px;
   padding-top: 4px;
+}
+
+.oKeywordSearchWrap {
+  display: flex;
+  button {
+    font-size: 1.2em;
+    border: none;
+    background-color: $white;
+    cursor: pointer;
+    color: $gray8;
+    font-weight: 500;
+    text-decoration: underline;
+  }
 }
