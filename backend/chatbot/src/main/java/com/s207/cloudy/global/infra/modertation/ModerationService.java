@@ -1,13 +1,7 @@
-package com.s207.cloudy.global.infra.modetation;
+package com.s207.cloudy.global.infra.modertation;
 
 
 import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
-import dev.langchain4j.model.input.Prompt;
-import dev.langchain4j.model.openai.OpenAiChatModel;
-import dev.langchain4j.model.openai.OpenAiModerationModel;
-import dev.langchain4j.service.AiServices;
-import dev.langchain4j.service.Moderate;
-import dev.langchain4j.service.ModerationException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,7 +16,7 @@ public class ModerationService {
 
     private final OpenAiChatService openAiChatService;
 
-    public String isHarmful(String message){
+    public boolean isHarmful(String message){
         String template = """ 
                 아래의 상황을 참고해 질문에 대한 답을 작성해줘.
                 모든 답변은 false 또는 true로 답변해야해 
@@ -35,8 +29,9 @@ public class ModerationService {
         Map<String, Object> variables = new HashMap<>();
         variables.put("input", message);
 
-
-        return openAiChatService.generateChat(template, variables);
+        var result = Boolean.parseBoolean(openAiChatService.generateChat(template, variables));
+        log.info("답변 가능 여부 :: {}", result);
+        return result;
     }
 
 

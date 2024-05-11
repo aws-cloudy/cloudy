@@ -25,6 +25,7 @@ public class SecurityConfig {
 
     private final JwtService jwtService;
 
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
@@ -35,7 +36,8 @@ public class SecurityConfig {
                 })
                 .headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()))
                 .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(exceptionHandlerFilter(), JwtAuthenticationFilter.class); // ExceptionHandlerFilter 추가
+                .addFilterBefore(exceptionHandlerFilter(), JwtAuthenticationFilter.class);
+
 
 
         return http.build();
