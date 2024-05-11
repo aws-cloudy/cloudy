@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.learning.dto.annotation.validator;
 
 import com.s207.cloudy.domain.learning.dto.annotation.validation.JobNameValidation;
-import com.s207.cloudy.domain.learning.entity.enums.JobNameType;
+import com.s207.cloudy.domain.learning.domain.enums.JobNameType;
 import com.s207.cloudy.global.error.exception.CustomValidationException;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

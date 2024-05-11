@@ -1,7 +1,7 @@
 package com.s207.cloudy.global.infra.chatmodel;
 
 import com.s207.cloudy.domain.chatbot.common.application.ChatQueryService;
-import com.s207.cloudy.domain.chatbot.entity.Chatbot;
+import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
 import dev.langchain4j.model.input.Prompt;

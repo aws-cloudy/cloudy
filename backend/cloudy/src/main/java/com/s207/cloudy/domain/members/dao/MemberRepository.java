@@ -2,7 +2,7 @@ package com.s207.cloudy.domain.members.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

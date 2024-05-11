@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.chatbot.common.application;
 
 import com.s207.cloudy.domain.chatbot.common.dto.ChatListRes;
-import com.s207.cloudy.domain.chatbot.entity.Chatbot;
+import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 import com.s207.cloudy.domain.chatbot.qna.application.QnaService;
 import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
 import lombok.RequiredArgsConstructor;

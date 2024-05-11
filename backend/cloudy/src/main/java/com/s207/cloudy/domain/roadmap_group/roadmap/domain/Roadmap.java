@@ -1,6 +1,5 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.domain;
 
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import jakarta.persistence.*;
 import lombok.Builder;

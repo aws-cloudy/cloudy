@@ -1,15 +1,19 @@
 package com.s207.cloudy.domain.learning.application;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.BDDMockito.given;
+
+import com.s207.cloudy.domain.learning.dao.JobRepository;
+import com.s207.cloudy.domain.learning.dao.LearningRepository;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.exception.LearningException;
-import com.s207.cloudy.domain.learning.repository.JobRepository;
-import com.s207.cloudy.domain.learning.repository.LearningRepository;
-import com.s207.cloudy.domain.learning.service.LearningService;
-import com.s207.cloudy.domain.learning.service.LearningServiceImpl;
 import com.s207.cloudy.dummy.learning.DummyLearning;
 import com.s207.cloudy.global.error.enums.ErrorCode;
+import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,13 +22,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.BDDMockito.given;
 
 @SpringJUnitConfig(LearningServiceImpl.class)
 class LearningServiceImplTest {
