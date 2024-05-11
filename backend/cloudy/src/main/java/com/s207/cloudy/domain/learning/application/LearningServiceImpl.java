@@ -2,6 +2,7 @@ package com.s207.cloudy.domain.learning.application;
 
 import com.s207.cloudy.domain.learning.dao.JobRepository;
 import com.s207.cloudy.domain.learning.dao.LearningRepository;
+import com.s207.cloudy.domain.learning.domain.Learning;
 import com.s207.cloudy.domain.learning.domain.enums.CourseType;
 import com.s207.cloudy.domain.learning.domain.enums.DifficultyType;
 import com.s207.cloudy.domain.learning.domain.enums.JobNameType;
@@ -13,6 +14,7 @@ import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.global.error.enums.ErrorCode;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -135,5 +137,14 @@ public class LearningServiceImpl implements LearningService {
         }
 
         return convertServiceName.toArray(new String[0]);
+    }
+
+    @Override
+    public List<LearningItem> getCoursesWithRoadmapId(Integer roadmapId) {
+        return learningRepository
+            .findByRoadmapId(roadmapId)
+            .stream()
+            .map(Learning::toDto)
+            .collect(Collectors.toList());
     }
 }
