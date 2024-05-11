@@ -8,11 +8,9 @@ public class DummyRoadmapComment {
 
     public static RoadmapComment getDummyRoadmapComment(Roadmap roadmap, Member member) {
         return RoadmapComment.builder()
-                .roadmap(roadmap)
-                .member(
-                        member
-                )
-                .content("참 좋은 강의네요!")
-                .build();
+            .roadmap(roadmap)
+            .member(member)
+            .content("참 좋은 강의네요!")
+            .build();
     }
 }

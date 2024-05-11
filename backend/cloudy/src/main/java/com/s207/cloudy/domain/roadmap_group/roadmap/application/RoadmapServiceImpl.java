@@ -1,5 +1,6 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.application;
 
+import com.s207.cloudy.domain.learning.domain.Learning;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapRepository;
@@ -8,15 +9,12 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
-import com.s207.cloudy.domain.learning.domain.Learning;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
-import java.util.stream.Collectors;
 
 
 @Service
@@ -29,15 +27,17 @@ public class RoadmapServiceImpl implements RoadmapService {
     private final LearningRepository learningRepository;
 
     @Override
-    public RoadmapListRes findRoadmapList(String job, String service, String query, Pageable pageable) {
-        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getRoadmaplist(job, service, query, pageable);
+    public RoadmapListRes findRoadmapList(String job, String service, String query,
+                                          Pageable pageable) {
+        Page<RoadmapRes> roadmaps =
+            roadmapQueryRepository.getRoadmaplist(job, service, query, pageable);
         return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
     }
 
     @Override
     public Roadmap findRoadmapEntity(int roadmapId) {
         return roadmapRepository.findById(roadmapId)
-                .orElseThrow(RoadmapNotFoundException::new);
+            .orElseThrow(RoadmapNotFoundException::new);
     }
 
     @Override
@@ -45,22 +45,18 @@ public class RoadmapServiceImpl implements RoadmapService {
 
 
         return RoadmapDetailsRes
-                .builder()
-                .detail(
-                        roadmapRepository
-                                .getRoadmapsById(roadmapId)
-                                .orElseThrow(RoadmapNotFoundException::new)
-                                .toDto()
-
-                )
-                .courses(
-                        learningRepository
-                                .findByRoadmapId(roadmapId)
-                                .stream()
-                                .map(Learning::toDto)
-                                .collect(Collectors.toList())
-                )
-                .build();
+            .builder()
+            .detail(
+                findRoadmapEntity(roadmapId).toDto()
+            )
+            .courses(
+                learningRepository
+                    .findByRoadmapId(roadmapId)
+                    .stream()
+                    .map(Learning::toDto)
+                    .collect(Collectors.toList())
+            )
+            .build();
 
 
     }
