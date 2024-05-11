@@ -5,7 +5,6 @@ import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentListRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
-import jakarta.ws.rs.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -46,7 +45,7 @@ public class RoadmapController {
     @GetMapping("/{roadmapId}/comments")
     public ResponseEntity<RoadmapCommentListRes> getRoadmapCommentList(@PathVariable("roadmapId")Integer roadmapId){
         return ResponseEntity.ok(
-                new RoadmapCommentListRes(roadmapCommentService.getRoadmapList(roadmapId))
+                new RoadmapCommentListRes(roadmapCommentService.getRoadmapCommentList(roadmapId))
         );
     }
 

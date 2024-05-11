@@ -47,10 +47,10 @@ class MemberRoadmapServiceImplTest {
 
 
     Roadmap dummyRoadmap;
+    Member dummyMember;
     MemberRoadmap dummyMemberRoadmap;
     BookmarkRes dummyBookmarkRes1;
     BookmarkRes dummyBookmarkRes2;
-    Member dummyMember;
 
     @BeforeEach
     void setUp() {

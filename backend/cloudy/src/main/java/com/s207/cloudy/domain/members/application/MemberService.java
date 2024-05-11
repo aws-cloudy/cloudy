@@ -9,5 +9,7 @@ public interface MemberService {
 
     MemberDto findById(String id);
 
+    Member findMemberEntity(String userId);
+
     void save(Member member);
 }

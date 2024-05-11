@@ -223,7 +223,7 @@ class RoadmapControllerTest {
         List<RoadmapCommentDto> comments =
             List.of(DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap, dummyMember).toDto());
 
-        given(mockRoadmapCommentService.getRoadmapList(anyInt())).willReturn(comments);
+        given(mockRoadmapCommentService.getRoadmapCommentList(anyInt())).willReturn(comments);
 
         mockMvc.perform(get("/api/v1/roadmaps/{roadmapId}/comments", 1)
                 .contentType(MediaType.APPLICATION_JSON)

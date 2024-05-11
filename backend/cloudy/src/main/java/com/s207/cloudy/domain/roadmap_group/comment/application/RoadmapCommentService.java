@@ -6,7 +6,7 @@ import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentPostReq;
 import java.util.List;
 
 public interface RoadmapCommentService {
-    List<RoadmapCommentDto> getRoadmapList(Integer roadmapId);
+    List<RoadmapCommentDto> getRoadmapCommentList(Integer roadmapId);
 
     Integer postRoadmapComment(RoadmapCommentPostReq roadmapCommentPostReq, String userId);
 }
