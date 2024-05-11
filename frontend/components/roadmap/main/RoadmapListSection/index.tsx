@@ -58,7 +58,6 @@ const RoadmapListSection = () => {
         }
       })
       setList(prev => [...prev, ...updatedRoadmaps])
-
       offset.current += 1
     }
     setIsFetching(false)

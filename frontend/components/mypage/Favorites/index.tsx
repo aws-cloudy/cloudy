@@ -2,7 +2,8 @@ import RoadmapCard from '@/components/common/RoadmapCard'
 import styles from './Favorites.module.scss'
 import { roadmapData } from '@/components/roadmap/main/RoadmapListSection/roadmapData'
 import { useEffect, useState } from 'react'
-import { getBookmarks } from '@/app/api/mypage/bookmarks/route'
+import { getBookmarks } from '@/apis/bookmark'
+
 
 const Favorites = ({ user }: any) => {
   const [bookmarks, setBookmarks] = useState([])

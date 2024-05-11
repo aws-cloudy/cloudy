@@ -15,6 +15,12 @@ export const authOptions: NextAuthOptions = {
       issuer: process.env.COGNITO_ISSUER,
       idToken: true,
       checks: 'nonce',
+      // authorization: {
+      //   params: {
+      //     scope: "openid profile email",
+      //     redirect_uri: `https://www.aws-cloudy.com/api/auth/callback/cognito`,
+      //   },
+      // },
     }),
   ],
   callbacks: {
