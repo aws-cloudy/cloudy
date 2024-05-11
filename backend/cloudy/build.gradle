@@ -101,8 +101,29 @@ jacocoTestReport {
         html.required = true
         csv.required = false
     }
-}
 
+    def Qdomains = []
+    for (qPattern in '**/QA'..'**/QZ') {
+        Qdomains.add(qPattern + '*')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect {
+                    fileTree(dir: it, excludes: [
+                            "**/*Application*",
+                            "**/*Config*",
+                            "**/dto/**",
+                            "**/entity/**",
+                            "**/*Interceptor*",
+                            "**/*Filter*",
+                            "**/*Exception*",
+                            "**/*Provider*"
+                    ] + Qdomains)
+                })
+        )
+    }
+}
 
 sonarqube {
     properties {
