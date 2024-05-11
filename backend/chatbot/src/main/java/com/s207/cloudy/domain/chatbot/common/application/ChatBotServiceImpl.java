@@ -3,7 +3,7 @@ package com.s207.cloudy.domain.chatbot.common.application;
 import com.s207.cloudy.domain.chatbot.common.dto.ChatListRes;
 import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 import com.s207.cloudy.domain.chatbot.qna.application.QnaService;
-import com.s207.cloudy.domain.chatbot.common.dto.QuestionReq;
+import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -15,7 +15,7 @@ public class ChatBotServiceImpl implements ChatBotService {
     private final ChatQueryService chatQueryService;
 
     @Override
-    public Flux<String> question(QuestionReq question, String userId) {
+    public Flux<String> question(ChatReq question, String userId) {
 
         int type = question.getType();
         if (Chatbot.QNA.getNum() == type){
