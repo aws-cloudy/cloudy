@@ -1,6 +1,6 @@
-package com.s207.cloudy.domain.learning.entity;
+package com.s207.cloudy.domain.learning.domain;
 
-import com.s207.cloudy.domain.learning.entity.embedded.LearningJobPK;
+import com.s207.cloudy.domain.learning.domain.embedded.LearningJobPK;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

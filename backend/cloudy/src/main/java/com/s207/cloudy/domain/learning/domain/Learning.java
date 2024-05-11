@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.entity;
+package com.s207.cloudy.domain.learning.domain;
 
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import jakarta.persistence.*;

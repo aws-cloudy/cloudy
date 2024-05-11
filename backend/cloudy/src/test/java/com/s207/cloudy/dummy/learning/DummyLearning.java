@@ -2,10 +2,10 @@ package com.s207.cloudy.dummy.learning;
 
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
-import com.s207.cloudy.domain.learning.entity.Job;
-import com.s207.cloudy.domain.learning.entity.Learning;
-import com.s207.cloudy.domain.learning.entity.LearningJob;
-import com.s207.cloudy.domain.learning.entity.embedded.LearningJobPK;
+import com.s207.cloudy.domain.learning.domain.Job;
+import com.s207.cloudy.domain.learning.domain.Learning;
+import com.s207.cloudy.domain.learning.domain.LearningJob;
+import com.s207.cloudy.domain.learning.domain.embedded.LearningJobPK;
 
 import java.util.List;
 

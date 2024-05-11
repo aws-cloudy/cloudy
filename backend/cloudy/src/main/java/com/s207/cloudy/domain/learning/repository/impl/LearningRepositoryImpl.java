@@ -15,11 +15,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static com.s207.cloudy.domain.learning.entity.QJob.job;
-import static com.s207.cloudy.domain.learning.entity.QLearning.learning;
-import static com.s207.cloudy.domain.learning.entity.QLearningJob.learningJob;
-import static com.s207.cloudy.domain.learning.entity.QLearningService.learningService;
-import static com.s207.cloudy.domain.learning.entity.QService.service;
+import static com.s207.cloudy.domain.learning.domain.QJob.job;
+import static com.s207.cloudy.domain.learning.domain.QLearning.learning;
+import static com.s207.cloudy.domain.learning.domain.QLearningJob.learningJob;
+import static com.s207.cloudy.domain.learning.domain.QLearningService.learningService;
+import static com.s207.cloudy.domain.learning.domain.QService.service;
 
 @RequiredArgsConstructor
 @Repository

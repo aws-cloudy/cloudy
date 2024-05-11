@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.entity.enums;
+package com.s207.cloudy.domain.learning.domain.enums;
 
 import com.s207.cloudy.global.error.exception.CustomValidationException;
 

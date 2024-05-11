@@ -91,6 +91,20 @@ test {
     // finalizedBy : 이(test) 작업에 대해 주어진 종료자 작업을 추가
     finalizedBy jacocoTestReport // test 작업이 끝나고 jacocoTestReport를 실행
     useJUnitPlatform()
+
+    jacoco {
+        excludes += [
+                "**/*Application*",
+                "**/*Config*",
+                "**/dto/**",
+                "**/entity/**",
+                "**/*Interceptor*",
+                "**/*Filter*",
+                "**/*Handler*",
+                "**/*Exception*",
+                "**/*Provider*"
+        ]
+    }
 }
 
 
@@ -114,9 +128,10 @@ jacocoTestReport {
                             "**/*Application*",
                             "**/*Config*",
                             "**/dto/**",
-                            "**/entity/**",
+                            "**/domain/**/domain/**",
                             "**/*Interceptor*",
                             "**/*Filter*",
+                            "**/*Handler*",
                             "**/*Exception*",
                             "**/*Provider*"
                     ] + Qdomains)

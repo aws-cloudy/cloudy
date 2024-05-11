@@ -1,7 +1,7 @@
-package com.s207.cloudy.domain.learning.entity.embedded;
+package com.s207.cloudy.domain.learning.domain.embedded;
 
-import com.s207.cloudy.domain.learning.entity.Learning;
-import com.s207.cloudy.domain.learning.entity.Service;
+import com.s207.cloudy.domain.learning.domain.Learning;
+import com.s207.cloudy.domain.learning.domain.Service;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

@@ -3,11 +3,11 @@ package com.s207.cloudy.domain.learning.service;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
-import com.s207.cloudy.domain.learning.entity.enums.CourseType;
-import com.s207.cloudy.domain.learning.entity.enums.DifficultyType;
+import com.s207.cloudy.domain.learning.domain.enums.CourseType;
+import com.s207.cloudy.domain.learning.domain.enums.DifficultyType;
 
-import com.s207.cloudy.domain.learning.entity.enums.JobNameType;
-import com.s207.cloudy.domain.learning.entity.enums.ServiceNameType;
+import com.s207.cloudy.domain.learning.domain.enums.JobNameType;
+import com.s207.cloudy.domain.learning.domain.enums.ServiceNameType;
 import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.domain.learning.repository.JobRepository;
 import com.s207.cloudy.domain.learning.repository.LearningRepository;

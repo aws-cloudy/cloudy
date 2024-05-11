@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.learning.repository;
 
-import com.s207.cloudy.domain.learning.entity.Job;
+import com.s207.cloudy.domain.learning.domain.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

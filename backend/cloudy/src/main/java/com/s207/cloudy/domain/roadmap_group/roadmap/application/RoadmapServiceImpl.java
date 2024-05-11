@@ -8,7 +8,7 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapListRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
-import com.s207.cloudy.domain.learning.entity.Learning;
+import com.s207.cloudy.domain.learning.domain.Learning;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.member.api;
 
 
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.member.application.MemberRoadmapService;
 import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkListRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
