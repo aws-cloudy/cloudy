@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionReq {
+public class ChatReq {
     private int type;
     private String inputData;
 }
