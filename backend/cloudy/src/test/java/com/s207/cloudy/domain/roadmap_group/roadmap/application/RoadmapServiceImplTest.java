@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.application;
 
-import com.s207.cloudy.domain.learning.repository.LearningRepository;
+import com.s207.cloudy.domain.learning.dao.LearningRepository;
 import com.s207.cloudy.domain.members.application.MemberService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dao.RoadmapRepository;

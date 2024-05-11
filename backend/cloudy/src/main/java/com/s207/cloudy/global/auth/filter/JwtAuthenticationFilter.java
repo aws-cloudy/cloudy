@@ -25,7 +25,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
     private final JwtService jwtService;
-    private final RequestMatcher requestMatcher;
 
 
     private boolean isAuthenticatedPath(String path){

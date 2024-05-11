@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.repository;
+package com.s207.cloudy.domain.learning.dao;
 
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;

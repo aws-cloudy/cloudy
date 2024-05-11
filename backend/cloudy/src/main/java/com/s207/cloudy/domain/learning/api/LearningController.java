@@ -1,9 +1,9 @@
-package com.s207.cloudy.domain.learning.controller;
+package com.s207.cloudy.domain.learning.api;
 
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchByJobReq;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
-import com.s207.cloudy.domain.learning.service.LearningService;
+import com.s207.cloudy.domain.learning.application.LearningService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

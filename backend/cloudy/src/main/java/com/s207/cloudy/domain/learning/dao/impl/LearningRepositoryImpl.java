@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.repository.impl;
+package com.s207.cloudy.domain.learning.dao.impl;
 
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Expression;
@@ -9,7 +9,7 @@ import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
-import com.s207.cloudy.domain.learning.repository.LearningRepositoryCustom;
+import com.s207.cloudy.domain.learning.dao.LearningRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

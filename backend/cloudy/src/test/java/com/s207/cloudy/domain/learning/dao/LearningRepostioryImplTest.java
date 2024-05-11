@@ -6,7 +6,7 @@ import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.domain.Job;
 import com.s207.cloudy.domain.learning.domain.Learning;
 import com.s207.cloudy.domain.learning.domain.LearningJob;
-import com.s207.cloudy.domain.learning.repository.impl.LearningRepositoryImpl;
+import com.s207.cloudy.domain.learning.dao.impl.LearningRepositoryImpl;
 import com.s207.cloudy.dummy.learning.DummyLearning;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
-import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.repository;
+package com.s207.cloudy.domain.learning.dao;
 
 import com.s207.cloudy.domain.learning.domain.Job;
 import org.springframework.data.jpa.repository.JpaRepository;
