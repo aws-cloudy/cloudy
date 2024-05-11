@@ -1,5 +1,11 @@
 package com.s207.cloudy.domain.roadmap_group.member.application;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.BDDMockito.given;
+
 import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
@@ -7,10 +13,14 @@ import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
 import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkListRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.member.dto.CreateRoadmapReq;
+import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.dummy.DummyMember;
 import com.s207.cloudy.dummy.DummyRoadmap;
+import com.s207.cloudy.global.error.enums.ErrorCode;
+import java.util.List;
+import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,12 +30,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.BDDMockito.given;
 
 @SpringJUnitConfig(MemberRoadmapServiceImpl.class)
 class MemberRoadmapServiceImplTest {
@@ -72,6 +76,22 @@ class MemberRoadmapServiceImplTest {
         // then
         Assertions.assertThat(actualRoadmaps).isNotNull();
         Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(dummyList.size());
+    }
+
+    @Test
+    @DisplayName("회원이 이미 북마크한 로드맵을 저장 요청 시 예외를 터뜨린다.")
+    void create_bookmark_failed_when_request_duplicate() {
+
+        CreateRoadmapReq createRoadmapReq = new CreateRoadmapReq(dummyRoadmap.getId());
+
+        // given
+        given(mockMemberRoadmapRepository.existsByRoadmapIdAndMemberId(anyString(), anyInt()))
+            .willReturn(true);
+
+        // then
+        assertThatThrownBy(() -> memberRoadmapService.createRoadmapBookmark(dummyMember, createRoadmapReq))
+            .isInstanceOf(MemberRoadmapException.class)
+            .hasMessage(ErrorCode.DUPLICATED.getMessage());
     }
 
     @Test
