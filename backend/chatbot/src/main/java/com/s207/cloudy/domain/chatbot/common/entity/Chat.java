@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.chatbot.entity;
+package com.s207.cloudy.domain.chatbot.common.entity;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
