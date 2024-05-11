@@ -2,7 +2,7 @@ package com.s207.cloudy.domain.learning.controller;
 
 
 import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
-import com.s207.cloudy.global.infra.modetation.ModerationService;
+import com.s207.cloudy.global.infra.modertation.ModerationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
