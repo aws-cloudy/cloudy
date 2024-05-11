@@ -1,0 +1,36 @@
+@import '@/styles/theme.scss';
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputBox {
+  width: 100%;
+  height: 80px;
+  border-radius: 6px;
+  border: solid 1px $gray7;
+  padding: 10px;
+  padding-right: 30px;
+  margin-bottom: 26px;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.iconBox {
+  display: flex;
+  position: absolute;
+  transform: translateY(-50%);
+  top: 20px;
+  right: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: $primary;
+  padding: 0;
+}
+
+.icon {
+  font-size: 2em;
+}

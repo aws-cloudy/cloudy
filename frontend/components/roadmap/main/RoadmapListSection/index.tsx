@@ -10,7 +10,7 @@ import Loading from '@/components/common/Loading'
 import Empty from '@/components/common/Empty'
 import { ROADMAP_ROWS_PER_PAGE } from '@/constants/rows'
 import { useRoadmapSearchValue } from '@/stores/roadmap'
-import { useSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import { getBookmarks } from '@/apis/bookmark'
 
 const RoadmapListSection = () => {
@@ -21,13 +21,15 @@ const RoadmapListSection = () => {
   const [bookmarks, setBookmarks] = useState<{ roadmapId: number; bookmarkId: number }[]>([])
 
   const searchValue = useRoadmapSearchValue()
-  const { data: session, status } = useSession()
 
   // 찜한 로드맵 목록
   const fetchBookmarks = async () => {
+    const session = await getSession()
     const memberId = session?.user.id
+
     if (!memberId) return
     const response = await getBookmarks(memberId)
+    console.log(response)
     if (response?.roadmaps) {
       const marksData = response.roadmaps.map((bookmark: Bookmark) => ({
         roadmapId: bookmark.roadmapId,
@@ -42,6 +44,9 @@ const RoadmapListSection = () => {
     if (!hasMore.current) return
 
     const roadmaps = await getRoadmaps(offset.current, searchValue.keyword, searchValue.job, searchValue.service)
+
+    console.log(roadmaps)
+
     if (roadmaps) {
       roadmaps.length < ROADMAP_ROWS_PER_PAGE && (hasMore.current = false)
       const updatedRoadmaps = roadmaps.map((roadmap: IRoadmapCard) => {
@@ -57,6 +62,7 @@ const RoadmapListSection = () => {
       offset.current += 1
     }
     setIsFetching(false)
+    return
   }
 
   const observerCallback: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -77,6 +83,7 @@ const RoadmapListSection = () => {
   if (isFetching) return <Loading />
   if (list.length <= 0)
     return <Empty text="검색 결과가 없습니다. 필터를 다시 적용해보거나 올바른 검색어를 입력해주세요 !" />
+
   return (
     <>
       <div className={styles.container}>

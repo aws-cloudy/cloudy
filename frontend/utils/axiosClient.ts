@@ -10,14 +10,14 @@ export const client = axios.create({
 // 응답 인터셉터
 client.interceptors.response.use(
   res => res,
-  err => Promise.reject(alert(err.response.data.errorMap.type.message)),
+  err => Promise.reject(err),
 )
 
 client.interceptors.request.use(
   async config => {
     const session = await getSession()
     const accessToken = session?.accessToken
-    console.log('token', accessToken)
+
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
@@ -25,7 +25,7 @@ client.interceptors.request.use(
     return config
   },
   error => {
-    return Promise.reject(error)
+    return Promise.reject(error.response)
   },
 )
 
