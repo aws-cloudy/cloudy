@@ -7,6 +7,21 @@ export const client = axios.create({
   baseURL: '/cloudy-api',
 })
 
+client.interceptors.request.use(
+  async config => {
+    const session = await getSession()
+    if (session?.accessToken) {
+      const token = session.accessToken
+      // console.log('token', `Bearer ${token}`)
+      config.headers['Authorization'] = `Bearer ${token}`
+    }
+    return config
+  },
+  error => {
+    throw new Error(error)
+  },
+)
+
 // 응답 인터셉터
 client.interceptors.response.use(
   res => res,

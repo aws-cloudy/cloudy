@@ -2,6 +2,15 @@ import { client, searchClient } from '@/utils/axiosClient'
 
 const url = '/learnings'
 
+// 학습 오타 교정된 검색어
+export const getFinalSearch = async (query: string) => {
+  const response = searchClient
+    .get(`${url}/search/final?query=${query}`)
+    .then(res => res.data)
+    .catch(() => {})
+  return response
+}
+
 // 학습 전체 조회 - 검색어 오타 교정 전
 export const getLearnings = async (
   offset: number,

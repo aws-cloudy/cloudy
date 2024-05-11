@@ -86,6 +86,7 @@ function MainSearch() {
             {...register('search')}
             onKeyUp={handleKeyUp}
             onKeyDown={handleKeyDown}
+            autoComplete="off"
           />
         </form>
         <BiSearch className={styles.searchIcon} />

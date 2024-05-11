@@ -50,13 +50,14 @@ export interface ILearningFilter {
 export interface ILearningFilterToggle {
   title: string
   data: IFilter[]
+  filter: IFilter[]
   setFilter: (v: IFilter[]) => void
 }
 
 export interface ILearningFilterToggoleItem {
   item: IFilter
   list: IFilter[]
-  setList: React.Dispatch<React.SetStateAction<IFilter[]>>
+  setList: (v: IFilter[]) => void
 }
 
 export interface ILearningAutocomplete {
