@@ -27,3 +27,6 @@ amazon:
       secretkey: ${AWS_SECRET_KEY}
     dynamodb:
       endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
+
+cognito:
+  iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"

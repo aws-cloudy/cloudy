@@ -1,4 +1,4 @@
-package com.s207.cloudy.infra.modetation;
+package com.s207.cloudy.global.infra.modetation;
 
 
 import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
