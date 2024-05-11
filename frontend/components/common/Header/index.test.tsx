@@ -16,7 +16,7 @@ window.scrollTo = jest.fn()
 describe('<Header />', () => {
   it('Header의 logo를 렌더링합니다', () => {
     render(
-      <SessionProvider session={mockSession}>
+      <SessionProvider session={null}>
         <Header />
       </SessionProvider>,
     )

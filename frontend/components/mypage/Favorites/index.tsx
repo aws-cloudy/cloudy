@@ -4,7 +4,6 @@ import { roadmapData } from '@/components/roadmap/main/RoadmapListSection/roadma
 import { useEffect, useState } from 'react'
 import { getBookmarks } from '@/apis/bookmark'
 
-
 const Favorites = ({ user }: any) => {
   const [bookmarks, setBookmarks] = useState([])
 

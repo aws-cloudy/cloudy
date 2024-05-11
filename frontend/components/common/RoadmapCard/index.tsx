@@ -47,7 +47,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
 
   return (
-    <div className={styles.card} key={item.roadmapId} onClick={onClick}>
+    <div className={styles.card} key={item.roadmapId} onClick={onClick} data-testid="roadmap-item">
       <div className={styles.imageBox}>
         <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
         {status === 'authenticated' &&

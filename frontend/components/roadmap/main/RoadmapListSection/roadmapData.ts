@@ -10,6 +10,8 @@ export const roadmapData: IRoadmapCard[] = [
     job: 'Developer',
     service: 'Develoling',
     commentsCnt: 2,
+    isScrapped: false,
+    bookmarkId: 0,
   },
   {
     roadmapId: 2,
@@ -21,6 +23,8 @@ export const roadmapData: IRoadmapCard[] = [
     job: 'Developer',
     service: 'Develoling',
     commentsCnt: 2,
+    isScrapped: false,
+    bookmarkId: 1,
   },
   {
     roadmapId: 3,
@@ -31,6 +35,8 @@ export const roadmapData: IRoadmapCard[] = [
     job: 'Developer',
     service: 'Develoling',
     commentsCnt: 2,
+    isScrapped: false,
+    bookmarkId: 2,
   },
   {
     roadmapId: 4,
@@ -41,5 +47,7 @@ export const roadmapData: IRoadmapCard[] = [
     job: 'Developer',
     service: 'Develoling',
     commentsCnt: 2,
+    isScrapped: false,
+    bookmarkId: 3,
   },
 ]
