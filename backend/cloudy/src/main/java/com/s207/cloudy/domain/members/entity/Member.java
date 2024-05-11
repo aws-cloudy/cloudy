@@ -20,6 +20,7 @@ public class Member implements UserDetails {
 
     @Id
     @Column(name="id")
+    @Getter
     private String id;
 
     @Transient

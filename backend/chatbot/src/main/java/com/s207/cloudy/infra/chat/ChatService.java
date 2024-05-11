@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface ChatService {
     Flux<String> generateStreamingChat(String template, Map<String, Object> variables);
+    String generateChat(String template, Map<String, Object> variables);
 }
