@@ -3,12 +3,15 @@ package com.s207.cloudy.domain.chatbot.qna.application;
 import com.s207.cloudy.domain.chatbot.common.application.ChatService;
 import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
 import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
+import com.s207.cloudy.global.infra.embeddingmodel.OpenAiEmbeddingService;
+import com.s207.cloudy.global.infra.embeddingstore.EmbeddingStoreService;
 import com.s207.cloudy.global.infra.embeddingstore.PineconeService;
 import dev.langchain4j.data.segment.TextSegment;
 import dev.langchain4j.store.embedding.EmbeddingMatch;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -16,23 +19,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.s207.cloudy.global.infra.embeddingstore.enums.IndexName.QNA;
+import static com.s207.cloudy.global.infra.embeddingstore.enums.MetadataKey.ANSWER;
+import static com.s207.cloudy.global.infra.embeddingstore.enums.NameSpace.QUESTION;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class QnaService implements ChatService {
-    private static final String INDEX_NAME = "qna";
-    private static final String NAMESPACE = "question";
-    private static final String METADATA_TEXT_KEY = "ans";
-    private static final String EMBEDDING_MODEL_NAME = "text-embedding-3-small";
 
 
-    private final PineconeService pineconeService;
+    @Value("${pinecone.key}")
+    private String pineconeKey;
+
+    @Value("${pinecone.id.qna}")
+    private String projectId;
+
+    @Value("${pinecone.env.qna}")
+    private String projectEnv;
+
+    private EmbeddingStoreService pineconeService;
     private final OpenAiChatService openAiChatService;
+    private final OpenAiEmbeddingService openAiEmbeddingService;
     @PostConstruct
     public void init() {
         // 파인콘 설정 초기화
-        pineconeService.initEmbeddingStore(INDEX_NAME, NAMESPACE, METADATA_TEXT_KEY, EMBEDDING_MODEL_NAME);
-
+        this.pineconeService = new PineconeService(
+                pineconeKey,
+                projectId,
+                projectEnv,
+                QNA.getName(),
+                QUESTION.getName(),
+                ANSWER.getName(),
+                openAiEmbeddingService
+        );
     }
 
     @Override
