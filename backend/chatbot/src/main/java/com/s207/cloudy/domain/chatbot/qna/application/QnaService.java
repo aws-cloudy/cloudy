@@ -2,6 +2,7 @@ package com.s207.cloudy.domain.chatbot.qna.application;
 
 import com.s207.cloudy.domain.chatbot.common.application.ChatService;
 import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
+import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 import com.s207.cloudy.global.infra.chatmodel.OpenAiChatService;
 import com.s207.cloudy.global.infra.embeddingmodel.OpenAiEmbeddingService;
 import com.s207.cloudy.global.infra.embeddingstore.EmbeddingStoreService;
@@ -77,7 +78,7 @@ public class QnaService implements ChatService {
         variables.put("context", relevant.get(0).embedded().text());
         variables.put("input", inputData);
 
-        return openAiChatService.generateStreamingChat(template, variables, userId);
+        return openAiChatService.generateStreamingChat(template, variables, userId, Chatbot.QNA);
     }
 
     @Override

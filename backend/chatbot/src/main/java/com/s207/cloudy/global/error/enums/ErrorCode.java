@@ -17,7 +17,7 @@ public enum ErrorCode {
 
 
     DUPLICATED("CE006", "이미 존재합니다.", HttpStatus.CONFLICT),
-    HARMFUL_CONTENTS("CE007", "사용자의 질문이 부적절한 컨텐츠를 담고 있습니다.", HttpStatus.BAD_REQUEST),
+    HARMFUL_CONTENTS("CE008", "사용자의 질문이 부적절한 컨텐츠를 담고 있습니다.", HttpStatus.BAD_REQUEST),
 
     //서버에러
     SERVER_ERROR("SE001", "Internal Server Error / 데이터베이스 오류입니다.", HttpStatus.INTERNAL_SERVER_ERROR),

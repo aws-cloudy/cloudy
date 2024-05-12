@@ -32,7 +32,7 @@ public class OpenAiChatService implements ChatService {
     private final ChatQueryService chatQueryService;
 
     @Override
-    public Flux<String> generateStreamingChat(String template, Map<String, Object> variables, String userId) {
+    public Flux<String> generateStreamingChat(String template, Map<String, Object> variables, String userId, Chatbot chatbot) {
 
         Prompt prompt = getPrompt(template, variables);
 
@@ -57,7 +57,7 @@ public class OpenAiChatService implements ChatService {
 
                     @Override
                     public void onComplete(Response<AiMessage> response) {
-                        chatQueryService.saveChat(userId, Chatbot.QNA, response.content()
+                        chatQueryService.saveChat(userId, chatbot, response.content()
                                 .text(), false);
                         emitter.complete();
                     }
