@@ -14,7 +14,7 @@ const Favorites = ({ user }: any) => {
         .then(data => setBookmarks(data.roadmaps))
         .catch(error => console.error('북마크 로드 실패', error))
     }
-    console.log('북마크', bookmarks)
+    
   }, [user.id])
 
   return (
