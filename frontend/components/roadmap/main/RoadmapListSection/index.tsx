@@ -86,8 +86,9 @@ const RoadmapListSection = () => {
   if (isFetching) return <Loading />
 
   return (
-    <>
-      {keyword && <div className={styles.title}>{`'${keyword}'에 대한 검색 결과`}</div>}
+    <div className={styles.wrap}>
+      <div className={styles.title}>전체 검색</div>
+      {keyword && <div className={styles.desc}>{`'${keyword}' 검색 결과입니다`}</div>}
       {list.length <= 0 ? (
         <div className={styles.emptyWrap}>
           <Empty text="검색 결과가 없습니다. 필터를 다시 적용해보거나 올바른 검색어를 입력해주세요 !" />
@@ -108,7 +109,7 @@ const RoadmapListSection = () => {
       )}
 
       <Observer callback={observerCallback} />
-    </>
+    </div>
   )
 }
 

@@ -3,6 +3,10 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 40px;
+  padding: 30px 20px;
+  border: 1px solid $gray6;
+  border-radius: 12px;
 }
 
 .title {
@@ -16,4 +20,10 @@
   font-size: 0.9em;
   font-weight: 400;
   margin-block: 8px 20px;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  grid-gap: 20px;
 }
