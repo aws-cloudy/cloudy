@@ -10,9 +10,8 @@ import { getRoadmapComments } from '@/apis/roadmap'
 
 const Activity = ({user}:any) => {
   const [selectedTab, setSelectedTab] = useState('write')  
-  const [questionList, setQuestionList] = useState([]);
-  const [answerList, setAnswwerList] = useState([]);
-  
+  const [questionList, setQuestionList] = useState<any[]>([]);
+  const [answerList, setAnswerList] = useState<any[]>([]);
 
   //작성글 더미데이터
   const wData = {
@@ -83,7 +82,7 @@ const Activity = ({user}:any) => {
           id: 5,
           memberId: "0498fd2c-a031-7096-02b6-0dbcbb40c9f0",
           memberName: "김싸피",
-          createdAt: "2024-05-03T03:04:16.947Z",
+          createdAt: "2024-05-04T03:04:16.947Z",
           desc: "test ",
           questionId: 4
         }
@@ -114,18 +113,40 @@ const Activity = ({user}:any) => {
     try {
       const res = await fetch('/api/mypage/answers');      
       const data = await res.json();
-      setAnswwerList(data.answerList);
+      setAnswerList(data.answerList);
     } catch (error) {
       console.log('답변 가져오기 실패', error)
     }
   };
 
+  const sortByDateFn = (data: any[]) => {
+    return [...data].sort((a, b) => {
+      const dateA = new Date(a.createdAt).getTime();
+      const dateB = new Date(b.createdAt).getTime();
+      console.log('A,b', dateA, dateB)
+      return dateB - dateA; // 오름차순으로 정렬하려면 dateA - dateB
+    });
+  };
 
   useEffect(() => {
-    fetchQuestions();
-    fetchAnswers();
-    // console.log('받았어', questionList)
-  }, []);
+    // fetchQuestions();
+    // fetchAnswers();
+    
+    setQuestionList(wData.questionList)
+    setAnswerList(cData.answersList)
+  }, [])
+
+  useEffect(() => {
+    if (selectedTab === 'write' && options.name === '작성일순') {
+      setQuestionList(sortByDateFn(wData.questionList));
+    } else if (selectedTab === 'comment' && options.name === '작성일순') {
+      setAnswerList(sortByDateFn(cData.answersList));
+    } else if (options.name === '전체') {
+      setQuestionList(wData.questionList);
+      setAnswerList(cData.answersList);
+    }
+    
+  }, [options, selectedTab]);
 
   return (
     <section className={styles.section}>
@@ -155,8 +176,8 @@ const Activity = ({user}:any) => {
           <input type="text" placeholder="검색어를 입력해주세요." className={styles.input} />
         </div>
       </div>
-      {selectedTab === 'write' && <ActivityWrite posts={wData.questionList} />}
-      {selectedTab === 'comment' && <ActivityComment comments={cData.answersList} />}
+      {selectedTab === 'write' && <ActivityWrite posts={questionList} />}
+      {selectedTab === 'comment' && <ActivityComment comments={answerList} />}
     </section>
   )
 }
