@@ -99,7 +99,7 @@ public class SearchServiceImpl implements SearchService{
         return res;
     }
 
-    private Optional<SearchListRes> searchListFromCache(String query) {
+    public Optional<SearchListRes> searchListFromCache(String query) {
         Optional<SearchListRes> cachedResult = redisUtils.getData(query, SearchListRes.class);
 //        if (cachedResult.isPresent()) {
 //            redisUtils.extendExpire(query, EXPIRATION_TIME); // 캐시 유효시간 다시 초기화
@@ -107,11 +107,11 @@ public class SearchServiceImpl implements SearchService{
         return cachedResult;
     }
 
-    private void cacheSearchResult(String query, SearchListRes searchResult) {
+    public void cacheSearchResult(String query, SearchListRes searchResult) {
         redisUtils.saveData(query, searchResult, EXPIRATION_TIME);
     }
 
-    private SearchListRes searchListFromOpensearch(String query, int count) {
+    public SearchListRes searchListFromOpensearch(String query, int count) {
         // 요청 쿼리 생성
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
         BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
@@ -138,7 +138,7 @@ public class SearchServiceImpl implements SearchService{
         return executeSearchAndMapResponse(new SearchRequest(INDEX_NAME).source(sourceBuilder));
     }
 
-    private SearchResponse executeSearchRequest(SearchRequest searchRequest) {
+    public SearchResponse executeSearchRequest(SearchRequest searchRequest) {
         try {
             return client.search(searchRequest, RequestOptions.DEFAULT);
         } catch (IOException e) {
@@ -146,7 +146,7 @@ public class SearchServiceImpl implements SearchService{
         }
     }
 
-    private SearchListRes executeSearchAndMapResponse(SearchRequest searchRequest) {
+    public SearchListRes executeSearchAndMapResponse(SearchRequest searchRequest) {
         try {
             SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
             return mapper.mapSearchResponse(searchResponse);
@@ -155,7 +155,7 @@ public class SearchServiceImpl implements SearchService{
         }
     }
 
-    private SearchListRes isQueryExistInOpensearch(String query) {
+    public SearchListRes isQueryExistInOpensearch(String query) {
         // 요청 쿼리 생성
         SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
 
@@ -165,7 +165,7 @@ public class SearchServiceImpl implements SearchService{
         return executeSearchAndMapResponse(new SearchRequest(INDEX_NAME).source(sourceBuilder));
     }
 
-    private void addQueryToOpensearchIfNotExist(SearchListRes searchResult, String query) {
+    public void addQueryToOpensearchIfNotExist(SearchListRes searchResult, String query) {
         // 정확히 일치하는 검색어가 존재 여부 확인
         for (SearchListItem hit : searchResult.getSearchList()) {
             String findQuery = hit.getTitle();
@@ -188,7 +188,7 @@ public class SearchServiceImpl implements SearchService{
         }
     }
 
-    private void increaseCounter(SearchListRes searchResult) {
+    public void increaseCounter(SearchListRes searchResult) {
         for (SearchListItem hit : searchResult.getSearchList()) {
             String documentId = hit.getDocumentId();
 
@@ -212,7 +212,7 @@ public class SearchServiceImpl implements SearchService{
     }
 
 
-    private String isModifiedQueryExistInOpensearch(String query) {
+    public String isModifiedQueryExistInOpensearch(String query) {
         String[] modifiedQuery = query.split(" ");
 
         // 요청 쿼리 생성
@@ -225,6 +225,7 @@ public class SearchServiceImpl implements SearchService{
 
         // 만들어진 쿼리를 바탕으로, Opensearch에 요청
         SearchResponse searchResponse = executeSearchRequest(new SearchRequest(INDEX_NAME).source(sourceBuilder));
+        log.info(searchResponse.toString());
 
         // 오타교정된 검색어가 있을 경우
         Suggest suggest = searchResponse.getSuggest();
