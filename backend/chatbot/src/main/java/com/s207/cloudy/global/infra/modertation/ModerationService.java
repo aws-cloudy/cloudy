@@ -17,6 +17,7 @@ public class ModerationService {
     private final OpenAiChatService openAiChatService;
 
     public boolean isHarmful(String message){
+        log.info("query :: {}", message);
         String template = """ 
                 아래의 상황을 참고해 질문에 대한 답을 작성해줘.
                 모든 답변은 false 또는 true로 답변해야해 
