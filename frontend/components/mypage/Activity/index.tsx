@@ -12,6 +12,7 @@ const Activity = ({user}:any) => {
   const [selectedTab, setSelectedTab] = useState('write')  
   const [questionList, setQuestionList] = useState<any[]>([]);
   const [answerList, setAnswerList] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   //작성글 더미데이터
   const wData = {
@@ -41,7 +42,7 @@ const Activity = ({user}:any) => {
         id: 4,
         memberId: "0498fd2c-a031-7096-02b6-0dbcbb40c9f0",
         memberName: "김싸피",
-        title: "test ",
+        title: "테스트",
         desc: "test1",
         hit: 0,
         createdAt: "2024-05-03T02:04:36.546Z",
@@ -128,6 +129,18 @@ const Activity = ({user}:any) => {
     });
   };
 
+  const filterPosts = (posts: any[], query: string) => {
+    return posts.filter(post =>
+      (post.title && post.title.toLowerCase().includes(query.toLowerCase())) ||
+      (post.desc && post.desc.toLowerCase().includes(query.toLowerCase()))
+    );
+  };
+
+  // 검색어 입력 핸들러
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
   useEffect(() => {
     // fetchQuestions();
     // fetchAnswers();
@@ -173,11 +186,11 @@ const Activity = ({user}:any) => {
         <CustomSelect item={options} setItem={setOptions} options={drop} />
         <div className={styles.inputContainer}>
           <IoIosSearch className={styles.icon} />
-          <input type="text" placeholder="검색어를 입력해주세요." className={styles.input} />
+          <input type="text" placeholder="검색어를 입력해주세요." value={searchQuery} onChange={handleSearch} className={styles.input} />
         </div>
       </div>
-      {selectedTab === 'write' && <ActivityWrite posts={questionList} />}
-      {selectedTab === 'comment' && <ActivityComment comments={answerList} />}
+      {selectedTab === 'write' && <ActivityWrite posts={filterPosts(questionList, searchQuery)} />}
+      {selectedTab === 'comment' && <ActivityComment comments={filterPosts(answerList, searchQuery)} />}
     </section>
   )
 }
