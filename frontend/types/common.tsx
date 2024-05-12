@@ -22,5 +22,5 @@ export interface ICustomInput {
   value: string
   setValue: Dispatch<SetStateAction<string>>
   width?: string
-  onClick: () => void
+  onSearch: () => void
 }

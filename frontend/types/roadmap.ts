@@ -11,8 +11,7 @@ export interface IRoadmapFilterDropdown {
 export interface IRoadmapFilterInput {
   value: string
   setValue: Dispatch<SetStateAction<string>>
-  job: IFilter
-  service: IFilter
+  onSearch: () => void
 }
 
 export interface IRoadmapCard {
