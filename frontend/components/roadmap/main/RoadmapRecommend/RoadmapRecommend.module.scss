@@ -1,0 +1,19 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: $black;
+}
+
+.desc {
+  color: $gray9;
+  font-size: 0.9em;
+  font-weight: 400;
+  margin-block: 8px 20px;
+}
