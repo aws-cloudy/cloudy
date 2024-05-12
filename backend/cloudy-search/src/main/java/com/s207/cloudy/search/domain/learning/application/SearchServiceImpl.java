@@ -38,7 +38,7 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class SearchServiceImpl implements SearchService{
+public class SearchServiceImpl implements SearchService {
 
     private final OpensearchServiceImpl opensearchService;
     private final RedisUtils redisUtils;
