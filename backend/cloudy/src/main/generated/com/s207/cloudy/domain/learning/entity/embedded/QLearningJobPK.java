@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.entity.embedded;
+package com.s207.cloudy.domain.learning.domain.embedded;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -22,9 +22,9 @@ public class QLearningJobPK extends BeanPath<LearningJobPK> {
 
     public static final QLearningJobPK learningJobPK = new QLearningJobPK("learningJobPK");
 
-    public final com.s207.cloudy.domain.learning.entity.QJob job;
+    public final com.s207.cloudy.domain.learning.domain.QJob job;
 
-    public final com.s207.cloudy.domain.learning.entity.QLearning learning;
+    public final com.s207.cloudy.domain.learning.domain.QLearning learning;
 
     public QLearningJobPK(String variable) {
         this(LearningJobPK.class, forVariable(variable), INITS);
@@ -44,8 +44,8 @@ public class QLearningJobPK extends BeanPath<LearningJobPK> {
 
     public QLearningJobPK(Class<? extends LearningJobPK> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.job = inits.isInitialized("job") ? new com.s207.cloudy.domain.learning.entity.QJob(forProperty("job")) : null;
-        this.learning = inits.isInitialized("learning") ? new com.s207.cloudy.domain.learning.entity.QLearning(forProperty("learning")) : null;
+        this.job = inits.isInitialized("job") ? new com.s207.cloudy.domain.learning.domain.QJob(forProperty("job")) : null;
+        this.learning = inits.isInitialized("learning") ? new com.s207.cloudy.domain.learning.domain.QLearning(forProperty("learning")) : null;
     }
 
 }

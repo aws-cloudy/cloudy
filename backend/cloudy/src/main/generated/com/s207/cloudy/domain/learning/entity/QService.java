@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.learning.entity;
+package com.s207.cloudy.domain.learning.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 

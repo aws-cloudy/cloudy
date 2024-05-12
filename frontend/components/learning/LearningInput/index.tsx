@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styles from './LearningInput.module.scss'
 import { ILearningAutocomplete, ILearningInput } from '@/types/learning'
 import LearningSearchList from '../LearningSearchList'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { getSearchAutoComplete } from '@/apis/learning'
+import { useLearningActions } from '@/stores/learning'
 
 const LearningInput = (props: ILearningInput) => {
   const { value, setValue } = props
 
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [selected, setSelected] = useState<number>(-1)
+
+  const { setLearningOriginalQuery } = useLearningActions()
 
   const [list, setList] = useState<ILearningAutocomplete[]>([])
 
@@ -26,12 +29,9 @@ const LearningInput = (props: ILearningInput) => {
   const type = params.get('type') || ''
   const difficulty = params.get('difficulty') || ''
 
-  useEffect(() => {
-    value ? setIsOpen(true) : setIsOpen(false)
-  }, [value])
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
+    setIsOpen(true)
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -56,6 +56,7 @@ const LearningInput = (props: ILearningInput) => {
     setValue(title || value)
     router.push(url)
     setIsOpen(false)
+    setLearningOriginalQuery('')
   }
 
   return (
@@ -75,6 +76,7 @@ const LearningInput = (props: ILearningInput) => {
           onKeyUp={handleKeyUp}
           onKeyDown={handleKeyDown}
           onMouseEnter={() => setSelected(-1)}
+          autoComplete="off"
           name="learning-input"
         />
         {isOpen && list.length > 0 && (

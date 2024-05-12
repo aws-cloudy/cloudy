@@ -1,13 +1,13 @@
 package com.s207.cloudy.global.infra.chatmodel;
 
 import com.s207.cloudy.domain.chatbot.common.application.ChatQueryService;
-import com.s207.cloudy.domain.chatbot.entity.Chatbot;
+import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
 import dev.langchain4j.data.message.AiMessage;
 import dev.langchain4j.model.StreamingResponseHandler;
 import dev.langchain4j.model.input.Prompt;
 import dev.langchain4j.model.input.PromptTemplate;
 import dev.langchain4j.model.openai.OpenAiChatModel;
-import dev.langchain4j.model.openai.OpenAiChatModelName;
+
 import dev.langchain4j.model.openai.OpenAiStreamingChatModel;
 import dev.langchain4j.model.output.Response;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +32,7 @@ public class OpenAiChatService implements ChatService {
     private final ChatQueryService chatQueryService;
 
     @Override
-    public Flux<String> generateStreamingChat(String template, Map<String, Object> variables, String userId) {
+    public Flux<String> generateStreamingChat(String template, Map<String, Object> variables, String userId, Chatbot chatbot) {
 
         Prompt prompt = getPrompt(template, variables);
 
@@ -41,7 +41,7 @@ public class OpenAiChatService implements ChatService {
         if (openAiStreamingChatModel == null) {
             openAiStreamingChatModel = OpenAiStreamingChatModel.builder()
                     .apiKey(openAiKey)
-                    .modelName(OpenAiChatModelName.GPT_3_5_TURBO)
+                    .modelName(GPT_3_5_TURBO)
                     .build();
         }
 
@@ -57,7 +57,7 @@ public class OpenAiChatService implements ChatService {
 
                     @Override
                     public void onComplete(Response<AiMessage> response) {
-                        chatQueryService.saveChat(userId, Chatbot.QNA, response.content()
+                        chatQueryService.saveChat(userId, chatbot, response.content()
                                 .text(), false);
                         emitter.complete();
                     }
@@ -85,8 +85,9 @@ public class OpenAiChatService implements ChatService {
                     .modelName(GPT_3_5_TURBO)
                     .build();
         }
-
-        return openAiChatModel.generate(prompt.text());
+        var result =openAiChatModel.generate(prompt.text());
+        log.info("generateChat :: input={}, result = {}", prompt.text(), result);
+        return result;
     }
 
     private Prompt getPrompt(String template, Map<String, Object> variables) {

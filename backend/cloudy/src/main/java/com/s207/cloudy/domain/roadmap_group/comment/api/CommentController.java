@@ -1,7 +1,7 @@
 package com.s207.cloudy.domain.roadmap_group.comment.api;
 
 
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.comment.application.RoadmapCommentService;
 import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentPostReq;
 import com.s207.cloudy.domain.roadmap_group.comment.dto.RoadmapCommentPostRes;

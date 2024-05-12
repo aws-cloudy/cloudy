@@ -11,38 +11,6 @@
   margin-bottom: 16px;
 }
 
-.inputContainer {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.inputBox {
-  width: 100%;
-  border-radius: 6px;
-  border: solid 1px $gray7;
-  height: 4%;
-  padding: 10px;
-  margin-bottom: 26px;
-  box-sizing: border-box;
-}
-
-.iconBox {
-  display: flex;
-  position: absolute;
-  transform: translateY(-50%);
-  right: 10px;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  color: $primary;
-  padding: 0;
-}
-
-.icon {
-  font-size: 2em;
-}
-
 .submit {
   background-color: $gray7;
 }

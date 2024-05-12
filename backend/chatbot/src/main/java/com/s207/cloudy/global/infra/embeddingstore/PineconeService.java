@@ -13,29 +13,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
 @RequiredArgsConstructor
 @Slf4j
 public class PineconeService implements EmbeddingStoreService {
-
-    @Value("${pinecone.key}")
-    private String pineconeKey;
-
-    @Value("${pinecone.id.qna}")
-    private String projectId;
-
-    @Value("${pinecone.env.qna}")
-    private String projectEnv;
 
     private final OpenAiEmbeddingService openAiEmbeddingService;
 
     private EmbeddingStore<TextSegment> embeddingStore;
 
-    @Override
-    public void initEmbeddingStore(String indexName, String namespace, String metadataTextKey, String embeddingModelName) {
+    public PineconeService(
+            String pineconeKey, String projectId, String projectEnv,
+            String indexName, String namespace, String metadataTextKey,
+            OpenAiEmbeddingService openAiEmbeddingService
+    ) {
         // 임베딩 서비스 설정 초기화
-        openAiEmbeddingService.initOpenAiEmbeddingModel(embeddingModelName);
-
         embeddingStore = PineconeEmbeddingStore.builder()
                 .apiKey(pineconeKey)
                 .environment(projectEnv)
@@ -44,18 +35,22 @@ public class PineconeService implements EmbeddingStoreService {
                 .nameSpace(namespace)
                 .metadataTextKey(metadataTextKey)
                 .build();
+
+        this.openAiEmbeddingService = openAiEmbeddingService;
     }
 
     @Override
     public List<EmbeddingMatch<TextSegment>> findRelevant(String question, int maxNum) {
         // 사용자 입력 문자 임베딩 데이터로 변환
-        Embedding queryEmbedding = openAiEmbeddingService.getEmbeddingQuery(question);
-        log.info("임베딩 결과 :: {}", queryEmbedding.vectorAsList());
-        return embeddingStore.findRelevant(queryEmbedding, maxNum);
+        Embedding embeddingQuery = openAiEmbeddingService.getEmbeddingQuery(question);
+        log.info("임베딩 결과 :: {}", embeddingQuery.vectorAsList());
+
+        return embeddingStore.findRelevant(embeddingQuery, maxNum);
     }
 
     @Override
     public void addData(TextSegment segment, String text) {
+
         Embedding embedding = openAiEmbeddingService.getEmbeddingQuery(text);
         embeddingStore.add(embedding, segment);
     }

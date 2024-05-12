@@ -2,8 +2,7 @@ package com.s207.cloudy.global.auth.filter;
 
 
 import com.s207.cloudy.domain.members.application.MemberService;
-import com.s207.cloudy.domain.members.dao.MemberRepository;
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

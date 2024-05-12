@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.roadmap_group.member.application;
 
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapQueryRepository;
 import com.s207.cloudy.domain.roadmap_group.member.dao.MemberRoadmapRepository;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
@@ -51,6 +51,7 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int memberRoadmapId) {
         MemberRoadmap memberRoadmap = findMemberRoadmapEntity(memberRoadmapId);
         memberRoadmapRepository.delete(memberRoadmap);

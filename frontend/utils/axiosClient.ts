@@ -12,6 +12,7 @@ client.interceptors.request.use(
     const session = await getSession()
     if (session?.accessToken) {
       const token = session.accessToken
+      // console.log('token', `Bearer ${token}`)
       config.headers['Authorization'] = `Bearer ${token}`
     }
     return config
@@ -24,7 +25,23 @@ client.interceptors.request.use(
 // 응답 인터셉터
 client.interceptors.response.use(
   res => res,
-  err => Promise.reject(err.response.data.errorMap.type.message),
+  err => Promise.reject(err),
+)
+
+client.interceptors.request.use(
+  async config => {
+    const session = await getSession()
+    const accessToken = session?.accessToken
+
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`
+    }
+
+    return config
+  },
+  error => {
+    return Promise.reject(error.response)
+  },
 )
 
 export const searchClient = axios.create({
