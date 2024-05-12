@@ -1,14 +1,10 @@
 import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
-
-// const cognitoClient = new CognitoIdentityProviderClient({
-//     region: process.env.AWS_REGION as string,
-//     credentials: {
-//       accessKeyId: process.env.AWS_ACCESS_KEY_ID as string,
-//       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY as string,
-//     },
-//   })
+import { checkUserExists, getUser } from './cognito'
+import { redirect } from 'next/navigation'
+import { client } from './axiosClient'
+import server from './axiosServer'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -19,52 +15,55 @@ export const authOptions: NextAuthOptions = {
       issuer: process.env.COGNITO_ISSUER,
       idToken: true,
       checks: 'nonce',
+      // authorization: {
+      //   params: {
+      //     scope: "openid profile email",
+      //     redirect_uri: `https://www.aws-cloudy.com/api/auth/callback/cognito`,
+      //   },
+      // },
     }),
   ],
   callbacks: {
-    // async redirect({ url, baseUrl, user }: any) {
-    //     // user 객체와 user.email의 존재 여부를 확인
-    //     if (!user || !user.email) {
-    //       console.error('User data is incomplete:', user)
-    //       throw new Error('User data is incomplete')
-    //     }
+    async signIn({ user, profile }: any) {
+      let username
+      if (profile?.identities) {
+        // 구글 로그인의 경우, Cognito에 등록된 Username 사용
+        username = `google_${profile.identities[0].userId}`
+      } else {
+        // 일반 Cognito 사용자의 경우 이메일을 사용
+        username = user.email
+      }
+      user.username = username
+      const { exists, hasJobId } = await checkUserExists(username)
+      if (!exists || !hasJobId) {
+        return `/join?auth=${encodeURIComponent(username)}`
+      }
 
-    //     const params = {
-    //       UserPoolId: process.env.COGNITO_USER_POOL_ID,
-    //       Username: user.email,
-    //     }
-    //     const command = new AdminGetUserCommand(params)
-
-    //     try {
-    //       await cognitoClient.send(command)
-    //       // 사용자가 존재하면 원래 URL로 리디렉션
-    //       return url
-    //     } catch (error: any) {
-    //       if (error.name === 'UserNotFoundException') {
-    //         // 사용자가 존재하지 않으면 /join 페이지로 리디렉션
-    //         return `${baseUrl}/join`
-    //       }
-    //       console.error('Error validation user in Cognito: ', error)
-    //       throw new Error('Internal Server Error')
-    //     }
-    //   },
-
-    // 토큰을 세션에 추가하는 콜백
-    async jwt({ token, account }: any) {
-      if (account) {
-        token.accessToken = account.access_token
+      return true
+    },
+    async jwt({ token, user, account, profile }: any) {
+      if (user) {
+        token.username = user.username
+        token.jobId = user?.jobId || profile?.job_id
+        token.serviceId = user?.serviceId || profile?.service_id
+        token.accessToken = account.id_token
         token.id = account.providerAccountId
       }
       return token
     },
-    // 세션 데이터에 accessToken 추가
+
     async session({ session, token }: any) {
+      session.user.username = token.username
       session.accessToken = token.accessToken as string
       session.user.id = token.id as string
       session.user.uuid = token.sub as string
-      session.token = token
+      session.user.jobId = token.jobId
+      session.user.serviceId = token.serviceId
       return session
     },
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXT_PUBLIC_SECRET,
+  pages: {
+    newUser: '/join',
+  },
 }

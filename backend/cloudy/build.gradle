@@ -28,6 +28,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+
     // lombok
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
@@ -76,13 +77,6 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:4.1.1'
 
-    //opensearch
-//    implementation 'org.opensearch.client:opensearch-rest-client:2.11.0'
-//    implementation 'org.opensearch.client:opensearch-java:2.10.0'
-    implementation 'org.opensearch.client:opensearch-rest-high-level-client:2.11.0'
-
-
-
 }
 
 configurations {
@@ -97,6 +91,22 @@ test {
     // finalizedBy : 이(test) 작업에 대해 주어진 종료자 작업을 추가
     finalizedBy jacocoTestReport // test 작업이 끝나고 jacocoTestReport를 실행
     useJUnitPlatform()
+
+    jacoco {
+        excludes += [
+                "**/*Application*",
+                "**/*Config*",
+                "**/dto/**",
+                "**/entity/**",
+                "**/global/**",
+                "**/infra/**",
+                "**/*Interceptor*",
+                "**/*Filter*",
+                "**/*Handler*",
+                "**/*Exception*",
+                "**/*Provider*"
+        ]
+    }
 }
 
 
@@ -107,11 +117,36 @@ jacocoTestReport {
         html.required = true
         csv.required = false
     }
-}
 
+    def Qdomains = []
+    for (qPattern in '**/QA'..'**/QZ') {
+        Qdomains.add(qPattern + '*')
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(
+                files(classDirectories.files.collect {
+                    fileTree(dir: it, excludes: [
+                            "**/*Application*",
+                            "**/*Config*",
+                            "**/dto/**",
+                            "**/global/**",
+                            "**/infra/**",
+                            "**/domain/**/domain/**",
+                            "**/*Interceptor*",
+                            "**/*Filter*",
+                            "**/*Handler*",
+                            "**/*Exception*",
+                            "**/*Provider*"
+                    ] + Qdomains)
+                })
+        )
+    }
+}
 
 sonarqube {
     properties {
-        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacocoTestReport.xml"
+        property "sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml"
+        property "sonar.exclusions", "**/*Application*, **/*Config*, **/dto/**, **/global/**, **/infra/**, **/domain/**/domain/**, **/*Interceptor*, **/*Filter*, **/*Handler*, **/*Exception*, **/*Provider*"
     }
 }

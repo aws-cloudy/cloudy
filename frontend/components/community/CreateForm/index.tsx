@@ -19,12 +19,14 @@ import Layout from '@/components/common/Layout'
 import { IHashtag, IImage, IUpdateQuestion } from '@/types/community'
 import { Editor as EditorType } from '@toast-ui/react-editor'
 import { Hashtag } from '@prisma/client'
+import Loading from '@/components/common/Loading'
 
 const EditorBody = dynamic(() => import('@/components/community/create/EditorBody'), { ssr: false })
 
 function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
   const [tags, setTags] = useState<IHashtag[]>(hashtags ? hashtags : [])
   const [images, setImages] = useState<IImage[]>([])
+  const [isSaving, setIsSaving] = useState(false)
   const { register, getValues } = useForm<{ title: string }>()
   const editorRef = useRef<EditorType>(null)
   const router = useRouter()
@@ -32,6 +34,7 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsSaving(true)
     const editor = editorRef.current
     if (!editor) return
     const title = getValues('title')
@@ -55,17 +58,17 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
     await Promise.all(uploadImages)
 
     if (id && isUpdate) {
-      const res = await axios.put(`${commuURL}/question/update`, {
+      const res = await axios.put(`${commuURL}question/update`, {
         questionId: id,
         tags,
         title,
         desc,
         imageData,
       })
-      router.prefetch(`/community/detail/${id}`)
       router.push(`/community/detail/${id}`)
+      router.refresh()
     } else {
-      const res = await axios.post(`${commuURL}/question/create`, {
+      const res = await axios.post(`${commuURL}question/create`, {
         tags,
         title,
         desc,
@@ -77,6 +80,7 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
 
   return (
     <Layout>
+      {isSaving && <Loading maxWidth />}
       <form className={styles.form} onSubmit={onSubmit}>
         <EditorHashtag tags={tags} setTags={setTags} />
         <EditorTitle register={register} orig={title} />

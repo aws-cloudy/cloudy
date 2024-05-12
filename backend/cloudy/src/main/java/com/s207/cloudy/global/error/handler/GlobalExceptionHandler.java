@@ -1,7 +1,7 @@
 package com.s207.cloudy.global.error.handler;
 
 import com.s207.cloudy.domain.learning.exception.LearningException;
-import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapNotFoundException;
+import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
 import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import com.s207.cloudy.global.error.dto.CommonErrorResponse;
@@ -62,8 +62,8 @@ public class GlobalExceptionHandler {
                 );
     }
 
-    @ExceptionHandler({RoadmapNotFoundException.class, MemberRoadmapNotFoundException.class})
-    public ResponseEntity<CommonErrorResponse> notFoundException404(RuntimeException e) {
+    @ExceptionHandler({RoadmapNotFoundException.class, MemberRoadmapException.class})
+    public ResponseEntity<CommonErrorResponse> memberExceptionHandler(RuntimeException e) {
         return ResponseEntity
                 .status(NOT_FOUND)
                 .body(CommonErrorResponse

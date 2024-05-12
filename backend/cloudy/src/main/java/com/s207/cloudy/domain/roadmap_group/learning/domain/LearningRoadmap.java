@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.roadmap_group.learning.domain;
 
-import com.s207.cloudy.domain.learning.entity.Learning;
+import com.s207.cloudy.domain.learning.domain.Learning;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import jakarta.persistence.*;
 import lombok.Getter;

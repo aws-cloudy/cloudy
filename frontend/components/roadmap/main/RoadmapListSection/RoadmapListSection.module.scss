@@ -1,7 +1,31 @@
 @import '@/styles/theme.scss';
 
+.wrap {
+  padding: 30px 20px;
+  border: 1px solid $gray6;
+  border-radius: 12px;
+}
+
 .container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   grid-gap: 20px;
+  margin-top: 16px;
+}
+
+.title {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: $black;
+}
+
+.desc {
+  color: $gray9;
+  font-size: 0.9em;
+  font-weight: 400;
+  margin-block: 8px 20px;
+}
+
+.emptyWrap {
+  margin-top: 16px;
 }

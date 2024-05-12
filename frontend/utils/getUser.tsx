@@ -8,6 +8,8 @@ export async function getUser() {
   if (!session?.user) {
     return undefined
   } else {
-    return session.user as ISessionUser
+    const res = JSON.parse(JSON.stringify(session.user))
+    res.accessToken = session.accessToken
+    return res
   }
 }

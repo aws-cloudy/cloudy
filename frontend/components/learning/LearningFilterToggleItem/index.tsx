@@ -2,24 +2,20 @@ import React from 'react'
 import styles from './LearningFilterToggleItem.module.scss'
 import { FiPlus } from 'react-icons/fi'
 import { FiMinus } from 'react-icons/fi'
-import { IFilter } from '@/types/learning'
-import { useDifficultyFilter, useServiceFilter, useTypeFilter, usejobFilter } from '@/stores/learning'
-import { useSetFilter } from '@/hooks/useSetFilter'
+import { ILearningFilterToggoleItem } from '@/types/learning'
 
-const LearningFilterToggoleItem = (props: { item: IFilter }) => {
-  const { item } = props
+const LearningFilterToggoleItem = (props: ILearningFilterToggoleItem) => {
+  const { item, list, setList } = props
 
-  const jobs = usejobFilter()
-  const services = useServiceFilter()
-  const types = useTypeFilter()
-  const dificulties = useDifficultyFilter()
-
-  const setFilter = useSetFilter(item)
+  const onClick = () => {
+    const index = list.indexOf(item)
+    index === -1 ? setList([...list, item]) : setList(list.filter(v => v != item))
+  }
 
   return (
-    <div className={styles.container} onClick={e => setFilter()}>
+    <div className={styles.container} onClick={e => onClick()}>
       <div className={styles.wrap}>
-        {[...jobs, ...services, ...types, ...dificulties].every(v => v.name !== item.name) ? (
+        {list.every(v => v.name !== item.name) ? (
           <FiPlus data-testid="plus-icon" />
         ) : (
           <FiMinus data-testid="minus-icon" />

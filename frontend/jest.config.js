@@ -5,7 +5,7 @@ const createJestConfig = nextJest({ dir: './' })
 
 // jest 에서 설정하고 싶은 옵션을 여기서 작성하면 된다.
 const customJestConfig = {
-  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts', '<rootDir>/prisma/singleton.tsx'],
   testEnvironment: 'jest-environment-jsdom',
   // testResultsProcessor 추가
   testResultsProcessor: 'jest-junit',

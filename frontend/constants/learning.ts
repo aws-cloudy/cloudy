@@ -1,6 +1,6 @@
 export const jobData = [
   { value: 'Architect', name: 'Architect', category: 'job' },
-  { value: 'Buisiness_User', name: 'Buisiness User', category: 'job' },
+  { value: 'Business_User', name: 'Business User', category: 'job' },
   { value: 'Cloud_Operator', name: 'Cloud Operator', category: 'job' },
   { value: 'Data_Engineer', name: 'Data Engineer', category: 'job' },
   { value: 'Developer', name: 'Developer', category: 'job' },
@@ -20,7 +20,7 @@ export const serviceData = [
 
 export const typeData = [
   { value: 'Digital_Course', name: 'Digital Course', category: 'type' },
-  { value: 'Digital_Course_with_Lab', name: 'Digital Course With Lab', category: 'type' },
+  { value: 'Digital_Course_With_Lab', name: 'Digital Course With Lab', category: 'type' },
   { value: 'Exam_Preparation', name: 'Exam Preparation', category: 'type' },
 ]
 

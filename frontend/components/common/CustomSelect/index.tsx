@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './CustomSelect.module.scss'
 import { IoIosArrowDown } from 'react-icons/io'
 import { IoIosArrowUp } from 'react-icons/io'
@@ -11,6 +11,7 @@ const CustomSelect = (props: ICustomSelect) => {
   const { item, setItem, options } = props
 
   const [open, setOpen] = useState(false)
+  const selectRef = useRef<HTMLDivElement | null>(null)
 
   const onChange = (v: IFilter) => {
     setItem(v)
@@ -19,9 +20,21 @@ const CustomSelect = (props: ICustomSelect) => {
 
   const isDefault = item.value === ''
 
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick)
+    }
+  }, [])
+
   return (
-    <div className={styles.select}>
-      <div className={`${styles.selected} ${!isDefault && styles.isNotDefault}`} onClick={e => setOpen(!open)}>
+    <div className={styles.select} ref={selectRef}>
+      <div className={`${styles.selected} ${!isDefault && styles.isNotDefault}`} onClick={() => setOpen(!open)}>
         <span>{item.name}</span>
         {open ? (
           <IoIosArrowUp color={isDefault ? '#000' : '#fff'} />
@@ -29,9 +42,13 @@ const CustomSelect = (props: ICustomSelect) => {
           <IoIosArrowDown color={isDefault ? '#000' : '#fff'} />
         )}
       </div>
-      <div className={`${styles.optionWrap} ${open ? styles.visible : styles.none} `} role="listbox">
+      <div
+        className={`${styles.optionWrap} ${open ? styles.visible : styles.none} `}
+        role="listbox"
+        onBlur={() => setOpen(false)}
+      >
         {options.map(v => (
-          <div className={styles.option} onClick={e => onChange(v)} key={v.name}>
+          <div className={styles.option} onClick={() => onChange(v)} key={v.name}>
             {v.name}
           </div>
         ))}

@@ -1,6 +1,6 @@
 package com.s207.cloudy.dummy;
 
-import com.s207.cloudy.domain.members.entity.Member;
+import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.member.domain.MemberRoadmap;
 import com.s207.cloudy.domain.roadmap_group.member.dto.BookmarkRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
@@ -29,6 +29,7 @@ public class DummyRoadmap {
                 roadmap.getService(),
                 roadmap.getJob(),
                 roadmap.getSummary(),
+                roadmap.getDesc(),
                 2);
     }
 
@@ -44,4 +45,5 @@ public class DummyRoadmap {
                 roadmap.getSummary(),
                 2);
     }
+
 }

@@ -10,7 +10,7 @@ const meta = {
   },
 
   tags: ['autodocs'],
-  args: { value: '', setValue: fn(), onClick: fn() },
+  args: { value: '', setValue: fn(), onSearch: fn() },
 } satisfies Meta<typeof CustomInput>
 
 export default meta
@@ -20,5 +20,5 @@ type Story = StoryObj<typeof meta>
 export const EmptyInput: Story = {}
 
 export const Input: Story = {
-  args: { value: '클라우드', setValue: fn() },
+  args: { value: '클라우드', setValue: fn(), onSearch: fn() },
 }

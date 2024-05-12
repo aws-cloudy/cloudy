@@ -16,10 +16,13 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
 
   const clickMoreButton = () => layout !== 'justify' && setMore(!more)
 
+  // 이미지 url 변경
+  const changeUrl = (v: string) => 'https:' + v.substring(1, v.length - 1)
+
   return (
     <div className={layout === 'grid' ? styles.container : styles.justifyContainer}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
-        <Image src={'/img/learning/1.png'} alt={item.title} className={styles.img} fill priority sizes="auto" />
+        <Image src={changeUrl(item.thumbnail)} alt={item.title} className={styles.img} fill priority sizes="auto" />
         <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
           {difficulty.text}
         </div>

@@ -1,6 +1,17 @@
-import axiosInstance from '@/utils/axiosInstance'
+import server from '@/utils/axiosServer'
 
-export const fetchLearningRecom = async (job: number) => {
-  const res = await axiosInstance.get(`/v1/my/learnings/search/job/${job}`, { params: { count: 10 } })
-  return res.data.learningList
+export const fetchLearningRecomWithoutJob = async () => {
+  const response = await server
+    .get(`/learnings/search/job`)
+    .then(res => res.data.learningList)
+    .catch(err => err)
+  return response
+}
+
+export const fetchLearningRecom = async (jobNo: number) => {
+  const response = await server
+    .get(`/my/learnings/search/job/${jobNo}`)
+    .then(res => res.data.learningList)
+    .catch(err => err)
+  return response
 }

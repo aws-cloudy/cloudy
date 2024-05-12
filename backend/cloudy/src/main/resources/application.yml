@@ -12,7 +12,8 @@ spring:
     password: ${DB_PASSWORD}
     hikari:
       max-lifetime: 160000
-
+  jackson:
+    time-zone: Asia/Seoul
   jpa:
     defer-datasource-initialization: false
     generate-ddl: false
@@ -23,15 +24,10 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
-        show_sql: true
+        format_sql: false
+        show_sql: false
         dialect: org.hibernate.dialect.MySQLDialect
 
 cognito:
   iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"
 
-opensearch:
-  host: ${ES_HOST}
-  port: 443
-  username: ${ES_USER}
-  password: ${ES_PASSWORD}

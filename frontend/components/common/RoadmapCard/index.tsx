@@ -7,46 +7,67 @@ import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { getShortText } from '@/utils/getShortText'
 import { IRoadmapCard } from '@/types/roadmap'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { deleteBookmark, postBookmark } from '@/apis/bookmark'
 
 const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const { item } = props
 
-  const [clickMark, setClickMark] = useState('scrap')
+  const { data: session, status } = useSession()
 
-  const handleMarkClear = () => {
+  const [clickMark, setClickMark] = useState(item.isScrapped)
+
+  const handleMarkClear = async (event: { stopPropagation: () => void }) => {
+    event.stopPropagation()
+    try {
+      await deleteBookmark(item.bookmarkId)
+      setClickMark(false)
+    } catch (error) {
+      console.error('스크랩 해제 실패하였습니다.', error)
+    }
+
     //북마크 스크랩 해제
-    setClickMark('unscrap')
+    setClickMark(false)
   }
 
-  const handleMarkSelect = () => {
+  const handleMarkSelect = async (event: { stopPropagation: () => void }) => {
+    event.stopPropagation()
+    try {
+      await postBookmark(item.roadmapId)
+      setClickMark(true)
+    } catch (error) {
+      console.error('스크랩 실패하였습니다.', error)
+    }
+
     //북마크 스크랩
-    setClickMark('scrap')
+    setClickMark(true)
   }
 
   const router = useRouter()
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
 
   return (
-    <div className={styles.card} key={item.roadmapId} onClick={onClick}>
+    <div className={styles.card} key={item.roadmapId} onClick={onClick} data-testid="roadmap-item">
       <div className={styles.imageBox}>
         <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
-        {clickMark === 'scrap' ? (
-          <BsBookmarkFill
-            className={styles.bookmark}
-            onClick={handleMarkClear}
-            size={20}
-            role="button"
-            data-testid="scrap-icon"
-          />
-        ) : (
-          <BsBookmark
-            className={styles.bookmark}
-            onClick={handleMarkSelect}
-            size={20}
-            role="button"
-            data-testid="unscrap-icon"
-          />
-        )}
+        {status === 'authenticated' &&
+          (clickMark ? (
+            <BsBookmarkFill
+              className={styles.bookmark}
+              onClick={handleMarkClear}
+              size={20}
+              role="button"
+              data-testid="scrap-icon"
+            />
+          ) : (
+            <BsBookmark
+              className={styles.bookmark}
+              onClick={handleMarkSelect}
+              size={20}
+              role="button"
+              data-testid="unscrap-icon"
+            />
+          ))}
       </div>
       <div className={styles.info}>
         <div className={styles.title}>{item.title}</div>

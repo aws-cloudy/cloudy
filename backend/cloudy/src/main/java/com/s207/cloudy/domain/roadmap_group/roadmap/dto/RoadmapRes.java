@@ -16,5 +16,6 @@ public class RoadmapRes {
     private String service;
     private String job;
     private String summary;
+    private String desc;
     private long commentsCnt;
 }

@@ -3,31 +3,19 @@ import { Dispatch, SetStateAction } from 'react'
 export interface ILearningInput {
   value: string
   setValue: Dispatch<SetStateAction<string>>
-  keyword: string
-  setKeyword: Dispatch<SetStateAction<string>>
 }
 
 export interface ILearningSearchList {
+  list: ILearningAutocomplete[]
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+  selected: number
   setValue: Dispatch<SetStateAction<string>>
-  setKeyword: Dispatch<SetStateAction<string>>
 }
 
 export interface ILearningSearchListItem {
-  onClick: (v: string) => void
-}
-
-export interface ILearningSearchResult {
-  keyword: string
-}
-
-export interface IJob {
-  id: number
-  name: string
-}
-
-export interface IService {
-  id: number
-  name: string
+  onClick: () => void
+  item: ILearningAutocomplete
+  selected: boolean
 }
 
 export interface ILearningCard {
@@ -55,6 +43,30 @@ export interface IFilter {
   category: string
 }
 
-export interface ILearningList {
-  keyword: string
+export interface ILearningFilter {
+  [key: string]: IFilter[]
+}
+
+export interface ILearningFilterToggle {
+  title: string
+  data: IFilter[]
+  filter: IFilter[]
+  setFilter: (v: IFilter[]) => void
+}
+
+export interface ILearningFilterToggoleItem {
+  item: IFilter
+  list: IFilter[]
+  setList: (v: IFilter[]) => void
+}
+
+export interface ILearningAutocomplete {
+  learningId: string
+  title: string
+  documentId: string
+}
+
+export interface ILearningTagList {
+  filter: ILearningFilter
+  setFilter: Dispatch<SetStateAction<ILearningFilter>>
 }

@@ -9,7 +9,7 @@ const meta = {
   },
 
   tags: ['autodocs'],
-  args: { item: { category: 'job', name: ' test', value: 'test' } },
+  args: { item: { category: 'job', name: ' test', value: 'test' }, onClick: jest.fn() },
 } satisfies Meta<typeof LearningTagListItem>
 
 export default meta

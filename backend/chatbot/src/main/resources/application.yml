@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: chatbot-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      max-lifetime: 160000
+  jackson:
+    time-zone: Asia/Seoul
+  jpa:
+    defer-datasource-initialization: false
+    generate-ddl: false
+
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        show_sql: false
+        dialect: org.hibernate.dialect.MySQLDialect
+
+openai:
+    key: ${OPENAI_KEY}
+pinecone:
+  key: ${PINECONE_KEY}
+  env:
+    qna: aped-4627-b74a
+  #    qna: ${PINECONE_ENV_QNA}
+  id:
+    #    qna: ${PINECONE_ID_QNA}
+    qna: kyr8e0r
+server:
+  servlet:
+    encoding:
+      charset: UTF-8
+
+amazon:
+  aws:
+    credentials:
+      accesskey: ${AWS_ACCESS_KEY}
+      secretkey: ${AWS_SECRET_KEY}
+    dynamodb:
+      endpoint: https://dynamodb.ap-northeast-2.amazonaws.com
+
+cognito:
+  iss: "https://cognito-idp.ap-northeast-2.amazonaws.com/ap-northeast-2_584en6hOW/.well-known"

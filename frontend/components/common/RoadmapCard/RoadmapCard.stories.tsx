@@ -14,6 +14,9 @@ const meta = {
   component: RodmapCardComponent,
   parameters: {
     layout: 'fullscreen',
+    nextjs: {
+      appDirectory: true,
+    },
   },
 
   tags: ['autodocs'],

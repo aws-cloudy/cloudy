@@ -1,6 +1,5 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.domain;
 
-import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapDetailsRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -33,13 +32,19 @@ public class Roadmap {
     @Column(name = "summary")
     private String summary;
 
+    @Column(name="desc")
+    private String desc;
+
+    
+
     @Builder
-    public Roadmap(String title, String thumbnail, String service, String job, String summary) {
+    public Roadmap(String title, String thumbnail, String service, String job, String summary, String desc) {
         this.title = title;
         this.thumbnail = thumbnail;
         this.service = service;
         this.job = job;
         this.summary = summary;
+        this.desc = desc;
     }
 
     public RoadmapRes toDto(){
@@ -52,6 +57,7 @@ public class Roadmap {
                 .service(service)
                 .summary(summary)
                 .commentsCnt(0)
+                .desc(desc)
                 .build();
     }
 }
