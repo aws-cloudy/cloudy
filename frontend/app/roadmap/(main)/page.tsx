@@ -1,6 +1,7 @@
 import Layout from '@/components/common/Layout'
 import PageTitle from '@/components/common/PageTitle'
 import RoadmapFilterSection from '@/components/roadmap/main/RoadmapFilterSection'
+import RoadmapHazardSection from '@/components/roadmap/main/RoadmapHazardSection'
 import RoadmapListSection from '@/components/roadmap/main/RoadmapListSection'
 import RoadmapRecommend from '@/components/roadmap/main/RoadmapRecommend'
 import { Suspense } from 'react'
@@ -12,8 +13,9 @@ const RoadmapPage = () => {
         <PageTitle />
         <Suspense>
           <RoadmapFilterSection />
-          <RoadmapRecommend />
-          <RoadmapListSection />
+          <RoadmapHazardSection />
+          {/* <RoadmapRecommend />
+          <RoadmapListSection /> */}
         </Suspense>
       </Layout>
     </>

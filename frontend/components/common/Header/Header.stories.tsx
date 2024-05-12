@@ -1,9 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import Header from './'
+import { SessionProvider } from 'next-auth/react'
+
+const Component = () => (
+  <SessionProvider session={null}>
+    <Header />
+  </SessionProvider>
+)
 
 const meta = {
   title: 'common/Header',
-  component: Header,
+  component: Component,
   parameters: {
     layout: 'fullscreen',
   },
