@@ -67,31 +67,6 @@ public class LearningServiceImpl {
 
 
 
-    //주어진 질의에 대해 키워드 추출
-    private String extractKeywords(String query){
-        String template= """
-                        The user asked the following question:
-                        "{{desc}}"
-                    
-                        Provide four AWS service names and four IT technology keywords related to the content.
-                        Each keyword should be separated by a comma and a space, and the whole output should be in one line.
-                        Do not include any labels such as "AWS services" or "IT keywords and .
-                        Exclude "IAM", "AWS", "Amazon" from the AWS services."
-                        Each Keyword must be an english
-                        """;
-
-        Map<String, Object> variables = new HashMap<>();
-
-        variables.put("desc", query);
-
-        String keywords = openAiChatService.generateChat(template, variables);
-
-        log.info("LearningServiceImpl :: keywords = {}", keywords);
-
-
-        return keywords;
-
-    }
 
     private List<Integer> getRecommendedLearningIds(String keywords, int num){
         return pineconeService.findRelevant(keywords, num)
@@ -102,7 +77,7 @@ public class LearningServiceImpl {
 
 
     public LearningListRes recommendLearning(String query, Integer num){
-        String keywords = extractKeywords(query)
+        String keywords = openAiChatService.extractKeywords(query)
                 .replace("AWS", "")
                 .replace("Amazon", "");
 
@@ -117,7 +92,7 @@ public class LearningServiceImpl {
     }
 
     public Flux<String> generateChatStream(ChatReq chatReq, String userId) {
-        String keywords = extractKeywords(chatReq.getInputData())
+        String keywords = openAiChatService.extractKeywords(chatReq.getInputData())
                 .replace("AWS", "")
                 .replace("Amazon", "");
 
