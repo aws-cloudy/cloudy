@@ -14,6 +14,7 @@ import Loading from '@/components/common/Loading'
 import Empty from '@/components/common/Empty'
 import { useSearchParams } from 'next/navigation'
 import { useLearningActions, useLearningOriginalQuery } from '@/stores/learning'
+import LearningHazardSection from '../LearningHazardSection'
 
 const LearningList = () => {
   // 무한 스크롤
@@ -92,10 +93,11 @@ const LearningList = () => {
     return <Empty text="검색 결과가 없습니다. 필터를 다시 적용해보거나 올바른 검색어를 입력해주세요 !" />
   return (
     <>
-      <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
+      {/* <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
         {list && list.map((item, i) => <LearningCard key={i} item={item} layout={layout} />)}
       </div>
-      <Observer callback={observerCallback} />
+      <Observer callback={observerCallback} /> */}
+      <LearningHazardSection />
     </>
   )
 }
