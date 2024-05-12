@@ -26,6 +26,9 @@ public class ModerationAdvice {
     @Pointcut("@annotation(org.springframework.web.bind.annotation.PostMapping)")
     public void postMapping(){}
 
+    @Pointcut("within(com.s207.cloudy.domain.recommend.api.RecommendController) && @annotation(org.springframework.web.bind.annotation.GetMapping)")
+    public void recommendControllerGetMapping(){}
+
     private Map<String, Object> extractMemberAndChatReq(Object[] args){
         Map<String, Object> data = new HashMap<>();
 
@@ -44,8 +47,26 @@ public class ModerationAdvice {
 
     }
 
+    private Map<String, Object> extractQuery(Object[] args){
+        Map<String, Object> data = new HashMap<>();
+
+        for(Object arg : args){
+
+            if(arg instanceof String){
+                data.put("query", arg);
+
+            }
+            if(arg instanceof Member){
+                data.put("member", arg);
+            }
+        }
+
+        return data;
+
+    }
+
     @Around("postMapping()")
-    public Object moderationAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object chatbotModerationAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 
         var data = extractMemberAndChatReq(proceedingJoinPoint.getArgs());
 
@@ -54,6 +75,22 @@ public class ModerationAdvice {
 
         if(moderationService.isHarmful(chatReq.getInputData())){
             log.info("질문 규칙 위반 :: member={} messge={}", member.getId(), chatReq.getInputData());
+            throw new ModerationException(ErrorCode.HARMFUL_CONTENTS);
+        }
+
+        return proceedingJoinPoint.proceed();
+    }
+
+    @Around("recommendControllerGetMapping()")
+    public Object recommendModerationAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+
+        var data = extractQuery(proceedingJoinPoint.getArgs());
+
+        var member = (Member) data.get("member");
+        var query = (String) data.get("query");
+
+        if(moderationService.isHarmful(query)){
+            log.info("질문 규칙 위반 :: member={} messge={}", member.getId(), query);
             throw new ModerationException(ErrorCode.HARMFUL_CONTENTS);
         }
 
