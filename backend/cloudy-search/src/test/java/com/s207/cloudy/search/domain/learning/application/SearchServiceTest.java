@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.util.ArrayList;
@@ -25,7 +26,8 @@ import java.util.List;
 import static com.s207.cloudy.search.dummy.learning.DummyLearning.getDummySearchItem1;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
+//@ExtendWith(MockitoExtension.class)
+@SpringJUnitConfig(SearchServiceImpl.class)
 class SearchServiceImplTest {
 
     @Mock
@@ -37,7 +39,8 @@ class SearchServiceImplTest {
     @Mock
     private RedisUtils redisUtils;
 
-    private SearchServiceImpl searchService;
+    @Autowired
+    private SearchService searchService;
 
     private SearchListItem dummyItem1;
     private List<SearchListItem> dummyList;
@@ -75,6 +78,7 @@ class SearchServiceImplTest {
 
         when(searchService.searchListFromCache(req.getQuery())).thenReturn(java.util.Optional.empty());
         when(searchService.searchListFromOpensearch(req.getQuery(), req.getCount())).thenReturn(expectedResult);
+
 
         // When
         SearchListRes actualResult = searchService.getAutoCompleteList(req);
