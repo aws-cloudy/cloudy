@@ -30,7 +30,6 @@ const RoadmapFilterSection = () => {
   }
 
   useEffect(() => {
-    console.log('param change')
     setJob(extractArrFromQuery(params.get('job'), roadmapJobFilter)[0] || roadmapJobFilter[0])
     setService(extractArrFromQuery(params.get('service'), roadmapServiceFilter)[0] || roadmapServiceFilter[0])
   }, [params])

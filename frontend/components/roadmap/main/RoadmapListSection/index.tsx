@@ -9,9 +9,9 @@ import Observer from '@/components/common/Observer'
 import Loading from '@/components/common/Loading'
 import Empty from '@/components/common/Empty'
 import { ROADMAP_ROWS_PER_PAGE } from '@/constants/rows'
-import { useRoadmapSearchValue } from '@/stores/roadmap'
 import { getSession, useSession } from 'next-auth/react'
 import { getBookmarks } from '@/apis/bookmark'
+import { useSearchParams } from 'next/navigation'
 
 const RoadmapListSection = () => {
   const [list, setList] = useState<IRoadmapCard[]>([])
@@ -20,7 +20,7 @@ const RoadmapListSection = () => {
   const [isFetching, setIsFetching] = useState<boolean>(true)
   const [bookmarks, setBookmarks] = useState<{ roadmapId: number; bookmarkId: number }[]>([])
 
-  const searchValue = useRoadmapSearchValue()
+  const params = useSearchParams()
 
   // 찜한 로드맵 목록
   const fetchBookmarks = async () => {
@@ -43,7 +43,11 @@ const RoadmapListSection = () => {
   const fetchRoadmaps = async () => {
     if (!hasMore.current) return
 
-    const roadmaps = await getRoadmaps(offset.current, searchValue.keyword, searchValue.job, searchValue.service)
+    const keyword = params.get('query') || ''
+    const job = params.get('job') || ''
+    const service = params.get('service') || ''
+
+    const roadmaps = await getRoadmaps(offset.current, keyword, job, service)
 
     console.log(roadmaps)
 
@@ -65,7 +69,7 @@ const RoadmapListSection = () => {
   }
 
   const observerCallback: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    if (isIntersecting && hasMore.current) {
+    if (isIntersecting && hasMore.current && offset.current > 0) {
       fetchRoadmaps()
     }
   }
@@ -77,7 +81,7 @@ const RoadmapListSection = () => {
     hasMore.current = true
     offset.current = 0
     fetchBookmarks().then(fetchRoadmaps)
-  }, [searchValue])
+  }, [params])
 
   if (isFetching) return <Loading />
   if (list.length <= 0)
