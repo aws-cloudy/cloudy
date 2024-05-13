@@ -16,9 +16,6 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
 
   const clickMoreButton = () => layout !== 'justify' && setMore(!more)
 
-  // 이미지 url 변경
-  // const changeUrl = (v: string) => 'https:' + v.substring(1, v.length - 1)
-
   return (
     <div className={layout === 'grid' ? styles.container : styles.justifyContainer} onClick={clickMoreButton}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
