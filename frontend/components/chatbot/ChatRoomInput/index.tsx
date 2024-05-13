@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import styles from './ChatRoomInput.module.scss'
 import { IChatRoomInput } from '@/types/chatbot'
 
-function ChatRoomInput({ handleConnect, setIsReceiving }: IChatRoomInput) {
+function ChatRoomInput({ handleConnect, setIsReceiving, isReceiving }: IChatRoomInput) {
   const { register, handleSubmit, getValues, reset } = useForm<{ msg: string }>()
 
   const onSubmit = () => {
@@ -23,6 +23,8 @@ function ChatRoomInput({ handleConnect, setIsReceiving }: IChatRoomInput) {
         {...register('msg')}
         required
         data-testid="input"
+        autoComplete="off"
+        disabled={isReceiving ? true : false}
       />
     </form>
   )
