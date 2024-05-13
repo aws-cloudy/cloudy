@@ -29,7 +29,7 @@ function ChatRoom() {
     const type = chatBotList[chatBotType].type
     setMessages(prev => [...prev, { isUserSent: true, content: userMessage, regAt: new Date().toDateString() }])
     try {
-      const res = await fetch(`/cloudy-chat-api?type=${type}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_CHAT_SERVER_URL}?type=${type}`, {
         method: 'POST',
         headers: {
           Connection: 'keep-alive',
