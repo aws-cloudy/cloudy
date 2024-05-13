@@ -37,4 +37,25 @@ public class CommentController {
                         .build()
                     );
     }
+
+    @DeleteMapping("/{commentId}/roadmaps")
+    public ResponseEntity<RoadmapCommentPostRes> deleteRoadmapComment(
+            @PathVariable("commentId") Integer commentId,
+
+            @AuthenticationPrincipal Member member
+    ){
+
+
+        return ResponseEntity.ok(
+                RoadmapCommentPostRes
+                        .builder()
+                        .id(
+                                roadmapCommentService.deleteRoadmapComment(
+                                        commentId,
+                                        member.getId()
+                                )
+                        )
+                        .build()
+        );
+    }
 }

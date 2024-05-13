@@ -2,6 +2,7 @@ package com.s207.cloudy.global.error.handler;
 
 import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.domain.roadmap_group.member.exception.MemberRoadmapException;
+import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapException;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
 import com.s207.cloudy.global.auth.error.exception.AuthorizationException;
 import com.s207.cloudy.global.error.dto.CommonErrorResponse;
@@ -91,5 +92,24 @@ public class GlobalExceptionHandler {
                 );
 
     }
+
+
+    @ExceptionHandler(RoadmapException.class)
+    public ResponseEntity<CommonErrorResponse> roadmapExceptionHandler(RoadmapException e) {
+        log.error("Exception type : {}, message :{}", e.getClass(), e.getErrorCode().getMessage());
+
+
+        return ResponseEntity
+                .status(e.getHttpStatus())
+                .body(
+                        CommonErrorResponse
+                                .builder()
+                                .code(e.getCode())
+                                .message(e.getMessage())
+                                .build()
+                );
+
+    }
+
 
 }

@@ -9,4 +9,6 @@ public interface RoadmapCommentService {
     List<RoadmapCommentDto> getRoadmapCommentList(Integer roadmapId);
 
     Integer postRoadmapComment(RoadmapCommentPostReq roadmapCommentPostReq, String userId);
+
+    Integer deleteRoadmapComment(Integer commentId, String id);
 }
