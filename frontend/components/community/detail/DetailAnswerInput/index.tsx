@@ -7,10 +7,12 @@ import React, { BaseSyntheticEvent } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import styles from './DetailAnswerInput.module.scss'
 import Button from '@/components/common/Button'
+import { useIsLogin } from '@/stores/authStore'
 
-function DetailAnswerInput({ id, authId }: { id: string | number; authId: string | undefined }) {
+function DetailAnswerInput({ id }: { id: string | number }) {
   const { register, getValues, handleSubmit, reset } = useForm<{ desc: string }>()
   const router = useRouter()
+  const isLogin = useIsLogin()
 
   const onSubmit: SubmitHandler<{ desc: string }> = async (
     _data,
@@ -18,13 +20,13 @@ function DetailAnswerInput({ id, authId }: { id: string | number; authId: string
   ) => {
     if (e) e.preventDefault()
     const desc = getValues('desc')
-    const res = await axios.post(`${commuURL}question/answer`, { postId: id, desc })
+    await axios.post(`${commuURL}question/answer`, { postId: id, desc })
     router.refresh()
     reset()
   }
 
   return (
-    Boolean(authId) && (
+    isLogin && (
       <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
         <textarea {...register('desc')} placeholder="댓글을 입력하세요" required className={styles.textBox}></textarea>
         <Button type="submit" width="25%">

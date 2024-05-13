@@ -23,14 +23,12 @@ export interface IQuestionDetail {
   hit: number
   createdAt: Date | string
   hashtags: { hashtag: Hashtag }[]
-  authId?: string | undefined
 }
 
 export interface IQuestionAnswer {
   id: string | number
   answers: IAnswer[]
   checkedId: number | null
-  authId?: string | undefined
   isWriter?: boolean
 }
 

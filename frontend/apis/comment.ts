@@ -14,7 +14,7 @@ export const postRoadmapComment = async (roadmapId: number, memberId: string, co
 // 로드맵 댓글 삭제
 export const deleteRoadmapComment = async (roadmapId: number, commentId: number) => {
   const response = client
-    .delete(`${url}/roadmaps/${roadmapId}/${commentId}`)
+    .delete(`${url}/${commentId}/roadmaps`)
     .then(res => res.data)
     .catch(err => err)
   return response

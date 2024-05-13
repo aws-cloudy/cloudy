@@ -27,13 +27,11 @@ export interface IDetailContentSubtitle {
   author: string
   createdAt: string | Date
   authorId: string
-  authId: string | undefined
 }
 
 export interface IDetailAnswerItem {
   ans: IAnswer
   isChecked: boolean
-  authId: string | undefined
   isWriter?: boolean
 }
 
