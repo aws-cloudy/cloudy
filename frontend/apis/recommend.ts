@@ -13,6 +13,10 @@ tmpClient.interceptors.response.use(
   res => res,
   async error => {
     const originalRequest = error.config
+    if (error.response.status === 400) {
+      console.log(error.response)
+      if (error.response.data.code === 'CE008') console.log('부적절한 컨텐츠')
+    }
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
       const session = await getSession()

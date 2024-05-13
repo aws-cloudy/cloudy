@@ -19,13 +19,13 @@ const LearningRecommend = () => {
 
   const fetchRecommendLearnings = async () => {
     const learnings = await getRecommendLearnings(keyword)
-    learnings && isLogin && setList(learnings)
+    learnings && setList(learnings)
     setIsFetching(false)
   }
 
   useEffect(() => {
     setIsFetching(true)
-    fetchRecommendLearnings()
+    keyword && isLogin && fetchRecommendLearnings()
   }, [params])
 
   if (!keyword) return

@@ -94,6 +94,7 @@ const LearningList = () => {
     return <Empty text="검색 결과가 없습니다. 필터를 다시 적용해보거나 올바른 검색어를 입력해주세요 !" />
   return (
     <>
+      <LearningRecommend />
       <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
         {list && list.map((item, i) => <LearningCard key={i} item={item} layout={layout} />)}
       </div>
