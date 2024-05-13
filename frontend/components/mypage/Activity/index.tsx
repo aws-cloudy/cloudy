@@ -51,7 +51,6 @@ const Activity = ({ user }: any) => {
     return [...data].sort((a, b) => {
       const dateA = new Date(a.createdAt).getTime()
       const dateB = new Date(b.createdAt).getTime()
-      console.log('A,b', dateA, dateB)
       return dateB - dateA // 오름차순으로 정렬하려면 dateA - dateB
     })
   }
@@ -85,6 +84,8 @@ const Activity = ({ user }: any) => {
     } else if (options.name === '기본순') {
       setQuestionList(originQuestionList)
       setAnswerList(originAnswerList)
+      console.log('질문', questionList)
+      console.log('댓글', answerList)
     }
   }, [options, selectedTab])
 
