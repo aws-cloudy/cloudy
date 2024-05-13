@@ -111,8 +111,6 @@ public class OpenAiChatService implements ChatService {
 
         Prompt prompt = getPrompt(template, variables);
 
-        log.info("generate prompt: {}", prompt.text().substring(0, 15));
-
         if (openAiChatModel == null) {
             openAiChatModel = OpenAiChatModel.builder()
                     .apiKey(openAiKey)
@@ -120,7 +118,7 @@ public class OpenAiChatService implements ChatService {
                     .build();
         }
         var result =openAiChatModel.generate(prompt.text());
-        log.info("generateChat :: input={}, result = {}", prompt.text(), result);
+        log.info("generateChat :: result = {}",  result);
         return result;
     }
 
