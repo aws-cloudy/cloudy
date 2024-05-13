@@ -23,7 +23,7 @@ const ActivityCommentList = ({ comments }: any) => {
     <>
       {comments.map((comment: any) => (
         <section className={styles.section} key={comment.id} onClick={() => handleMove(comment.questionId)}>
-          <div className={styles.tag}>{comment.category}</div>
+          <div className={styles.tag}>{comment.type === 'community' ? '커뮤니티' : '로드맵'}</div>
           <div className={styles.desc}>
             {comment.desc.length > 60 ? `${comment.desc.substring(0, 60)}...` : comment.desc}
           </div>

@@ -39,8 +39,9 @@ const Activity = ({ user }: any) => {
     try {
       const res = await fetch('/api/mypage/answers')
       const data = await res.json()
-      setAnswerList(data.answersList)
-      setOriginAnswerList(data.answersList)
+      const commentsWithType = data.answersList.map((comment: any) => ({ ...comment, type: 'community' }))
+      setAnswerList(commentsWithType)
+      setOriginAnswerList(commentsWithType)
       console.log(answerList)
     } catch (error) {
       console.log('답변 가져오기 실패', error)

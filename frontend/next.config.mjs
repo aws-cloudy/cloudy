@@ -10,6 +10,9 @@ const nextConfig = {
       { protocol: 'https', hostname: 'rattle-stock-d32.notion.site' },
       { protocol: 'https', hostname: 'encrypted-tbn0.gstatic.com' },
       { protocol: 'https', hostname: 'media.licdn.com' },
+      { protocol: 'https', hostname: 'devio2023-media.developers.io' },
+      { protocol: 'https', hostname: 'd1tlzifd8jdoy4.cloudfront.net' },
+      { protocol: 'https', hostname: 'i.ytimg.com' },
       { protocol: 'http', hostname: 'localhost' },
     ],
     minimumCacheTTL: 31536000,
@@ -49,7 +52,7 @@ const nextConfig = {
       },
       {
         source: '/cloudy-chat-api',
-        destination: 'http://k10s207.p.ssafy.io:8080/api/v1/chats',
+        destination: 'http://cloudy-chatbot-lb-2064037433.ap-northeast-2.elb.amazonaws.com/chatbot',
       },
     ]
   },
