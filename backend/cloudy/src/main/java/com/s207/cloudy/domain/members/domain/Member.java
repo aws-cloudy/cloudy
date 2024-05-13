@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.members.domain;
 
-import com.s207.cloudy.domain.members.MemberDto;
+import com.s207.cloudy.domain.members.dto.MemberDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;

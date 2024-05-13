@@ -21,6 +21,7 @@ const RoadmapListSection = () => {
   const [bookmarks, setBookmarks] = useState<{ roadmapId: number; bookmarkId: number }[]>([])
 
   const params = useSearchParams()
+  const keyword = params.get('query') || ''
 
   // 찜한 로드맵 목록
   const fetchBookmarks = async () => {
@@ -43,7 +44,6 @@ const RoadmapListSection = () => {
   const fetchRoadmaps = async () => {
     if (!hasMore.current) return
 
-    const keyword = params.get('query') || ''
     const job = params.get('job') || ''
     const service = params.get('service') || ''
 
@@ -84,14 +84,18 @@ const RoadmapListSection = () => {
   }, [params])
 
   if (isFetching) return <Loading />
-  if (list.length <= 0)
-    return <Empty text="검색 결과가 없습니다. 필터를 다시 적용해보거나 올바른 검색어를 입력해주세요 !" />
 
   return (
-    <>
-      <div className={styles.container}>
-        {list &&
-          list.map(road => (
+    <div className={styles.wrap}>
+      <div className={styles.title}>전체 검색</div>
+      {keyword && <div className={styles.desc}>{`'${keyword}' 검색 결과입니다`}</div>}
+      {list.length <= 0 ? (
+        <div className={styles.emptyWrap}>
+          <Empty text="검색 결과가 없습니다. 필터를 다시 적용해보거나 올바른 검색어를 입력해주세요 !" />
+        </div>
+      ) : (
+        <div className={styles.container}>
+          {list.map(road => (
             <RoadmapCard
               item={{
                 ...road,
@@ -102,9 +106,11 @@ const RoadmapListSection = () => {
               key={road.roadmapId}
             />
           ))}
-      </div>
+        </div>
+      )}
+
       <Observer callback={observerCallback} />
-    </>
+    </div>
   )
 }
 

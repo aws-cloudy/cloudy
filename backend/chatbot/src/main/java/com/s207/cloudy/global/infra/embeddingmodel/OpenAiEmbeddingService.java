@@ -10,17 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class OpenAiEmbeddingService implements  EmbeddingService{
 
-    @Value("${openai.key}")
-    private String openAiKey;
+    private final OpenAiEmbeddingModel openAiEmbeddingModel;
 
-    private OpenAiEmbeddingModel openAiEmbeddingModel;
-
-
-    @Override
-    public void initOpenAiEmbeddingModel(String modelName) {
+    public OpenAiEmbeddingService(@Value("${openai.key}") String openAiKey) {
         openAiEmbeddingModel = OpenAiEmbeddingModel.builder()
                 .apiKey(openAiKey)
-                .modelName(modelName)
+                .modelName("text-embedding-3-small")
                 .build();
     }
 

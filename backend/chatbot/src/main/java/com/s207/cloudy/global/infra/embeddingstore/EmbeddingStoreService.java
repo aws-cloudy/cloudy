@@ -6,7 +6,6 @@ import dev.langchain4j.store.embedding.EmbeddingMatch;
 import java.util.List;
 
 public interface EmbeddingStoreService {
-    void initEmbeddingStore(String indexName, String namespace, String metadataTextKey,  String embeddingModelName);
 
     List<EmbeddingMatch<TextSegment>> findRelevant(String question, int maxNum);
 

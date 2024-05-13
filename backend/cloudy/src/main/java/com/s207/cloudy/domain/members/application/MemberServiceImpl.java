@@ -1,6 +1,6 @@
 package com.s207.cloudy.domain.members.application;
 
-import com.s207.cloudy.domain.members.MemberDto;
+import com.s207.cloudy.domain.members.dto.MemberDto;
 import com.s207.cloudy.domain.members.dao.MemberRepository;
 import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.members.exception.MemberException;

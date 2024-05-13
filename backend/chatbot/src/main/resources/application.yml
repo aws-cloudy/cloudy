@@ -1,9 +1,28 @@
 spring:
   application:
     name: chatbot-server
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      max-lifetime: 160000
+  jackson:
+    time-zone: Asia/Seoul
+  jpa:
+    defer-datasource-initialization: false
+    generate-ddl: false
 
-
-
+    hibernate:
+      ddl-auto: none
+    open-in-view: false
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        show_sql: false
+        dialect: org.hibernate.dialect.MySQLDialect
 
 openai:
     key: ${OPENAI_KEY}
