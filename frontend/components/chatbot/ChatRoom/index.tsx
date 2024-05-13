@@ -39,6 +39,12 @@ function ChatRoom() {
         body: JSON.stringify({ type, inputData: userMessage }),
       })
 
+      if (res.status === 400) {
+        setBotMessage('사용자의 질문이 부적절한 컨텐츠를 담고 있습니다.')
+        setIsReceiving(false)
+        return
+      }
+
       const reader = res.body!.getReader()
       const decoder = new TextDecoder()
 
