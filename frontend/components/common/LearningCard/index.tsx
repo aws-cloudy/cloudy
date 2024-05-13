@@ -20,7 +20,7 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
   const changeUrl = (v: string) => 'https:' + v.substring(1, v.length - 1)
 
   return (
-    <div className={layout === 'grid' ? styles.container : styles.justifyContainer}>
+    <div className={layout === 'grid' ? styles.container : styles.justifyContainer} onClick={clickMoreButton}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
         <Image src={changeUrl(item.thumbnail)} alt={item.title} className={styles.img} fill priority sizes="auto" />
         <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
@@ -33,7 +33,7 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
         </div>
         <div className={styles.title}>{item.title}</div>
         {more || layout === 'justify' ? (
-          <div className={styles.moreWrap} onClick={clickMoreButton}>
+          <div className={styles.moreWrap}>
             <div className={styles.duration}>소요시간 {item.duration}</div>
             <div className={styles.summary}>{item.summary}</div>
             <Link href={item.link} target="_blank" className={styles.link}>
