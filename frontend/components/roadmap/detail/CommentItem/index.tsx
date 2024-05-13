@@ -3,6 +3,7 @@ import React from 'react'
 import { IComment } from '@/types/roadmap'
 import { getDate, getTime } from '@/utils/common/getFullDay'
 import { deleteRoadmapComment } from '@/apis/comment'
+import { useRouter } from 'next/navigation'
 
 const CommentItem = ({
   roadmapId,
@@ -14,9 +15,12 @@ const CommentItem = ({
   memberId: string | undefined
 }) => {
   console.log(comments)
+  const router = useRouter()
+
   const handleDelete = async (commentId: number) => {
     try {
       await deleteRoadmapComment(roadmapId, commentId)
+      router.refresh()
     } catch (e) {
       console.log(e)
     }
