@@ -60,16 +60,16 @@ class LearningServiceImplTest {
 
         // given
         given(learningRepository.findLearnings(any())).willReturn(List.of());
-        given(convertUtil.covertJobName(any())).willReturn(new String[]{""});
+        given(convertUtil.convertJobName(any())).willReturn(new String[]{""});
 
         // when
         learningService.getLearnings(req);
 
         // then
-        verify(convertUtil, times(1)).covertJobName(req.getJobName());
-        verify(convertUtil, never()).covertServiceName(req.getServiceName());
-        verify(convertUtil, never()).covertDifficulty(req.getDifficulty());
-        verify(convertUtil, never()).covertType(req.getType());
+        verify(convertUtil, times(1)).convertJobName(req.getJobName());
+        verify(convertUtil, never()).convertServiceName(req.getServiceName());
+        verify(convertUtil, never()).convertDifficulty(req.getDifficulty());
+        verify(convertUtil, never()).convertType(req.getType());
     }
 
     @Test
@@ -84,19 +84,19 @@ class LearningServiceImplTest {
 
         // given
         given(learningRepository.findLearnings(any())).willReturn(List.of());
-        given(convertUtil.covertJobName(any())).willReturn(new String[]{""});
-        given(convertUtil.covertType(any())).willReturn(new String[]{""});
-        given(convertUtil.covertServiceName(any())).willReturn(new String[]{""});
-        given(convertUtil.covertDifficulty(any())).willReturn(new String[]{""});
+        given(convertUtil.convertJobName(any())).willReturn(new String[]{""});
+        given(convertUtil.convertType(any())).willReturn(new String[]{""});
+        given(convertUtil.convertServiceName(any())).willReturn(new String[]{""});
+        given(convertUtil.convertDifficulty(any())).willReturn(new String[]{""});
 
         // when
         learningService.getLearnings(req);
 
         // then
-        verify(convertUtil, times(1)).covertJobName(req.getJobName());
-        verify(convertUtil, times(1)).covertServiceName(req.getServiceName());
-        verify(convertUtil, times(1)).covertDifficulty(req.getDifficulty());
-        verify(convertUtil, times(1)).covertType(req.getType());
+        verify(convertUtil, times(1)).convertJobName(req.getJobName());
+        verify(convertUtil, times(1)).convertServiceName(req.getServiceName());
+        verify(convertUtil, times(1)).convertDifficulty(req.getDifficulty());
+        verify(convertUtil, times(1)).convertType(req.getType());
     }
 
     @Test

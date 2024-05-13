@@ -12,7 +12,7 @@ import java.util.List;
 @Component
 public class ConvertUtil {
 
-    public String[] covertDifficulty(String[] difficulty) {
+    public String[] convertDifficulty(String[] difficulty) {
         String[] convertDifficulty = new String[difficulty.length];
 
         for (int i = 0; i < difficulty.length; i++) {
@@ -22,7 +22,7 @@ public class ConvertUtil {
         return convertDifficulty;
     }
 
-    public String[] covertType(String[] type) {
+    public String[] convertType(String[] type) {
         String[] convertType = new String[type.length];
 
         for (int i = 0; i < type.length; i++) {
@@ -32,26 +32,26 @@ public class ConvertUtil {
         return convertType;
     }
 
-    public String[] covertJobName(String[] jobName) {
+    public String[] convertJobName(String[] jobName) {
         List<String> convertJobName = new ArrayList<>();
         String[] etcArr = new String[] {"Account/Sales Manager", "Alliance Lead",
                 "Business Development/Analyst Manager", "Data Scientist", "Decision Maker",
                 "DevOps Engineer", "Pre-Sales Consultant", "Project/Program/Delivery Manager",
                 "Security Engineer"};
 
-        for (int i = 0; i < jobName.length; i++) {
-            if (jobName[i].equals("etc")) {
+        for (String s : jobName) {
+            if (s.equals("etc")) {
                 convertJobName.addAll(List.of(etcArr));
                 continue;
             }
 
-            convertJobName.add(JobNameType.getByJobName(jobName[i]));
+            convertJobName.add(JobNameType.getByJobName(s));
         }
 
         return convertJobName.toArray(new String[0]);
     }
 
-    public String[] covertServiceName(String[] serviceName) {
+    public String[] convertServiceName(String[] serviceName) {
         List<String> convertServiceName = new ArrayList<>();
         String[] etcArr = new String[] {"Data Analytics", "Architecting", "Business Applications",
                 "Cloud Financial Management", "Containers", "Compute", "DevOps", "Developer Tools",
@@ -59,13 +59,13 @@ public class ConvertUtil {
                 "Media Services", "Migration & Transfer", "Security, Identity & Compliance",
                 "SAP on AWS", "SaaS", "End-user Computing", "Developing", "Cloud Operations (SysOps)"};
 
-        for (int i = 0; i < serviceName.length; i++) {
-            if (serviceName[i].equals("etc")) {
+        for (String s : serviceName) {
+            if (s.equals("etc")) {
                 convertServiceName.addAll(List.of(etcArr));
                 continue;
             }
 
-            convertServiceName.add(ServiceNameType.getByServiceName(serviceName[i]));
+            convertServiceName.add(ServiceNameType.getByServiceName(s));
         }
 
         return convertServiceName.toArray(new String[0]);

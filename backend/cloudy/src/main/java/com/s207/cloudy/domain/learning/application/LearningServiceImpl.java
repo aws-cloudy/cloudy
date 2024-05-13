@@ -26,25 +26,25 @@ public class LearningServiceImpl implements LearningService {
     public LearningListRes getLearnings(LearningSearchReq learningSearchReq) {
         // 난이도 파라미터 변환
         if (learningSearchReq.getDifficulty() != null) {
-            String[] covertDifficulty = convertUtil.covertDifficulty(learningSearchReq.getDifficulty());
+            String[] covertDifficulty = convertUtil.convertDifficulty(learningSearchReq.getDifficulty());
             learningSearchReq.setDifficulty(covertDifficulty);
         }
 
         // 강의분류 파라미터 변환
         if (learningSearchReq.getType() != null) {
-            String[] covertType = convertUtil.covertType(learningSearchReq.getType());
+            String[] covertType = convertUtil.convertType(learningSearchReq.getType());
             learningSearchReq.setType(covertType);
         }
 
         // 직무명 파라미터 변환
         if (learningSearchReq.getJobName() != null) {
-            String[] covertJobName = convertUtil.covertJobName(learningSearchReq.getJobName());
+            String[] covertJobName = convertUtil.convertJobName(learningSearchReq.getJobName());
             learningSearchReq.setJobName(covertJobName);
         }
 
         // 서비스명 파라미터 변환
         if (learningSearchReq.getServiceName() != null) {
-            String[] covertServiceName = convertUtil.covertServiceName(learningSearchReq.getServiceName());
+            String[] covertServiceName = convertUtil.convertServiceName(learningSearchReq.getServiceName());
             learningSearchReq.setServiceName(covertServiceName);
         }
 
