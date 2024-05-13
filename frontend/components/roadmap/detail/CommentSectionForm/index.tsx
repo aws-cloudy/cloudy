@@ -3,17 +3,19 @@ import { useForm } from 'react-hook-form'
 import styles from './CommentSectionForm.module.scss'
 import { FaSquareCheck } from 'react-icons/fa6'
 import { postRoadmapComment } from '@/apis/comment'
+import { useRouter } from 'next/navigation'
 
 function CommentSectionForm({ roadmapId, memberId }: { roadmapId: number; memberId: string | undefined }) {
   const { register, handleSubmit, getValues, reset } = useForm<{ comment: string }>()
+  const router = useRouter()
   const onSubmit = async () => {
     const comment = getValues('comment')
     if (!memberId) return
 
     try {
-      const res = await postRoadmapComment(roadmapId, memberId, comment)
-      console.log(res)
+      await postRoadmapComment(roadmapId, memberId, comment)
       reset()
+      router.refresh()
     } catch (e) {
       console.log(e)
     }

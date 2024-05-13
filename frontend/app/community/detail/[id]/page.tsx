@@ -31,9 +31,8 @@ async function CommunityDetailPage({ params: { id } }: ICommunityDetailPage) {
     createdAt,
     memberName,
     hit,
-    authId: user?.id,
   }
-  const A: IQuestionAnswer = { id: questionId, answers, checkedId, authId: user?.id, isWriter: user?.id === memberId }
+  const A: IQuestionAnswer = { id: questionId, answers, checkedId, isWriter: user?.id === memberId }
 
   return (
     <Layout>

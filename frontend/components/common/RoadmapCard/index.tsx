@@ -16,7 +16,6 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const { data: session, status } = useSession()
 
   const [clickMark, setClickMark] = useState(item.isScrapped)
-  
 
   const handleMarkClear = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
@@ -51,13 +50,21 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const router = useRouter()
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
 
-  if(item.isUseMypage && !clickMark){
+  if (item.isUseMypage && !clickMark) {
     return null
   }
   return (
     <div className={styles.card} key={item.roadmapId} onClick={onClick} data-testid="roadmap-item">
       <div className={styles.imageBox}>
-        <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
+        <Image
+          src={item.thumbnail}
+          alt="roadmap-image"
+          className={styles.image}
+          fill
+          priority
+          objectFit="cover"
+          sizes="auto"
+        />
         {status === 'authenticated' &&
           (clickMark ? (
             <BsBookmarkFill
@@ -92,7 +99,6 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
         </div>
       </div>
     </div>
-    
   )
 }
 

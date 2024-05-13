@@ -18,7 +18,6 @@ function DetailContent({ question }: { question: IQuestionDetail }) {
           author={question.memberName}
           authorId={question.memberId}
           createdAt={question.createdAt}
-          authId={question.authId}
         />
       </div>
       <DetailContentDesc desc={question.desc} />

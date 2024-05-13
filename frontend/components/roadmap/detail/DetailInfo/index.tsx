@@ -11,7 +11,7 @@ const DetailInfo = ({ data }: { data: IRoadmapCardExtend }) => {
   return (
     <>
       <div className={styles.imgWrap}>
-        <Image src={data.thumbnail} alt={data.title} priority fill />
+        <Image src={data.thumbnail} alt={data.title} priority fill sizes="auto" />
       </div>
       <div className={styles.container}>
         <ReactMarkdown children={data.desc} remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]} />
