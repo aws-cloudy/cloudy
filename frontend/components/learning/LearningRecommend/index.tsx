@@ -6,6 +6,8 @@ import LearningRecommendItem from '../LearningRecommendItem'
 import { roadmapData } from '@/components/roadmap/main/RoadmapListSection/roadmapData'
 import { ILearningCard } from '@/types/learning'
 import { getRecommendLearnings } from '@/apis/recommend'
+import { useIsLogin } from '@/stores/authStore'
+import Loading from '@/components/common/Loading'
 
 const LearningRecommend = () => {
   const [isFetching, setIsFetching] = useState<boolean>(true)
@@ -13,17 +15,18 @@ const LearningRecommend = () => {
   const params = useSearchParams()
   const keyword = params.get('query') || params.get('oquery') || ''
 
+  const isLogin = useIsLogin()
+
   const fetchRecommendLearnings = async () => {
     const learnings = await getRecommendLearnings(keyword)
-    learnings && setList(learnings)
+    learnings && isLogin && setList(learnings)
     setIsFetching(false)
   }
 
   useEffect(() => {
     setIsFetching(true)
     fetchRecommendLearnings()
-    console.log(keyword)
-  }, [keyword])
+  }, [params])
 
   if (!keyword) return
   return (
@@ -35,12 +38,22 @@ const LearningRecommend = () => {
           <p className={styles.arrowBox}>우디는 강의를 추천해주는 클라우디의 서비스입니다</p>
         </div>
       </div>
-      <div className={styles.desc}>{`'${keyword}'와 관련된 추천 강의입니다`}</div>
-      <div className={styles.wrap}>
-        {list.map(item => (
-          <LearningRecommendItem key={item.learningId} item={item} />
-        ))}
-      </div>
+
+      {isLogin ? (
+        <div className={styles.descLogin}>{`'${keyword}'와 관련된 추천 강의입니다`} </div>
+      ) : (
+        <div className={styles.desc}>{`로그인 후 ${keyword}와 관련된 강의를 추천받아 보세요!`}</div>
+      )}
+
+      {isFetching ? (
+        <Loading />
+      ) : (
+        <div className={styles.wrap}>
+          {list.map(item => (
+            <LearningRecommendItem key={item.learningId} item={item} />
+          ))}
+        </div>
+      )}
     </article>
   )
 }
