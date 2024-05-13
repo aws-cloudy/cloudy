@@ -7,12 +7,14 @@ import ChatList from '../ChatList'
 import ChatRoom from '../ChatRoom'
 import { useEffect, useRef } from 'react'
 import ChatBotHeader from '../ChatBotHeader'
+import { useIsLogin } from '@/stores/authStore'
 
 function ChatBot() {
   const isChatbotOpen = useIsChatbotOpen()
   const chatBotType = useChatbotType()
   const chatbotRef = useRef<HTMLDivElement>(null)
   const { setIsChatbotOpen } = useChatbotActions()
+  const isLogin = useIsLogin()
 
   const autoCloseChatbot = (e: MouseEvent) => {
     const chatbot = chatbotRef.current
@@ -24,11 +26,14 @@ function ChatBot() {
   }
 
   useEffect(() => {
+    if (!isLogin) return
     if (isChatbotOpen) {
       window.addEventListener('mousedown', autoCloseChatbot)
       return () => window.removeEventListener('mousedown', autoCloseChatbot)
     }
   }, [isChatbotOpen])
+
+  if (!isLogin) return <></>
 
   return (
     isChatbotOpen && (

@@ -1,22 +1,24 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import styles from './Header.module.scss'
 import mainStyles from './HeaderMain.module.scss'
 import Link from 'next/link'
 import { MdOutlineLanguage } from 'react-icons/md'
 import { MdMenu } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
+import { useIsLogin, useToken, useUsername } from '@/stores/authStore'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const isLogin = useIsLogin()
+  const username = useUsername()
   const navRef = useRef<HTMLDivElement>(null)
   const pathname = usePathname()
   const isMain = pathname === '/'
   const [isDark, setIsDark] = useState(isMain ? true : false)
   const [style, setStyle] = useState(isDark ? mainStyles : styles)
-  const { data: session } = useSession()
 
   useEffect(() => {
     setIsOpen(false)
@@ -75,9 +77,9 @@ const Header = () => {
             </Link>
           </div>
           <div className={style.RightWrap}>
-            {session ? (
+            {isLogin ? (
               <Link href="/mypage" className={style.menuItem}>
-                {session.user?.name}님
+                {username}님
               </Link> // 세션에 사용자 이름이 있다면 표시
             ) : (
               <button onClick={() => signIn('cognito', { callbackUrl: '/' })} className={style.loginButton}>
@@ -110,7 +112,7 @@ const Header = () => {
               <Link href="/community" className={style.mobileMenuItem}>
                 커뮤니티
               </Link>
-              {session ? (
+              {isLogin ? (
                 <Link href="/mypage" className={style.mobileMenuItem}>
                   마이페이지
                 </Link> // 세션에 사용자 이름이 있다면 표시

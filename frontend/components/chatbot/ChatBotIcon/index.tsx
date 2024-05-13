@@ -6,16 +6,20 @@ import styles from './ChatBotIcon.module.scss'
 import { RiRobot2Fill } from 'react-icons/ri'
 import { useChatbotActions, useIsChatbotOpen } from '@/stores/chatbotStore'
 import { usePathname } from 'next/navigation'
+import { useIsLogin } from '@/stores/authStore'
 
 function ChatBotIcon() {
   const pathname = usePathname()
   const isChatbotOpen = useIsChatbotOpen()
+  const isLogin = useIsLogin()
   const { setIsChatbotOpen } = useChatbotActions()
   const isActive = useMemo(() => {
     if (pathname === '/community/create') return false
     if (pathname.startsWith('/community/update')) return false
     return true
   }, [pathname])
+
+  if (!isLogin) return <></>
 
   return (
     !isChatbotOpen &&

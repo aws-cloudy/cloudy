@@ -7,30 +7,43 @@ import React, { useEffect, useRef, useState } from 'react'
 import ChatRoomInput from '../ChatRoomInput'
 import { IMessage } from '@/types/chatbot'
 import { chatBotList } from '@/constants/chatbot'
+import { getSession } from 'next-auth/react'
+import ChatRoomPrevMsg from '../ChatRoomPrevMsg'
 
 function ChatRoom() {
   const chatBotType = useChatbotType()
   const msgRef = useRef<HTMLDivElement>(null)
-  const { sub, name } = chatBotList[chatBotType]
   const { setChatbotType } = useChatbotActions()
-  const [messages, setMessages] = useState<IMessage[]>([
-    { sender: 'cpu', content: `안녕하세요! ${sub} ${name}입니다. 무엇을 도와드릴까요?` },
-  ])
+  const [prevMessages, setPrevMessages] = useState<IMessage[]>([])
+  const [messages, setMessages] = useState<IMessage[]>([])
   const [botMessage, setBotMessage] = useState('')
   const [isReceiving, setIsReceiving] = useState(false)
+  const [isInitialFetching, setIsInitialFetching] = useState(true)
+  const prevHeight = useRef(0)
 
   const handleConnect = async (userMessage: string) => {
     if (userMessage.length === 0) return
-    setMessages(prev => [...prev, { sender: 'user', content: userMessage }])
+    const session = await getSession()
+    if (!session?.accessToken) return
+    const token = session.accessToken
+    const type = chatBotList[chatBotType].type
+    setMessages(prev => [...prev, { isUserSent: true, content: userMessage, regAt: new Date().toDateString() }])
     try {
-      const res = await fetch('/cloudy-chat-api', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_CHAT_SERVER_URL}?type=${type}`, {
         method: 'POST',
         headers: {
           Connection: 'keep-alive',
           'Content-Type': 'application/json; charset=utf-8',
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ inputData: userMessage }),
+        body: JSON.stringify({ type, inputData: userMessage }),
       })
+
+      if (res.status === 400) {
+        setBotMessage('사용자의 질문이 부적절한 컨텐츠를 담고 있습니다.')
+        setIsReceiving(false)
+        return
+      }
 
       const reader = res.body!.getReader()
       const decoder = new TextDecoder()
@@ -58,12 +71,24 @@ function ChatRoom() {
   useEffect(() => {
     const messageBox = msgRef.current
     if (!messageBox) return
+    prevHeight.current = messageBox.scrollHeight
     messageBox.scrollTo({ top: messageBox.scrollHeight })
-  }, [messages, botMessage])
+  }, [messages, botMessage, isInitialFetching])
+
+  useEffect(() => {
+    if (isInitialFetching) {
+      setIsInitialFetching(false)
+    } else {
+      const messageBox = msgRef.current
+      if (!messageBox) return
+      messageBox.scrollTo({ top: messageBox.scrollHeight - prevHeight.current })
+      prevHeight.current = messageBox.scrollHeight
+    }
+  }, [prevMessages])
 
   useEffect(() => {
     if (!isReceiving && botMessage.length > 0) {
-      setMessages(prev => [...prev, { sender: 'cpu', content: botMessage }])
+      setMessages(prev => [...prev, { isUserSent: false, content: botMessage, regAt: null }])
       setBotMessage('')
     }
   }, [isReceiving])
@@ -74,14 +99,21 @@ function ChatRoom() {
         {'〈　목록으로 돌아가기'}
       </div>
       <div className={styles.msgBox} ref={msgRef}>
+        <ChatRoomPrevMsg
+          prevMessages={prevMessages}
+          setPrevMessages={setPrevMessages}
+          isInitialFetching={isInitialFetching}
+          setIsInitialFetching={setIsInitialFetching}
+        />
         {messages.map((e, i) => (
-          <ChatRoomMessage key={i} sender={e.sender} content={e.content} />
+          <ChatRoomMessage key={i} isUserSent={e.isUserSent} content={e.content} regAt={e.regAt} />
         ))}
-
-        {isReceiving && <ChatRoomMessage sender="cpu" content={botMessage} waiting={botMessage.length === 0} />}
+        {isReceiving && (
+          <ChatRoomMessage isUserSent={false} content={botMessage} waiting={botMessage.length === 0} regAt={null} />
+        )}
       </div>
 
-      <ChatRoomInput handleConnect={handleConnect} setIsReceiving={setIsReceiving} />
+      <ChatRoomInput handleConnect={handleConnect} setIsReceiving={setIsReceiving} isReceiving={isReceiving} />
     </div>
   )
 }

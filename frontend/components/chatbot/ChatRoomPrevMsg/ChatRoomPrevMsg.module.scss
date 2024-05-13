@@ -1,0 +1,24 @@
+@import '@/styles/theme.scss';
+
+.newMessage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0;
+
+  & > p {
+    width: fit-content;
+    padding: 5px 10px;
+    background-color: $gray2;
+    color: $gray8;
+    font-size: 0.8em;
+    border-radius: 25px;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .newMessage > p {
+    font-size: 0.9em;
+  }
+}

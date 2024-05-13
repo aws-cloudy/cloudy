@@ -98,7 +98,7 @@ const LearningList = () => {
         {list && list.map((item, i) => <LearningCard key={i} item={item} layout={layout} />)}
       </div>
       <Observer callback={observerCallback} />
-      {/* <LearningHazardSection /> */}
+      <LearningHazardSection />
     </>
   )
 }
