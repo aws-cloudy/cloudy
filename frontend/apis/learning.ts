@@ -25,7 +25,10 @@ export const getLearnings = async (
     .get(
       `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
     )
-    .then(res => res.data.learningList)
+    .then(res => {
+      console.log(res.data.learningList)
+      return res.data.learningList
+    })
     .catch(() => [])
 
   return response
