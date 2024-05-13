@@ -53,7 +53,7 @@ const Account = ({ user }: any) => {
         <div className={styles.title}>이메일</div>
         <div className={styles.block}>{user.email}</div>
       </div>
-      <div className={styles.row}>
+      <div className={styles.dropRow}>
         <div className={styles.title}>직무</div>
         <Dropdown
           options={jobOptions}
@@ -64,7 +64,7 @@ const Account = ({ user }: any) => {
           width={400}
         />
       </div>
-      <div className={styles.row}>
+      <div className={styles.dropRow}>
         <div className={styles.title}>관심 서비스</div>
         <Dropdown
           options={serviceOptions}

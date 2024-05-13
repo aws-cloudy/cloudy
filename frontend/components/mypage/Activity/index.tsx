@@ -39,8 +39,9 @@ const Activity = ({ user }: any) => {
     try {
       const res = await fetch('/api/mypage/answers')
       const data = await res.json()
-      setAnswerList(data.answersList)
-      setOriginAnswerList(data.answersList)
+      const commentsWithType = data.answersList.map((comment: any) => ({ ...comment, type: 'community' }))
+      setAnswerList(commentsWithType)
+      setOriginAnswerList(commentsWithType)
       console.log(answerList)
     } catch (error) {
       console.log('답변 가져오기 실패', error)
@@ -51,7 +52,6 @@ const Activity = ({ user }: any) => {
     return [...data].sort((a, b) => {
       const dateA = new Date(a.createdAt).getTime()
       const dateB = new Date(b.createdAt).getTime()
-      console.log('A,b', dateA, dateB)
       return dateB - dateA // 오름차순으로 정렬하려면 dateA - dateB
     })
   }
@@ -85,6 +85,8 @@ const Activity = ({ user }: any) => {
     } else if (options.name === '기본순') {
       setQuestionList(originQuestionList)
       setAnswerList(originAnswerList)
+      console.log('질문', questionList)
+      console.log('댓글', answerList)
     }
   }, [options, selectedTab])
 

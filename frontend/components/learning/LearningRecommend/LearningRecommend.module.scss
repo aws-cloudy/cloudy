@@ -17,16 +17,23 @@
   align-items: center;
 }
 
-.desc {
+.descLogin {
   color: $gray9;
   font-size: 0.9em;
   font-weight: 400;
   margin-block: 8px 20px;
 }
 
+.desc {
+  color: $gray9;
+  font-size: 0.9em;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
 .wrap {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   grid-gap: 20px;
 }
 
