@@ -24,6 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.*;
 
 @SpringJUnitConfig(LearningServiceImpl.class)
 class LearningServiceImplTest {
@@ -33,6 +34,9 @@ class LearningServiceImplTest {
 
     @MockBean
     LearningRepository learningRepository;
+
+    @MockBean
+    ConvertUtil convertUtil;
 
     @MockBean
     JobRepository jobRepository;
@@ -45,6 +49,67 @@ class LearningServiceImplTest {
         dummyItem2 = DummyLearning.getDummyLearningItem2();
         dummyItem3 = DummyLearning.getDummyLearningItem2();
         dummyItem4 = DummyLearning.getDummyLearningItem2();
+    }
+
+    @Test
+    @DisplayName("직무명만을 포함해 조회 요청 시 직무명 변환 메서드를 실행하고, 다른 변환 메서드는 실행이 되지 않는다.")
+    void getLearningsWithType() {
+        LearningSearchReq req = new LearningSearchReq();
+        req.setPageSize(2);
+        req.setJobName(new String[]{""});
+
+        // given
+        given(learningRepository.findLearnings(any())).willReturn(List.of());
+        given(convertUtil.covertJobName(any())).willReturn(new String[]{""});
+
+        // when
+        learningService.getLearnings(req);
+
+        // then
+        verify(convertUtil, times(1)).covertJobName(req.getJobName());
+        verify(convertUtil, never()).covertServiceName(req.getServiceName());
+        verify(convertUtil, never()).covertDifficulty(req.getDifficulty());
+        verify(convertUtil, never()).covertType(req.getType());
+    }
+
+    @Test
+    @DisplayName("난이도, 강의분류, 서비스명, 직무명 포함해 조회 요청 시 각각의 필드에 대한 변환 메서드를 실행한다.")
+    void getLearningsWithAllParameter() {
+        LearningSearchReq req = new LearningSearchReq();
+        req.setPageSize(2);
+        req.setDifficulty(new String[]{""});
+        req.setJobName(new String[]{""});
+        req.setType(new String[]{""});
+        req.setServiceName(new String[]{""});
+
+        // given
+        given(learningRepository.findLearnings(any())).willReturn(List.of());
+        given(convertUtil.covertJobName(any())).willReturn(new String[]{""});
+        given(convertUtil.covertType(any())).willReturn(new String[]{""});
+        given(convertUtil.covertServiceName(any())).willReturn(new String[]{""});
+        given(convertUtil.covertDifficulty(any())).willReturn(new String[]{""});
+
+        // when
+        learningService.getLearnings(req);
+
+        // then
+        verify(convertUtil, times(1)).covertJobName(req.getJobName());
+        verify(convertUtil, times(1)).covertServiceName(req.getServiceName());
+        verify(convertUtil, times(1)).covertDifficulty(req.getDifficulty());
+        verify(convertUtil, times(1)).covertType(req.getType());
+    }
+
+    @Test
+    @DisplayName("로그인 한 회원이 존재하지 않는 직무로 학습 조회 시 예외를 터뜨린다.")
+    void getLearningsFailedWhenNonExistJob() {
+
+        given(jobRepository.existsJobId(anyInt())).willReturn(Boolean.FALSE);
+
+        // when
+        // then
+        Assertions.assertThatThrownBy(()->learningService.getLearningsByJob(1,1))
+                .isInstanceOf(LearningException.class)
+                .hasMessageContaining(ErrorCode.INVALID_JOB_ID.getMessage());
     }
 
     @Test

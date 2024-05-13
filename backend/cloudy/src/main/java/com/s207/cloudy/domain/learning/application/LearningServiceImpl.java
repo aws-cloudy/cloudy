@@ -49,6 +49,7 @@ public class LearningServiceImpl implements LearningService {
         }
 
         List<LearningItem> items = learningRepository.findLearnings(learningSearchReq);
+
         return LearningListRes.builder()
                 .learningList(items)
                 .isModified(false)
