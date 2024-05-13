@@ -8,9 +8,10 @@ import { jobOptions } from '@/constants/user'
 async function MainLectureRecom() {
   const user = await getUser()
   const isLogin = user?.id
-  const learningList = isLogin
-    ? ((await fetchLearningRecom(user.jobId)) as ILearningCard[])
-    : ((await fetchLearningRecomWithoutJob()) as ILearningCard[])
+  const learningList: ILearningCard[] = []
+  // const learningList = isLogin
+  //   ? ((await fetchLearningRecom(user.jobId)) as ILearningCard[])
+  //   : ((await fetchLearningRecomWithoutJob()) as ILearningCard[])
 
   return (
     <div className={styles.container}>

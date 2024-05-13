@@ -26,4 +26,12 @@ export interface IChatListItem {
 export interface IChatRoomInput {
   handleConnect: (userMessage: string) => void
   setIsReceiving: React.Dispatch<SetStateAction<boolean>>
+  isReceiving: boolean
+}
+
+export interface IChatRoomPrevMsg {
+  prevMessages: IMessage[]
+  setPrevMessages: React.Dispatch<SetStateAction<IMessage[]>>
+  isInitialFetching: boolean
+  setIsInitialFetching: React.Dispatch<SetStateAction<boolean>>
 }
