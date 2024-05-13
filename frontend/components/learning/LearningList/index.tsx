@@ -41,7 +41,12 @@ const LearningList = () => {
     const difficulty = params.get('difficulty') || ''
 
     const final = await getFinalSearch(keyword)
+      .then(res => res)
+      .catch(err => {
+        console.log('err', err)
+      })
 
+    console.log('final', final)
     let word = ''
     if (oKeyword) {
       word = oKeyword
