@@ -8,6 +8,8 @@ const nextConfig = {
       { protocol: 'https', hostname: 'explore.skillbuilder.aws' },
       { protocol: 'https', hostname: 'cdn.inflearn.com' },
       { protocol: 'https', hostname: 'rattle-stock-d32.notion.site' },
+      { protocol: 'https', hostname: 'encrypted-tbn0.gstatic.com' },
+      { protocol: 'https', hostname: 'media.licdn.com' },
       { protocol: 'http', hostname: 'localhost' },
     ],
     minimumCacheTTL: 31536000,

@@ -39,3 +39,20 @@ export async function checkUserExists(username: string): Promise<{ exists: boole
     throw error
   }
 }
+
+export async function getUserRefreshToken(username: string): Promise<string | null> {
+  const params = {
+    UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string,
+    Username: username,
+  };
+
+  try {
+    const data = await client.send(new AdminGetUserCommand(params));
+    const refreshToken = data?.UserAttributes?.find(attr => attr.Name === 'refresh_token')?.Value;
+    return refreshToken || null;
+  } catch (error) {
+    console.error('Error fetching user refresh token from Cognito:', error);
+    return null;
+  }
+}
+
