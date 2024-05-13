@@ -17,3 +17,8 @@
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   grid-gap: 20px;
 }
+
+.loading {
+  align-items: center;
+  justify-content: center;
+}

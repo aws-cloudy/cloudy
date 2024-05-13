@@ -12,6 +12,7 @@ export const roadmapData: IRoadmapCard[] = [
     commentsCnt: 2,
     isScrapped: false,
     bookmarkId: 0,
+    isUseMypage: false,
   },
   {
     roadmapId: 2,
@@ -25,6 +26,7 @@ export const roadmapData: IRoadmapCard[] = [
     commentsCnt: 2,
     isScrapped: false,
     bookmarkId: 1,
+    isUseMypage: false,
   },
   {
     roadmapId: 3,
@@ -37,5 +39,6 @@ export const roadmapData: IRoadmapCard[] = [
     commentsCnt: 2,
     isScrapped: false,
     bookmarkId: 2,
+    isUseMypage: false,
   },
 ]

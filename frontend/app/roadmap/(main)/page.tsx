@@ -13,9 +13,9 @@ const RoadmapPage = () => {
         <PageTitle />
         <Suspense>
           <RoadmapFilterSection />
-          <RoadmapHazardSection />
-          {/* <RoadmapRecommend />
-          <RoadmapListSection /> */}
+          {/* <RoadmapHazardSection /> */}
+          <RoadmapRecommend />
+          <RoadmapListSection />
         </Suspense>
       </Layout>
     </>

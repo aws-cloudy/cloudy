@@ -1,19 +1,14 @@
 package com.s207.cloudy.domain.learning.application;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.BDDMockito.given;
-
 import com.s207.cloudy.domain.learning.dao.JobRepository;
 import com.s207.cloudy.domain.learning.dao.LearningRepository;
+import com.s207.cloudy.domain.learning.domain.Learning;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.learning.dto.LearningListRes;
 import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.domain.learning.exception.LearningException;
 import com.s207.cloudy.dummy.learning.DummyLearning;
 import com.s207.cloudy.global.error.enums.ErrorCode;
-import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -22,6 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.BDDMockito.given;
 
 @SpringJUnitConfig(LearningServiceImpl.class)
 class LearningServiceImplTest {
@@ -47,7 +49,7 @@ class LearningServiceImplTest {
 
     @Test
     @DisplayName("검색어 수정전의 전체 학습 목록을 정상적으로 조회한다.")
-    void getLearnings() throws Exception{
+    void getLearnings() throws Exception {
 
         List<LearningItem> dummyList = List.of(dummyItem1, dummyItem2);
         given(learningRepository.findLearnings(any()))
@@ -70,7 +72,7 @@ class LearningServiceImplTest {
 
     @Test
     @DisplayName("로그인 시, 지정한 개수만큼 해당 직무번호와 일치하는 전체 학습 목록을 랜덤하게 조회한다.")
-    void getListByJobWhenLoginSuccess() throws Exception{
+    void getListByJobWhenLoginSuccess() throws Exception {
 
         given(jobRepository.existsJobId(anyInt()))
                 .willReturn(true);
@@ -93,7 +95,7 @@ class LearningServiceImplTest {
 
     @Test
     @DisplayName("로그인 시, 직무가 존재하지 않으면 LearningException 예외가 발생한다.")
-    void getListByJobWhenLoginFail() throws Exception{
+    void getListByJobWhenLoginFail() throws Exception {
 
         given(jobRepository.existsJobId(anyInt()))
                 .willThrow(new LearningException(ErrorCode.INVALID_JOB_ID));
@@ -114,7 +116,7 @@ class LearningServiceImplTest {
 
     @Test
     @DisplayName("로그아웃 시, 지정한 개수만큼 전체 학습 목록을 랜덤하게 조회한다.")
-    void getListByJobWhenLogoutSuccess() throws Exception{
+    void getListByJobWhenLogoutSuccess() throws Exception {
 
         List<LearningItem> dummyList = List.of(dummyItem3, dummyItem4);
         given(learningRepository.findLearningsByJob(anyInt()))
@@ -129,6 +131,20 @@ class LearningServiceImplTest {
         // then
         Assertions.assertThat(list.getLearningList()).isNotNull();
         Assertions.assertThat(list.getLearningList()).hasSize(dummyList.size());
+    }
+
+    @Test
+    @DisplayName("로드맵id로 로드맵에 포함된 학습 리스트를 조회한다.")
+    void getCourseListByRoadmapIdSuccess() {
+        List<Learning> courses =
+                List.of(DummyLearning.getDummyLearning1(), DummyLearning.getDummyLearning2());
+
+        given(learningRepository.findByRoadmapId(anyInt()))
+                .willReturn(courses);
+
+        List<LearningItem> actualCourses = learningService.getCoursesWithRoadmapId(1);
+
+        Assertions.assertThat(actualCourses).hasSize(courses.size());
     }
 
 }

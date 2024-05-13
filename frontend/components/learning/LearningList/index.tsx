@@ -15,6 +15,7 @@ import Empty from '@/components/common/Empty'
 import { useSearchParams } from 'next/navigation'
 import { useLearningActions, useLearningOriginalQuery } from '@/stores/learning'
 import LearningHazardSection from '../LearningHazardSection'
+import LearningRecommend from '../LearningRecommend'
 
 const LearningList = () => {
   // 무한 스크롤
@@ -96,8 +97,8 @@ const LearningList = () => {
       {/* <div className={layout === 'grid' ? styles.gridContainer : styles.justifyContainer}>
         {list && list.map((item, i) => <LearningCard key={i} item={item} layout={layout} />)}
       </div>
-      <Observer callback={observerCallback} /> */}
-      <LearningHazardSection />
+      <Observer callback={observerCallback} />
+      {/* <LearningHazardSection /> */}
     </>
   )
 }

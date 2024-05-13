@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './RoadmapCard.module.scss'
 import Image from 'next/image'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
@@ -16,6 +16,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   const { data: session, status } = useSession()
 
   const [clickMark, setClickMark] = useState(item.isScrapped)
+  
 
   const handleMarkClear = async (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
@@ -43,9 +44,16 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
     setClickMark(true)
   }
 
+  useEffect(() => {
+    setClickMark(item.isScrapped)
+  }, [item.isScrapped])
+
   const router = useRouter()
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
 
+  if(item.isUseMypage && !clickMark){
+    return null
+  }
   return (
     <div className={styles.card} key={item.roadmapId} onClick={onClick} data-testid="roadmap-item">
       <div className={styles.imageBox}>
@@ -84,6 +92,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
         </div>
       </div>
     </div>
+    
   )
 }
 

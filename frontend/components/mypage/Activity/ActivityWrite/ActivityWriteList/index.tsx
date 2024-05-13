@@ -8,15 +8,15 @@ const ActivityWriteList = ({ posts }: any) => {
         <section className={styles.section} key={post.id}>
           <div className={styles.row}>
             <div className={styles.title}>{post.title}</div>
-            <div className={post.status === '미해결' ? styles.unResolve : styles.resolve}>{post.status}</div>
+            <div className={post.checkedId ? styles.resolve : styles.unResolve}>
+              {post.checkedId ? '해결' : '미해결'}
+            </div>
           </div>
-          <div className={styles.context}>
-            {post.context.length > 100 ? `${post.context.substring(0, 100)}...` : post.context}
-          </div>
+          <div className={styles.desc}>{post.desc.length > 100 ? `${post.desc.substring(0, 100)}...` : post.desc}</div>
           <div className={styles.row}>
-            {post.tags.map((tag: any) => (
-              <div className={styles.tag} key={tag}>
-                #{tag}
+            {post.hashtags.map((hashtag: any) => (
+              <div className={styles.tag} key={hashtag.hashtag.id}>
+                #{hashtag.hashtag.title}
               </div>
             ))}
           </div>

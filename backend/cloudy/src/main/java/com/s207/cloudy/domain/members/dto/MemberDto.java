@@ -1,4 +1,4 @@
-package com.s207.cloudy.domain.members;
+package com.s207.cloudy.domain.members.dto;
 
 import lombok.Builder;
 
