@@ -30,8 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         log.info("JwtAuthenticationFilter :: 필터 진입");
         jwtService.extractAccessToken(request)
-                .filter(jwtService::isTokenValid);
-                //.orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
+                .filter(jwtService::isTokenValid)
+                .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
 
 
         filterChain.doFilter(request, response);
