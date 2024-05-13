@@ -8,21 +8,6 @@ export const client = axios.create({
   baseURL: '/cloudy-api',
 })
 
-client.interceptors.request.use(
-  async config => {
-    const session = await getSession()
-    if (session?.accessToken) {
-      const token = session.accessToken
-      // console.log('token', `Bearer ${token}`)
-      config.headers['Authorization'] = `Bearer ${token}`
-    }
-    return config
-  },
-  error => {
-    throw new Error(error)
-  },
-)
-
 // 응답 인터셉터
 client.interceptors.response.use(
   res => res,
@@ -32,12 +17,12 @@ client.interceptors.response.use(
       originalRequest._retry = true
       const session = await getSession()
       // getUserRefreshToken 함수를 통해 Refresh Token을 가져오기
-      const refreshToken = await getUserRefreshToken(session?.user?.username || '')
+      const refreshToken = await getUserRefreshToken(session?.user?.username as string)
 
       if (refreshToken) {
         try {
           // Refresh Token을 사용하여 새로운 Access Token을 얻음
-          const newAccessToken = await getUserRefreshToken(session?.user?.username || '')
+          const newAccessToken = await getUserRefreshToken(session?.user?.username as string)
 
           // 새로운 Access Token으로 요청 재시도
           originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`
@@ -45,12 +30,12 @@ client.interceptors.response.use(
         } catch (error) {
           // Refresh Token이 만료된 경우 또는 다른 문제 발생 시 로그아웃 처리
           console.error('Refresh Token 만료!!:', error)
-          await signOut();
+          await signOut()
         }
       } else {
         // Refresh Token이 없는 경우
         console.error('Refresh Token이 없습니다.')
-        await signOut();
+        await signOut()
       }
     }
     return Promise.reject(error)
@@ -63,6 +48,7 @@ client.interceptors.request.use(
     const accessToken = session?.accessToken
 
     if (accessToken) {
+      // console.log(accessToken)
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
 
