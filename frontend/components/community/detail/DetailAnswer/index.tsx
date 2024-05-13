@@ -4,7 +4,7 @@ import styles from './DetailAnswer.module.scss'
 import DetailAnswerITem from '../DetailAnswerITem'
 
 function DetailAnswer({ answer }: { answer: IQuestionAnswer }) {
-  const { id, answers, checkedId, authId, isWriter } = answer
+  const { id, answers, checkedId, isWriter } = answer
 
   return (
     <div className={styles.container}>
@@ -13,16 +13,10 @@ function DetailAnswer({ answer }: { answer: IQuestionAnswer }) {
         <div className={styles.answers}>
           {answers.length === 0 && <div className={styles.nodata}>등록된 댓글이 없습니다.</div>}
           {answers.map(answer => (
-            <DetailAnswerITem
-              key={answer.id}
-              ans={answer}
-              isChecked={answer.id === checkedId}
-              authId={authId}
-              isWriter={isWriter}
-            />
+            <DetailAnswerITem key={answer.id} ans={answer} isChecked={answer.id === checkedId} isWriter={isWriter} />
           ))}
         </div>
-        <DetailAnswerInput id={id} authId={authId} />
+        <DetailAnswerInput id={id} />
       </div>
     </div>
   )
