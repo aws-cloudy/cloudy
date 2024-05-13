@@ -97,13 +97,11 @@ test {
                 "**/*Application*",
                 "**/*Config*",
                 "**/dto/**",
-                "**/entity/**",
                 "**/global/**",
-                "**/infra/**",
+                "**/domain/**/domain/**",
                 "**/*Interceptor*",
                 "**/*Filter*",
                 "**/*Handler*",
-                "**/*Exception*",
                 "**/*Provider*"
         ]
     }
@@ -131,12 +129,10 @@ jacocoTestReport {
                             "**/*Config*",
                             "**/dto/**",
                             "**/global/**",
-                            "**/infra/**",
                             "**/domain/**/domain/**",
                             "**/*Interceptor*",
                             "**/*Filter*",
                             "**/*Handler*",
-                            "**/*Exception*",
                             "**/*Provider*"
                     ] + Qdomains)
                 })
