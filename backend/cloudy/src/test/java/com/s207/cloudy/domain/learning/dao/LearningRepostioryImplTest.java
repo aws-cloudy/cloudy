@@ -1,13 +1,14 @@
 package com.s207.cloudy.domain.learning.dao;
 
 import com.s207.cloudy.TestQueryDslConfig;
-import com.s207.cloudy.domain.learning.dto.LearningItem;
-import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
+import com.s207.cloudy.domain.learning.dao.impl.LearningRepositoryImpl;
 import com.s207.cloudy.domain.learning.domain.Job;
 import com.s207.cloudy.domain.learning.domain.Learning;
 import com.s207.cloudy.domain.learning.domain.LearningJob;
-import com.s207.cloudy.domain.learning.dao.impl.LearningRepositoryImpl;
+import com.s207.cloudy.domain.learning.dto.LearningItem;
+import com.s207.cloudy.domain.learning.dto.LearningSearchReq;
 import com.s207.cloudy.dummy.learning.DummyLearning;
+import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -52,7 +53,7 @@ class LearningRepostioryImplTest {
         learningJob4 = DummyLearning.getDummyLearningJob(dummy4, job);
         entityManager.persist(learningJob3);
         entityManager.persist(learningJob4);
-        
+
         entityManager.flush();
         entityManager.clear();
     }
@@ -79,6 +80,25 @@ class LearningRepostioryImplTest {
             assertions.assertThat(list.get(0).getDifficulty()).isEqualTo(dummy1.getDifficulty());
             assertions.assertThat(list.get(0).getLink()).isEqualTo(dummy1.getLink());
         });
+    }
+
+    @DisplayName("필터링 조건을 적용해 전체 학습 리스트를 정상적으로 조회한다.")
+    @Test
+    void findListWithFiltering() {
+        // given
+        LearningSearchReq req = new LearningSearchReq();
+        req.setPageSize(2);
+        req.setQuery("AWS");
+        req.setDifficulty(new String[]{""});
+        req.setJobName(new String[]{""});
+        req.setType(new String[]{""});
+        req.setServiceName(new String[]{""});
+
+        // when
+        List<LearningItem> list = learningRepository.findLearnings(req);
+
+        // then
+        Assertions.assertThat(list).isEmpty();
     }
 
     @DisplayName("로그인 시, 지정한 개수만큼 해당 직무번호와 일치하는 전체 학습 목록을 랜덤하게 조회한다.")
@@ -110,7 +130,7 @@ class LearningRepostioryImplTest {
         // then
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(list).isNotEmpty();
-            assertions.assertThat(list).hasSize(2);
+            assertions.assertThat(list).hasSize( count);
         });
     }
 }
