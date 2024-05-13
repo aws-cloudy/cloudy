@@ -1,11 +1,18 @@
 import { Key } from 'react'
 import styles from './ActivityWriteList.module.scss'
+import { useRouter } from 'next/navigation'
 
 const ActivityWriteList = ({ posts }: any) => {
+  const router = useRouter()
+
+  const handleMove = (id: number) => {
+    router.push(`/community/detail/${id}`)
+  }
+
   return (
     <>
       {posts.map((post: any) => (
-        <section className={styles.section} key={post.id}>
+        <section className={styles.section} key={post.id} onClick={() => handleMove(post.id)}>
           <div className={styles.row}>
             <div className={styles.title}>{post.title}</div>
             <div className={post.checkedId ? styles.resolve : styles.unResolve}>

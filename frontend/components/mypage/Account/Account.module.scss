@@ -20,6 +20,14 @@
   margin-bottom: 25px;
 }
 
+.dropRow {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
 .title {
   color: $gray9;
   width: 15%;
@@ -27,12 +35,15 @@
 }
 
 .block {
-  width: 50%;
+  display: flex;
+  flex: initial;
+  width: 55%;
   height: 48px;
   background-color: $gray3;
   border-radius: 6px;
   align-content: center;
   padding: 10px;
+  align-items: center;
 }
 
 .switchButton {
@@ -45,4 +56,16 @@
   border-radius: 6px;
   border: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+  .block {
+    font-size: 0.8rem;
+  }
+  .dropRow {
+    flex-direction: column;
+  }
+  .title {
+    width: 22%;
+  }
 }

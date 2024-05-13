@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import Account from '@/components/mypage/Account'
 import Activity from '@/components/mypage/Activity'
 import Favorites from '@/components/mypage/Favorites'
+import Loading from '@/components/common/Loading'
 
 const MyPage = () => {
   const { data: session, status } = useSession()
@@ -20,7 +21,7 @@ const MyPage = () => {
   }, [session, status])
 
   if (status === 'loading') {
-    return null
+    return <Loading />
   } else if (status === 'authenticated') {
     return (
       <>
@@ -35,7 +36,7 @@ const MyPage = () => {
           </div>
           <div className={styles.right}>
             {selectedTab === 'account' && session && <Account user={session.user} />}
-            {selectedTab === 'activity' && session && <Activity user={session.user}/>}
+            {selectedTab === 'activity' && session && <Activity user={session.user} />}
             {selectedTab === 'favorites' && session && <Favorites user={session.user} />}
           </div>
         </section>
