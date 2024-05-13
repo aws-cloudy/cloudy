@@ -4,9 +4,20 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 170px;
-  position: relative;
+  height: auto;
   font-size: 0.9em;
+  position: relative;
+  cursor: pointer;
+}
+
+.imgWrap {
+  position: relative;
+  width: 100%;
+  height: 170px;
+}
+
+.img {
+  border-radius: 12px;
 }
 
 .hoverWrap {
@@ -15,13 +26,14 @@
   flex-direction: column;
   cursor: pointer;
   width: 100%;
-  height: 100%;
+  height: 170px;
   position: absolute;
   opacity: 0;
   transition: opacity 0.3s ease;
   color: $white;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 20px;
+  border-radius: 12px;
 
   &:hover {
     opacity: 1;
@@ -29,6 +41,36 @@
 }
 
 .title {
-  margin-bottom: 10px;
   font-weight: 500;
+  font-size: 1.04em;
+  font-weight: 500;
+  color: $black;
+  padding-top: 20px;
+}
+
+.badge {
+  right: 16px;
+  bottom: -16px;
+  display: flex;
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 100%;
+  font-size: 0.7em;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  color: $white;
+}
+
+.fundamental {
+  background-color: $red1;
+}
+
+.intermediate {
+  background-color: $green1;
+}
+
+.advanced {
+  background-color: $blue2;
 }
