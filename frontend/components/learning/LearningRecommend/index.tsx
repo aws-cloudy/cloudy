@@ -22,6 +22,7 @@ const LearningRecommend = () => {
   useEffect(() => {
     setIsFetching(true)
     fetchRecommendLearnings()
+    console.log(keyword)
   }, [keyword])
 
   if (!keyword) return

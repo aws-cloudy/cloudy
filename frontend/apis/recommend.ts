@@ -16,6 +16,7 @@ tmpClient.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
       const session = await getSession()
+      if (!session) return
       // getUserRefreshToken 함수를 통해 Refresh Token을 가져오기
       const refreshToken = await getUserRefreshToken(session?.user?.username as string)
 
@@ -47,6 +48,7 @@ tmpClient.interceptors.request.use(
     const session = await getSession()
     const accessToken = session?.accessToken
 
+    console.log(session)
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
