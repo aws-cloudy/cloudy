@@ -52,7 +52,7 @@
 
   &Inner {
     margin-top: 50px;
-    width: 300%;
+    min-width: 100%;
     height: calc(100% - 50px);
     display: flex;
     justify-content: space-between;
