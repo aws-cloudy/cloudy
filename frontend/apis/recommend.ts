@@ -5,7 +5,7 @@ import { getSession, signOut } from 'next-auth/react'
 const url = '/recommend'
 
 const tmpClient = axios.create({
-  baseURL: 'http://k10s207.p.ssafy.io:8080/api/v1',
+  baseURL: 'https://k10s207.p.ssafy.io/api/v1',
 })
 
 // 응답 인터셉터
@@ -48,7 +48,6 @@ tmpClient.interceptors.request.use(
     const session = await getSession()
     const accessToken = session?.accessToken
 
-    console.log(session)
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`
     }
@@ -65,6 +64,6 @@ export const getRecommendLearnings = async (query: string) => {
   const response = tmpClient
     .get(`${url}/learning?query=${query}&num=3`)
     .then(res => res.data.learningList)
-    .catch(err => [])
+    .catch(err => err.response.data.code)
   return response
 }

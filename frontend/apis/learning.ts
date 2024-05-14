@@ -7,7 +7,7 @@ export const getFinalSearch = async (query: string) => {
   const response = searchClient
     .get(`${url}/search/final?query=${query}`)
     .then(res => res.data)
-    .catch(() => {})
+    .catch(err => {})
   return response
 }
 
@@ -25,11 +25,8 @@ export const getLearnings = async (
     .get(
       `${url}/search?page=${offset}&pageSize=${limit}&query=${query}&jobName=${job}&serviceName=${service}&type=${type}&difficulty=${difficulty}`,
     )
-    .then(res => {
-      console.log(res.data.learningList)
-      return res.data.learningList
-    })
-    .catch(() => [])
+    .then(res => res.data.learningList)
+    .catch(err => [])
 
   return response
 }

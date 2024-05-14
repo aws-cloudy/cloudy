@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './LearningRecommend.module.scss'
 import { MdInfoOutline } from 'react-icons/md'
 import { useSearchParams } from 'next/navigation'
 import LearningRecommendItem from '../LearningRecommendItem'
-import { roadmapData } from '@/components/roadmap/main/RoadmapListSection/roadmapData'
 import { ILearningCard } from '@/types/learning'
 import { getRecommendLearnings } from '@/apis/recommend'
 import { useIsLogin } from '@/stores/authStore'
 import Loading from '@/components/common/Loading'
+import LearningHazard from '../LearningHazardSection'
 
 const LearningRecommend = () => {
-  const [isFetching, setIsFetching] = useState<boolean>(true)
+  const [isFetching, setIsFetching] = useState<boolean>(false)
   const [list, setList] = useState<ILearningCard[]>([])
+  const [isHazard, setIsHazard] = useState<boolean>(false)
   const params = useSearchParams()
   const keyword = params.get('query') || params.get('oquery') || ''
 
@@ -19,16 +20,19 @@ const LearningRecommend = () => {
 
   const fetchRecommendLearnings = async () => {
     const learnings = await getRecommendLearnings(keyword)
-    learnings && isLogin && setList(learnings)
+    learnings === 'CE008' ? setIsHazard(true) : setList(learnings)
     setIsFetching(false)
   }
 
   useEffect(() => {
     setIsFetching(true)
-    fetchRecommendLearnings()
+    setIsHazard(false)
+    keyword && isLogin && fetchRecommendLearnings()
   }, [params])
 
   if (!keyword) return
+  if (!isLogin) return
+  if (isHazard) return <LearningHazard />
   return (
     <article className={styles.container}>
       <div className={styles.title}>
@@ -38,13 +42,7 @@ const LearningRecommend = () => {
           <p className={styles.arrowBox}>우디는 강의를 추천해주는 클라우디의 서비스입니다</p>
         </div>
       </div>
-
-      {isLogin ? (
-        <div className={styles.descLogin}>{`'${keyword}'와 관련된 추천 강의입니다`} </div>
-      ) : (
-        <div className={styles.desc}>{`로그인 후 ${keyword}와 관련된 강의를 추천받아 보세요!`}</div>
-      )}
-
+      <div className={styles.descLogin}>{`'${keyword}'와 관련된 추천 강의입니다`} </div>
       {isFetching ? (
         <Loading />
       ) : (
