@@ -7,6 +7,7 @@ import { IChatRoomPrevMsg, IMessage } from '@/types/chatbot'
 import ChatRoomMessage from '../ChatRoomMessage'
 import Observer from '@/components/common/Observer'
 import styles from './ChatRoomPrevMsg.module.scss'
+import { chatClient } from '@/utils/axiosClient'
 
 function ChatRoomPrevMsg({ prevMessages, setPrevMessages, isInitialFetching, setIsInitialFetching }: IChatRoomPrevMsg) {
   const [prevMsgAll, setPrevMsgAll] = useState<IMessage[]>([])
@@ -17,7 +18,7 @@ function ChatRoomPrevMsg({ prevMessages, setPrevMessages, isInitialFetching, set
 
   const getPreviousChat = async () => {
     const type = chatBotList[chatBotType].type
-    const res = await axios.get(`/cloudy-chat-api?type=${type}`, {
+    const res = await chatClient.get(`/chats?type=${type}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
