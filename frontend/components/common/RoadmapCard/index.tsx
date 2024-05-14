@@ -56,15 +56,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   return (
     <div className={styles.card} key={item.roadmapId} onClick={onClick} data-testid="roadmap-item">
       <div className={styles.imageBox}>
-        <Image
-          src={item.thumbnail}
-          alt="roadmap-image"
-          className={styles.image}
-          fill
-          priority
-          objectFit="cover"
-          sizes="auto"
-        />
+        <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
         {status === 'authenticated' &&
           (clickMark ? (
             <BsBookmarkFill

@@ -14,6 +14,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'd1tlzifd8jdoy4.cloudfront.net' },
       { protocol: 'https', hostname: 'i.ytimg.com' },
       { protocol: 'https', hostname: 'dev.classmethod.jp' },
+      { protocol: 'https', hostname: 'd1.awsstatic.com' },
       { protocol: 'http', hostname: 'localhost' },
     ],
     minimumCacheTTL: 31536000,
