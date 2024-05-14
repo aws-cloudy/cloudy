@@ -40,7 +40,7 @@ export default function RegistInfomation({ username }: { username: string }) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, jobId: selectedJob?.value, serviceId: selectedService?.value }),
+      body: JSON.stringify({ username, jobId: Number(selectedJob?.value), serviceId: Number(selectedService?.value) }),
     })
       .then(res => {
         console.log('update 성공', res)
