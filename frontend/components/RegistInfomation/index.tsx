@@ -8,7 +8,7 @@ import Dropdown from '../common/Dropdown'
 import { signIn } from 'next-auth/react'
 import { OptionType, jobSelections, serviceOptions } from '@/constants/user'
 
-export default function RegistInfomation({ username }: any) {
+export default function RegistInfomation({ username }: { username: string }) {
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
   const [selectedService, setSelectedService] = useState<OptionType | null>(null)
   const [confirmScreen, setConfirmScreen] = useState(false)
@@ -42,14 +42,23 @@ export default function RegistInfomation({ username }: any) {
       },
       body: JSON.stringify({ username, jobId: selectedJob?.value, serviceId: selectedService?.value }),
     })
-    console.log('결과', response)
-    if (response.ok) {
-      // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
-      signIn('cognito', { callbackUrl: '/' })
-    } else {
-      // 에러 처리
-      console.error('Failed to update user information')
-    }
+      .then(res => {
+        console.log('update 성공', res)
+        // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
+        signIn('cognito', { callbackUrl: '/' })
+      })
+      .catch(err => {
+        // 에러 처리
+        console.error('Failed to update user information')
+      })
+    // console.log('결과', response)
+    // if (response.ok) {
+    //   // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
+    //   signIn('cognito', { callbackUrl: '/' })
+    // } else {
+    //   // 에러 처리
+    //   console.error('Failed to update user information')
+    // }
   }
 
   return (

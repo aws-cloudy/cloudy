@@ -16,11 +16,13 @@ const client = new CognitoIdentityProviderClient({
 export async function POST(req: Request) {
   // console.log('Request', req)
 
+  console.log('update function 실행')
   // req.body를 JSON으로 파싱
   const requestData = await req.json()
   const { username, jobId, serviceId } = requestData
 
   console.log(username, jobId, serviceId)
+
   const params = {
     UserAttributes: [
       {
@@ -35,6 +37,8 @@ export async function POST(req: Request) {
     UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string, // Cognito 사용자 풀 ID
     Username: username,
   }
+
+  console.log('params', params)
 
   try {
     await client.send(new AdminUpdateUserAttributesCommand(params))
