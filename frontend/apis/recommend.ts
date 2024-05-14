@@ -10,3 +10,15 @@ export const getRecommendLearnings = async (query: string) => {
     .catch(err => err.response.data.code)
   return response
 }
+
+// 로드맵 추천
+export const getRecommendRoadmaps = async (query: string) => {
+  const response = chatClient
+    .get(`${url}/roadmap?query=${query}&num=3`)
+    .then(res => {
+      console.log(res.data)
+      return res.data.roadmaps
+    })
+    .catch(err => err.response.data.code)
+  return response
+}

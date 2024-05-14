@@ -15,6 +15,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'i.ytimg.com' },
       { protocol: 'https', hostname: 'dev.classmethod.jp' },
       { protocol: 'https', hostname: 'd1.awsstatic.com' },
+      { protocol: 'https', hostname: 'digitalcloud.training' },
       { protocol: 'http', hostname: 'localhost' },
     ],
     minimumCacheTTL: 31536000,
