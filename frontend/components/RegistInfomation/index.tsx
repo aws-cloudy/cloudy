@@ -35,7 +35,7 @@ export default function RegistInfomation({ username }: { username: string }) {
   }
 
   const submit = async () => {
-    const response = await fetch('api/user/update', {
+    const response = await fetch('/api/user/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

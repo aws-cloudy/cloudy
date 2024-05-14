@@ -27,11 +27,11 @@ export async function POST(req: Request) {
     UserAttributes: [
       {
         Name: 'custom:job_id',
-        Value: jobId,
+        Value: '1',
       },
       {
         Name: 'custom:service_id',
-        Value: serviceId,
+        Value: '1',
       },
     ],
     UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string, // Cognito 사용자 풀 ID
