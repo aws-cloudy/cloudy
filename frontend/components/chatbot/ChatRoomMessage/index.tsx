@@ -3,10 +3,13 @@ import { IMessage } from '@/types/chatbot'
 import { useChatbotType } from '@/stores/chatbotStore'
 import { chatBotList } from '@/constants/chatbot'
 import Image from 'next/image'
+import { useMemo } from 'react'
 
 function ChatRoomMessage({ isUserSent, content, waiting }: IMessage) {
   const botType = useChatbotType()
   const icon = chatBotList[botType].image
+  const regex = new RegExp(/(\[바로가기\]\()(.*)(\))/g)
+  const convertedText = useMemo(() => content.replace(regex, `$1<a href="$2">$2</a>$3`), [content])
 
   return (
     <div className={styles.container}>
@@ -16,7 +19,7 @@ function ChatRoomMessage({ isUserSent, content, waiting }: IMessage) {
           {waiting ? (
             <Image src="/gif/spinner_transparent.gif" alt="loading" width={30} height={30} />
           ) : (
-            <span>{content}</span>
+            <span dangerouslySetInnerHTML={{ __html: convertedText }}></span>
           )}
         </div>
       </div>

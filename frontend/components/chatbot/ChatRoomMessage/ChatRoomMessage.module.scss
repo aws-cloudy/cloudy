@@ -37,6 +37,13 @@
   word-break: break-all;
   font-size: 0.8em;
 
+  & > span {
+    & > a {
+      color: $blue1;
+      font-weight: 500;
+    }
+  }
+
   &Bot {
     background-color: $gray3;
   }
