@@ -10,6 +10,9 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.application.RoadmapService;
 import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapException;
+import com.s207.cloudy.global.error.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -52,6 +55,22 @@ public class RoadmapCommentServiceImpl implements RoadmapCommentService{
         // Repository를 통해 저장하고 저장된 엔티티 반환
         return roadmapCommentRepository.save(comment).getId();
 
+    }
+
+    @Override
+    public Integer deleteRoadmapComment(Integer commentId, String userId) {
+
+        RoadmapComment roadmapComment = roadmapCommentRepository.findById(commentId)
+                .orElseThrow(()-> new RoadmapException(ErrorCode.NOT_FOUND));
+
+        if(!roadmapComment.getMember().getId().equals(userId)){
+            throw new RoadmapException(ErrorCode.FORBIDDEN);
+        }
+
+        roadmapCommentRepository.deleteById(commentId);
+
+
+        return commentId;
     }
 
 
