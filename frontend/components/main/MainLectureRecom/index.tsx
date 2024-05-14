@@ -11,6 +11,7 @@ async function MainLectureRecom() {
   const learningList = isLogin
     ? ((await fetchLearningRecom(user.jobId)) as ILearningCard[])
     : ((await fetchLearningRecomWithoutJob()) as ILearningCard[])
+  const len = learningList.length
 
   return (
     <div className={styles.container}>
@@ -26,7 +27,7 @@ async function MainLectureRecom() {
           </p>
         </div>
         <div className={styles.recomBox}>
-          <div className={styles.recomBoxInner}>
+          <div className={styles.recomBoxInner} style={{ width: `${len * 25}%` }}>
             {learningList &&
               learningList.map(each => (
                 <div className={styles.recomBoxInnerItem} key={each.learningId}>

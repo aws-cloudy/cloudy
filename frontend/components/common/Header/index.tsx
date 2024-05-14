@@ -1,14 +1,14 @@
 'use client'
 
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './Header.module.scss'
 import mainStyles from './HeaderMain.module.scss'
 import Link from 'next/link'
-import { MdOutlineLanguage } from 'react-icons/md'
+import { FaUser } from 'react-icons/fa'
 import { MdMenu } from 'react-icons/md'
 import { usePathname } from 'next/navigation'
 import { signIn } from 'next-auth/react'
-import { useIsLogin, useToken, useUsername } from '@/stores/authStore'
+import { useIsLogin, useUsername } from '@/stores/authStore'
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -78,7 +78,8 @@ const Header = () => {
           </div>
           <div className={style.RightWrap}>
             {isLogin ? (
-              <Link href="/mypage" className={style.menuItem}>
+              <Link href="/mypage" className={`${style.menuItem} ${style.profile}`}>
+                <FaUser />
                 {username}님
               </Link> // 세션에 사용자 이름이 있다면 표시
             ) : (
@@ -86,7 +87,6 @@ const Header = () => {
                 로그인
               </button>
             )}
-            <MdOutlineLanguage size={24} className="languageIcon" color={isDark ? '#fff' : ' #000'} />
           </div>
         </div>
       </header>
