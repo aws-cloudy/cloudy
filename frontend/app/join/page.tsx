@@ -10,7 +10,7 @@ const joinPage = ({ searchParams }: { searchParams: { auth: string } }) => {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  const username = searchParams.auth
+  const username = decodeURIComponent(searchParams.auth)
 
   useEffect(() => {
     if (status === 'authenticated') {

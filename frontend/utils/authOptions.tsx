@@ -2,9 +2,6 @@ import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
 import { checkUserExists, getUser } from './cognito'
-import { redirect } from 'next/navigation'
-import { client } from './axiosClient'
-import server from './axiosServer'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -14,7 +11,7 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.COGNITO_CLIENT_SECRET as string,
       issuer: process.env.COGNITO_ISSUER,
       idToken: true,
-      // checks: 'nonce',
+      checks: 'nonce',
       // authorization: {
       //   params: {
       //     scope: "openid profile email",
@@ -42,7 +39,6 @@ export const authOptions: NextAuthOptions = {
       return true
     },
     async jwt({ token, user, account, profile }: any) {
-      console.log('token', token)
       if (user) {
         token.username = user.username
         token.jobId = user?.jobId || profile?.job_id
