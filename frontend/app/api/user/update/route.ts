@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         Value: serviceId,
       },
     ],
-    clientId: process.env.COGNITO_CLIENT_ID as string,
+    ClientId: process.env.COGNITO_CLIENT_ID as string,
     UserPoolId: process.env.AMPLIFY_USERPOOL_ID as string, // Cognito 사용자 풀 ID
     Username: username,
   }
