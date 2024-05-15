@@ -35,6 +35,7 @@ export default function RegistInfomation({ username }: { username: string }) {
   }
 
   const submit = async () => {
+    console.log('이름 ', username)
     const response = await fetch('/api/user/update', {
       method: 'POST',
       headers: {
@@ -44,6 +45,7 @@ export default function RegistInfomation({ username }: { username: string }) {
     })
       .then(res => {
         console.log('update 성공', res)
+        console.log('username', username)
         console.log('job', selectedJob?.value)
         console.log('servive', selectedService?.value)
         // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
