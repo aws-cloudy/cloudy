@@ -9,7 +9,7 @@ import { signIn } from 'next-auth/react'
 import { OptionType, jobSelections, serviceOptions } from '@/constants/user'
 import { useSearchParams } from 'next/navigation'
 
-export default function RegistInfomation({ username }: { username: string }) {
+export default function RegistInfomation() {
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
   const [selectedService, setSelectedService] = useState<OptionType | null>(null)
   const [confirmScreen, setConfirmScreen] = useState(false)

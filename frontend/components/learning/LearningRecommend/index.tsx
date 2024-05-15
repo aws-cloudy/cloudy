@@ -28,7 +28,7 @@ const LearningRecommend = () => {
     setIsFetching(true)
     setIsHazard(false)
     keyword && isLogin && fetchRecommendLearnings()
-  }, [params])
+  }, [params, isLogin])
 
   if (!keyword) return
   if (!isLogin) return

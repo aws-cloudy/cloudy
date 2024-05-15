@@ -16,6 +16,7 @@ const nextConfig = {
       { protocol: 'https', hostname: 'dev.classmethod.jp' },
       { protocol: 'https', hostname: 'd1.awsstatic.com' },
       { protocol: 'https', hostname: 'digitalcloud.training' },
+      { protocol: 'https', hostname: 'i.pcmag.com' },
       { protocol: 'http', hostname: 'localhost' },
     ],
     minimumCacheTTL: 31536000,
