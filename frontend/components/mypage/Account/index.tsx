@@ -1,9 +1,10 @@
 'use client'
+
 import Dropdown from '@/components/common/Dropdown'
 import styles from './Account.module.scss'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { signIn } from 'next-auth/react'
-import { jobOptions, jobSelections, serviceOptions } from '@/constants/user'
+import { jobOptions, serviceOptions } from '@/constants/user'
 
 interface OptionType {
   value: string

@@ -28,7 +28,7 @@ const MyPage = () => {
         <section className={styles.section}>
           <div className={styles.left}>
             <div className={styles.intro}>
-              안녕하세요
+              안녕하세요.
               <br />
               {session.user.name}님
             </div>

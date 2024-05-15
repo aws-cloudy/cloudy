@@ -9,7 +9,7 @@ import { signIn } from 'next-auth/react'
 import { OptionType, jobSelections, serviceOptions } from '@/constants/user'
 import { useSearchParams } from 'next/navigation'
 
-export default function RegistInfomation({ username }: { username: string }) {
+export default function RegistInfomation() {
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
   const [selectedService, setSelectedService] = useState<OptionType | null>(null)
   const [confirmScreen, setConfirmScreen] = useState(false)
@@ -38,8 +38,7 @@ export default function RegistInfomation({ username }: { username: string }) {
   const params = useSearchParams()
 
   const submit = async () => {
-    console.log('이름 ', params.get('auth'))
-    const response = await fetch('/api/user/update', {
+    await fetch('/api/user/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -51,10 +50,6 @@ export default function RegistInfomation({ username }: { username: string }) {
       }),
     })
       .then(res => {
-        console.log('update 성공', res)
-        console.log('username', username)
-        console.log('job', selectedJob?.value)
-        console.log('servive', selectedService?.value)
         // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
         signIn('cognito', { callbackUrl: '/' })
       })
@@ -62,14 +57,6 @@ export default function RegistInfomation({ username }: { username: string }) {
         // 에러 처리
         console.error('Failed to update user information')
       })
-    // console.log('결과', response)
-    // if (response.ok) {
-    //   // 정보가 성공적으로 등록되면, 메인 페이지로 리다이렉트
-    //   signIn('cognito', { callbackUrl: '/' })
-    // } else {
-    //   // 에러 처리
-    //   console.error('Failed to update user information')
-    // }
   }
 
   return (
