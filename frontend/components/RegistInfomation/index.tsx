@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Dropdown from '../common/Dropdown'
 import { signIn } from 'next-auth/react'
 import { OptionType, jobSelections, serviceOptions } from '@/constants/user'
+import { useSearchParams } from 'next/navigation'
 
 export default function RegistInfomation({ username }: { username: string }) {
   const [selectedJob, setSelectedJob] = useState<OptionType | null>(null)
@@ -34,14 +35,20 @@ export default function RegistInfomation({ username }: { username: string }) {
     setConfirmScreen(false)
   }
 
+  const params = useSearchParams()
+
   const submit = async () => {
-    console.log('이름 ', username)
+    console.log('이름 ', params.get('auth'))
     const response = await fetch('/api/user/update', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, jobId: selectedJob?.value, serviceId: selectedService?.value }),
+      body: JSON.stringify({
+        username: params.get('auth'),
+        jobId: selectedJob?.value,
+        serviceId: selectedService?.value,
+      }),
     })
       .then(res => {
         console.log('update 성공', res)
