@@ -10,8 +10,8 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { deleteBookmark, postBookmark } from '@/apis/bookmark'
 
-const RoadmapCard = (props: { item: IRoadmapCard }) => {
-  const { item } = props
+const RoadmapCard = (props: { item: IRoadmapCard; onBookmarkDelete: (bookmarkId: number) => void }) => {
+  const { item, onBookmarkDelete } = props
 
   const { data: session, status } = useSession()
 
@@ -22,6 +22,7 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
     try {
       await deleteBookmark(item.bookmarkId)
       setClickMark(false)
+      onBookmarkDelete(item.bookmarkId)
     } catch (error) {
       console.error('스크랩 해제 실패하였습니다.', error)
     }

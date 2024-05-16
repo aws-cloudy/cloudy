@@ -5,24 +5,11 @@ import { getBookmarks } from '@/apis/bookmark'
 import { IRoadmapCard } from '@/types/roadmap'
 import Loading from '@/components/common/Loading'
 
-const Favorites = ({ user }: any) => {
-  const [bookmarks, setBookmarks] = useState<IRoadmapCard[]>([])
+const Favorites = ({ bookmarksData }: any) => {
+  const [bookmarks, setBookmarks] = useState<IRoadmapCard[]>(bookmarksData)
 
-  useEffect(() => {
-    console.log('memberId: ', user.id)
-    if (user.id) {
-      getBookmarks(user.id)
-        .then(data => setBookmarks(data.roadmaps))
-        .catch(error => console.error('북마크 로드 실패', error))
-    }
-  }, [user.id])
-
-  if (bookmarks.length === 0) {
-    return (
-      <div className={styles.loading}>
-        <Loading />
-      </div>
-    )
+  const handleBookmarkDelete = (bookmarkId: number) => {
+    setBookmarks(prevBookmarks => prevBookmarks.filter(bookmark => bookmark.bookmarkId !== bookmarkId))
   }
 
   return (
@@ -30,11 +17,19 @@ const Favorites = ({ user }: any) => {
       <div className={styles.intro} id="test_id">
         찜한 로드맵
       </div>
-      <div className={styles.cardContainer}>
-        {bookmarks.map(road => (
-          <RoadmapCard item={{ ...road, isScrapped: true, isUseMypage: true }} key={road.roadmapId} />
-        ))}
-      </div>
+      {bookmarks.length === 0 ? (
+        <div>찜한 로드맵이 없습니다. 마음에 드는 로드맵을 찾아보세요!</div>
+      ) : (
+        <div className={styles.cardContainer}>
+          {bookmarks.map(road => (
+            <RoadmapCard
+              item={{ ...road, isScrapped: true, isUseMypage: true }}
+              key={road.roadmapId}
+              onBookmarkDelete={handleBookmarkDelete}
+            />
+          ))}
+        </div>
+      )}
     </section>
   )
 }

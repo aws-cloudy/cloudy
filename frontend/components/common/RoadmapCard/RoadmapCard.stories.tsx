@@ -5,7 +5,12 @@ import { IRoadmapCard } from '@/types/roadmap'
 
 const RodmapCardComponent = ({ item }: { item: IRoadmapCard }) => (
   <div style={{ width: 350 }}>
-    <RodmapCard item={item} />
+    <RodmapCard
+      item={item}
+      onBookmarkDelete={function (bookmarkId: number): void {
+        throw new Error('Function not implemented.')
+      }}
+    />
   </div>
 )
 
