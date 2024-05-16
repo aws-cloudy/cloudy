@@ -104,6 +104,7 @@ const RoadmapListSection = () => {
                 isUseMypage: false,
               }}
               key={road.roadmapId}
+              onBookmarkDelete={function (bookmarkId: number): void {}}
             />
           ))}
         </div>
