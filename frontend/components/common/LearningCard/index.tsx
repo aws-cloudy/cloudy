@@ -16,10 +16,23 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
 
   const clickMoreButton = () => layout !== 'justify' && setMore(!more)
 
+  const loadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLElement
+    target.setAttribute('src', '/img/default.jpeg')
+  }
+
   return (
     <div className={layout === 'grid' ? styles.container : styles.justifyContainer} onClick={clickMoreButton}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
-        <Image src={item.thumbnail} alt={item.title} className={styles.img} fill priority sizes="auto" />
+        <Image
+          src={item.thumbnail}
+          alt={item.title}
+          className={styles.img}
+          fill
+          priority
+          sizes="auto"
+          onError={loadError}
+        />
         <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
           {difficulty.text}
         </div>
