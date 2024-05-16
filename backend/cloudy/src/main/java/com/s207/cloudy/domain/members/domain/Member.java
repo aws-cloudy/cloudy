@@ -19,7 +19,7 @@ import java.util.Collection;
 public class Member implements UserDetails {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @Getter
     private String id;
 
@@ -28,11 +28,11 @@ public class Member implements UserDetails {
 
 
     @Getter
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @Builder
-    public Member(String userId, String userName){
+    public Member(String userId, String userName) {
         this.name = userName;
         this.id = userId;
     }
@@ -47,7 +47,7 @@ public class Member implements UserDetails {
         return password;
     }
 
-    public void setString(String name){
+    public void setString(String name) {
         this.name = name;
     }
 
@@ -77,12 +77,7 @@ public class Member implements UserDetails {
     }
 
 
-
-    public MemberDto toDto(){
-        return MemberDto
-                .builder()
-                .id(this.id)
-                .name(this.name)
-                .build();
+    public MemberDto toDto() {
+        return new MemberDto(this.id, this.name);
     }
 }

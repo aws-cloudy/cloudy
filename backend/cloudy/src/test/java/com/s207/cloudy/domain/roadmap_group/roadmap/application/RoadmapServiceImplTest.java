@@ -1,11 +1,5 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.application;
 
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-
 import com.s207.cloudy.domain.learning.application.LearningService;
 import com.s207.cloudy.domain.learning.dto.LearningItem;
 import com.s207.cloudy.domain.members.application.MemberService;
@@ -18,8 +12,6 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.dto.RoadmapRes;
 import com.s207.cloudy.domain.roadmap_group.roadmap.exception.RoadmapNotFoundException;
 import com.s207.cloudy.dummy.DummyRoadmap;
 import com.s207.cloudy.dummy.learning.DummyLearning;
-import java.util.List;
-import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,6 +21,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.given;
 
 @SpringJUnitConfig(RoadmapServiceImpl.class)
 class RoadmapServiceImplTest {
@@ -77,7 +76,7 @@ class RoadmapServiceImplTest {
 
         // then
         Assertions.assertThat(actualRoadmaps).isNotNull();
-        Assertions.assertThat(actualRoadmaps.getRoadmaps()).hasSize(dummyList.size());
+        Assertions.assertThat(actualRoadmaps.roadmaps()).hasSize(dummyList.size());
     }
 
     @Test
@@ -113,7 +112,7 @@ class RoadmapServiceImplTest {
 
         // then
         Assertions.assertThat(actualRoadmapDetail).isNotNull();
-        Assertions.assertThat(actualRoadmapDetail.detail().getRoadmapId())
+        Assertions.assertThat(actualRoadmapDetail.detail().roadmapId())
             .isEqualTo(dummyRoadmap.getId());
         Assertions.assertThat(actualRoadmapDetail.courses().get(0).getLearningId())
             .isEqualTo(learningItems.get(0).getLearningId());

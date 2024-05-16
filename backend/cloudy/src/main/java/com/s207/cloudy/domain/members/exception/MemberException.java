@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 @AllArgsConstructor
 public class MemberException extends RuntimeException{
-    private ErrorCode errorCode;
+    private final ErrorCode errorCode;
 
 
     public HttpStatus getHttpStatus(){

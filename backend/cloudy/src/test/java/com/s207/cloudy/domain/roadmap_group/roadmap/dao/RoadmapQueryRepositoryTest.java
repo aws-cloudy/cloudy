@@ -73,11 +73,11 @@ class RoadmapQueryRepositoryTest {
             assertions.assertThat(roadmapList).isNotEmpty();
             assertions.assertThat(roadmapList).hasSize(2);
             assertions.assertThat(roadmapList.getTotalPages()).isEqualTo(1);
-            assertions.assertThat(roadmapList.getContent().get(0).getRoadmapId()).isEqualTo(dummyRoadmap1.getId());
-            assertions.assertThat(roadmapList.getContent().get(0).getTitle()).isEqualTo(dummyRoadmap1.getTitle());
-            assertions.assertThat(roadmapList.getContent().get(0).getThumbnail()).isEqualTo(dummyRoadmap1.getThumbnail());
-            assertions.assertThat(roadmapList.getContent().get(0).getSummary()).isEqualTo(dummyRoadmap1.getSummary());
-            assertions.assertThat(roadmapList.getContent().get(0).getCommentsCnt()).isEqualTo(actualCommentCnt.size());
+            assertions.assertThat(roadmapList.getContent().get(0).roadmapId()).isEqualTo(dummyRoadmap1.getId());
+            assertions.assertThat(roadmapList.getContent().get(0).title()).isEqualTo(dummyRoadmap1.getTitle());
+            assertions.assertThat(roadmapList.getContent().get(0).thumbnail()).isEqualTo(dummyRoadmap1.getThumbnail());
+            assertions.assertThat(roadmapList.getContent().get(0).summary()).isEqualTo(dummyRoadmap1.getSummary());
+            assertions.assertThat(roadmapList.getContent().get(0).commentsCnt()).isEqualTo(actualCommentCnt.size());
         });
     }
 
@@ -89,7 +89,7 @@ class RoadmapQueryRepositoryTest {
             assertions.assertThat(roadmapList).isNotNull();
             assertions.assertThat(roadmapList).hasSize(1);
             assertions.assertThat(roadmapList.getTotalPages()).isEqualTo(2);
-            assertions.assertThat(roadmapList.getContent().get(0).getRoadmapId()).isEqualTo(dummyRoadmap1.getId());
+            assertions.assertThat(roadmapList.getContent().get(0).roadmapId()).isEqualTo(dummyRoadmap1.getId());
         });
     }
 
@@ -100,8 +100,8 @@ class RoadmapQueryRepositoryTest {
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotNull();
             assertions.assertThat(roadmapList).hasSize(1);
-            assertions.assertThat(roadmapList.getContent().get(0).getRoadmapId()).isEqualTo(dummyRoadmap2.getId());
-            assertions.assertThat(roadmapList.getContent().get(0).getJob()).isEqualTo(dummyRoadmap2.getJob());
+            assertions.assertThat(roadmapList.getContent().get(0).roadmapId()).isEqualTo(dummyRoadmap2.getId());
+            assertions.assertThat(roadmapList.getContent().get(0).job()).isEqualTo(dummyRoadmap2.getJob());
         });
     }
 
@@ -112,8 +112,8 @@ class RoadmapQueryRepositoryTest {
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotNull();
             assertions.assertThat(roadmapList).hasSize(1);
-            assertions.assertThat(roadmapList.getContent().get(0).getRoadmapId()).isEqualTo(dummyRoadmap2.getId());
-            assertions.assertThat(roadmapList.getContent().get(0).getService()).isEqualTo(dummyRoadmap2.getService());
+            assertions.assertThat(roadmapList.getContent().get(0).roadmapId()).isEqualTo(dummyRoadmap2.getId());
+            assertions.assertThat(roadmapList.getContent().get(0).service()).isEqualTo(dummyRoadmap2.getService());
         });
     }
 
@@ -134,8 +134,8 @@ class RoadmapQueryRepositoryTest {
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotNull();
             assertions.assertThat(roadmapList).hasSize(1);
-            assertions.assertThat(roadmapList.getContent().get(0).getRoadmapId()).isEqualTo(dummyRoadmap2.getId());
-            assertions.assertThat(roadmapList.getContent().get(0).getService()).isEqualTo(dummyRoadmap2.getService());
+            assertions.assertThat(roadmapList.getContent().get(0).roadmapId()).isEqualTo(dummyRoadmap2.getId());
+            assertions.assertThat(roadmapList.getContent().get(0).service()).isEqualTo(dummyRoadmap2.getService());
         });
     }
 

@@ -1,6 +1,5 @@
 package com.s207.cloudy.domain.roadmap_group.roadmap.dao;
 
-import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.util.StringUtils;
@@ -29,19 +28,19 @@ public class RoadmapQueryRepository {
     public Page<RoadmapRes> getRoadmaplist(String job, String service, String query, Pageable pageable) {
 
         List<RoadmapRes> content = queryFactory
-                .select(Projections.fields(RoadmapRes.class,
-                        qRoadmap.id.as("roadmapId"),
-                        qRoadmap.title,
-                        qRoadmap.thumbnail,
-                        qRoadmap.service,
-                        qRoadmap.job,
-                        qRoadmap.summary,
-                        ExpressionUtils.as(
+                .select(Projections.constructor(RoadmapRes.class,
+                                qRoadmap.id,
+                                qRoadmap.title,
+                                qRoadmap.thumbnail,
+                                qRoadmap.service,
+                                qRoadmap.job,
+                                qRoadmap.summary,
+                                qRoadmap.desc,
                                 JPAExpressions.select(qComment.count())
                                         .from(qComment)
-                                        .where(qComment.roadmap.eq(qRoadmap)),
-                                "commentsCnt"
-                        ))
+                                        .where(qComment.roadmap.eq(qRoadmap)
+                                        )
+                        )
                 )
                 .where(isSearched(query), isFilteredWithJob(job), isFilteredWithService(service))
                 .from(qRoadmap)
