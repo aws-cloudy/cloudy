@@ -12,7 +12,7 @@ function DetailAnswerITem({ ans, isChecked, isWriter }: IDetailAnswerItem) {
   const userId = useUserId()
   const isAuthor = useMemo(() => {
     return ans.memberId === userId
-  }, [])
+  }, [userId])
   const router = useRouter()
 
   const deleteAnswer = async () => {
