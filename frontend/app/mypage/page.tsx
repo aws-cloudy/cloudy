@@ -31,6 +31,10 @@ const MyPage = () => {
     }
   }, [session, status])
 
+  const handleBookmarkDelete = (bookmarkId: number) => {
+    setBookmarksData(prevBookmarks => prevBookmarks.filter(bookmark => bookmark.bookmarkId !== bookmarkId))
+  }
+
   if (status === 'loading') {
     return <Loading />
   } else if (status === 'authenticated') {
@@ -48,7 +52,9 @@ const MyPage = () => {
           <div className={styles.right}>
             {selectedTab === 'account' && session && <Account user={session.user} />}
             {selectedTab === 'activity' && session && <Activity user={session.user} />}
-            {selectedTab === 'favorites' && session && <Favorites bookmarksData={bookmarksData} />}
+            {selectedTab === 'favorites' && session && (
+              <Favorites bookmarksData={bookmarksData} onBookmarkDelete={handleBookmarkDelete} />
+            )}
           </div>
         </section>
       </>
