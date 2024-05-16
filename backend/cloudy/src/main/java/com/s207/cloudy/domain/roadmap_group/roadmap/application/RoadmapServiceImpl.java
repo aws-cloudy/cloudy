@@ -26,24 +26,30 @@ public class RoadmapServiceImpl implements RoadmapService {
     @Override
     public RoadmapListRes findRoadmapList(String job, String service, String query,
                                           Pageable pageable) {
-        Page<RoadmapRes> roadmaps =
-            roadmapQueryRepository.getRoadmaplist(job, service, query, pageable);
+        job = replaceUnderBarToWhiteSpace(job);
+        service = replaceUnderBarToWhiteSpace(service);
+        Page<RoadmapRes> roadmaps = roadmapQueryRepository.getRoadmaplist(job, service, query, pageable);
         return new RoadmapListRes(roadmaps.getContent(), roadmaps.getTotalPages());
+    }
+
+    @Override
+    public String replaceUnderBarToWhiteSpace(String param) {
+        return param.replace("_", " ");
     }
 
     @Override
     public Roadmap findRoadmapEntity(int roadmapId) {
         return roadmapRepository.findById(roadmapId)
-            .orElseThrow(RoadmapNotFoundException::new);
+                .orElseThrow(RoadmapNotFoundException::new);
     }
 
     @Override
     public RoadmapDetailsRes getRoadmapDetails(Integer roadmapId) {
         return RoadmapDetailsRes
-            .builder()
-            .detail(findRoadmapEntity(roadmapId).toDto())
-            .courses(learningService.getCoursesWithRoadmapId(roadmapId))
-            .build();
+                .builder()
+                .detail(findRoadmapEntity(roadmapId).toDto())
+                .courses(learningService.getCoursesWithRoadmapId(roadmapId))
+                .build();
     }
 
 
