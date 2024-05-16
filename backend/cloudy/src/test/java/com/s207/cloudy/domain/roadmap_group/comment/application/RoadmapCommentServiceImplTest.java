@@ -1,10 +1,5 @@
 package com.s207.cloudy.domain.roadmap_group.comment.application;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.BDDMockito.given;
-
 import com.s207.cloudy.domain.members.application.MemberService;
 import com.s207.cloudy.domain.members.domain.Member;
 import com.s207.cloudy.domain.roadmap_group.comment.dao.RoadmapCommentRepository;
@@ -16,7 +11,6 @@ import com.s207.cloudy.domain.roadmap_group.roadmap.domain.Roadmap;
 import com.s207.cloudy.dummy.DummyMember;
 import com.s207.cloudy.dummy.DummyRoadmap;
 import com.s207.cloudy.dummy.DummyRoadmapComment;
-import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,6 +18,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+
+import java.util.List;
+
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.given;
 
 /**
  * @author 이하늬
@@ -57,18 +56,17 @@ class RoadmapCommentServiceImplTest {
     void return_roadmap_comments_list_by_roadmapId_success() {
 
         List<RoadmapComment> dummyComments =
-            List.of(DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap, dummyMember));
+                List.of(DummyRoadmapComment.getDummyRoadmapComment(dummyRoadmap, dummyMember));
 
         // given
         given(mockRoadmapCommentRepository.findByRoadmapId(anyInt())).willReturn(dummyComments);
 
         // when
         List<RoadmapCommentDto> actualComments = roadmapCommentService.getRoadmapCommentList(
-            dummyRoadmap.getId());
+                dummyRoadmap.getId());
 
         // then
-        Assertions.assertThat(actualComments).isNotEmpty();
-        Assertions.assertThat(actualComments).hasSize(dummyComments.size());
+        Assertions.assertThat(actualComments).isNotEmpty().hasSize(dummyComments.size());
     }
 
     @Test
@@ -76,25 +74,25 @@ class RoadmapCommentServiceImplTest {
     void create_roadmap_comments_success() {
 
         RoadmapCommentPostReq roadmapCommentPostReq =
-            new RoadmapCommentPostReq(dummyRoadmap.getId(), dummyMember.getId(), "content");
+                new RoadmapCommentPostReq(dummyRoadmap.getId(), dummyMember.getId(), "content");
 
         RoadmapComment comment = RoadmapComment.builder()
-            .roadmap(dummyRoadmap)
-            .member(dummyMember)
-            .content(roadmapCommentPostReq.content())
-            .build();
+                .roadmap(dummyRoadmap)
+                .member(dummyMember)
+                .content(roadmapCommentPostReq.content())
+                .build();
 
         // given
         given(mockRoadmapService.findRoadmapEntity(anyInt()))
-            .willReturn(dummyRoadmap);
+                .willReturn(dummyRoadmap);
         given(mockMemberService.findMemberEntity(anyString()))
-            .willReturn(dummyMember);
+                .willReturn(dummyMember);
         given(mockRoadmapCommentRepository.save(any(RoadmapComment.class)))
-            .willReturn(comment);
+                .willReturn(comment);
 
         // when
         Integer commentId =
-            roadmapCommentService.postRoadmapComment(roadmapCommentPostReq, dummyMember.getId());
+                roadmapCommentService.postRoadmapComment(roadmapCommentPostReq, dummyMember.getId());
 
         // then
         Assertions.assertThat(commentId).isNotNull();

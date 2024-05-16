@@ -62,8 +62,8 @@ class MemberRoadmapQueryRepositoryTest {
         List<BookmarkRes> roadmapList = roadmapPageList.getContent();
         SoftAssertions.assertSoftly(assertions -> {
             assertions.assertThat(roadmapList).isNotNull();
-            assertions.assertThat(roadmapList.get(0).getRoadmapId()).isEqualTo(dummyRoadmap1.getId());
-            assertions.assertThat(roadmapList.get(1).getRoadmapId()).isEqualTo(dummyRoadmap2.getId());
+            assertions.assertThat(roadmapList.get(0).roadmapId()).isEqualTo(dummyRoadmap1.getId());
+            assertions.assertThat(roadmapList.get(1).roadmapId()).isEqualTo(dummyRoadmap2.getId());
         });
     }
 }

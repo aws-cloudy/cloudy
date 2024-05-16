@@ -15,10 +15,11 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -31,26 +32,22 @@ public class SecurityConfig {
     private final MemberService memberService;
 
 
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-       http.csrf(AbstractHttpConfigurer::disable)
-               .authorizeHttpRequests((request)->{
-                   request.requestMatchers(antMatcher("/api/v1/bookmarks/**")).authenticated();
-                   request.requestMatchers(antMatcher("/**")).permitAll();
-                   request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
+        http.csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(request -> {
+                    request.requestMatchers(antMatcher("/api/v1/bookmarks/**")).authenticated();
+                    request.requestMatchers(antMatcher("/**")).permitAll();
+                    request.requestMatchers(antMatcher("/h2-console/**")).permitAll();
                 })
-        .headers(headers->headers.frameOptions(frameOptions->frameOptions.disable()))
-        .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-        .addFilterBefore(exceptionHandlerFilter(), JwtAuthenticationFilter.class) // ExceptionHandlerFilter 추가
-       .addFilterAfter(memberRegistryFilter(),JwtAuthenticationFilter.class);
+                .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(exceptionHandlerFilter(), JwtAuthenticationFilter.class) // ExceptionHandlerFilter 추가
+                .addFilterAfter(memberRegistryFilter(), JwtAuthenticationFilter.class);
 
 
         return http.build();
     }
-
-
-
 
 
     @Bean
@@ -61,12 +58,12 @@ public class SecurityConfig {
 
 
     @Bean
-    public MemberRegistryFilter memberRegistryFilter(){
+    public MemberRegistryFilter memberRegistryFilter() {
         return new MemberRegistryFilter(memberService);
     }
 
     @Bean
-    public ExceptionHandlerFilter exceptionHandlerFilter(){
+    public ExceptionHandlerFilter exceptionHandlerFilter() {
         return new ExceptionHandlerFilter();
     }
 
@@ -77,6 +74,7 @@ public class SecurityConfig {
         provider.setUserDetailsService(null);
         return new ProviderManager(provider);
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();

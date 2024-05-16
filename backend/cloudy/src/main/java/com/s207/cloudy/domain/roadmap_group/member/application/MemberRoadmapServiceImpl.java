@@ -38,11 +38,11 @@ public class MemberRoadmapServiceImpl implements MemberRoadmapService {
     @Override
     @Transactional
     public MemberRoadmap createRoadmapBookmark(Member member, CreateRoadmapReq req) {
-        if(memberRoadmapRepository.existsByRoadmapIdAndMemberId(member.getId(), req.getRoadmapId())){
+        if(memberRoadmapRepository.existsByRoadmapIdAndMemberId(member.getId(), req.roadmapId())){
             throw new MemberRoadmapException(ErrorCode.DUPLICATED);
         }
 
-        Roadmap roadmap = roadmapService.findRoadmapEntity(req.getRoadmapId());
+        Roadmap roadmap = roadmapService.findRoadmapEntity(req.roadmapId());
 
         String memberId = member.getUsername();
         MemberRoadmap memberRoadmap = new MemberRoadmap(memberId, roadmap);
