@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { ReactEventHandler, useEffect, useState } from 'react'
 import styles from './RoadmapCard.module.scss'
 import Image from 'next/image'
 import { BsChat, BsBookmark, BsBookmarkFill } from 'react-icons/bs'
@@ -47,6 +47,11 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
     setClickMark(item.isScrapped)
   }, [item.isScrapped])
 
+  const loadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLElement
+    target.setAttribute('src', '/img/default.jpeg')
+  }
+
   const router = useRouter()
   const onClick = () => router.push(`/roadmap/${item.roadmapId}`)
 
@@ -56,7 +61,15 @@ const RoadmapCard = (props: { item: IRoadmapCard }) => {
   return (
     <div className={styles.card} key={item.roadmapId} onClick={onClick} data-testid="roadmap-item">
       <div className={styles.imageBox}>
-        <Image src={item.thumbnail} alt="roadmap-image" className={styles.image} fill priority sizes="auto" />
+        <Image
+          src={item.thumbnail}
+          alt="roadmap-image"
+          className={styles.image}
+          fill
+          priority
+          sizes="auto"
+          onError={loadError}
+        />
         {status === 'authenticated' &&
           (clickMark ? (
             <BsBookmarkFill
