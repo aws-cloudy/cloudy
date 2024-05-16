@@ -1,16 +1,9 @@
 import RoadmapCard from '@/components/common/RoadmapCard'
 import styles from './Favorites.module.scss'
-import { useEffect, useState } from 'react'
-import { getBookmarks } from '@/apis/bookmark'
+import { useState } from 'react'
 import { IRoadmapCard } from '@/types/roadmap'
-import Loading from '@/components/common/Loading'
-
-const Favorites = ({ bookmarksData }: any) => {
+const Favorites = ({ bookmarksData, onBookmarkDelete }: any) => {
   const [bookmarks, setBookmarks] = useState<IRoadmapCard[]>(bookmarksData)
-
-  const handleBookmarkDelete = (bookmarkId: number) => {
-    setBookmarks(prevBookmarks => prevBookmarks.filter(bookmark => bookmark.bookmarkId !== bookmarkId))
-  }
 
   return (
     <section className={styles.section}>
@@ -25,7 +18,7 @@ const Favorites = ({ bookmarksData }: any) => {
             <RoadmapCard
               item={{ ...road, isScrapped: true, isUseMypage: true }}
               key={road.roadmapId}
-              onBookmarkDelete={handleBookmarkDelete}
+              onBookmarkDelete={onBookmarkDelete}
             />
           ))}
         </div>
