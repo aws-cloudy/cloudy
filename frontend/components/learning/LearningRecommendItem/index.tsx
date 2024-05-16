@@ -13,10 +13,23 @@ const LearningRecommendItem = ({ item }: { item: ILearningCard }) => {
 
   const onClick = () => router.push(item.link)
 
+  const loadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLElement
+    target.setAttribute('src', '/img/default.jpeg')
+  }
+
   return (
     <div className={styles.container} onClick={onClick}>
       <div className={styles.imgWrap}>
-        <Image src={item.thumbnail} alt={item.title} fill priority sizes="auto" className={styles.img} />
+        <Image
+          src={item.thumbnail}
+          alt={item.title}
+          fill
+          priority
+          sizes="auto"
+          className={styles.img}
+          onError={loadError}
+        />
         <div className={`${styles.badge} ${difficulty.class}`}>{difficulty.text}</div>
       </div>
 
