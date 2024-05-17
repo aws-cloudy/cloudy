@@ -8,9 +8,9 @@ import { useMemo } from 'react'
 function ChatRoomMessage({ isUserSent, content, waiting }: IMessage) {
   const botType = useChatbotType()
   const icon = chatBotList[botType].image
-  const regex = new RegExp(/(\()(?=(?=https:\/\/)|(?=http:\/\/))(.*)(\))/g)
+  const regex = new RegExp(/(\()(?=(?=https:\/\/)|(?=http:\/\/))(.*?)(\))/gm)
   const convertedText = useMemo(
-    () => content.replace(regex, `$1<a href="$2">$2</a>$3`).replace(/(?:\n)/g, '</br>'),
+    () => content.replace(regex, `$1<a href="$2">$2</a>$3`).replace(/(?:\n)/gm, '</br>'),
     [content],
   )
 
