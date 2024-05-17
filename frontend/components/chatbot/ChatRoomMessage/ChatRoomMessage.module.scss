@@ -39,7 +39,12 @@
 
   & > span {
     & > a {
+      font-weight: 500;
       color: $blue1;
+
+      &:hover {
+        color: $blue2;
+      }
     }
   }
 
