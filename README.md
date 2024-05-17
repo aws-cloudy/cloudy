@@ -91,7 +91,9 @@
 
 ## ✨ 서비스 화면
 
-- ### 메인 화면
+### 메인화면
+
+- 메인 화면
 
   ![메인화면.gif](/docs/img/MainScreen.gif)
 
@@ -108,6 +110,8 @@
   ![메인로드맵추천화면.gif](/docs/img/MainRoadmapList.gif)
 
 ---
+
+### 회원
 
 - ### 로그인 화면
 
@@ -131,9 +135,9 @@
 
   ![강의검색화면.gif](/docs/img/LearningSearch.gif)
 
----
+### 로드맵
 
-- ### 로드맵 화면
+- 로드맵 화면
 
   ![로드맵메인화면.gif](/docs/img/RoadmapMain.gif)
 
@@ -141,23 +145,36 @@
 
     ![로드맵검색화면.gif](/docs/img/RoadmapSearch.gif)
 
-  - 로드맵 상세
+### 커뮤니티
 
-    ![로드맵상세화면.gif](/docs/img/RoadmapDetail.gif)
+- 커뮤니티 화면
+  ![커뮤니티메인화면.gif](/docs/img/communityMain.gif)
 
----
+  - 커뮤니티 검색 화면
+    ![커뮤니티검색화면.gif](/docs/img/communitySearch.gif)
 
-- ### 마이페이지
+  - 커뮤니티 글쓰기 화면
+    ![커뮤니티글쓰기화면.gif](/docs/img/communityWrite.gif)
 
-  ![마이페이지메인화면.gif](/docs/img/MyPage.gif)
+  - 커뮤니티 상세 화면
+    ![커뮤니티덧글쓰기화면.gif](/docs/img/communityComment.gif)
 
-  - 활동내역
+  - 커뮤니티 채택 화면
+    ![커뮤니티채택화면.gif](/docs/img/communityCheck.gif)
 
-    ![활동내역화면.gif](/docs/img/MyPageActivity.gif)
+### 챗봇
 
-  - 찜한 로드맵 관리
+- 챗봇 메인화면
+  ![챗봇메인화면.gif](/docs/img/chatbotMain.gif)
 
-    ![찜한로드맵화면.gif](/docs/img/MyPageRoadmap.gif)
+- 챗봇 (클라/우디/아마/존)
+
+<div width="100%">
+  <img width="22%" src="./docs/img/chatbotCla.gif" alt="클라" />
+  <img width="22%" src="./docs/img/chatbotOudy.gif" alt="우디" />
+  <img width="22%" src="./docs/img/chatbotAma.gif" alt="아마" />
+  <img width="22%" src="./docs/img/chatbotJohn.gif" alt="존" />
+</div>
 
 ## 🚀 기술 스택
 
