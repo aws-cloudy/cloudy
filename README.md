@@ -91,6 +91,8 @@
 
 ## ✨ 서비스 화면
 
+### 메인화면
+
 - 메인 화면
 
   ![메인화면.gif](/docs/img/mainScreen.gif)
@@ -109,6 +111,8 @@
 
 ---
 
+### 회원
+
 - 로그인 화면
 
   ![로그인화면.gif](/docs/img/googleLogin.gif)
@@ -116,6 +120,8 @@
 - 회원가입 화면
 
   ![회원가입화면.gif](/docs/img/googleJoin.gif)
+
+### 학습
 
 - 학습 메인화면
 
@@ -129,12 +135,45 @@
 
   ![강의검색화면.gif](/docs/img/LearningSearch.gif)
 
+### 로드맵
+
 - 로드맵 화면
 
   ![로드맵메인화면.gif](/docs/img/RoadmapMain.gif)
 
   - 로드맵 검색
     ![로드맵검색화면.gif](/docs/img/RoadmapSearch.gif)
+
+### 커뮤니티
+
+- 커뮤니티 화면
+  ![커뮤니티메인화면.gif](/docs/img/communityMain.gif)
+
+  - 커뮤니티 검색 화면
+    ![커뮤니티검색화면.gif](/docs/img/communitySearch.gif)
+
+  - 커뮤니티 글쓰기 화면
+    ![커뮤니티글쓰기화면.gif](/docs/img/communityWrite.gif)
+
+  - 커뮤니티 상세 화면
+    ![커뮤니티덧글쓰기화면.gif](/docs/img/communityComment.gif)
+
+  - 커뮤니티 채택 화면
+    ![커뮤니티채택화면.gif](/docs/img/communityCheck.gif)
+
+### 챗봇
+
+- 챗봇 메인화면
+  ![챗봇메인화면.gif](/docs/img/chatbotMain.gif)
+
+- 챗봇 (클라/우디/아마/존)
+
+<div width="100%">
+  <img width="22%" src="./docs/img/chatbotCla.gif" alt="클라" />
+  <img width="22%" src="./docs/img/chatbotOudy.gif" alt="우디" />
+  <img width="22%" src="./docs/img/chatbotAma.gif" alt="아마" />
+  <img width="22%" src="./docs/img/chatbotJohn.gif" alt="존" />
+</div>
 
 ## 🚀 기술 스택
 
