@@ -59,8 +59,9 @@ function ChatRoom() {
         const lines = decoder.decode(value)
         const text = lines
           .split('data:')
-          .map(each => each.replace('\n\n', ''))
+          .map(each => each.replace('\n\n', '').replace(/(?:\n)/g, '</br>'))
           .join('')
+
         setBotMessage(prev => prev + text)
       }
     } catch (e) {
