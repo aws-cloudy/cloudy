@@ -95,19 +95,19 @@
 
 - 메인 화면
 
-  ![메인화면.gif](/docs/img/MainScreen.gif)
+  ![메인화면.gif](/docs/img/mainScreen.gif)
 
   - 메인 검색
 
-  ![메인검색화면.gif](/docs/img/MainSearch.gif)
+  ![메인검색화면.gif](/docs/img/mainSearch.gif)
 
   - 메인 직무 맞춤형 강의
 
-  ![메인직무추천화면.gif](/docs/img/MainJobList.gif)
+  ![메인직무추천화면.gif](/docs/img/mainJobList.gif)
 
   - 메인 로드맵 추천
 
-  ![메인로드맵추천화면.gif](/docs/img/MainRoadmapList.gif)
+  ![메인로드맵추천화면.gif](/docs/img/mainRoadmapList.gif)
 
 ---
 
@@ -115,11 +115,11 @@
 
 - ### 로그인 화면
 
-  ![로그인화면.gif](/docs/img/GoogleLogin.gif)
+  ![로그인화면.gif](/docs/img/googleLogin.gif)
 
 - 회원가입 화면
 
-  ![회원가입화면.gif](/docs/img/GoogleJoin.gif)
+  ![회원가입화면.gif](/docs/img/googleJoin.gif)
 
 ---
 
