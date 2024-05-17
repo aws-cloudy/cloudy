@@ -2,6 +2,7 @@ package com.s207.cloudy.domain.chatbot.common.application;
 
 import com.s207.cloudy.domain.chatbot.common.dto.ChatListRes;
 import com.s207.cloudy.domain.chatbot.common.entity.Chatbot;
+import com.s207.cloudy.domain.chatbot.fee.application.FeeService;
 import com.s207.cloudy.domain.chatbot.qna.application.QnaService;
 import com.s207.cloudy.domain.chatbot.common.dto.ChatReq;
 import com.s207.cloudy.domain.recommend.learning.application.LearningServiceImpl;
@@ -19,6 +20,7 @@ public class ChatBotServiceImpl implements ChatBotService {
     private final ChatQueryService chatQueryService;
     private final LearningServiceImpl learningService;
     private final RoadmapServiceImpl roadmapService;
+    private final FeeService feeService;
 
 
 
@@ -39,6 +41,11 @@ public class ChatBotServiceImpl implements ChatBotService {
                     question.getInputData(), true);
 
             return roadmapService.generateChatStream(question, userId);
+        }else if(Chatbot.FEE.getNum()==type){
+            chatQueryService.saveChat(userId, Chatbot.FEE,
+                    question.getInputData(), true);
+
+            return feeService.generateChatStream(question, userId);
         }
 
         return null;
