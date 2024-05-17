@@ -113,7 +113,7 @@
 
 ### 회원
 
-- ### 로그인 화면
+- 로그인 화면
 
   ![로그인화면.gif](/docs/img/googleLogin.gif)
 
@@ -123,27 +123,29 @@
 
 ---
 
-- ### 학습 메인화면
+### 학습
 
-  ![학습화면.gif](/docs/img/LearningMain.gif)
+- 학습 화면
+
+  ![학습화면.gif](/docs/img/learningMain.gif)
 
   - 스킬빌더 사이트 연동
 
-  ![스킬빌더연동화면.gif](/docs/img/LearningToSkillBuilder.gif)
+  ![스킬빌더연동화면.gif](/docs/img/learningToSkillBuilder.gif)
 
   - 강의 검색
 
-  ![강의검색화면.gif](/docs/img/LearningSearch.gif)
+  ![강의검색화면.gif](/docs/img/learningSearch.gif)
 
 ### 로드맵
 
 - 로드맵 화면
 
-  ![로드맵메인화면.gif](/docs/img/RoadmapMain.gif)
+  ![로드맵메인화면.gif](/docs/img/roadmapMain.gif)
 
   - 로드맵 검색
 
-    ![로드맵검색화면.gif](/docs/img/RoadmapSearch.gif)
+    ![로드맵검색화면.gif](/docs/img/roadmapSearch.gif)
 
 ### 커뮤니티
 
