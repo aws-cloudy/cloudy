@@ -110,7 +110,7 @@ public class LearningServiceImpl {
                     desc : {{desc}} 
                      강의 정보(desc)와 질문을 바탕으로 추천한 이유를 만들어줘 
                      마지막은 링크를 생성해야해 
-                     http://aws-cloudy/learning?query=
+                     http://aws-cloudy.com/learning?query=
                      링크 양식은 다음과 같고 query뒤에는 {{title}}을 붙이면 돼. 
                      링크를 만들어 낼때만 {{title}}에 space가 있을 경우 전부 %로 치환해야해 
                     최종 답변 양식은 다음과 같아 

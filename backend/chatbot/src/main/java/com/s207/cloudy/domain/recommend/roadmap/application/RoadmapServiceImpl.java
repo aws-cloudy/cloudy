@@ -106,9 +106,7 @@ public class RoadmapServiceImpl {
                     desc : {{desc}} 
                      강의 정보(desc)와 질문을 바탕으로 추천한 이유를 만들어줘 
                      마지막은 링크를 생성해야해 
-                     http://aws-cloudy/roadmap?query=
-                     링크 양식은 다음과 같고 query뒤에는 {{title}}을 붙이면 돼. 
-                     링크를 만들어 낼때만 {{title}}에 space가 있을 경우 전부 %로 치환해야해 
+                     http://aws-cloudy.com/roadmap/{{id}} 
                     최종 답변 양식은 다음과 같아 
                     {{title}}을 추천 드려요!
                     추천 드리는 이유는 다음과 같아요 
@@ -125,6 +123,7 @@ public class RoadmapServiceImpl {
         variables.put("title", recommendedRoadmap.getTitle());
         variables.put("desc", recommendedRoadmap.getDesc());
         variables.put("input", chatReq.getInputData());
+        variables.put("id", recommendedRoadmap.getId());
 
         return openAiChatService.generateStreamingChat(template, variables, userId, Chatbot.ROADMAP);
     }
