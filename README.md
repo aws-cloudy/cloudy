@@ -95,35 +95,35 @@
 
 - 메인 화면
 
-  ![메인화면.gif](/docs/img/mainScreen.gif)
+  ![메인화면.gif](/docs/img/MainScreen.gif)
 
   - 메인 검색
 
-  ![메인검색화면.gif](/docs/img/mainSearch.gif)
+  ![메인검색화면.gif](/docs/img/MainSearch.gif)
 
   - 메인 직무 맞춤형 강의
 
-  ![메인직무추천화면.gif](/docs/img/mainJobList.gif)
+  ![메인직무추천화면.gif](/docs/img/MainJobList.gif)
 
   - 메인 로드맵 추천
 
-  ![메인로드맵추천화면.gif](/docs/img/mainRoadmapList.gif)
+  ![메인로드맵추천화면.gif](/docs/img/MainRoadmapList.gif)
 
 ---
 
 ### 회원
 
-- 로그인 화면
+- ### 로그인 화면
 
-  ![로그인화면.gif](/docs/img/googleLogin.gif)
+  ![로그인화면.gif](/docs/img/GoogleLogin.gif)
 
 - 회원가입 화면
 
-  ![회원가입화면.gif](/docs/img/googleJoin.gif)
+  ![회원가입화면.gif](/docs/img/GoogleJoin.gif)
 
-### 학습
+---
 
-- 학습 메인화면
+- ### 학습 메인화면
 
   ![학습화면.gif](/docs/img/LearningMain.gif)
 
@@ -142,6 +142,7 @@
   ![로드맵메인화면.gif](/docs/img/RoadmapMain.gif)
 
   - 로드맵 검색
+
     ![로드맵검색화면.gif](/docs/img/RoadmapSearch.gif)
 
 ### 커뮤니티
