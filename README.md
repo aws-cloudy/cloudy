@@ -148,23 +148,29 @@
 ### 커뮤니티
 
 - 커뮤니티 화면
+
   ![커뮤니티메인화면.gif](/docs/img/communityMain.gif)
 
   - 커뮤니티 검색 화면
+
     ![커뮤니티검색화면.gif](/docs/img/communitySearch.gif)
 
   - 커뮤니티 글쓰기 화면
+
     ![커뮤니티글쓰기화면.gif](/docs/img/communityWrite.gif)
 
   - 커뮤니티 상세 화면
+
     ![커뮤니티덧글쓰기화면.gif](/docs/img/communityComment.gif)
 
   - 커뮤니티 채택 화면
+
     ![커뮤니티채택화면.gif](/docs/img/communityCheck.gif)
 
 ### 챗봇
 
 - 챗봇 메인화면
+
   ![챗봇메인화면.gif](/docs/img/chatbotMain.gif)
 
 - 챗봇 (클라/우디/아마/존)
