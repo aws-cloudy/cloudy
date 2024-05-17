@@ -1,6 +1,6 @@
 # AWS 클라우드 서비스를 친구처럼 편안하게, Cloudy
 
-#### SSAFY 10기 기업 연계 프로젝트
+#### SSAFY 10기 S207 AWS 기업 연계 프로젝트
 
 ## ✨ 프로젝트 개요
 
@@ -66,14 +66,28 @@
 
 ### RAG 기반 추천 / 챗봇
 
-### 오타 교정
+- 검색 추천
+  - 정확한 키워드를 입력하여 검색하는 것이 아닌 키워드 기반 검색을 사용함으로써, 질문의 맥락을 파악하고 사용자에게 그에 맞는 컨텐츠를 제공
+  - 검색 품질을 향상시키기 위해 데이터 간 유사한 단어를 생성할 수 있도록 키워드 추출 후 정규화 계층 추가
+  - 사용자 입력을 벡터로 변환 후 공통된 키워드를 비교하여 질문과 가장 유사한 데이터를 판단, 사용자에게 최종 반환
+- 챗봇
+  - GPT API를 활용하여 챗봇을 구성하였으며, 답변의 정확도를 높이기 위해 답변을 생성할 때 참고할 수 있는 정보를 DB에서 가져오는 작업을 수행함
+  - 최근 채팅 내역, 공식 홈페이지의 FAQ, 공식 요금 문서, 강의 소개 정보를 벡터DB에서 전달하여 정확한 답변을 생성하도록 개선
 
-### 자동완성
+### 오타 교정 / 자동 완성
+
+- 정상 검색어, 단순 오타, 순서 변경 3가지 인자를 고려하여 자동 완성 실행
+- 캐싱 레이어를 활용하여 응답 속도를 높였으며, 해당 과정 중 불필요한 검색어가 등록되는 것을 막기 위하여 의미 불명의 검색어는 제외
 
 ### 성능 개선
 
-- 람다 성능 개선
-- FE 성능 개선
+- 람다 성능 개선(서버리스)
+
+  - 람다 실행 시 초반 Cold Start를 개선하기 위하여 Code 다운로드와 실행 환경 개선을 미리 실행
+
+- 이미지 캐싱 개선
+  - 이미지 로딩 속도를 단축하기 위하여 BE와 FE에 캐싱 레이어를 도입
+  - 개선 전 LCP: 8초 -> 개선 후 LCP: 2.3초, 응답 시간 0.03초
 
 ## ✨ 서비스 화면
 
@@ -81,11 +95,47 @@
 
 ### Front-End
 
+- Next.js `14`
+- Typescript
+- axios
+- SCSS
+- Jest
+- StoryBook
+- Zustand
+- NextAuth
+- AWS Cognito
+- Prisma
+- Zod
+
 ### Back-End
+
+- Java `17`
+- Spring Boot `3.2.4`
+- SonarQube `4.3.1.3277`
+- Spring Security
+- JWT
+- OpenAI API `(GPT)`
+- OpenSearch
+- AWS ElastiCache
 
 ### DB
 
+- Redis
+- AWS S3
+- AWS RDS
+- AWS DynamoDB
+- MongoDB
+- Pinecone
+- Supabase
+
 ### Infra
+
+- Jenkins
+- AWS Lambda
+- AWS Amplify
+- AWS CloudFront
+- AWS CloudWatch
+- AWS Elastic Beanstalk
 
 ## 프로젝트 노션 페이지
 
@@ -101,7 +151,11 @@
 
 ## ERD
 
+![ERD](./exec/images/ERD.png)
+
 ## System Architecture
+
+![System Architecture](./exec/images/SystemArchitecture.PNG)
 
 ## 역할 분담
 
