@@ -1,0 +1,15 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  flex-direction: column;
+  width: 74%;
+  padding-top: 55px;
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    width: 100%;
+    padding-top: 10px;
+  }
+}

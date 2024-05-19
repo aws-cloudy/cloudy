@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PRISMA_DB_URL")
+}
+
+model Question {
+  id         Int            @id @default(autoincrement())
+  memberId   String
+  memberName String
+  title      String
+  desc       String
+  hit        Int            @default(0)
+  createdAt  DateTime       @default(now())
+  checkedId  Int?
+  answers    Answer[]
+  hashtags   Questionhash[]
+    images     Questionimage[]
+
+}
+
+model Answer {
+  id         Int       @id @default(autoincrement())
+  memberId   String
+  memberName String
+  createdAt  DateTime  @default(now())
+  desc       String
+  questionId Int?
+  question   Question? @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+}
+
+model Questionimage {
+  path        String        @id @unique
+  url         String
+  questionId  Int
+  question    Question      @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+
+model Hashtag {
+  id        Int            @id @default(autoincrement())
+  title     String         @unique @db.VarChar(20)
+  questions Questionhash[]
+}
+
+model Questionhash {
+  questionId Int
+  hashtagId  Int
+  hashtag    Hashtag  @relation(fields: [hashtagId], references: [id], onDelete: Cascade)
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@id([questionId, hashtagId])
+  @@index([questionId])
+  @@index([hashtagId])
+}

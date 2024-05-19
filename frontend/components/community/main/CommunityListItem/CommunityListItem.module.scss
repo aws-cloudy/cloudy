@@ -1,0 +1,58 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  padding: 10px 0 20px 0;
+  margin: 10px;
+  border-bottom: 1px solid $gray7;
+  cursor: pointer;
+}
+
+.title {
+  font-weight: 400;
+
+  &Box {
+    width: 100%;
+    display: flex;
+    margin: 10px 0;
+    justify-content: space-between;
+
+    &Inner {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+.desc {
+  color: $gray8;
+}
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hash {
+  margin-top: 10px;
+
+  &tag {
+    color: $primary;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+}
+
+.answers {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: $gray9;
+
+  * {
+    font-weight: 500;
+    margin: 0 2px;
+  }
+}

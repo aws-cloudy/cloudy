@@ -1,0 +1,30 @@
+@import '@/styles/theme.scss';
+
+.section {
+  width: 100%;
+  margin-top: 20px;
+  border-bottom: solid 2px $gray2;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tag {
+  color: $primary;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.desc {
+  color: $black;
+  margin-bottom: 10px;
+}
+
+.gray {
+  color: $gray9;
+}

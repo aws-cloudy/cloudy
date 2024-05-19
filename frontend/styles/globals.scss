@@ -1,0 +1,59 @@
+@import './font.scss';
+@import './theme.scss';
+
+:root {
+  --max-width: 1600px;
+  --width-ratio: 80%;
+  --font-mono: SCDream, ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono', 'Roboto Mono', 'Oxygen Mono',
+    'Ubuntu Monospace', 'Source Code Pro', 'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-mono);
+}
+
+html,
+body {
+  max-width: 100vw;
+
+  font-size: 16px;
+}
+
+body {
+  background-color: $white;
+  color: $black;
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: light;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  :root {
+    --width-ratio: 90%;
+  }
+  html,
+  body {
+    max-width: 100vw;
+    overflow-x: hidden;
+    font-size: 12px;
+  }
+}

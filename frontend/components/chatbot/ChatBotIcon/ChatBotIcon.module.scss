@@ -1,0 +1,70 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 80px;
+  height: 80px;
+  background-color: $primary;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 50%;
+  opacity: 0.8;
+  transition:
+    width 0.1s linear,
+    border-radius 0.1s linear;
+  cursor: pointer;
+  box-shadow: 0 0 10px 0 $gray6;
+  z-index: 9998;
+
+  &:hover {
+    width: 280px;
+    border-radius: 50px;
+    opacity: 1;
+
+    .messageBox {
+      display: flex;
+    }
+  }
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.icon {
+  font-size: 3em;
+  color: $white;
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+.message {
+  &Box {
+    display: none;
+    position: absolute;
+    right: 25px;
+    top: 15px;
+    width: 180px;
+    height: 50px;
+    color: $white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition-delay: 0.1s;
+  }
+
+  &Item2 {
+    font-weight: 500;
+    font-size: 1.1em;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .icon {
+    font-size: 4em;
+  }
+}

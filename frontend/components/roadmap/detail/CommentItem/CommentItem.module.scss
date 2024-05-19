@@ -1,0 +1,36 @@
+@import '@/styles/theme.scss';
+
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 4px;
+  font-size: 0.8em;
+  justify-content: space-between;
+}
+
+.nameDate {
+  display: flex;
+}
+
+.date {
+  margin-left: 5px;
+  color: $gray8;
+}
+
+.button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: $gray8;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray9;
+  }
+}
+
+.comment {
+  margin-bottom: 20px;
+  font-size: 0.8em;
+}

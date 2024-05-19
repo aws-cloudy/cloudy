@@ -1,0 +1,9 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  background-color: $gray6;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+}

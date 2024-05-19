@@ -1,0 +1,33 @@
+@import '@/styles/theme.scss';
+
+.wrap {
+  display: grid;
+  grid-template-columns: 0.1fr 2fr;
+  position: relative;
+}
+
+.circle {
+  width: 5%;
+  width: 22px;
+  height: 22px;
+  border-radius: 100%;
+  border: 3px solid $gray6;
+  background-color: $white;
+  z-index: 2;
+}
+
+.line {
+  position: absolute;
+  height: 100%;
+  width: 2px;
+  background-color: $gray6;
+  left: 11px;
+  transform: translateX(-50%);
+}
+
+.itemWrap {
+  display: flex;
+  width: 95%;
+  box-sizing: border-box;
+  background-color: blue;
+}

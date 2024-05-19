@@ -1,0 +1,24 @@
+@import '@/styles/theme.scss';
+
+.section {
+  padding: 20px;
+  width: 100%;
+}
+
+.intro {
+  font-size: 1.2em;
+  font-weight: 500;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-gap: 20px;
+}
+
+.loading {
+  align-items: center;
+  justify-content: center;
+}

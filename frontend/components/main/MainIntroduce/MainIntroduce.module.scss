@@ -1,0 +1,84 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.itemBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  &Inner {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.titleBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+
+  &Item1 {
+    font-size: 2.5em;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  &Item2 {
+    font-size: 1.5em;
+    color: $gray9;
+    margin-bottom: 80px;
+  }
+}
+
+.bgIcon {
+  position: absolute;
+  font-size: 70em;
+  z-index: 0;
+  right: -10%;
+  bottom: -30%;
+  color: $gray1;
+}
+
+@media screen and (max-width: $tablet) {
+  .titleBox {
+    &Item1 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    &Item2 {
+      font-size: 1.3em;
+      margin-bottom: 80px;
+    }
+  }
+
+  .itemBoxInner {
+    flex-direction: column;
+    align-items: start;
+    margin-bottom: 20px;
+    margin-right: 20px;
+  }
+
+  .bgIcon {
+    font-size: 50em;
+    right: -300px;
+    bottom: -150px;
+  }
+}

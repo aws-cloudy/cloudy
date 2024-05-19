@@ -1,0 +1,23 @@
+@import '@/styles/theme.scss';
+
+.addbutton {
+  color: $gray8;
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray7;
+  }
+}
+
+.tag {
+  color: $primary;
+  cursor: pointer;
+  margin-right: 5px;
+
+  &:hover {
+    text-decoration-line: line-through;
+  }
+}

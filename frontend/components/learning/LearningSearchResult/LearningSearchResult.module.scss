@@ -1,0 +1,55 @@
+@import '@/styles/theme.scss';
+
+.resultWrap {
+  margin: 32px 0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rightWrap {
+  display: flex;
+  align-items: center;
+}
+
+.resultText {
+  font-size: 1.1em;
+  b {
+    font-weight: 600;
+  }
+}
+
+.filterText {
+  margin-right: 10px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.black {
+  color: $black1;
+}
+
+.gray {
+  color: $gray7;
+}
+
+.iconWrap {
+  cursor: pointer;
+  margin-left: 10px;
+  padding-top: 4px;
+}
+
+.oKeywordSearchWrap {
+  display: flex;
+  button {
+    font-size: 1.2em;
+    border: none;
+    background-color: $white;
+    cursor: pointer;
+    color: $gray8;
+    font-weight: 500;
+    text-decoration: underline;
+  }
+}

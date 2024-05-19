@@ -1,0 +1,12 @@
+@import '@/styles/theme.scss';
+
+.section {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+@media screen and (max-width: $tablet) {
+  .section {
+    flex-wrap: wrap;
+  }
+}

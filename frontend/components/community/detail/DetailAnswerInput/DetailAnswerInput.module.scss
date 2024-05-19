@@ -1,0 +1,25 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.textBox {
+  width: 75%;
+  height: 50px;
+  resize: none;
+  border: 1px solid $gray8;
+  border-radius: 10px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.needLogin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: $gray8;
+}

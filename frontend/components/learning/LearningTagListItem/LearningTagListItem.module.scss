@@ -1,0 +1,19 @@
+@import '@/styles/theme.scss';
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  border: 1px solid $primary;
+  padding: 4px 12px;
+  cursor: pointer;
+
+  span {
+    margin-left: 8px;
+    font-size: 0.9em;
+    color: $primary;
+  }
+}

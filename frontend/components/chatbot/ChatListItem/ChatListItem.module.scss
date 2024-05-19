@@ -1,0 +1,68 @@
+@import '@/styles/theme.scss';
+
+.container {
+  width: 100%;
+  height: 25%;
+  border-bottom: 1px solid $gray6;
+  position: relative;
+  margin: 3px 0;
+  cursor: pointer;
+  overflow: hidden;
+
+  &:hover {
+    & > .cover {
+      opacity: 0;
+    }
+    & > .image {
+      transform: scale(1.05);
+    }
+
+    & .name {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.titleBox {
+  position: absolute;
+  z-index: 2;
+  text-align: right;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.name {
+  font-size: 1.3em;
+  transition: all 0.3s ease;
+
+  & > span:nth-child(1) {
+    font-weight: 300;
+  }
+
+  & > span:nth-child(2) {
+    color: $primary;
+  }
+}
+
+.image {
+  width: 60%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+  transition: transform 0.2s ease;
+}
+
+.cover {
+  position: absolute;
+  background: linear-gradient(to right, transparent -50%, $white 50%);
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}

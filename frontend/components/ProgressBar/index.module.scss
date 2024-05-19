@@ -1,0 +1,46 @@
+@import '@/styles/theme.scss';
+.progressBarContainer {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  position: relative;
+  margin-bottom: 3%;
+}
+
+.firstCircle,
+.lastCircle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  transform: translateY((-50%));
+}
+
+.firstCircle {
+  left: 0;
+  background-color: $primary;
+}
+
+.lastCircle {
+  right: 0;
+  transition: width 0.25s ease-in-out;
+}
+
+.progressBarLine {
+  height: 5px;
+  background-color: $primary;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  transition: width 0.25s ease-in-out;
+}
+
+.progressBarContainer::before {
+  content: '';
+  height: 5px;
+  width: 100%;
+  background-color: $gray6;
+  position: absolute;
+  transform: translateY(-50%);
+}

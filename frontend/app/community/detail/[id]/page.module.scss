@@ -1,0 +1,22 @@
+@import '@/styles/theme.scss';
+
+.inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.notfound {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $gray8;
+}
+
+@media screen and (max-width: $tablet) {
+  .inner {
+    flex-direction: column;
+  }
+}
