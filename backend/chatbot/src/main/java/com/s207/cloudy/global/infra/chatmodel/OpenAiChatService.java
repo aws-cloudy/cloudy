@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static dev.langchain4j.model.openai.OpenAiModelName.GPT_3_5_TURBO;
@@ -30,6 +31,39 @@ public class OpenAiChatService implements ChatService {
     private OpenAiChatModel openAiChatModel;
     private OpenAiStreamingChatModel openAiStreamingChatModel;
     private final ChatQueryService chatQueryService;
+
+
+    //주어진 질의에 대해 키워드 추출
+    @Override
+    public String extractKeywords(String query){
+        String template= """
+                        The user asked the following question:
+                        "{{desc}}"
+                    
+                        Provide four AWS service names and four IT technology keywords related to the content.
+                        Each keyword should be separated by a comma and a space, and the whole output should be in one line.
+                        Do not include any labels such as "AWS services" or "IT Technology keywords and .
+                        Exclude "IAM", "AWS", "Amazon" from the AWS services."
+                        if question has "feature flagging" or "feature flag" then please include "AppConfig" in keywords
+                        if question has "chat" please include "WebSocket" in keywords
+                        if question has "AI" or "ML" or simmilar keywords, please include AWS service related With ML/DL
+                        Each Keyword must be an english
+                        please give me a 20 keywords
+                        """;
+
+        Map<String, Object> variables = new HashMap<>();
+
+        variables.put("desc", query);
+
+        String keywords = this.generateChat(template, variables);
+
+        log.info("LearningServiceImpl :: keywords = {}", keywords);
+
+
+        return keywords;
+
+    }
+
 
     @Override
     public Flux<String> generateStreamingChat(String template, Map<String, Object> variables, String userId, Chatbot chatbot) {
@@ -77,8 +111,6 @@ public class OpenAiChatService implements ChatService {
 
         Prompt prompt = getPrompt(template, variables);
 
-        log.info("generate prompt: {}", prompt.text().substring(0, 15));
-
         if (openAiChatModel == null) {
             openAiChatModel = OpenAiChatModel.builder()
                     .apiKey(openAiKey)
@@ -86,7 +118,7 @@ public class OpenAiChatService implements ChatService {
                     .build();
         }
         var result =openAiChatModel.generate(prompt.text());
-        log.info("generateChat :: input={}, result = {}", prompt.text(), result);
+        log.info("generateChat :: result = {}",  result);
         return result;
     }
 

@@ -46,6 +46,7 @@ public class JwtServiceImpl implements JwtService {
     private final static String BEARER= "Bearer ";
     private final static String KID = "kid";
     private final static String SUB = "sub";
+    private final static String NAME = "name";
 
     @Override
     public boolean isTokenValid(String token) throws TokenExpiredException {
@@ -57,13 +58,13 @@ public class JwtServiceImpl implements JwtService {
 
         var algorithm = buildAlgorithm((jwk));
 
-        String userId = JWT.require(algorithm)
-                .build()
-                .verify(token)
-                .getClaim(SUB)
-                .asString();
+        var userId = extractPayloadData(SUB, algorithm, token);
+
+        var name = extractPayloadData(NAME, algorithm, token);
+
+
         log.info("[JwtServiceImpl isTokenValid] user가 접속하였습니다. ::{}", userId);
-        generateAuthentication(userId);
+        generateAuthentication(userId, name);
 
         return true;
     }
@@ -97,12 +98,20 @@ public class JwtServiceImpl implements JwtService {
             .orElseThrow(()-> new AuthorizationException(UNAUTHORIZED));
 
     }
+    private String extractPayloadData(String claimType, Algorithm algorithm, String token){
+        return JWT.require(algorithm)
+                .build()
+                .verify(token)
+                .getClaim(claimType)
+                .asString();
+    }
 
 
-    private void generateAuthentication(String userId){
+
+    private void generateAuthentication(String userId, String username){
 
         List<GrantedAuthority> authorities = new ArrayList<>();
-        Member member = new Member(userId,userId);
+        Member member = new Member(userId,username);
         log.error("[JwtServiceImpl generateAuthentication] :: {}", member);
         Authentication authentication = new UsernamePasswordAuthenticationToken(member, null,
                 authoritiesMapper.mapAuthorities(member.getAuthorities()));

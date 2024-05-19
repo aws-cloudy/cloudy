@@ -36,7 +36,7 @@ const LearningSearchResult = () => {
   }
 
   return (
-    <>
+    <div className={styles.resultWrap}>
       <div className={styles.container}>
         <div>
           {originalQuery && (
@@ -66,7 +66,7 @@ const LearningSearchResult = () => {
           <button onClick={searchWithOriginalQuery}>{keyword}로 대신 검색</button>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

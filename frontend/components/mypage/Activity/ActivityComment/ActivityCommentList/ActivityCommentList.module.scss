@@ -4,6 +4,7 @@
   width: 100%;
   margin-top: 20px;
   border-bottom: solid 2px $gray2;
+  cursor: pointer;
 }
 
 .row {
@@ -16,9 +17,10 @@
 .tag {
   color: $primary;
   margin-bottom: 10px;
+  font-weight: 500;
 }
 
-.context {
+.desc {
   color: $black;
   margin-bottom: 10px;
 }

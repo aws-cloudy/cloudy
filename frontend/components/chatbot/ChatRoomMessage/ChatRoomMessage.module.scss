@@ -34,6 +34,19 @@
   padding: 20px;
   border-radius: 10px;
   margin: 0 10px;
+  word-break: break-all;
+  font-size: 0.8em;
+
+  & > span {
+    & > a {
+      font-weight: 500;
+      color: $blue1;
+
+      &:hover {
+        color: $blue2;
+      }
+    }
+  }
 
   &Bot {
     background-color: $gray3;
@@ -41,5 +54,11 @@
 
   &User {
     border: 1px solid $black1;
+  }
+}
+
+@media screen and (max-width: $tablet) {
+  .message {
+    font-size: 1em;
   }
 }

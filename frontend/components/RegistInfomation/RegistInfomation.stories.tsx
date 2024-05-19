@@ -8,6 +8,7 @@ const meta = {
     layout: 'fullscreen',
   },
   tags: ['autodocs'],
+  args: { username: '' },
 } satisfies Meta<typeof RegistInfomation>
 
 export default meta

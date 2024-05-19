@@ -84,21 +84,21 @@ class MemberRoadmapControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.roadmaps[0].bookmarkId",
-                        equalTo(dummyBookmarkRes1.getBookmarkId()), Integer.class))
+                        equalTo(dummyBookmarkRes1.bookmarkId()), Integer.class))
                 .andExpect(jsonPath("$.roadmaps[0].roadmapId",
-                        equalTo(dummyBookmarkRes1.getRoadmapId()), Integer.class))
+                        equalTo(dummyBookmarkRes1.roadmapId()), Integer.class))
                 .andExpect(jsonPath("$.roadmaps[0].title",
-                        equalTo(dummyBookmarkRes1.getTitle()), String.class))
+                        equalTo(dummyBookmarkRes1.title()), String.class))
                 .andExpect(jsonPath("$.roadmaps[0].thumbnail",
-                        equalTo(dummyBookmarkRes1.getThumbnail()), String.class))
+                        equalTo(dummyBookmarkRes1.thumbnail()), String.class))
                 .andExpect(jsonPath("$.roadmaps[0].service",
-                        equalTo(dummyBookmarkRes1.getService()), String.class))
+                        equalTo(dummyBookmarkRes1.service()), String.class))
                 .andExpect(jsonPath("$.roadmaps[0].job",
-                        equalTo(dummyBookmarkRes1.getJob()), String.class))
+                        equalTo(dummyBookmarkRes1.job()), String.class))
                 .andExpect(jsonPath("$.roadmaps[0].summary",
-                        equalTo(dummyBookmarkRes1.getSummary()), String.class))
+                        equalTo(dummyBookmarkRes1.summary()), String.class))
                 .andExpect(jsonPath("$.roadmaps[0].commentsCnt",
-                        equalTo(dummyBookmarkRes1.getCommentsCnt()), Long.class))
+                        equalTo(dummyBookmarkRes1.commentsCnt()), Long.class))
                 .andExpect(jsonPath("$.totalPageCnt",
                         equalTo((long) dummyList.size()), Long.class))
                 .andDo(print());
@@ -124,14 +124,12 @@ class MemberRoadmapControllerTest {
     @DisplayName("로드맵 번호가 null일 경우 북마크 생성에 실패하고, 400 BAD REQUEST를 반환한다.")
     void should_400_and_create_bookmark_failed_when_invalid_request_body() throws Exception {
 
-        CreateRoadmapReq createRoadmapReq = new CreateRoadmapReq();
-
         given(mockMemberRoadmapService.createRoadmapBookmark(any(Member.class), any(CreateRoadmapReq.class)))
                 .willReturn(dummyMemberRoadmap);
 
         mockMvc.perform(post(BOOKMARK_URI)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(createRoadmapReq)))
+                        .content(objectMapper.writeValueAsString( new CreateRoadmapReq(null))))
                 .andExpect(status().isBadRequest())
                 .andDo(print());
     }

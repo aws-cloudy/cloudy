@@ -67,31 +67,6 @@ public class LearningServiceImpl {
 
 
 
-    //주어진 질의에 대해 키워드 추출
-    private String extractKeywords(String query){
-        String template= """
-                        The user asked the following question:
-                        "{{desc}}"
-                    
-                        Provide four AWS service names and four IT technology keywords related to the content.
-                        Each keyword should be separated by a comma and a space, and the whole output should be in one line.
-                        Do not include any labels such as "AWS services" or "IT keywords and .
-                        Exclude "IAM", "AWS", "Amazon" from the AWS services."
-                        Each Keyword must be an english
-                        """;
-
-        Map<String, Object> variables = new HashMap<>();
-
-        variables.put("desc", query);
-
-        String keywords = openAiChatService.generateChat(template, variables);
-
-        log.info("LearningServiceImpl :: keywords = {}", keywords);
-
-
-        return keywords;
-
-    }
 
     private List<Integer> getRecommendedLearningIds(String keywords, int num){
         return pineconeService.findRelevant(keywords, num)
@@ -102,7 +77,7 @@ public class LearningServiceImpl {
 
 
     public LearningListRes recommendLearning(String query, Integer num){
-        String keywords = extractKeywords(query)
+        String keywords = openAiChatService.extractKeywords(query)
                 .replace("AWS", "")
                 .replace("Amazon", "");
 
@@ -117,7 +92,7 @@ public class LearningServiceImpl {
     }
 
     public Flux<String> generateChatStream(ChatReq chatReq, String userId) {
-        String keywords = extractKeywords(chatReq.getInputData())
+        String keywords = openAiChatService.extractKeywords(chatReq.getInputData())
                 .replace("AWS", "")
                 .replace("Amazon", "");
 
@@ -135,7 +110,7 @@ public class LearningServiceImpl {
                     desc : {{desc}} 
                      강의 정보(desc)와 질문을 바탕으로 추천한 이유를 만들어줘 
                      마지막은 링크를 생성해야해 
-                     http://aws-cloudy/learning?query=
+                     http://aws-cloudy.com/learning?query=
                      링크 양식은 다음과 같고 query뒤에는 {{title}}을 붙이면 돼. 
                      링크를 만들어 낼때만 {{title}}에 space가 있을 경우 전부 %로 치환해야해 
                     최종 답변 양식은 다음과 같아 

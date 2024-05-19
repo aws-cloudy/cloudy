@@ -2,7 +2,7 @@
 
 .section {
   padding: 20px;
-  width: 75%;
+  width: 100%;
 }
 
 .intro {
@@ -20,29 +20,49 @@
   margin-bottom: 25px;
 }
 
+.dropRow {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
 .title {
   color: $gray9;
-  width: 15%;
+  width: 100px;
   align-content: center;
 }
 
 .block {
-  width: 50%;
+  display: flex;
+  flex: initial;
+  width: 400px;
   height: 48px;
   background-color: $gray3;
   border-radius: 6px;
   align-content: center;
   padding: 10px;
+  align-items: center;
 }
 
 .switchButton {
   background-color: $primary;
   color: $white;
-  width: 10%;
+  width: 80px;
   height: 48px;
   text-align: center;
   align-content: center;
   border-radius: 6px;
   border: 0;
   cursor: pointer;
+}
+
+@media screen and (max-width: 1280px) {
+  .block {
+    font-size: 0.8rem;
+  }
+  .dropRow {
+    flex-direction: column;
+  }
 }

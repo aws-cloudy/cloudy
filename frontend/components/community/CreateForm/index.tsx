@@ -16,14 +16,13 @@ import EditorFooter from '@/components/community/create/EditorFooter'
 import EditorTitle from '@/components/community/create/EditorTitle'
 
 import Layout from '@/components/common/Layout'
+import Loading from '@/components/common/Loading'
 import { IHashtag, IImage, IUpdateQuestion } from '@/types/community'
 import { Editor as EditorType } from '@toast-ui/react-editor'
-import { Hashtag } from '@prisma/client'
-import Loading from '@/components/common/Loading'
 
 const EditorBody = dynamic(() => import('@/components/community/create/EditorBody'), { ssr: false })
 
-function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
+function CreateForm({ id, desc, hashtags, title }: IUpdateQuestion) {
   const [tags, setTags] = useState<IHashtag[]>(hashtags ? hashtags : [])
   const [images, setImages] = useState<IImage[]>([])
   const [isSaving, setIsSaving] = useState(false)
@@ -58,7 +57,7 @@ function CreateForm({ id, authorId, desc, hashtags, title }: IUpdateQuestion) {
     await Promise.all(uploadImages)
 
     if (id && isUpdate) {
-      const res = await axios.put(`${commuURL}question/update`, {
+      await axios.put(`${commuURL}question/update`, {
         questionId: id,
         tags,
         title,

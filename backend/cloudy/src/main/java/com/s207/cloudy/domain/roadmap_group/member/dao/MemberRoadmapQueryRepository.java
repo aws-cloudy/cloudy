@@ -1,6 +1,5 @@
 package com.s207.cloudy.domain.roadmap_group.member.dao;
 
-import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -31,20 +30,18 @@ public class MemberRoadmapQueryRepository {
 
         Pageable pageable = PageRequest.of(0, 1000);
         List<BookmarkRes> content = queryFactory
-                .select(Projections.fields(BookmarkRes.class,
-                        qMemberRoadmap.id.as("bookmarkId"),
-                        qRoadmap.id.as("roadmapId"),
-                        qRoadmap.title,
-                        qRoadmap.thumbnail,
-                        qRoadmap.service,
-                        qRoadmap.job,
-                        qRoadmap.summary,
-                        ExpressionUtils.as(
+                .select(Projections.constructor(BookmarkRes.class,
+                                qMemberRoadmap.id,
+                                qRoadmap.id,
+                                qRoadmap.title,
+                                qRoadmap.thumbnail,
+                                qRoadmap.service,
+                                qRoadmap.job,
+                                qRoadmap.summary,
                                 JPAExpressions.select(qComment.count())
                                         .from(qComment)
-                                        .where(qComment.roadmap.eq(qRoadmap)),
-                                "commentsCnt"
-                        ))
+                                        .where(qComment.roadmap.eq(qRoadmap))
+                        )
                 )
                 .from(qMemberRoadmap)
                 .innerJoin(qMemberRoadmap.roadmap, qRoadmap)

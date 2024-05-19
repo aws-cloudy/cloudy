@@ -5,9 +5,14 @@ import styles from './DetailAnswerITem.module.scss'
 import axios from 'axios'
 import { commuURL } from '@/apis/urls'
 import { useRouter } from 'next/navigation'
+import { useUserId } from '@/stores/authStore'
+import { useMemo } from 'react'
 
-function DetailAnswerITem({ ans, isChecked, authId, isWriter }: IDetailAnswerItem) {
-  const isAuthor = ans.memberId === authId
+function DetailAnswerITem({ ans, isChecked, isWriter }: IDetailAnswerItem) {
+  const userId = useUserId()
+  const isAuthor = useMemo(() => {
+    return ans.memberId === userId
+  }, [userId])
   const router = useRouter()
 
   const deleteAnswer = async () => {
@@ -31,7 +36,7 @@ function DetailAnswerITem({ ans, isChecked, authId, isWriter }: IDetailAnswerIte
 
         <div className={styles.buttonBox}>
           {isWriter && <button onClick={() => checkAnswer()}>{isChecked ? '채택해제' : '채택하기'}</button>}
-          {isAuthor && <button onClick={() => deleteAnswer()}>삭제</button>}
+          {(isWriter || isAuthor) && <button onClick={() => deleteAnswer()}>삭제</button>}
         </div>
       </div>
       {ans.desc}

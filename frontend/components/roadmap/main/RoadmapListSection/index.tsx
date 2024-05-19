@@ -101,8 +101,10 @@ const RoadmapListSection = () => {
                 ...road,
                 isScrapped: bookmarks.some(bm => bm.roadmapId === road.roadmapId),
                 bookmarkId: bookmarks.find(bm => bm.roadmapId === road.roadmapId)?.bookmarkId ?? -1,
+                isUseMypage: false,
               }}
               key={road.roadmapId}
+              onBookmarkDelete={function (bookmarkId: number): void {}}
             />
           ))}
         </div>

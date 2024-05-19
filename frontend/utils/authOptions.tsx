@@ -2,9 +2,6 @@ import GoogleProvider from 'next-auth/providers/google'
 import CognitoProvider from 'next-auth/providers/cognito'
 import { NextAuthOptions } from 'next-auth'
 import { checkUserExists, getUser } from './cognito'
-import { redirect } from 'next/navigation'
-import { client } from './axiosClient'
-import server from './axiosServer'
 
 export const authOptions: NextAuthOptions = {
   //Providers 소셜 로그인 서비스 코드
@@ -62,7 +59,7 @@ export const authOptions: NextAuthOptions = {
       return session
     },
   },
-  secret: process.env.NEXT_PUBLIC_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     newUser: '/join',
   },

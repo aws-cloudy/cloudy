@@ -15,7 +15,7 @@ public enum DifficultyType {
     private static final Map<String, DifficultyType> CODE_MAP = new HashMap<>();
 
     static {
-        for(DifficultyType difficultyType : values()) {
+        for (DifficultyType difficultyType : values()) {
             CODE_MAP.put(difficultyType.code, difficultyType);
         }
     }
@@ -23,11 +23,13 @@ public enum DifficultyType {
     DifficultyType(String code) {
         this.code = code;
     }
+
     public String getCode() {
         return code;
     }
 
     public static DifficultyType getByCode(String code) {
-        return Optional.ofNullable(CODE_MAP.get(code)).orElseThrow(CustomValidationException::new);
+        return Optional.ofNullable(CODE_MAP.get(code))
+                .orElseThrow(CustomValidationException::new);
     }
 }

@@ -15,7 +15,7 @@ function Observer({ callback }: { callback: IntersectionObserverCallback }) {
       if (!observerRef.current) return
       return observer.unobserve(observerRef.current)
     }
-  })
+  }, [callback])
 
   return <div ref={observerRef} className={styles.container}></div>
 }

@@ -39,6 +39,7 @@ public enum JobNameType {
     }
 
     public static String getByJobName(String jobName) {
-        return Optional.ofNullable(JOBNAME_MAP.get(jobName)).orElseThrow(CustomValidationException::new);
+        return Optional.ofNullable(JOBNAME_MAP.get(jobName))
+                .orElseThrow(CustomValidationException::new);
     }
 }

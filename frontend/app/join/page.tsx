@@ -6,11 +6,9 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { Suspense, useEffect } from 'react'
 
-const joinPage = ({ searchParams }: { searchParams: { auth: string } }) => {
+const joinPage = () => {
   const { data: session, status } = useSession()
   const router = useRouter()
-
-  const username = searchParams.auth
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -23,7 +21,7 @@ const joinPage = ({ searchParams }: { searchParams: { auth: string } }) => {
     <>
       <section className={styles.section}>
         <Suspense>
-          <RegistInfomation username={username} />
+          <RegistInfomation />
         </Suspense>
       </section>
     </>

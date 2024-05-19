@@ -2,8 +2,8 @@ import { getUser } from '@/utils/getUser'
 import styles from './MainLectureRecom.module.scss'
 import { fetchLearningRecom, fetchLearningRecomWithoutJob } from '@/apis/mainLearing'
 import { ILearningCard } from '@/types/learning'
-import LearningCard from '@/components/common/LearningCard'
 import { jobOptions } from '@/constants/user'
+import MainLectureRecomInner from '../MainLectureRecomInner'
 
 async function MainLectureRecom() {
   const user = await getUser()
@@ -25,16 +25,7 @@ async function MainLectureRecom() {
               : 'Cloudy에서는 이런 강의도 제공하고 있어요'}
           </p>
         </div>
-        <div className={styles.recomBox}>
-          <div className={styles.recomBoxInner}>
-            {learningList &&
-              learningList.map(each => (
-                <div className={styles.recomBoxInnerItem} key={each.learningId}>
-                  <LearningCard item={each} layout="grid" />
-                </div>
-              ))}
-          </div>
-        </div>
+        <MainLectureRecomInner learningList={learningList} len={learningList.length} />
       </div>
     </div>
   )

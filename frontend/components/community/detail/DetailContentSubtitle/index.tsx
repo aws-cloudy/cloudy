@@ -8,11 +8,16 @@ import { getFullDay } from '@/utils/common/getFullDay'
 import axios from 'axios'
 import { commuURL } from '@/apis/urls'
 import { useRouter } from 'next/navigation'
+import { useUserId } from '@/stores/authStore'
+import { useMemo } from 'react'
 
-function DetailContentSubtitle({ id, author, createdAt, authorId, authId }: IDetailContentSubtitle) {
+function DetailContentSubtitle({ id, author, createdAt, authorId }: IDetailContentSubtitle) {
   const date = new Date(createdAt)
   const router = useRouter()
-  const isAuthor = authorId === authId
+  const userId = useUserId()
+  const isAuthor = useMemo(() => {
+    return authorId === userId
+  }, [userId])
 
   const handleDelete = async () => {
     await axios.delete(`${commuURL}question/detail/delete`, { params: { id } })

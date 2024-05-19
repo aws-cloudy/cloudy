@@ -23,18 +23,33 @@ public class CommentController {
     private final RoadmapCommentService roadmapCommentService;
 
     @PostMapping("/roadmaps")
-    public ResponseEntity<RoadmapCommentPostRes> postRoadmapComment(@RequestBody RoadmapCommentPostReq roadmapCommentPostReq, @AuthenticationPrincipal Member member){
+    public ResponseEntity<RoadmapCommentPostRes> postRoadmapComment(@RequestBody RoadmapCommentPostReq roadmapCommentPostReq, @AuthenticationPrincipal Member member) {
 
-            log.info("{}",member);
+        log.info("{}", member);
 
-            return ResponseEntity
-                    .ok(
-                        RoadmapCommentPostRes
-                        .builder()
-                        .id(
+        return ResponseEntity
+                .ok(
+                        new RoadmapCommentPostRes(
                                 roadmapCommentService.postRoadmapComment(roadmapCommentPostReq, member.getId())
                         )
-                        .build()
-                    );
+                );
+    }
+
+    @DeleteMapping("/{commentId}/roadmaps")
+    public ResponseEntity<RoadmapCommentPostRes> deleteRoadmapComment(
+            @PathVariable("commentId") Integer commentId,
+
+            @AuthenticationPrincipal Member member
+    ) {
+
+
+        return ResponseEntity.ok(
+                new RoadmapCommentPostRes
+                        (roadmapCommentService.deleteRoadmapComment(
+                                commentId,
+                                member.getId()
+                        )
+                        )
+        );
     }
 }

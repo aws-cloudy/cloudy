@@ -2,7 +2,7 @@
 
 .container {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   background-color: $gray1;
   display: flex;
   justify-content: center;
@@ -12,6 +12,7 @@
 .inner {
   width: 90%;
   height: 80%;
+  padding-bottom: 20px;
 }
 
 .titleBox {
@@ -29,52 +30,6 @@
   }
 }
 
-.recomBox {
-  width: calc(100vw - 10%);
-  height: calc(90% - 50px);
-  overflow-x: auto;
-  margin-top: 50px;
-
-  &::-webkit-scrollbar {
-    background-color: transparent;
-    height: 10px;
-
-    &-track {
-      background-color: $gray3;
-      border-radius: 25px;
-    }
-
-    &-thumb {
-      background-color: $primary;
-      border-radius: 25px;
-    }
-  }
-
-  &Inner {
-    margin-top: 50px;
-    width: 300%;
-    height: calc(100% - 50px);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-
-    &Item {
-      margin: 0 5px;
-      width: 300px;
-      height: fit-content;
-
-      & > * {
-        width: 100%;
-        height: fit-content;
-
-        & img {
-          object-fit: cover;
-        }
-      }
-    }
-  }
-}
-
 @media screen and (max-width: $tablet) {
   .container {
     height: 80vh;
@@ -87,14 +42,6 @@
 
     &Item2 {
       font-size: 1.1em;
-    }
-  }
-
-  .recomBoxInner {
-    margin-top: 0;
-
-    &Item {
-      width: 100%;
     }
   }
 }

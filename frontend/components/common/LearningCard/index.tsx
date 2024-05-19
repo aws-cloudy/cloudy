@@ -16,13 +16,23 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
 
   const clickMoreButton = () => layout !== 'justify' && setMore(!more)
 
-  // 이미지 url 변경
-  const changeUrl = (v: string) => 'https:' + v.substring(1, v.length - 1)
+  const loadError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const target = e.target as HTMLElement
+    target.setAttribute('src', '/img/default.jpeg')
+  }
 
   return (
-    <div className={layout === 'grid' ? styles.container : styles.justifyContainer}>
+    <div className={layout === 'grid' ? styles.container : styles.justifyContainer} onClick={clickMoreButton}>
       <div className={layout === 'grid' ? styles.imgWrap : styles.justifyImgWrap}>
-        <Image src={changeUrl(item.thumbnail)} alt={item.title} className={styles.img} fill priority sizes="auto" />
+        <Image
+          src={item.thumbnail}
+          alt={item.title}
+          className={styles.img}
+          fill
+          priority
+          sizes="auto"
+          onError={loadError}
+        />
         <div className={`${styles.badge} ${difficulty.class} ${layout === 'justify' && styles.justifyBadge}`}>
           {difficulty.text}
         </div>
@@ -33,7 +43,7 @@ const LearningCard = (props: { item: ILearningCard; layout: string }) => {
         </div>
         <div className={styles.title}>{item.title}</div>
         {more || layout === 'justify' ? (
-          <div className={styles.moreWrap} onClick={clickMoreButton}>
+          <div className={styles.moreWrap}>
             <div className={styles.duration}>소요시간 {item.duration}</div>
             <div className={styles.summary}>{item.summary}</div>
             <Link href={item.link} target="_blank" className={styles.link}>
