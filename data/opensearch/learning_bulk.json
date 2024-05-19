@@ -1,0 +1,3410 @@
+{
+  "index": {
+    "_index": "learning",
+    "_id": "1"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Athena (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "2"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Visualizing with QuickSight (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "3"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Elastic MapReduce (EMR) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "4"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon EMR (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "5"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Glue (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "6"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon Redshift (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "7"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Hadoop Fundamentals (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "8"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Kinesis Data Analytics for Java Applications (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "9"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Kinesis Analytics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "10"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Redshift Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "11"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Quicksight (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "12"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Health Check with Elastic Load Balancing vs. Auto Scaling group (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "13"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "The AWS Well-Architected Framework (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "14"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Let's Build in Amazon Honeycode (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "15"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Job Roles in the Cloud (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "16"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Cloud for CFOs (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "17"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Cloud for CIOs (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "18"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Cloud Essentials for Business Leaders (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "19"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Cloud Essentials for Business Leaders (Financial Services) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "20"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Cloud Practitioner Essentials (Korean) (Sub) (한국어 자막)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "21"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Cloud Practitioner Essentials (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "22"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Cloud Acquisition (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "23"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Sustainability Transformation with AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "24"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Foundations: Getting Started with the AWS Cloud Essentials (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "25"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Technical Essentials (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "26"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Technical Essentials (Korean) (Sub) (한국어 자막)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "27"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Billing and Cost Management (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "28"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Elastic Container Registry (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "29"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Elastic Container Service (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "30"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon EKS Anywhere (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "31"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Fargate (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "32"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon ECR (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "33"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon ECS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "34"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Fargate (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "35"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Compute Services Overview (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "36"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Elastic Load Balancer - Application (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "37"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Auto Scaling (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "38"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Elastic Compute Cloud (EC2) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "39"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon EC2 Basics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "40"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon EC2 Systems Manager (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "41"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Inferentia and Amazon EC2 Inf1 Instances (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "42"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Aurora MySQL - Basics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "43"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Aurora MySQL - Migration (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "44"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building Highly Connected Applications using Amazon Neptune (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "45"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Quantum Ledger Database (QLDB) Service Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "46"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Quantum Ledger Database (QLDB) Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "47"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DynamoDB – Architecture and Features (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "48"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DynamoDB for Serverless Architectures (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "49"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive into DocumentDB (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "50"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Database Offerings (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "51"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon MemoryDB for Redis (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "52"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon ElastiCache (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "53"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon Keyspaces (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "54"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon Neptune (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "55"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon Timestream (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "56"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon DocumentDB (with MongoDB compatibility) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "57"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon RDS for MariaDB (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "58"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Aurora Service Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "59"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DocumentDB Service Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "60"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DynamoDB Service Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "61"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon ElastiCache Service Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "62"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Neptune Service Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "63"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Building with AWS Databases (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "64"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Database Migration (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "65"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from Microsoft SQL Server to Amazon RDS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "66"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from Oracle to Amazon RDS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "67"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from MySQL to Amazon RDS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "68"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from PostgreSQL to Amazon RDS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "69"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from Apache Cassandra to Amazon Keyspaces (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "70"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from Redis to Amazon ElastiCache (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "71"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Aurora Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "72"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DocumentDB Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "73"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DynamoDB Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "74"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon ElastiCache Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "75"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Neptune Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "76"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "PostgreSQL Fundamentals: Explain (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "77"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "PostgreSQL Fundamentals: Architecture (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "78"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "PostgreSQL Fundamentals: SQL Command Line (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "79"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "PostgreSQL Fundamentals (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "80"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon RDS Service Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "81"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Improve Code Quality with Amazon CodeGuru Reviewer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "82"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with DevOps on AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "83"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS CodeBuild (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "84"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS CodeCommit (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "85"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Command Line Interface (CLI) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "86"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS CodePipeline (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "87"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS CodeStar (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "88"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon CodeWhisperer - Getting Started (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "89"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Development Tools Services Overview (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "90"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS X-Ray (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "91"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Detect Anomalies in Game Transactions with ML and Sagemaker (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "92"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS for Games – Part I (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "93"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS for Games – Part II (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "94"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS IoT (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "95"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS IoT Analytics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "96"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to IoT Device Defender (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "97"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS IoT: Visual Walkthrough (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "98"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS IoT Device Management (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "99"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Audit Manager (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "100"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Basics of AWS Managed Services (AMS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "101"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS CloudFormation (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "102"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS CloudFormation Stacks - Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "103"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon CloudWatch Logs Insights (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "104"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon CloudWatch Logs (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "105"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Config (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "106"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Control Tower (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "107"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS CloudTrail (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "108"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Systems Manager (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "109"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Management Console (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "110"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Service Catalog (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "111"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Trusted Advisor (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "112"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Bedrock Getting Started (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "113"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Kendra Getting Started (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "114"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Lex Getting Started (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "115"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building a Generative AI-Ready Organization (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "116"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Generative AI - Art of the Possible (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "117"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Planning a Generative AI Project (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "118"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Transcribe Getting Started (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "119"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Basics of Machine learning (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "120"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Generative AI for Executives (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "121"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon Textract (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "122"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Machine learning: Art of the Possible (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "123"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Planning a Machine learning Project (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "124"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building a Machine learning Ready Organization (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "125"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Machine learning Essentials for Business and Technical Decision Makers (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "126"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon SageMaker (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "127"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Foundations: Machine learning Basics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "128"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Foundations: How Amazon SageMaker Can Help (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "129"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Media Services by Use Case (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "130"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Elemental Link - Getting Started (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "131"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Video Streaming Concepts: AWS Media Services (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "132"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Elemental Live - Foundations (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "133"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Media Glossary (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "134"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Application Migration Service (AWS MGN) – A Technical Introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "135"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "CloudEndure Migration Training - Technical (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "136"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to the AWS Cloud Adoption Framework (CAF) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "137"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating to AWS: A high level introduction (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "138"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Migration Hub Refactor Spaces (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "139"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Selecting your Data Migration Strategy with AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "140"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Understanding AWS Networking Gateways (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "141"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Understanding CIDR Notation (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "142"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Direct Connect (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "143"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Global Accelerator (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "144"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Application Load Balancer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "145"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Network Load Balancer (NLB) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "146"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Gateway Load Balancer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "147"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon CloudFront (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "148"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Networking Basics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "149"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Network Ninja to Cloud Ninja (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "150"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Subnets, Gateways, and Route Tables Explained (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "151"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Virtual Private Cloud (VPC) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "152"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Authentication and Authorization with AWS Identity and Access Management (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "153"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Cloud Audit Academy – Cloud Agnostic (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "154"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Differences Between Security Groups and NACLs (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "155"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Understanding Amazon EBS Volume Encryption (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "156"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Identity and Access Management - Architecture and Terminology (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "157"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Identity and Access Management - Basics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "158"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Identity and Access Management (IAM) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "159"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon Inspector (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "160"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Protecting Your Instance with Security Groups (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "161"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Security Fundamentals (Second Edition) (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "162"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Shared Responsibility Model (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "163"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Security Token Services (STS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "164"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating SAP Workloads to AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "165"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "SaaS Business Fundamentals (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "166"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon FSx for NetApp ONTAP Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "167"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with AWS Storage (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "168"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon FSx for Lustre (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "169"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Amazon FSx for Windows File Server (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "170"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon API Gateway for Serverless Applications (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "171"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting into the Serverless Mindset (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "172"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Decoupled Applications (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "173"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Serverless Development (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "174"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Lambda Foundations (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "175"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Step Functions (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "176"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Architecting on AWS - Online Course Supplement (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "177"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Well-Architected Foundations (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "178"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Readiness: AWS Certified Solutions Architect – Associate (Digital) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "179"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Well-Architected Considerations for Financial Services (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "180"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Harnessing Data in Amazon Honeycode (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "181"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Making the App You Want in Amazon Honeycode (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "182"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS Solutions (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "183"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to Containers (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "184"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Elastic Container Service (ECS) Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "185"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon EKS Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "186"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Planning an AWS Outposts Implementation (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "187"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Aurora MySQL and Amazon RDS MySQL (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "188"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Breaking Free from Legacy Databases (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "189"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from Oracle to Amazon Aurora (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "190"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating from Microsoft SQL Server to Amazon DynamoDB (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "191"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Break Free of Legacy Databases (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "192"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Developing with Amazon DynamoDB (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "193"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Using the AWS Schema Conversion Tool (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "194"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Mapping a Few Core Oracle DB Concepts to Amazon RDS/Aurora PostgreSQL Concepts (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "195"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Moving To Managed Databases on AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "196"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Aurora PostgreSQL and Amazon RDS PostgreSQL (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "197"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Build Modern Apps with Purpose-Built Databases (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "198"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Working with Indexes in DynamoDB (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "199"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon DynamoDB - Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "200"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Cloud Development Kit Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "201"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon AppStream 2.0 Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "202"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Introduction to AWS End User Computing Services (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "203"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon WorkSpaces Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "204"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Why Analytics for Games (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "205"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building an Analytics Pipeline for Games (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "206"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon GameLift Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "207"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Game Server Hosting on AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "208"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Game Server Hosting with Amazon EC2 (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "209"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Lumberyard Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "210"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Using Amazon GameLift FleetIQ for Game Servers (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "211"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS IoT Device Defender Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "212"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS IoT Security Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "213"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "IoT Foundation: Telemetry (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "214"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Managing AWS IoT Devices: Fleet Indexing (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "215"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS IoT Security Series (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "216"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Managed Services (AMS) Advanced: Disaster Recovery (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "217"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Observability (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "218"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "How AWS Managed Services (AMS) Works Within Cloud Operating Models (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "219"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Machine learning Terminology and Process (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "220"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "The Elements of Data Science (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "221"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS DeepRacer: Driven by Reinforcement learning (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "222"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Foundations of Prompt Engineering (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "223"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Low-Code Machine learning on AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "224"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Elemental MediaConvert Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "225"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Working with Captions using AWS Elemental MediaLive (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "226"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Digital Rights Management and the SPEKE Protocol in Video Workflows (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "227"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building a Live Video Channel with MediaLive and MediaPackage (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "228"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "From Migration to Modernization: Discover, plan, and migrate a monolith to ECS and Fargate with the help of Application Discovery and no code changes (Korean) (Na) (한국어 강의)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "229"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Designing Landing Zone Architectures with AWS Control Tower (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "230"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Migration Hub Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "231"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Migrating to AWS (OCS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "232"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Snowcone Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "233"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Network Connectivity Options (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "234"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Network – Monitoring and Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "235"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Configure and Deploy AWS Client VPN (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "236"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Route 53 Domains - Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "237"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS VPN - Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "238"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Networking Practical Approaches (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "239"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Configuring and Deploying VPCs with Multiple Subnets (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "240"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Designing and Deploying SAP Workloads on AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "241"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "SaaS Business Transformation (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "242"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Backup Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "243"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Elastic Block Store (Amazon EBS) Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "244"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Running High Performance Applications with Amazon FSx (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "245"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Moving to the Cloud with Amazon FSx (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "246"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Build with Amazon FSx for OpenZFS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "247"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon FSx for Lustre Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "248"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon FSx for Windows File Server Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "249"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Getting Started with Amazon Simple Storage Service (Amazon S3) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "250"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS DataSync Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "251"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Elastic File System (Amazon EFS) Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "252"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Auditing Amazon Simple Storage Service (Amazon S3) Security (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "253"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Simple Storage Service (Amazon S3) Storage Classes Deep Dive (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "254"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Snowcone Planning and Logistics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "255"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Using AWS Snowcone (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "256"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Transfer Family (SFTP, FTPS, FTP) Primer (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "257"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Architecting Serverless Applications (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "258"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Build and Deploy APIs with a Serverless CI/CD (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "259"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Developing Serverless Solutions on AWS - Course Supplement (OCS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "260"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Designing Event-Driven Architectures (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "261"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deploying Serverless Applications (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "262"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Lambda Function Security &amp; Defense in Depth (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "263"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Security and Observability for Serverless Applications (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "264"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Scaling Serverless Architectures (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "265"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Best Practices for Data Warehousing with Amazon Redshift (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "266"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Advanced Architecting on AWS - Online Course Supplement (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "267"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Get Connected: Amazon Honeycode APIs and Integrations (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "268"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building in Amazon Honeycode: App Design with Data in Mind (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "269"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Elastic Kubernetes Service (Amazon EKS) - Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "270"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Managing the Application Lifecycle in Amazon ECS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "271"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Managing Applications at Scale with Amazon ECS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "272"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive on Container Security (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "273"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Performance Tuning on Amazon DocumentDB (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "274"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Advanced CloudFormation: Macros (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "275"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Advanced learninging Practices Using AWS DevOps Tools (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "276"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon WorkSpaces Deep Dive (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "277"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive into AWS IoT Rules Engine (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "278"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Building Language Models on AWS (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "279"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Readiness: AWS Certified Machine learning - Specialty (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "280"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive with Security: AWS Identity and Access Management (IAM) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "281"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive into Amazon Elastic Block Store (EBS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "282"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Designing and Deploying an Amazon Elastic File System (Amazon EFS) Solution (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "283"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive: Architecting with Amazon Elastic Block Store (Amazon EBS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "284"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive: Managing and Monitoring Amazon Elastic Block Store (Amazon EBS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "285"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive: Amazon Elastic Block Store (Amazon EBS) Performance Optimization (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "286"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive: Amazon Elastic Block Store (Amazon EBS) Cost Optimization (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "287"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Storage Gateway Deep Dive: Amazon FSx File Gateway (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "288"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Managing, Monitoring, and Optimizing your Amazon Elastic File System (Amazon EFS) Solution (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "289"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Simple Storage Service (Amazon S3) Business Continuity and Disaster Recovery (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "290"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Simple Storage Service (Amazon S3) Cost Optimization (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "291"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Securing and Protecting Your Data in Amazon Simple Storage Service (Amazon S3) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "292"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Managing Amazon Simple Storage Service (Amazon S3) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "293"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Simple Storage Service (Amazon S3) Performance Optimization (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "294"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Securing Data in Amazon Elastic File System (Amazon EFS) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "295"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Snowball Edge Logistics and Planning (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "296"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Snowball Edge: Using Snowball Edge (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "297"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Storage Gateway Deep Dive: Amazon S3 File Gateway (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "298"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Storage Gateway Deep Dive: Tape Gateway (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "299"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Storage Gateway Deep Dive: Volume Gateway (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "300"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive on AWS Fargate: Building Serverless Containers at Scale (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "301"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Deep Dive: Lambda@Edge (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "302"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Serverless Analytics (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "303"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Official Practice Question Set: AWS Certified Data Engineer - Associate (DEA-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "304"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Standard Course: AWS Certified Solutions Architect - Associate (SAA-C03 - Korean) (Na)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "305"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Solutions Architect - Associate Official Practice Question Set (SAA-C03 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "306"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Standard Course: AWS Certified Cloud Practitioner (CLF-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "307"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Cloud Practitioner Official Practice Question Set (CLF-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "308"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Standard Course: AWS Certified Developer - Associate (DVA-C02) (Korean) (Na)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "309"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Developer - Associate Official Practice Question Set (DVA-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "310"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified SysOps Administrator - Associate Official Practice Question Set (SOA-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "311"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep: AWS Certified SysOps Administrator - Associate (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "312"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Standard Course: AWS Certified Solutions Architect - Professional (SAP-C02) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "313"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Solutions Architect - Professional Official Practice Question Set (SAP-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "314"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Standard Course: AWS Certified DevOps Engineer - Professional (DOP-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "315"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified DevOps Engineer - Professional Official Practice Question Set (DOP-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "316"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Database - Specialty Official Practice Question Set (DBS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "317"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Official Practice Question Set: AWS Certified Machine learning - Specialty (MLS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "318"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Standard Course: AWS Certified Advanced Networking - Specialty (ANS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "319"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Advanced Networking - Specialty Official Practice Question Set (ANS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "320"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Security - Specialty Official Practice Question Set (SCS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "321"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Official Practice Question Set: AWS Certified Security - Specialty (SCS-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "322"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified: SAP on AWS - Specialty Official Practice Question Set (PAS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "323"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified DevOps Engineer - Professional (DOP-C02 - Korean) (Amazon)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "324"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon API Gateway - Troubleshooting (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "325"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Official Prelearning: AWS Certified Data Engineer - Associate (DEA-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "326"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified Solutions Architect - Associate (SAA-C03 - Korean) (Na)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "327"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Solutions Architect - Associate Official Practice Exam (SAA-C03 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "328"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified Cloud Practitioner (CLF-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "329"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Cloud Practitioner Official Practice Exam (CLF-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "330"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Official Prelearning: AWS Certified Cloud Practitioner (CLF-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "331"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified Developer - Associate (DVA-C02) (Korean) (Na)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "332"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Developer - Associate Official Practice Exam (DVA-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "333"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified SysOps Administrator - Associate Official Practice Exam (SOA-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "334"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep: AWS Certified SysOps Administrator - Associate (with Practice Material) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "335"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified Solutions Architect - Professional (SAP-C02) (Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "336"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified Solutions Architect - Professional Official Practice Exam (SAP-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "337"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified DevOps Engineer - Professional (DOP-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "338"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "AWS Certified DevOps Engineer - Professional Official Practice Exam (DOP-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "339"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Enhanced Course: AWS Certified Advanced Networking - Specialty (ANS-C01 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "340"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Exam Prep Official Practice Exam: AWS Certified Security - Specialty (SCS-C02 - Korean)"
+}
+{
+  "index": {
+    "_index": "learning",
+    "_id": "341"
+  }
+}
+{
+  "counter": 0.0,
+  "title": "Amazon Elastic Block Store (Amazon EBS) Primer (Includes Labs) (Korean)"
+}
