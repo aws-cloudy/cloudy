@@ -242,6 +242,10 @@
 
 [API 명세](https://www.notion.so/9311c70962b64557bb356fced2543745?v=b279e1c8466f42f89d6f713ac69de15c)
 
+## 화면 정의서
+
+![figma](./exec/images/figma.PNG)
+
 ## ERD
 
 ![ERD](./exec/images/ERD.png)
